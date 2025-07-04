@@ -1,8 +1,23 @@
 from typing import Optional
 
 import pytest
+from hypothesis import given
+from hypothesis import strategies as st
 
 from algolib.data_structures.queue import Queue
+
+
+@given(st.lists(st.integers()))
+def test_queue_property_order_preserved(initial_list: list[int]) -> None:
+    queue = Queue[int]()
+    for item in initial_list:
+        queue.enqueue(item)
+
+    dequeued_list = []
+    while not queue.is_empty():
+        dequeued_list.append(queue.dequeue())
+
+    assert dequeued_list == initial_list
 
 
 def test_queue_enqueue_and_peek() -> None:

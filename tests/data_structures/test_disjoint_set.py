@@ -1,6 +1,23 @@
 import pytest
+from hypothesis import given
+from hypothesis import strategies as st
 
 from algolib.data_structures.disjoint_set import DisjointSet
+
+
+@given(st.sets(st.integers() | st.text(), min_size=2))
+def test_disjoint_set_property_union_chain(elements: set[int | str]) -> None:
+    ds = DisjointSet[int | str](elements)
+    element_list = list(elements)
+
+    # Union all elements in a chain
+    for i in range(len(element_list) - 1):
+        ds.union(element_list[i], element_list[i + 1])
+
+    # Check that all elements have the same root
+    root = ds.find(element_list[0])
+    for element in element_list:
+        assert ds.find(element) == root
 
 
 @pytest.fixture

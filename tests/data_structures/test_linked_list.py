@@ -1,8 +1,19 @@
 from typing import List, Optional
 
 import pytest
+from hypothesis import given
+from hypothesis import strategies as st
 
 from algolib.data_structures.linked_list import LinkedList
+
+
+@given(st.lists(st.integers()))
+def test_linked_list_property_preserves_list(items: list[int]) -> None:
+    ll = LinkedList[int]()
+    for item in items:
+        ll.append(item)
+
+    assert list(ll) == items
 
 
 def test_linked_list_append() -> None:

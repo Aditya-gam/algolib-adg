@@ -1,26 +1,29 @@
 from collections import deque
-from typing import TYPE_CHECKING, Any
+from typing import TypeVar, Generic, Set, Deque, List
 
-if TYPE_CHECKING:
-    from algolib.data_structures.graph import Graph, Vertex
+from algolib.data_structures.graph import Graph, Vertex
+
+T = TypeVar("T")
 
 
-class BFS:
-    def traverse(self, graph: "Graph[Any]", start: "Vertex[Any]") -> list["Vertex[Any]"]:
-        visited: set["Vertex[Any]"] = set()
-        queue: deque["Vertex[Any]"] = deque()
-        result: list["Vertex[Any]"] = []
+class BFS(Generic[T]):
+    def traverse(
+        self, graph: Graph[T], start_vertex: Vertex[T]
+    ) -> List[Vertex[T]]:
+        if start_vertex not in graph:
+            raise ValueError("Start vertex must be in the graph")
 
-        queue.append(start)
-        visited.add(start)
+        queue: Deque[Vertex[T]] = deque([start_vertex])
+        visited: Set[Vertex[T]] = {start_vertex}
+        traversal_order: List[Vertex[T]] = []
 
         while queue:
             current_vertex = queue.popleft()
-            result.append(current_vertex)
+            traversal_order.append(current_vertex)
 
-            for neighbor in graph.get_neighbors(current_vertex):
+            for neighbor, _ in graph.neighbors(current_vertex):
                 if neighbor not in visited:
                     visited.add(neighbor)
                     queue.append(neighbor)
 
-        return result
+        return traversal_order

@@ -52,8 +52,10 @@ class Graph(Generic[T]):
             raise ValueError("Vertex not in graph")
         return iter(self._adj[v])
 
-    def __contains__(self, key: T) -> bool:
-        return key in self._vertices
+    def __contains__(self, item: object) -> bool:
+        if isinstance(item, Vertex):
+            return item in self._adj
+        return item in self._vertices
 
     def __len__(self) -> int:
         return len(self._vertices)

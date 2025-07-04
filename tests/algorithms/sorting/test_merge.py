@@ -1,10 +1,22 @@
 """Tests for the merge sort algorithm."""
 
+from collections import Counter
 from dataclasses import dataclass
 
 import pytest
+from hypothesis import given
+from hypothesis import strategies as st
 
 from algolib.algorithms.sorting.merge import MergeSorter
+from tests.utils.helpers import is_sorted
+
+
+@given(st.lists(st.integers()))
+def test_merge_sorter_property(data: list[int]) -> None:
+    sorter = MergeSorter[int]()
+    sorted_data = sorter.sort(data)
+    assert is_sorted(sorted_data)
+    assert Counter(data) == Counter(sorted_data)
 
 
 @dataclass

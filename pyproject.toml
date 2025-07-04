@@ -39,6 +39,7 @@ preview = true
 python_version = "3.11"
 strict = true
 plugins = []
+mypy_path = "."
 
 [tool.pytest.ini_options]
 addopts = "--strict-markers --cov=algolib --cov-report=term-missing --cov-fail-under=95 -q"

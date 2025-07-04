@@ -1,8 +1,24 @@
 """Tests for the binary search algorithm."""
 
 import pytest
+from hypothesis import given
+from hypothesis import strategies as st
 
 from algolib.algorithms.searching.binary import BinarySearcher
+
+
+@given(st.lists(st.integers()), st.integers())
+def test_binary_search_property(data: list[int], value_to_find: int) -> None:
+    searcher = BinarySearcher[int]()
+    sorted_data = sorted(list(set(data)))  # Ensure data is sorted and unique
+
+    result = searcher.search(sorted_data, value_to_find)
+
+    if value_to_find in sorted_data:
+        assert result is not None
+        assert sorted_data[result] == value_to_find
+    else:
+        assert result is None
 
 
 @pytest.fixture

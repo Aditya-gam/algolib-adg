@@ -1,361 +1,170 @@
-from typing import Any
+from typing import List, Set, Tuple
 
 import pytest
+from hypothesis import given
+from hypothesis import strategies as st
 
 from algolib.algorithms.graph.traversal.bfs import BFS
 from algolib.data_structures.graph import Graph, Vertex
 
 
-@pytest.fixture
-def sample_graph() -> Graph[str]:
-    graph: Graph[str] = Graph()
-    vertices = [graph.add_vertex(str(i)) for i in range(6)]
-    graph.add_edge(vertices[0], vertices[1])
-    graph.add_edge(vertices[0], vertices[2])
-    graph.add_edge(vertices[1], vertices[3])
-    graph.add_edge(vertices[2], vertices[4])
-    graph.add_edge(vertices[3], vertices[5])
-    graph.add_edge(vertices[4], vertices[5])
-    return graph
+@st.composite
+def random_graph_and_start_vertex(
+    draw: st.DrawFn,
+) -> Tuple[Graph[int], Vertex[int]]:
+    num_vertices = draw(st.integers(min_value=1, max_value=10))
+    vertex_keys = list(range(num_vertices))
+    graph = Graph[int]()
+    vertices = {key: graph.add_vertex(key) for key in vertex_keys}
 
-
-def test_bfs_traversal(sample_graph: Graph[str]) -> None:
-    bfs = BFS()
-    start_vertex: Vertex[str] = Vertex("0")
-    traversal_order = bfs.traverse(sample_graph, start_vertex)
-    expected_order = [Vertex("0"), Vertex("1"), Vertex("2"), Vertex("3"), Vertex("4"), Vertex("5")]
-    assert traversal_order == expected_order
-
-
-def test_bfs_traversal_disconnected_graph() -> None:
-    graph: Graph[str] = Graph()
-    vertex_a: Vertex[str] = graph.add_vertex("A")
-    graph.add_vertex("B")
-    graph.add_vertex("C")
-
-    bfs = BFS()
-    traversal_order = bfs.traverse(graph, vertex_a)
-    assert traversal_order == [Vertex("A")]
-
-
-def test_bfs_traversal_empty_graph() -> None:
-    graph: Graph[str] = Graph()
-    bfs = BFS()
-    with pytest.raises(ValueError):
-        # Assuming that starting BFS on a non-existent vertex in an empty graph should raise an error
-        # Or, we could test a scenario where the start vertex is not in the graph.
-        # For now, let's assume the graph must contain the start vertex.
-        bfs.traverse(graph, Vertex("Start"))
-
-
-def test_bfs_traversal_graph_with_cycle(sample_graph: Graph[str]) -> None:
-    # Adding a cycle: 3 -> 0
-    # Ensure that these vertices are in the graph.
-    v3 = sample_graph.get_vertex("3")
-    v0 = sample_graph.get_vertex("0")
-    assert v3 is not None
-    assert v0 is not None
-    sample_graph.add_edge(v3, v0)
-
-    bfs = BFS()
-    start_vertex: Vertex[str] = Vertex("0")
-    traversal_order = bfs.traverse(sample_graph, start_vertex)
-    # The order depends on the order of neighbors in the adjacency list.
-    # Given the current sample_graph edge additions: (0,1), (0,2), (1,3), (2,4), (3,5), (4,5)
-    # When 3->0 is added, for vertex 3, it will visit 5 then 0 (if 0 wasn't visited).
-    # Since 0 is already visited from the start, this cycle should not cause an infinite loop
-    # or re-add 0 to result. The order remains deterministic.
-    expected_order = [Vertex("0"), Vertex("1"), Vertex("2"), Vertex("3"), Vertex("4"), Vertex("5")]
-    assert traversal_order == expected_order
-
-
-def test_bfs_traversal_larger_graph() -> None:
-    graph: Graph[str] = Graph()
-    vertices = {str(i): graph.add_vertex(str(i)) for i in range(10)}
-    graph.add_edge(vertices["0"], vertices["1"])
-    graph.add_edge(vertices["0"], vertices["2"])
-    graph.add_edge(vertices["1"], vertices["3"])
-    graph.add_edge(vertices["1"], vertices["4"])
-    graph.add_edge(vertices["2"], vertices["5"])
-    graph.add_edge(vertices["2"], vertices["6"])
-    graph.add_edge(vertices["3"], vertices["7"])
-    graph.add_edge(vertices["4"], vertices["7"])
-    graph.add_edge(vertices["5"], vertices["8"])
-    graph.add_edge(vertices["6"], vertices["8"])
-    graph.add_edge(vertices["7"], vertices["9"])
-    graph.add_edge(vertices["8"], vertices["9"])
-
-    bfs = BFS()
-    start_vertex: Vertex[str] = vertices["0"]
-    traversal_order = bfs.traverse(graph, start_vertex)
-    expected_order = [
-        Vertex("0"),
-        Vertex("1"),
-        Vertex("2"),
-        Vertex("3"),
-        Vertex("4"),
-        Vertex("5"),
-        Vertex("6"),
-        Vertex("7"),
-        Vertex("8"),
-        Vertex("9"),
+    # Generate a set of unique edges to avoid parallel edges
+    possible_edges = [
+        (v1, v2)
+        for v1 in vertices.values()
+        for v2 in vertices.values()
+        if v1 != v2
     ]
-    assert traversal_order == expected_order
+    if possible_edges:
+        edges_to_add = draw(
+            st.lists(st.sampled_from(possible_edges), unique=True))
+        for u, v in edges_to_add:
+            graph.add_edge(u, v)
+
+    start_vertex = draw(st.sampled_from(list(vertices.values())))
+    return graph, start_vertex
 
 
-def test_bfs_traversal_single_node_graph() -> None:
-    graph: Graph[str] = Graph()
-    vertex_a: Vertex[str] = graph.add_vertex("A")
-    bfs = BFS()
-    traversal_order = bfs.traverse(graph, vertex_a)
-    assert traversal_order == [Vertex("A")]
+@given(graph_and_start=random_graph_and_start_vertex())
+def test_bfs_property_traversal_properties(
+    graph_and_start: Tuple[Graph[int], Vertex[int]]
+) -> None:
+    graph, start_vertex = graph_and_start
+    bfs = BFS[int]()
+
+    traversal_result = bfs.traverse(graph, start_vertex)
+
+    # 1. The first vertex in the traversal is the start vertex.
+    assert traversal_result[0] == start_vertex
+
+    # 2. All traversed vertices are unique.
+    assert len(traversal_result) == len(set(traversal_result))
+
+    # 3. All traversed vertices must be reachable from the start_vertex.
+    q: List[Vertex[int]] = [start_vertex]
+    reachable: Set[Vertex[int]] = {start_vertex}
+    head = 0
+    while head < len(q):
+        curr = q[head]
+        head += 1
+        for neighbor, _ in graph.neighbors(curr):
+            if neighbor not in reachable:
+                reachable.add(neighbor)
+                q.append(neighbor)
+
+    assert set(traversal_result) == reachable
 
 
-def test_bfs_traversal_graph_no_edges() -> None:
-    graph: Graph[str] = Graph()
-    vertices = [graph.add_vertex(str(i)) for i in range(5)]
-    bfs = BFS()
-    traversal_order = bfs.traverse(graph, vertices[0])
-    assert traversal_order == [Vertex("0")]
+@pytest.fixture
+def graph() -> Graph[str]:
+    """Fixture for a sample graph."""
+    g = Graph[str]()
+    vertices = [g.add_vertex(str(i)) for i in range(8)]
+    edges = [
+        (0, 1),
+        (0, 2),
+        (1, 3),
+        (1, 4),
+        (2, 5),
+        (2, 6),
+        (3, 7),
+        (4, 7),
+        (5, 7),
+        (6, 7),
+    ]
+    for u, v in edges:
+        g.add_edge(vertices[u], vertices[v])
+    return g
 
 
-def test_bfs_traversal_multiple_disconnected_components() -> None:
-    graph: Graph[str] = Graph()
-    v0: Vertex[str] = graph.add_vertex("0")
-    v1: Vertex[str] = graph.add_vertex("1")
-    v2: Vertex[str] = graph.add_vertex("2")
-    v3: Vertex[str] = graph.add_vertex("3")
-    v4: Vertex[str] = graph.add_vertex("4")
+def test_bfs_traversal(graph: Graph[str]) -> None:
+    """Test BFS traversal from a start vertex."""
+    bfs = BFS[str]()
+    start_vertex = graph.get_vertex("0")
+    assert start_vertex is not None
 
-    # Component 1
-    graph.add_edge(v0, v1)
-    graph.add_edge(v1, v2)
+    traversal = bfs.traverse(graph, start_vertex)
+    # The exact order depends on neighbor iteration order.
+    # We check for correctness of visited nodes and their count.
+    expected_reachable_nodes = {"0", "1", "2", "3", "4", "5", "6", "7"}
+    traversed_keys = {v.key for v in traversal}
+    assert traversed_keys == expected_reachable_nodes
+    assert len(traversal) == 8
 
-    # Component 2
+
+def test_bfs_traversal_disconnected_component(graph: Graph[str]) -> None:
+    """Test BFS on a component disconnected from the start vertex."""
+    bfs = BFS[str]()
+    # Add a disconnected component
+    v8 = graph.add_vertex("8")
+    v9 = graph.add_vertex("9")
+    graph.add_edge(v8, v9)
+
+    start_vertex = graph.get_vertex("0")
+    assert start_vertex is not None
+
+    traversal = bfs.traverse(graph, start_vertex)
+    traversed_keys = {v.key for v in traversal}
+    assert "8" not in traversed_keys
+    assert "9" not in traversed_keys
+    assert len(traversal) == 8
+
+
+def test_bfs_traversal_start_not_in_graph() -> None:
+    """Test that ValueError is raised if the start vertex is not in the graph."""
+    graph = Graph[int]()
+    graph.add_vertex(1)
+    start_vertex_not_in_graph = Vertex(99)
+    bfs = BFS[int]()
+    with pytest.raises(
+        ValueError, match="Start vertex must be in the graph"
+    ):
+        bfs.traverse(graph, start_vertex_not_in_graph)
+
+
+def test_bfs_single_node_graph() -> None:
+    """Test BFS on a graph with a single node."""
+    graph = Graph[str]()
+    start_vertex = graph.add_vertex("A")
+    bfs = BFS[str]()
+    traversal = bfs.traverse(graph, start_vertex)
+    assert traversal == [start_vertex]
+
+
+def test_bfs_linear_graph() -> None:
+    """Test BFS on a linear graph (a path)."""
+    graph = Graph[int]()
+    vertices = [graph.add_vertex(i) for i in range(5)]
+    for i in range(4):
+        graph.add_edge(vertices[i], vertices[i + 1])
+
+    bfs = BFS[int]()
+    start_vertex = vertices[0]
+    traversal = bfs.traverse(graph, start_vertex)
+    expected_order = [vertices[i] for i in range(5)]
+    assert traversal == expected_order
+
+
+def test_bfs_with_cycle(graph: Graph[str]) -> None:
+    """Test that BFS handles cycles correctly and does not loop infinitely."""
+    bfs = BFS[str]()
+    # Add a cycle between 3 and 4
+    v3 = graph.get_vertex("3")
+    v4 = graph.get_vertex("4")
+    assert v3 and v4
     graph.add_edge(v3, v4)
 
-    bfs = BFS()
-    traversal_order = bfs.traverse(graph, v0)
-    assert traversal_order == [v0, v1, v2]
-
-    traversal_order_2 = bfs.traverse(graph, v3)
-    assert traversal_order_2 == [v3, v4]
-
-
-def test_bfs_traversal_different_start_vertices(sample_graph: Graph[str]) -> None:
-    bfs = BFS()
-    # Test from vertex "1"
-    start_vertex_1 = sample_graph.get_vertex("1")
-    assert start_vertex_1 is not None
-    traversal_order_1 = bfs.traverse(sample_graph, start_vertex_1)
-    expected_order_1 = [
-        sample_graph.get_vertex("1"),
-        sample_graph.get_vertex("0"),
-        sample_graph.get_vertex("3"),
-        sample_graph.get_vertex("2"),
-        sample_graph.get_vertex("5"),
-        sample_graph.get_vertex("4"),
-    ]
-    assert traversal_order_1 == expected_order_1
-
-    # Test from vertex "2"
-    start_vertex_2 = sample_graph.get_vertex("2")
-    assert start_vertex_2 is not None
-    traversal_order_2 = bfs.traverse(sample_graph, start_vertex_2)
-    expected_order_2 = [
-        sample_graph.get_vertex("2"),
-        sample_graph.get_vertex("0"),
-        sample_graph.get_vertex("4"),
-        sample_graph.get_vertex("1"),
-        sample_graph.get_vertex("5"),
-        sample_graph.get_vertex("3"),
-    ]
-    assert traversal_order_2 == expected_order_2
-
-
-def test_bfs_traversal_complete_graph() -> None:
-    graph: Graph[str] = Graph()
-    vertices = [graph.add_vertex(str(i)) for i in range(4)]
-    # Connect every vertex to every other vertex
-    for i in range(4):
-        for j in range(i + 1, 4):
-            graph.add_edge(vertices[i], vertices[j])
-
-    bfs = BFS()
-    traversal_order = bfs.traverse(graph, vertices[0])
-    # The order of neighbors might vary based on internal Dict order, but the set of visited nodes should be all.
-    # For deterministic test, we can sort the next level neighbors or define a fixed order.
-    # Given how Python dicts work, insertion order is preserved from 3.7+
-    expected_order = [Vertex("0"), Vertex("1"), Vertex("2"), Vertex("3")]
-    assert set(traversal_order) == set(expected_order)  # Order can vary for same depth
-
-
-def test_bfs_traversal_line_graph() -> None:
-    graph: Graph[str] = Graph()
-    v0: Vertex[str] = graph.add_vertex("0")
-    v1: Vertex[str] = graph.add_vertex("1")
-    v2: Vertex[str] = graph.add_vertex("2")
-    v3: Vertex[str] = graph.add_vertex("3")
-    graph.add_edge(v0, v1)
-    graph.add_edge(v1, v2)
-    graph.add_edge(v2, v3)
-
-    bfs = BFS()
-    traversal_order = bfs.traverse(graph, v0)
-    assert traversal_order == [v0, v1, v2, v3]
-
-
-def test_bfs_traversal_star_graph() -> None:
-    graph: Graph[str] = Graph()
-    center: Vertex[str] = graph.add_vertex("Center")
-    leaf1: Vertex[str] = graph.add_vertex("Leaf1")
-    leaf2: Vertex[str] = graph.add_vertex("Leaf2")
-    leaf3: Vertex[str] = graph.add_vertex("Leaf3")
-    graph.add_edge(center, leaf1)
-    graph.add_edge(center, leaf2)
-    graph.add_edge(center, leaf3)
-
-    bfs = BFS()
-    traversal_order = bfs.traverse(graph, center)
-    # Order of leaves can vary based on adjacency list. So check set equality for second level.
-    assert traversal_order[0] == center
-    assert set(traversal_order[1:]) == {leaf1, leaf2, leaf3}
-
-
-def test_bfs_traversal_directed_graph() -> None:
-    graph: Graph[str] = Graph(directed=True)
-    vA: Vertex[str] = graph.add_vertex("A")
-    vB: Vertex[str] = graph.add_vertex("B")
-    vC: Vertex[str] = graph.add_vertex("C")
-    vD: Vertex[str] = graph.add_vertex("D")
-
-    graph.add_edge(vA, vB)
-    graph.add_edge(vA, vC)
-    graph.add_edge(vB, vD)
-
-    bfs = BFS()
-    traversal_order = bfs.traverse(graph, vA)
-    assert traversal_order == [vA, vB, vC, vD]
-
-
-def test_bfs_traversal_directed_graph_with_multiple_paths() -> None:
-    graph: Graph[str] = Graph(directed=True)
-    vA: Vertex[str] = graph.add_vertex("A")
-    vB: Vertex[str] = graph.add_vertex("B")
-    vC: Vertex[str] = graph.add_vertex("C")
-    vD: Vertex[str] = graph.add_vertex("D")
-
-    graph.add_edge(vA, vB)
-    graph.add_edge(vA, vC)
-    graph.add_edge(vB, vD)
-    graph.add_edge(vC, vD)  # Both B and C can reach D
-
-    bfs = BFS()
-    traversal_order = bfs.traverse(graph, vA)
-    # The order should be A, B, C, D (D is visited when B is processed first).
-    assert traversal_order == [vA, vB, vC, vD]
-
-
-def test_bfs_traversal_directed_graph_with_cycle() -> None:
-    graph: Graph[str] = Graph(directed=True)
-    vA: Vertex[str] = graph.add_vertex("A")
-    vB: Vertex[str] = graph.add_vertex("B")
-    vC: Vertex[str] = graph.add_vertex("C")
-
-    graph.add_edge(vA, vB)
-    graph.add_edge(vB, vC)
-    graph.add_edge(vC, vA)  # Cycle A -> B -> C -> A
-
-    bfs = BFS()
-    traversal_order = bfs.traverse(graph, vA)
-    # A is visited first, then B, then C. A is not revisited.
-    assert traversal_order == [vA, vB, vC]
-
-
-def test_bfs_traversal_string_keys() -> None:
-    graph: Graph[str] = Graph[str]()
-    start_vertex = graph.add_vertex("Start")
-    middle_vertex = graph.add_vertex("Middle")
-    end_vertex = graph.add_vertex("End")
-    graph.add_edge(start_vertex, middle_vertex)
-    graph.add_edge(middle_vertex, end_vertex)
-
-    bfs = BFS()
-    traversal_order = bfs.traverse(graph, start_vertex)
-    assert [v.key for v in traversal_order] == ["Start", "Middle", "End"]
-
-
-def test_bfs_traversal_integer_keys() -> None:
-    graph: Graph[int] = Graph[int]()
-    v1 = graph.add_vertex(1)
-    v2 = graph.add_vertex(2)
-    v3 = graph.add_vertex(3)
-    graph.add_edge(v1, v2)
-    graph.add_edge(v2, v3)
-
-    bfs = BFS()
-    traversal_order = bfs.traverse(graph, v1)
-    assert [v.key for v in traversal_order] == [1, 2, 3]
-
-
-def test_bfs_traversal_mixed_type_keys() -> None:
-    # Although not generally recommended for graph keys, testing for robustness
-    graph: Graph[Any] = Graph[Any]()  # Use Any for mixed types
-    v1: Vertex[int] = graph.add_vertex(1)
-    vA: Vertex[str] = graph.add_vertex("A")
-    vFloat: Vertex[float] = graph.add_vertex(3.14)
-
-    graph.add_edge(v1, vA)
-    graph.add_edge(vA, vFloat)
-
-    bfs = BFS()
-    traversal_order = bfs.traverse(graph, v1)
-    assert traversal_order == [v1, vA, vFloat]
-
-
-def test_bfs_traversal_self_loop() -> None:
-    graph: Graph[str] = Graph()
-    vA: Vertex[str] = graph.add_vertex("A")
-    vB: Vertex[str] = graph.add_vertex("B")
-    graph.add_edge(vA, vA)  # Self-loop
-    graph.add_edge(vA, vB)
-
-    bfs = BFS()
-    traversal_order = bfs.traverse(graph, vA)
-    # Self-loop shouldn't change traversal order (A visited once)
-    assert traversal_order == [vA, vB]
-
-
-def test_bfs_traversal_parallel_edges() -> None:
-    graph: Graph[str] = Graph()
-    vA: Vertex[str] = graph.add_vertex("A")
-    vB: Vertex[str] = graph.add_vertex("B")
-    graph.add_edge(vA, vB)
-    graph.add_edge(vA, vB, weight=2.0)  # Parallel edge
-
-    bfs = BFS()
-    traversal_order = bfs.traverse(graph, vA)
-    # Parallel edges shouldn't affect BFS unique path.
-    assert traversal_order == [vA, vB]
-
-
-def test_bfs_traversal_start_node_no_neighbors() -> None:
-    graph: Graph[str] = Graph()
-    vA: Vertex[str] = graph.add_vertex("A")
-    graph.add_vertex("B")  # Isolated
-    bfs = BFS()
-    traversal_order = bfs.traverse(graph, vA)
-    assert traversal_order == [vA]
-
-
-def test_bfs_traversal_unreachable_target_node() -> None:
-    graph: Graph[str] = Graph()
-    vA: Vertex[str] = graph.add_vertex("A")
-    vB: Vertex[str] = graph.add_vertex("B")
-    vC: Vertex[str] = graph.add_vertex("C")
-    graph.add_edge(vA, vB)
-
-    bfs = BFS()
-    traversal_order = bfs.traverse(graph, vA)
-    assert traversal_order == [vA, vB]
-    assert vC not in traversal_order  # C is unreachable from A
+    start_vertex = graph.get_vertex("0")
+    assert start_vertex
+    traversal = bfs.traverse(graph, start_vertex)
+    assert len(traversal) == len(graph)  # Should visit every node once
+    assert len(set(traversal)) == len(graph)

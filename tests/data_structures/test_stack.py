@@ -1,8 +1,23 @@
 from typing import Optional
 
 import pytest
+from hypothesis import given
+from hypothesis import strategies as st
 
 from algolib.data_structures.stack import Stack
+
+
+@given(st.lists(st.integers()))
+def test_stack_property_reversal(initial_list: list[int]) -> None:
+    stack = Stack[int]()
+    for item in initial_list:
+        stack.push(item)
+
+    popped_list = []
+    while not stack.is_empty():
+        popped_list.append(stack.pop())
+
+    assert popped_list == initial_list[::-1]
 
 
 def test_stack_push_and_peek() -> None:

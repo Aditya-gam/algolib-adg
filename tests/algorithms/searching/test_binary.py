@@ -5,7 +5,7 @@ import pytest
 from algolib.algorithms.searching.binary import BinarySearcher
 
 
-@pytest.fixture()
+@pytest.fixture
 def searcher() -> BinarySearcher[int]:
     """Fixture for a BinarySearcher instance."""
     return BinarySearcher()

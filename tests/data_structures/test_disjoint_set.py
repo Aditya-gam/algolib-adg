@@ -3,7 +3,7 @@ import pytest
 from algolib.data_structures.disjoint_set import DisjointSet
 
 
-@pytest.fixture()
+@pytest.fixture
 def ds() -> DisjointSet[str]:
     return DisjointSet[str](["A", "B", "C", "D"])
 

@@ -19,13 +19,13 @@ class _ComparableItem:
         return self.key <= other.key
 
 
-@pytest.fixture()
+@pytest.fixture
 def sorter() -> MergeSorter[int]:
     """Fixture for a MergeSorter instance with integers."""
     return MergeSorter()
 
 
-@pytest.fixture()
+@pytest.fixture
 def stability_sorter() -> MergeSorter[_ComparableItem]:
     """Fixture for a MergeSorter instance with a custom comparable object."""
     return MergeSorter()

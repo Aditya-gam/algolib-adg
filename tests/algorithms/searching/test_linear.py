@@ -15,7 +15,7 @@ class _ComparableNone:
         return False
 
 
-@pytest.fixture()
+@pytest.fixture
 def searcher() -> LinearSearcher[int]:
     """Fixture for a LinearSearcher instance."""
     return LinearSearcher()

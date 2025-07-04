@@ -16,13 +16,13 @@ class _ComparableItem:
         return self.key < other.key
 
 
-@pytest.fixture()
+@pytest.fixture
 def sorter() -> BubbleSorter[int]:
     """Fixture for a BubbleSorter instance with integers."""
     return BubbleSorter()
 
 
-@pytest.fixture()
+@pytest.fixture
 def stability_sorter() -> BubbleSorter[_ComparableItem]:
     """Fixture for a BubbleSorter instance with a custom comparable object."""
     return BubbleSorter()

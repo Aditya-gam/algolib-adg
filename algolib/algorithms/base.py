@@ -6,10 +6,10 @@ from typing import Generic, TypeVar
 T = TypeVar("T")
 
 
-class BaseAlgorithm(ABC, Generic[T]):
+class Algorithm(ABC, Generic[T]):
     """Common interface for every algorithm in **algolib**."""
 
     @abstractmethod
-    def run(self, data: T) -> T:  # pragma: no cover
+    def run(self, problem: T) -> None:
         """Execute the algorithm and return the result."""
         raise NotImplementedError

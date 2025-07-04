@@ -5,15 +5,13 @@ FROM python:3.11-slim
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
 
-# Install build tools & git
+# Install build tools, git, and Poetry
 RUN apt-get update -y && apt-get install -y --no-install-recommends \
     build-essential \
-    git \
     curl \
-    && rm -rf /var/lib/apt/lists/*
-
-# Install Poetry
-RUN curl -sSL https://install.python-poetry.org | python3 - --version 1.8.2
+    git \
+    && rm -rf /var/lib/apt/lists/* \
+    && curl -sSL https://install.python-poetry.org | python3 - --version 1.8.2
 ENV PATH="/root/.local/bin:$PATH"
 
 # Copy project files

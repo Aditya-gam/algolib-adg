@@ -1,0 +1,38 @@
+name: ci
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        python: ["3.11"]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+          cache: "poetry"
+
+      - name: Install Poetry
+        uses: abatilo/actions-poetry@v3
+        with:
+          poetry-version: "1.8.2"
+
+      - name: Install deps
+        run: |
+          poetry install --no-root --sync
+
+      - name: Lint & format (Ruff)
+        run: poetry run ruff check .
+      - name: Static typing (mypy)
+        run: poetry run mypy algolib
+      - name: Unit tests
+        run: poetry run pytest --cov=algolib
+      - name: Build docs
+        run: poetry run sphinx-build -b html docs docs/_build/html 

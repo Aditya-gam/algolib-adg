@@ -1,0 +1,49 @@
+[tool.poetry]
+name = "algolib_adg"
+version = "0.1.0"
+description = ""
+authors = ["Aditya Gambhir"]
+license = "MIT"
+packages = [{ include = "algolib" }]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+typing-extensions = "^4.14.1"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.4.1"
+hypothesis = "^6.135.24"
+pytest-benchmark = "^5.1.0"
+ruff = "^0.12.2"
+mypy = "^1.16.1"
+sphinx = "^8.2.3"
+furo = "^2024.8.6"
+sphinx-autobuild = "^2024.10.3"
+pre-commit = "^4.2.0"
+pytest-cov = "^6.2.1"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+# E (pycodestyle), F (pyflakes), I (isort), B (flake8-bugbear) …
+select = ["E", "F", "I", "B", "W", "C90"]
+ignore = ["E501"]   # long lines handled by formatter
+
+[tool.ruff.format]
+# Enables Black-compatible formatting
+preview = true
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+plugins = []
+
+[tool.pytest.ini_options]
+addopts = "--strict-markers -q"
+testpaths = ["tests"]
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

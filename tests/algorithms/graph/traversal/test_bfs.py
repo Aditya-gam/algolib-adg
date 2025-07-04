@@ -18,15 +18,9 @@ def random_graph_and_start_vertex(
     vertices = {key: graph.add_vertex(key) for key in vertex_keys}
 
     # Generate a set of unique edges to avoid parallel edges
-    possible_edges = [
-        (v1, v2)
-        for v1 in vertices.values()
-        for v2 in vertices.values()
-        if v1 != v2
-    ]
+    possible_edges = [(v1, v2) for v1 in vertices.values() for v2 in vertices.values() if v1 != v2]
     if possible_edges:
-        edges_to_add = draw(
-            st.lists(st.sampled_from(possible_edges), unique=True))
+        edges_to_add = draw(st.lists(st.sampled_from(possible_edges), unique=True))
         for u, v in edges_to_add:
             graph.add_edge(u, v)
 
@@ -35,9 +29,7 @@ def random_graph_and_start_vertex(
 
 
 @given(graph_and_start=random_graph_and_start_vertex())
-def test_bfs_property_traversal_properties(
-    graph_and_start: Tuple[Graph[int], Vertex[int]]
-) -> None:
+def test_bfs_property_traversal_properties(graph_and_start: Tuple[Graph[int], Vertex[int]]) -> None:
     graph, start_vertex = graph_and_start
     bfs = BFS[int]()
 
@@ -125,9 +117,7 @@ def test_bfs_traversal_start_not_in_graph() -> None:
     graph.add_vertex(1)
     start_vertex_not_in_graph = Vertex(99)
     bfs = BFS[int]()
-    with pytest.raises(
-        ValueError, match="Start vertex must be in the graph"
-    ):
+    with pytest.raises(ValueError, match="Start vertex must be in the graph"):
         bfs.traverse(graph, start_vertex_not_in_graph)
 
 

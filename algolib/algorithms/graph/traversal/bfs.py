@@ -1,5 +1,5 @@
 from collections import deque
-from typing import TypeVar, Generic, Set, Deque, List
+from typing import Deque, Generic, List, Set, TypeVar
 
 from algolib.data_structures.graph import Graph, Vertex
 
@@ -7,9 +7,7 @@ T = TypeVar("T")
 
 
 class BFS(Generic[T]):
-    def traverse(
-        self, graph: Graph[T], start_vertex: Vertex[T]
-    ) -> List[Vertex[T]]:
+    def traverse(self, graph: Graph[T], start_vertex: Vertex[T]) -> List[Vertex[T]]:
         if start_vertex not in graph:
             raise ValueError("Start vertex must be in the graph")
 

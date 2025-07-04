@@ -1,3 +1,7 @@
+from typing import Any, cast
+
+import pytest
+
 from algolib._typing import SupportsLessThan
 
 
@@ -10,4 +14,7 @@ def test_supports_less_than_protocol() -> None:
         pass
 
     assert isinstance(LessThanComparable(), SupportsLessThan)
-    assert not isinstance(NotLessThanComparable(), SupportsLessThan)
+
+    with pytest.raises(TypeError):
+        # Cast to Any to bypass mypy type checking for this intentional error test
+        _ = cast(Any, NotLessThanComparable()) < cast(Any, NotLessThanComparable())

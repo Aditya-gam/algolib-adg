@@ -35,7 +35,7 @@ def test_linked_list_iter() -> None:
         ll.append(item)
 
     # Test round-trip
-    iterated_items: List[int] = [item for item in ll]
+    iterated_items: List[int] = list(ll)
     assert iterated_items == items
 
 

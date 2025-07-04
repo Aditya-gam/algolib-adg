@@ -3,7 +3,7 @@ import pytest
 from algolib.data_structures.graph import Graph, Vertex
 
 
-@pytest.fixture  # type: ignore[misc]
+@pytest.fixture()
 def graph() -> Graph[str]:
     return Graph[str]()
 

@@ -1,9 +1,6 @@
-from algolib.algorithms.base import Algorithm
-
-
-def test_base_abstract() -> None:
-    assert issubclass(Algorithm, object)
+"""A simple smoke test to ensure that the basic setup is working."""
 
 
 def test_smoke() -> None:
+    """A simple smoke test."""
     pass

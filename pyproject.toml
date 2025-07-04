@@ -41,9 +41,17 @@ strict = true
 plugins = []
 
 [tool.pytest.ini_options]
-addopts = "--strict-markers -q"
+addopts = "--strict-markers --cov=algolib --cov-report=term-missing --cov-fail-under=95 -q"
 testpaths = ["tests"]
 
 [build-system]
 requires = ["poetry-core>=2.0.0,<3.0.0"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.coverage.run]
+branch = true
+source = ["algolib"]
+
+[tool.coverage.report]
+fail_under = 95
+show_missing = true

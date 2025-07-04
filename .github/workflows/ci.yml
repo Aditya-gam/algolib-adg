@@ -1,22 +1,24 @@
-name: ci
+name: CI
+
 on:
-  pull_request:
   push:
-    branches: [main]
+    branches: [ "main", "feat/**" ]
+  pull_request:
+    branches: [ "main" ]
 
 jobs:
   build:
-    strategy:
-      matrix:
-        os: [ubuntu-latest, macos-latest]
-        python: ["3.11"]
-    runs-on: ${{ matrix.os }}
-    steps:
-      - uses: actions/checkout@v4
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
 
-      - uses: actions/setup-python@v5
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
         with:
-          python-version: ${{ matrix.python }}
+          python-version: "3.11"
           cache: "poetry"
 
       - name: Install Poetry
@@ -24,15 +26,35 @@ jobs:
         with:
           poetry-version: "1.8.2"
 
-      - name: Install deps
-        run: |
-          poetry install --no-root --sync
+      - name: Dependency review
+        uses: actions/dependency-review-action@v4
 
-      - name: Lint & format (Ruff)
-        run: poetry run ruff check .
-      - name: Static typing (mypy)
-        run: poetry run mypy algolib
-      - name: Unit tests
-        run: poetry run pytest --cov=algolib
-      - name: Build docs
-        run: poetry run sphinx-build -b html docs docs/_build/html 
+      - name: Install dependencies
+        run: |
+          poetry install --all-extras
+
+      - name: Run Ruff (format + lint)
+        run: |
+          poetry run ruff format --check .
+          poetry run ruff check .
+
+      - name: Run mypy (strict)
+        run: |
+          poetry run mypy --strict algolib tests
+
+      - name: Run tests with coverage
+        run: |
+          poetry run pytest --cov=algolib --cov-report=xml --cov-report=term-missing --cov-fail-under=95 -q
+
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          files: ./coverage.xml
+          fail_ci_if_error: true
+          verbose: true
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+      - name: Build documentation (HTML)
+        run: |
+          poetry run sphinx-build -b html docs/source docs/_build/html 

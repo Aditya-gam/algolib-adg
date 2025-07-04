@@ -57,3 +57,7 @@ class Graph(Generic[T]):
 
     def __len__(self) -> int:
         return len(self._vertices)
+
+    def get_neighbors(self, v: Vertex[T]) -> List[Vertex[T]]:
+        """Get all neighbors of a vertex."""
+        return [neighbor for neighbor, _ in self.neighbors(v)]

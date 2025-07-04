@@ -145,3 +145,22 @@ def test_edge_weights(graph: Graph[str]) -> None:
     graph.add_edge(v1, v2, weight=3.14)
     neighbors = list(graph.neighbors(v1))
     assert neighbors[0] == (v2, 3.14)
+
+
+def test_add_edge_with_nonexistent_target_vertex(graph: Graph[str]) -> None:
+    vA = graph.add_vertex("A")
+    vB = Vertex("B")
+    with pytest.raises(ValueError, match="Both vertices must be in the graph"):
+        graph.add_edge(vA, vB)
+
+
+def test_graph_contains_nonexistent_vertex(graph: Graph[str]) -> None:
+    graph.add_vertex("A")
+    assert "B" not in graph
+
+
+def test_vertex_inequality_with_non_vertex_object() -> None:
+    vertex = Vertex("A")
+    assert vertex != 123
+    assert vertex != ["A"]
+    assert vertex is not None

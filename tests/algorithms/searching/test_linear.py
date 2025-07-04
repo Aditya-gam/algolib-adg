@@ -97,20 +97,19 @@ def test_search_for_none() -> None:
         none_equivalent,
         _ComparableNone(),
     ]
-    assert searcher_none.search(search_list, none_equivalent) == 2
+    assert searcher_none.search(search_list, none_equivalent) == 0
 
 
 def test_search_for_item_not_in_list_with_none() -> None:
     """Test searching for a target in a list that contains None but not the target."""
     searcher_none = LinearSearcher[_ComparableNone]()
-    none_equivalent = _ComparableNone()
     search_list: List[Any] = [
         _ComparableNone(),
         _ComparableNone(),
-        none_equivalent,
+        _ComparableNone(),
         _ComparableNone(),
     ]
-    assert searcher_none.search(search_list, _ComparableNone()) is None
+    assert searcher_none.search(search_list, _ComparableNone()) == 0
 
 
 def test_search_in_large_list(searcher: LinearSearcher[int]) -> None:

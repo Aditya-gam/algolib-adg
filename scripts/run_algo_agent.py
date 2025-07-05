@@ -112,7 +112,8 @@ def validate_generated_files(temp_dir: Path) -> dict[Path, list[str]]:
                         continue
 
                     if file_path.exists():
-                        all_errors[file_path].append(output)  # Append full error for context
+                        # Append full error for context
+                        all_errors[file_path].append(output)
     except Exception as e:
         print(f"An unexpected error occurred during validation: {e}", file=sys.stderr)
         # Handle case where validation tool itself fails
@@ -205,14 +206,21 @@ def perform_git_operations(
         repo.heads.master.checkout()
 
 
-def main(base_sha: str, dry_run: bool) -> None:
+def main(spec_files: list[str], base_sha: str, dry_run: bool) -> None:
     """Main execution function."""
-    changed_specs = get_changed_specs(base_sha)
-    if not changed_specs:
-        print("No new or changed specs found.")
+    specs_to_process: List[Path]
+    if spec_files:
+        specs_to_process = [Path(p) for p in spec_files]
+        print(f"Processing {len(specs_to_process)} spec file(s) provided directly.")
+    else:
+        print(f"No spec files provided. Checking for changes against base SHA: {base_sha}")
+        specs_to_process = get_changed_specs(base_sha)
+
+    if not specs_to_process:
+        print("No new or changed specs found to process.")
         return
 
-    for spec_path in changed_specs:
+    for spec_path in specs_to_process:
         print(f"\nProcessing spec: {spec_path.name}")
         try:
             spec = AlgorithmSpec.from_file(spec_path)
@@ -228,7 +236,14 @@ if __name__ == "__main__":
         description="Generate and commit algorithm implementations from specs."
     )
     parser.add_argument(
-        "base_sha", help="The base Git SHA to compare against for detecting changed specs."
+        "spec_files",
+        nargs="*",
+        help="Optional paths to specific .yml spec files to process.",
+    )
+    parser.add_argument(
+        "--base-sha",
+        default="main",
+        help="The base Git SHA to compare against for detecting changed specs if no files are provided. Defaults to 'main'.",
     )
     parser.add_argument(
         "--dry-run",
@@ -237,4 +252,4 @@ if __name__ == "__main__":
     )
     args = parser.parse_args()
 
-    main(args.base_sha, args.dry_run)
+    main(args.spec_files, args.base_sha, args.dry_run)

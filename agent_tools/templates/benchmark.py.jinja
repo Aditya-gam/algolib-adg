@@ -3,16 +3,20 @@
 # pytest-benchmark fixture based on the provided spec.
 
 import pytest
+import random
+from typing import List
 
-from .{{ spec.name.lower().replace(" ", "_") }} import {{ spec.name.replace(" ", "") }}
+from algolib._typing import ComparableT
+from algolib.algorithms.sorting.bubble import BubbleSort
+from algolib.algorithms.sorting.base import Sorter
 
-def test_benchmark_{{ spec.name.lower().replace(" ", "_") }}(benchmark):
-    # Benchmark fixture will be generated here.
-    # It should run the algorithm on a representative dataset.
-    benchmark(
-        {{ spec.name.replace(" ", "") }}().run,
-        # Add representative data here
-    )
+
+@pytest.mark.benchmark(group="Sort")
+def test_bubble_sort_benchmark(benchmark):
+    sorter: Sorter[List[ComparableT]] = BubbleSort()
+    data = [random.randint(0, 1000) for _ in range(100)]
+
+    benchmark(sorter.sort, data.copy())
 
 # Placeholder for {{ spec.name }} benchmark
 

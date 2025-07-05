@@ -19,9 +19,11 @@ Features:
 
 import argparse
 import os
+import re
 import shutil
 import subprocess
 import sys
+from collections import defaultdict
 from pathlib import Path
 from typing import List
 
@@ -52,47 +54,74 @@ def get_changed_specs(base_sha: str) -> List[Path]:
         return []
 
 
-def validate_generated_files(temp_dir: Path) -> str:
+def validate_generated_files(temp_dir: Path) -> dict[Path, list[str]]:
     """
     Runs ruff, mypy, and pytest on the generated files in the temp directory.
-    Returns an empty string if validation is successful, otherwise returns the
-    error output.
+    Returns a dictionary mapping file paths to a list of their errors.
+    An empty dictionary means validation was successful.
     """
     print(f"Running validation in: {temp_dir}")
     env = os.environ.copy()
     env["PYTHONPATH"] = f"{temp_dir}:{env.get('PYTHONPATH', '')}"
 
+    all_errors: dict[Path, list[str]] = defaultdict(list)
+    error_occurred = False
+
     try:
-        print("\n--- Running Ruff Formatter ---")
-        subprocess.run(
-            ["ruff", "format", "."], cwd=temp_dir, check=True, capture_output=True, text=True
-        )
+        # Run all validation steps and collect errors
+        validation_steps = [
+            ("Ruff Formatter", ["ruff", "format", "."]),
+            ("Ruff Linter", ["ruff", "check", "--fix", "."]),
+            ("MyPy", ["mypy", "."]),
+            ("Pytest", ["pytest", "-q"]),
+        ]
 
-        print("\n--- Running Ruff Linter ---")
-        subprocess.run(
-            ["ruff", "check", "--fix", "."],
-            cwd=temp_dir,
-            check=True,
-            capture_output=True,
-            text=True,
-        )
+        for name, command in validation_steps:
+            print(f"\n--- Running {name} ---")
+            process = subprocess.run(
+                command,
+                cwd=temp_dir,
+                capture_output=True,
+                text=True,
+                env=env if name == "Pytest" else None,
+            )
+            if process.returncode != 0:
+                error_occurred = True
+                output = process.stdout + "\n" + process.stderr
+                # Simple parsing: find file paths in the output
+                # This is a basic regex, might need refinement
+                file_errors = re.findall(r"(\S+\.py):\d+:", output)
+                for file_path_str in set(file_errors):
+                    # IMPORTANT: Sanitize and resolve the path to prevent writing outside the temp_dir
+                    clean_path_str = file_path_str.strip()
+                    if ".." in clean_path_str or clean_path_str.startswith("/"):
+                        print(
+                            f"Warning: Skipping potentially unsafe file path: {file_path_str}",
+                            file=sys.stderr,
+                        )
+                        continue
 
-        print("\n--- Running MyPy ---")
-        subprocess.run(["mypy", "."], cwd=temp_dir, check=True, capture_output=True, text=True)
+                    file_path = (temp_dir / clean_path_str).resolve()
 
-        print("\n--- Running Pytest ---")
-        subprocess.run(
-            ["pytest", "-q"], cwd=temp_dir, check=True, capture_output=True, text=True, env=env
-        )
+                    # Final check to ensure we are within the temp directory
+                    if temp_dir.resolve() not in file_path.parents:
+                        print(
+                            f"Warning: Skipping file path outside of temp dir: {file_path}",
+                            file=sys.stderr,
+                        )
+                        continue
 
+                    if file_path.exists():
+                        all_errors[file_path].append(output)  # Append full error for context
+    except Exception as e:
+        print(f"An unexpected error occurred during validation: {e}", file=sys.stderr)
+        # Handle case where validation tool itself fails
+        return {temp_dir: [str(e)]}
+
+    if not error_occurred:
         print("\n✅ Validation successful!")
-        return ""
-    except subprocess.CalledProcessError as e:
-        errors = (
-            f"❌ Validation failed: {e.cmd}\n---stdout---\n{e.stdout}\n---stderr---\n{e.stderr}"
-        )
-        print(errors, file=sys.stderr)
-        return errors
+
+    return dict(all_errors)
 
 
 def process_spec(spec: AlgorithmSpec, dry_run: bool) -> None:
@@ -108,20 +137,14 @@ def process_spec(spec: AlgorithmSpec, dry_run: bool) -> None:
     max_retries = 3
     for i in range(max_retries):
         print(f"\n--- Validation attempt {i + 1}/{max_retries} ---")
-        errors = validate_generated_files(temp_dir)
-        if not errors:
+        errors_by_file = validate_generated_files(temp_dir)
+        if not errors_by_file:
             break  # Success
 
-        print("Validation failed. Attempting to fix...")
-        # This is a simplification. A more robust solution would parse the
-        # errors to identify which file to fix. For now, we assume the
-        # primary code file is the one to fix.
-        code_file_path = generated_files.get("code")
-        if code_file_path:
-            agent.fix_code(code_file_path, errors)
-        else:
-            print("Could not find code file to fix.", file=sys.stderr)
-            break
+        print(f"Validation failed. Attempting to fix {len(errors_by_file)} file(s)...")
+        for file_path, errors in errors_by_file.items():
+            error_str = "\n".join(errors)
+            agent.fix_code(file_path, error_str)
     else:
         print(f"Failed to validate after {max_retries} attempts.", file=sys.stderr)
         if not dry_run:

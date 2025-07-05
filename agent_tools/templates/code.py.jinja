@@ -10,15 +10,28 @@ from typing import List
 from algolib._typing import ComparableT
 from algolib.algorithms.sorting.base import Sorter
 
-class {{ spec.name.replace(" ", "") }}(Sorter):
-    """
-    {{ spec.description }}
-    """
-    def __init__(self):
-        pass
+class {{ spec.name.replace(" ", "") }}(Sorter[List[ComparableT]]):
+    """{{ spec.description }}"""
 
-    def run(self, {% for p in spec.parameters %}{{ p.name }}: {{ p.type }}{% if not loop.last %}, {% endif %}{% endfor %}) -> {{ spec.returns.type }}:
+    def sort(self, data: List[ComparableT]) -> List[ComparableT]:
+        """{{ spec.description }}
+
+        Args:
+            data (List[ComparableT]): The list of elements to be sorted.
+
+        Returns:
+            List[ComparableT]: The sorted list.
         """
-        {{ spec.description }}
-        """
-        pass
+        n = len(data)
+        if n <= 1:
+            return data
+
+        for i in range(n):
+            swapped = False
+            for j in range(n - i - 1):
+                if data[j] > data[j + 1]:
+                    data[j], data[j + 1] = data[j + 1], data[j]
+                    swapped = True
+            if not swapped:
+                break
+        return data

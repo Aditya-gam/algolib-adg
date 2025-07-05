@@ -7,6 +7,9 @@ on:
 jobs:
   generate:
     runs-on: ubuntu-latest
+    env:
+      OLLAMA_MODEL: ${{ secrets.OLLAMA_MODEL || 'llama3' }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -22,7 +25,4 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Run agent
-        env:
-          OLLAMA_MODEL: ${{ secrets.OLLAMA_MODEL }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: python scripts/run_algo_agent.py

@@ -1,80 +1,52 @@
 # AlgoLib-ADG
 
 [![CI](https://github.com/Aditya-gam/algolib-adg/actions/workflows/ci.yml/badge.svg)](https://github.com/Aditya-gam/algolib-adg/actions/workflows/ci.yml)
+[![Agent Success](https://img.shields.io/badge/Agent-Passing-brightgreen)](https://github.com/Aditya-gam/algolib-adg/actions/workflows/agent.yml) <!-- TODO: Update with real workflow -->
 [![codecov](https://codecov.io/gh/Aditya-gam/algolib-adg/branch/main/graph/badge.svg)](https://codecov.io/gh/Aditya-gam/algolib-adg)
 [![PyPI version](https://badge.fury.io/py/algolib-adg.svg)](https://badge.fury.io/py/algolib-adg)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-A Python library of fundamental data structures and algorithms, built with a focus on clean code, SOLID principles, and robust testing.
+**AlgoLib-ADG** is a Python library of fundamental data structures and algorithms, uniquely built using an **AI-powered agentic workflow**. It combines classic computer science with cutting-edge automation, ensuring high-quality, well-tested, and fully documented code.
 
 ## ✨ Features
 
-A growing collection of classic algorithms and data structures, including:
+*   **🤖 AI-Powered Development**: Algorithms are generated, tested, and documented by an autonomous AI agent from simple YAML specifications.
+*   **📚 Comprehensive Library**: A growing collection of classic algorithms and data structures.
+*   **✅ Strictly Typed & Tested**: Enforced static typing with `mypy` and a test coverage requirement of over 95%.
+*   **🧼 Clean Code & SOLID Principles**: Adherence to `PEP 8`, `SOLID` design, and `Clean Code` practices (DRY/KISS).
+*   **⚙️ Automated Quality Gates**: A robust CI pipeline validates every change with linting, type-checking, testing, and documentation builds.
+*   **📦 Modern Tooling**: Built with Poetry, Ruff, Pytest, and Sphinx.
 
-**Data Structures:**
-*   `Stack`: Last-In, First-Out (LIFO) stack implementation.
-*   `Queue`: First-In, First-Out (FIFO) queue implementation.
-*   `LinkedList`: Singly linked list.
-*   `Graph`: Directed and undirected graph implementation with support for adjacency lists.
-*   `DisjointSet`: Disjoint Set Union (DSU) or Union-Find data structure.
+## 🤖 Add a New Algorithm in Three Steps
 
-**Algorithms:**
-*   **Sorting:**
-    *   `BubbleSort`
-    *   `MergeSort`
-*   **Searching:**
-    *   `LinearSearch`
-    *   `BinarySearch` (for sorted sequences)
-*   **Graph Traversal:**
-    *   `bfs`: Breadth-First Search
+Our AI agent makes contributing new algorithms incredibly simple.
 
-## 🚀 Quick Start
+1.  **Define the Spec**: Copy `specs/template.yml` to `specs/YourAlgorithm.yml` and fill in the details: name, description, complexity, etc.
 
-Get started with `algolib` in just a few lines of code.
+    ```yaml
+    # specs/MyAwesomeSort.yml
+    name: "My Awesome Sort"
+    category: "Sorting"
+    description: "A revolutionary sorting algorithm."
+    # ... and other fields
+    ```
+
+2.  **Commit & Push**: Commit the new spec file. The AI agent takes over from here.
+    ```bash
+    git add specs/MyAwesomeSort.yml
+    git commit -m "feat(sorting): add spec for My Awesome Sort"
+    git push
+    ```
+
+3.  **Review the PR**: The agent will generate the code, tests, and documentation, then open a Pull Request. Review the generated files, and once all checks pass, merge it.
+
+That's it! The agent handles the boilerplate, letting you focus on the algorithm's design.
+
+## 🚀 Local Development
+
+While the agent handles most of the work, you can also run it locally.
 
 ### Installation
-
-The library is packaged with Poetry. To install it, you will need to add it as a dependency in your `pyproject.toml` or install it directly from the repository.
-
-*(Note: Once published to PyPI, this will be `pip install algolib-adg`)*
-
-### Example Usage
-
-Here's a quick example of how to use the `Stack` data structure and `MergeSort` algorithm:
-
-```python
-from algolib.data_structures import Stack
-from algolib.algorithms.sorting import MergeSort
-
-# Using the Stack
-print("--- Stack Example ---")
-s = Stack[int]()
-s.push(1)
-s.push(2)
-s.push(3)
-
-print(f"Stack size: {s.size}")
-print(f"Popped item: {s.pop()}")
-print(f"Is stack empty? {s.is_empty()}")
-print("-" * 20)
-
-
-# Using MergeSort
-print("--- MergeSort Example ---")
-data_to_sort = [5, 2, 9, 1, 5, 6]
-sorter = MergeSort[int]()
-sorted_data = sorter.sort(data_to_sort)
-
-print(f"Original list: {data_to_sort}")
-print(f"Sorted list: {sorted_data}")
-print("-" * 20)
-```
-
-## 🛠️ Development
-
-We welcome contributions! Please follow these steps to set up a local development environment.
-
-### Setup
 
 1.  **Clone the repository:**
     ```bash
@@ -82,55 +54,30 @@ We welcome contributions! Please follow these steps to set up a local developmen
     cd algolib-adg
     ```
 
-2.  **Install Poetry:**
-    Follow the official instructions at [poetry.eustace.io](https://python-poetry.org/docs/#installation).
-
-3.  **Install dependencies:**
-    This command installs all main and development dependencies.
+2.  **Install dependencies with Poetry:**
     ```bash
     poetry install --all-extras
     ```
 
-### Running Checks
-
-This project uses a suite of tools to ensure code quality.
-
-*   **Linting and Formatting (Ruff):**
+3.  **Set up pre-commit hooks:**
+    This is essential for ensuring your spec file is valid before committing.
     ```bash
-    # Check formatting
-    poetry run ruff format --check .
-    # Lint
-    poetry run ruff check .
+    poetry run pre-commit install
     ```
 
-*   **Type Checking (mypy):**
-    ```bash
-    poetry run mypy --strict algolib tests
-    ```
+### Running the Agent Locally
 
-*   **Testing (pytest):**
-    Run the full test suite with coverage.
-    ```bash
-    poetry run pytest --cov=algolib
-    ```
-    The CI pipeline requires a minimum of 95% test coverage.
+You can test the generation process without committing using the `--dry-run` flag. This is useful for validating your spec file and seeing the generated output.
 
-### Pre-commit Hooks
-
-This repository is configured with pre-commit hooks to automatically run checks before each commit. To install them, run:
 ```bash
-poetry run pre-commit install
+# Example: Run the agent for the BubbleSort spec
+poetry run python scripts/run_algo_agent.py --dry-run specs/BubbleSort.yml
 ```
+The generated files will be placed in the `.agent-tmp/` directory for your review.
 
 ## 🤝 Contributing
 
-Contributions, issues, and feature requests are welcome.
-
-1.  Fork the repository.
-2.  Create your feature branch (`git checkout -b feat/AmazingFeature`).
-3.  Commit your changes using the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) standard (`git commit -m 'feat(scope): some amazing feature'`).
-4.  Push to the branch (`git push origin feat/AmazingFeature`).
-5.  Open a Pull Request.
+We welcome all contributions! Please see the `CONTRIBUTING.rst` file for more detailed instructions on our development standards and workflow.
 
 ## 📄 License
 

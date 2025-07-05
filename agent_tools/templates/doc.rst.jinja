@@ -1,0 +1,18 @@
+.. _{{ spec.name.lower().replace(" ", "-") }}:
+
+{{ spec.name }}
+{{ "=" * spec.name|length }}
+
+.. automodule:: algolib.algorithms.{{ spec.category.lower() }}.{{ spec.name.lower().replace(" ", "_") }}
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Description
+-----------
+{{ spec.description }}
+
+Complexity
+----------
+- **Time**: {{ spec.complexity.time }}
+- **Space**: {{ spec.complexity.space }}

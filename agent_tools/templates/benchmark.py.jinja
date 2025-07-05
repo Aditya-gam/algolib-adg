@@ -1,0 +1,25 @@
+# This is a placeholder for the benchmark generation template.
+# It will be populated with Jinja2 syntax to generate the
+# pytest-benchmark fixture based on the provided spec.
+
+import pytest
+import random
+from typing import List
+
+from algolib._typing import ComparableT
+from algolib.algorithms.sorting.bubble import BubbleSort
+from algolib.algorithms.sorting.base import Sorter
+
+
+@pytest.mark.benchmark(group="Sort")
+def test_bubble_sort_benchmark(benchmark):
+    sorter: Sorter[List[ComparableT]] = BubbleSort()
+    data = [random.randint(0, 1000) for _ in range(100)]
+
+    benchmark(sorter.sort, data.copy())
+
+# Placeholder for {{ spec.name }} benchmark
+
+# TODO: Add benchmark tests
+def test_benchmark_{{ spec.name.lower().replace(" ", "_") }}_placeholder(benchmark):
+    benchmark(lambda: 1 + 1)

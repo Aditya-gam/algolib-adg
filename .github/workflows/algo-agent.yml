@@ -1,0 +1,28 @@
+name: algo-agent
+on:
+  push:
+    paths:
+      - "specs/**"
+      - "spec_builder/**"
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    env:
+      OLLAMA_MODEL: ${{ secrets.OLLAMA_MODEL || 'llama3' }}
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
+
+      - name: Start Ollama
+        uses: ai-action/setup-ollama@v1
+
+      - name: Pull Ollama model
+        run: ollama pull ${{ env.OLLAMA_MODEL }}
+
+      - name: Install deps
+        run: pip install -r requirements.txt
+
+      - name: Run agent
+        run: python scripts/run_algo_agent.py

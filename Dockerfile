@@ -23,4 +23,4 @@ RUN poetry config virtualenvs.create false && poetry install --no-interaction --
 COPY . .
 
 # Run tests by default
-CMD ["pytest", "-q"] 
+CMD ["pytest", "-q"]

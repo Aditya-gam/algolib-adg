@@ -18,11 +18,10 @@ repos:
     rev: v1.11.0
     hooks:
       - id: mypy
-        args:
-          - --config-file=pyproject.toml
-        additional_dependencies:
-          - hypothesis
-          - pytest
+        language: python
+        entry: poetry run mypy
+        args: [--config-file=pyproject.toml]
+        exclude: ^(docs/|.*/templates/|app\.py|.*/generated/)
 
   # Tests should be run separately as part of CI
   # - repo: local
@@ -33,3 +32,13 @@ repos:
   #       language: system
   #       pass_filenames: false
   #       always_run: true
+
+  - repo: local
+    hooks:
+      - id: check-interface
+        name: Check interface compliance
+        entry: scripts/check_interface.py
+        language: python
+        args: ["HEAD"]
+        types: [python]
+        pass_filenames: false

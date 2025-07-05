@@ -1,0 +1,22 @@
+name: Bubble Sort
+description: A simple sorting algorithm that repeatedly steps through the list, compares
+  adjacent elements and swaps them if they are in the wrong order.
+category: Sorting
+complexity:
+  time_worst: O(n^2)
+  time_average: O(n^2)
+  time_best: O(n)
+  space_worst: O(1)
+parameters:
+- name: data
+  type: list[ComparableT]
+  description: The list of elements to be sorted.
+returns:
+  type: list[ComparableT]
+  description: The sorted list.
+dependencies:
+- Sorter
+- SupportsLessThan
+
+# Smoke test
+# Forcing a change to trigger the script.

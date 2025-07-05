@@ -18,24 +18,24 @@ The result is both a teaching resource and a live demonstration of next-generati
     - 100 % PEP 8 compliant (enforced by _Black_, _isort_, _Flake8_, _ruff_).
     - ≥ 95 % line coverage; ≤ 0.5 % branch misses on `main`.
     - Strict type checking with _mypy_ (CI gate).
-    
+
 2. **Developer Experience**
     - One-command setup via **Poetry** (or `pip-tools`) and _pre-commit_ hooks.
     - GitHub Actions pipeline that executes lint → type-check → tests → benchmark → Sphinx build.
     - Badges for build status, coverage, and docs health.
-    
+
 3. **Documentation & Demo**
     - Auto-generated API docs (Sphinx + _furo_ theme) published to GitHub Pages.
     - Rich narrative pages: algorithm intuition, complexity analysis, ASCII/PlantUML diagrams.
     - Interactive Streamlit app letting visitors run algorithms and visualise steps.
-    
+
 4. **Agentic-AI Integration** _(Phase 0.5)_
     - LangChain-driven **Algo-Agent** that reads YAML specs (`/specs/*.yml`) and produces:
         - `algolib/…` implementation class
         - `tests/test_<algo>.py` with exhaustive cases & property tests
         - Sphinx reStructuredText page with explanation + complexity table
         - `benchmarks/test_<algo>.py` for `pytest-benchmark`
-        
+
     - Action triggers on push to `specs/`, commits generated code to a feature branch, opens an auto-PR, and comments if coverage / lint fail.
 ---
 ## 3. Architecture & Tooling
@@ -121,20 +121,20 @@ Implement **five algorithms** with full OOP wrappers & type hints:
 _Deliverables_: full type hints, Google-style docstrings, 100 % unit tests, property tests, ≥ 95 % coverage.
 ### Phase 2 — Testing & Documentation _(1 day)_
 - Exhaustive unit tests: edge cases (empty list, single-element, duplicates), property-based checks for idempotence & stability.
-	
+
 - Configure `pytest --cov=algolib --typeguard-packages=algolib`. Coverage gate ≥ 95 %.
-	
+
 - Create Sphinx docs:
     - `index.rst`, `usage/quickstart.rst`, `algorithms/sorting/bubble_sort.rst`, …
     - Include diagrams via PlantUML (rendered by Sphinx-contrib-plantuml).
-    
+
 - Deploy to GitHub Pages (`gh-pages` branch).
 ### Phase 3 — Public Showcase _(1 day — replaces old Phase 3)_
 1. **Algorithm Playground**
     - Sidebar → select category & algorithm.
     - Dynamic input widgets (array editor, graph builder).
     - Visual output (matplotlib chart or NetworkX graph) plus time-complexity badge.
-    
+
 2. **Spec Builder**
     - Form: algorithm name, category, complexity fields, _dependencies_ multiselect.
     - **On Submit:**
@@ -148,13 +148,13 @@ Deployed to Streamlit Cloud with status badge and docs link in README & navbar.
 ---
 ## 5. Agentic-AI Feature Backlog
 1. **Custom Spec Ingestion** – fully supported via Spec Builder UI.
-    
+
 2. **Interface-Compliance Checker** — enforced in Phase 0.5 CI gate.
-	
+
 3. **Auto-Explain & Diagram Agent** (Phase 2+)
     - After merge, run algorithm on sample data, ask LLM for natural-language explanation & PlantUML sequence/state diagram.
     - Commit artefacts to `docs/auto-explain/<algo>.rst`.
-    
+
 4. **Performance-Regression Agent** (Phase 3+)
     - Parse latest `pytest-benchmark` JSON; post PR comment if current run >10 % slower than `main`.
     - Suggest micro-optimisations with annotated diff.

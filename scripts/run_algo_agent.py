@@ -52,9 +52,11 @@ def get_changed_specs(base_sha: str) -> List[Path]:
         return []
 
 
-def validate_generated_files(temp_dir: Path) -> bool:
+def validate_generated_files(temp_dir: Path) -> str:
     """
     Runs ruff, mypy, and pytest on the generated files in the temp directory.
+    Returns an empty string if validation is successful, otherwise returns the
+    error output.
     """
     print(f"Running validation in: {temp_dir}")
     env = os.environ.copy()
@@ -84,12 +86,100 @@ def validate_generated_files(temp_dir: Path) -> bool:
         )
 
         print("\n✅ Validation successful!")
-        return True
+        return ""
     except subprocess.CalledProcessError as e:
-        print(f"❌ Validation failed: {e.cmd}", file=sys.stderr)
-        print(e.stdout, file=sys.stdout)
-        print(e.stderr, file=sys.stderr)
-        return False
+        errors = (
+            f"❌ Validation failed: {e.cmd}\n---stdout---\n{e.stdout}\n---stderr---\n{e.stderr}"
+        )
+        print(errors, file=sys.stderr)
+        return errors
+
+
+def process_spec(spec: AlgorithmSpec, dry_run: bool) -> None:
+    """
+    Processes a single algorithm specification.
+    """
+    agent = Agent(spec)
+    generated_files = agent.run()
+
+    slug = spec.name.lower().replace(" ", "_")
+    temp_dir = project_root / ".agent-tmp" / slug
+
+    max_retries = 3
+    for i in range(max_retries):
+        print(f"\n--- Validation attempt {i + 1}/{max_retries} ---")
+        errors = validate_generated_files(temp_dir)
+        if not errors:
+            break  # Success
+
+        print("Validation failed. Attempting to fix...")
+        # This is a simplification. A more robust solution would parse the
+        # errors to identify which file to fix. For now, we assume the
+        # primary code file is the one to fix.
+        code_file_path = generated_files.get("code")
+        if code_file_path:
+            agent.fix_code(code_file_path, errors)
+        else:
+            print("Could not find code file to fix.", file=sys.stderr)
+            break
+    else:
+        print(f"Failed to validate after {max_retries} attempts.", file=sys.stderr)
+        if not dry_run:
+            shutil.rmtree(temp_dir)
+        return
+
+    if dry_run:
+        print(f"Dry run: Artifacts for {spec.name} are in {temp_dir}")
+        return
+
+    # --- Git Operations ---
+    perform_git_operations(spec, generated_files, temp_dir)
+
+
+def perform_git_operations(
+    spec: AlgorithmSpec, generated_files: dict[str, Path], temp_dir: Path
+) -> None:
+    """
+    Handles branching, committing, and pushing the generated files.
+    """
+    repo = Repo(project_root)
+    origin = repo.remotes.origin
+    slug = spec.name.lower().replace(" ", "_")
+
+    # Move files from temp to repo
+    for _, src_path in generated_files.items():
+        # The output_path in the writers already includes the target structure
+        dest_path = project_root / src_path.relative_to(temp_dir)
+        dest_path.parent.mkdir(parents=True, exist_ok=True)
+        shutil.move(str(src_path), str(dest_path))
+
+    # Create branch, commit, and push
+    branch_name = f"agent/{slug}"
+    try:
+        new_branch = repo.create_head(branch_name)
+        new_branch.checkout()
+
+        repo.index.add([str(p.relative_to(project_root)) for p in generated_files.values()])
+        repo.index.commit(f"feat({spec.category}): implement {spec.name} via agent")
+
+        print(f"Pushing branch {branch_name} to origin...")
+        origin.push(refspec=f"{branch_name}:{branch_name}")
+
+        # Construct PR URL
+        repo_url = origin.url.split(".git")[0].replace(":", "/").replace("git@", "https://")
+        pr_url = f"{repo_url}/pull/new/{branch_name}"
+        print(f"\n🚀 Successfully created and pushed branch for {spec.name}.")
+        print(f"   Create a PR: {pr_url}")
+
+    except Exception as e:
+        print(f"Error during Git operations for {spec.name}: {e}", file=sys.stderr)
+        repo.heads.master.checkout()  # Or main
+        repo.delete_head(branch_name, force=True)
+    finally:
+        shutil.rmtree(temp_dir)
+        # Switch back to the original branch
+        # This is a simplification; a more robust implementation would store the original branch name
+        repo.heads.master.checkout()
 
 
 def main(base_sha: str, dry_run: bool) -> None:
@@ -107,60 +197,7 @@ def main(base_sha: str, dry_run: bool) -> None:
             print(f"Error parsing spec {spec_path.name}: {e}", file=sys.stderr)
             continue
 
-        agent = Agent(spec)
-        generated_files = agent.run()
-
-        slug = spec.name.lower().replace(" ", "_")
-        temp_dir = project_root / ".agent-tmp" / slug
-
-        if not validate_generated_files(temp_dir):
-            print(f"Skipping {spec.name} due to validation errors.")
-            if not dry_run:
-                shutil.rmtree(temp_dir)
-            continue
-
-        if dry_run:
-            print(f"Dry run: Artifacts for {spec.name} are in {temp_dir}")
-            continue
-
-        # --- Git Operations ---
-        repo = Repo(project_root)
-        origin = repo.remotes.origin
-
-        # Move files from temp to repo
-        for _file_type, src_path in generated_files.items():
-            # The output_path in the writers already includes the target structure
-            dest_path = project_root / src_path.relative_to(temp_dir)
-            dest_path.parent.mkdir(parents=True, exist_ok=True)
-            shutil.move(str(src_path), str(dest_path))
-
-        # Create branch, commit, and push
-        branch_name = f"agent/{slug}"
-        try:
-            new_branch = repo.create_head(branch_name)
-            new_branch.checkout()
-
-            repo.index.add([str(p.relative_to(project_root)) for p in generated_files.values()])
-            repo.index.commit(f"feat({spec.category}): implement {spec.name} via agent")
-
-            print(f"Pushing branch {branch_name} to origin...")
-            origin.push(refspec=f"{branch_name}:{branch_name}")
-
-            # Construct PR URL
-            repo_url = origin.url.split(".git")[0].replace(":", "/").replace("git@", "https://")
-            pr_url = f"{repo_url}/pull/new/{branch_name}"
-            print(f"\n🚀 Successfully created and pushed branch for {spec.name}.")
-            print(f"   Create a PR: {pr_url}")
-
-        except Exception as e:
-            print(f"Error during Git operations for {spec.name}: {e}", file=sys.stderr)
-            repo.heads.master.checkout()  # Or main
-            repo.delete_head(branch_name, force=True)
-        finally:
-            shutil.rmtree(temp_dir)
-            # Switch back to the original branch
-            # This is a simplification; a more robust implementation would store the original branch name
-            repo.heads.master.checkout()
+        process_spec(spec, dry_run)
 
 
 if __name__ == "__main__":

@@ -6,14 +6,11 @@ It receives an `AlgorithmSpec` object as `spec`.
 # imports
 
 from dataclasses import dataclass
+from typing import List
+from algolib._typing import ComparableT
+from algolib.algorithms.sorting.base import Sorter
 
-{% for dep in spec.dependencies %}
-from algolib.interfaces import {{ dep }}
-{% endfor %}
-
-# Placeholder for {{ spec.name }}
-
-class {{ spec.name.replace(" ", "") }}:
+class {{ spec.name.replace(" ", "") }}(Sorter):
     """
     {{ spec.description }}
     """

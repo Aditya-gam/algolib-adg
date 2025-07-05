@@ -1,4 +1,3 @@
-from os import getenv
 from typing import cast
 
 from langchain_core.language_models import BaseChatModel
@@ -9,5 +8,5 @@ def get_llm() -> BaseChatModel:
     """Returns a ChatOllama model instance."""
     return cast(
         BaseChatModel,
-        ChatOllama(model=getenv("OLLAMA_MODEL", "llama3.1"), temperature=0.2),
+        ChatOllama(model="llama3.1", temperature=0.2),
     )

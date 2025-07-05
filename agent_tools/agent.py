@@ -2,8 +2,9 @@
 Main agent class that orchestrates the code generation process.
 """
 
+import sys
 from pathlib import Path
-from typing import Any, List, Type
+from typing import List, Type
 
 import yaml
 from langchain.agents import AgentExecutor, create_tool_calling_agent
@@ -19,12 +20,26 @@ from agent_tools.test_writer import TestWriter
 from algolib.specs.schema import AlgorithmSpec
 
 # System prompt to guide the LLM's behavior
-SYSTEM_PROMPT = """You are Algo-Agent.
-Generate minimal, idiomatic Python implementing the supplied spec.
-Never modify existing library code.
+SYSTEM_PROMPT = """You are Algo-Agent, a world-class Python programmer specializing in algorithms and data structures. Your task is to generate a complete, production-ready implementation of a given algorithm based on a specification.
 
-You must generate all four artifacts: code, tests, documentation, and a benchmark.
-To do this, you must call all four available tools in order: `write_code`, `write_tests`, `write_docs`, and `write_bench`.
+**Your output MUST adhere to the following strict standards:**
+1.  **Code Style (PEP 8)**: All code must be formatted with Ruff.
+2.  **Typing (Strict Mypy)**:
+    - All functions and methods must have explicit type hints for all arguments and return values.
+    - Use types from Python's `typing` module (e.g., `List`, `Dict`, `Tuple`).
+    - For custom generic types, import `ComparableT` from `algolib._typing`.
+    - **Crucially, do not use `Any` or `object`**.
+3.  **Object-Oriented Design (SOLID)**:
+    - The generated class must inherit from the correct base class (e.g., `Sorter`).
+    - The implementation should be contained within the class methods.
+4.  **Clarity and Readability (Clean Code)**:
+    - Use clear and descriptive variable names.
+    - Add comments to explain complex or non-obvious parts of the algorithm.
+5.  **Testing (TDD)**:
+    - Generated tests must be thorough, covering edge cases (empty lists, single-element lists), sorted lists, and typical unsorted cases.
+    - Use the `unittest` framework.
+
+**Your process is to call all four available tools in order: `write_code`, `write_tests`, `write_docs`, and `write_bench` to generate a complete set of artifacts.**
 """
 
 
@@ -34,7 +49,7 @@ class BaseWriterTool(BaseTool):
     spec: AlgorithmSpec
     writer_class: Type[FileWriter]
 
-    def _run(self, *args: Any, **kwargs: Any) -> str:
+    def _run(self) -> str:
         writer = self.writer_class(self.spec)
         # Handle append mode for documentation
         append_mode = self.name == "write_docs"
@@ -90,6 +105,50 @@ class Agent:
 
         agent = create_tool_calling_agent(self.llm, self.tools, prompt)
         self.agent_executor = AgentExecutor(agent=agent, tools=self.tools, verbose=True)
+
+    def fix_code(self, file_path: Path, errors: str) -> None:
+        """
+        Reads the content of a file with errors, asks the LLM to fix it,
+        and overwrites the file with the corrected code.
+        """
+        print(f"Attempting to fix errors in: {file_path}")
+        file_content = file_path.read_text()
+
+        prompt = f"""The following file has validation errors:
+
+File: {file_path.name}
+Content:
+```python
+{file_content}
+```
+
+Errors:
+```
+{errors}
+```
+
+Please fix the code to resolve these errors and provide the full, corrected file content.
+"""
+
+        response = self.llm.invoke(prompt)
+        corrected_code = response.content
+
+        # Ensure corrected_code is a string
+        if not isinstance(corrected_code, str):
+            # Fallback or error handling if the content is not a string
+            print(
+                f"Warning: LLM response content is not a string: {corrected_code}", file=sys.stderr
+            )
+            corrected_code = ""  # Or handle as appropriate
+
+        # The response might contain markdown code blocks, so we need to extract the code.
+        if "```" in corrected_code:
+            corrected_code = corrected_code.split("```")[1]
+            if corrected_code.startswith("python"):
+                corrected_code = corrected_code[6:]
+
+        file_path.write_text(corrected_code)
+        print(f"File {file_path.name} updated with corrections.")
 
     def run(self) -> dict[str, Path]:
         """

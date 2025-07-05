@@ -11,16 +11,16 @@ python = "^3.11"
 typing-extensions = "^4.14.1"
 
 [tool.poetry.group.dev.dependencies]
-pytest = "^8.4.1"
-hypothesis = "^6.135.24"
-pytest-benchmark = "^5.1.0"
-ruff = "^0.12.2"
-mypy = "^1.16.1"
-sphinx = "^8.2.3"
 furo = "^2024.8.6"
-sphinx-autobuild = "^2024.10.3"
+hypothesis = "^6.135.24"
+mypy = "^1.16.1"
 pre-commit = "^4.2.0"
+pytest = "^8.4.1"
+pytest-benchmark = "^5.1.0"
 pytest-cov = "^6.2.1"
+ruff = "^0.12.2"
+sphinx = "^8.2.3"
+sphinx-autobuild = "^2024.10.3"
 
 [tool.ruff]
 line-length = 100
@@ -40,8 +40,12 @@ python_version = "3.11"
 strict = true
 plugins = []
 
+[[tool.mypy.overrides]]
+module = "tests.*"
+ignore_missing_imports = true
+
 [tool.pytest.ini_options]
-addopts = "--strict-markers -q"
+addopts = "--strict-markers --cov=algolib --cov-report=term-missing --cov-fail-under=95 -q"
 testpaths = ["tests"]
 
 [build-system]

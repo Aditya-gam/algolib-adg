@@ -15,3 +15,12 @@ documentation for details.
    :maxdepth: 2
    :caption: Contents:
 
+.. toctree::
+   :caption: API Reference
+   :maxdepth: 2
+
+   algorithms/sorting/bubble
+   algorithms/sorting/merge
+   algorithms/searching/linear
+   algorithms/searching/binary
+   algorithms/graph/traversal/bfs

@@ -1,15 +1,21 @@
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
 [tool.poetry]
-name = "algolib_adg"
-version = "0.1.0"
-description = ""
-authors = ["Aditya Gambhir"]
-license = "MIT"
 packages = [{ include = "algolib" }]
 
-[tool.poetry.dependencies]
-python = "^3.11"
-typing-extensions = "^4.14.1"
-langchain-ollama = "^0.3.3"
+[project]
+name = "algolib-adg"
+version = "0.1.0"
+description = "A comprehensive library of algorithms and data structures, with a focus on clean code, SOLID principles, and thorough testing."
+authors = [{ name = "Aditya Gambhir" }]
+license = { text = "MIT" }
+requires-python = ">=3.11,<4.0"
+dependencies = [
+    "typing-extensions>=4.14.1,<5.0.0",
+    "langchain-ollama>=0.3.3,<0.4.0",
+]
 
 [tool.poetry.group.dev.dependencies]
 furo = "^2024.8.6"
@@ -67,6 +73,7 @@ omit = [
     "algolib/interfaces/*",
 ]
 
-[build-system]
-requires = ["poetry-core>=2.0.0,<3.0.0"]
-build-backend = "poetry.core.masonry.api"
+[tool.coverage.run]
+omit = [
+    "algolib/interfaces/*",
+]

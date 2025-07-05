@@ -9,39 +9,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          # We need to fetch more than the latest commit to be able to diff
-          fetch-depth: 0
-
-      - name: Set up Python 3.11
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
-      - name: Install and configure Poetry
-        uses: snok/install-poetry@v1
-        with:
-          version: "1.8.2"
-          virtualenvs-create: true
-          virtualenvs-in-project: true
-
-      - name: Load cached venv
-        id: cached-poetry-dependencies
-        uses: actions/cache@v4
-        with:
-          path: .venv
-          key: venv-${{ runner.os }}-${{ hashFiles('**/poetry.lock') }}
-
-      - name: Install dependencies
-        if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
-        run: poetry install --no-interaction --no-root --all-extras
-
-      - name: Install project
-        run: poetry install --no-interaction --all-extras
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.11" }
 
       - name: Start Ollama (optional – comment out to use OpenAI)
         if: ${{ env.LLM_BACKEND == 'ollama' }}
-        uses: ai-action/setup-ollama@v1
+        uses: ollama/ollama-action@v1
+        with:
+          model: ${{ env.OLLAMA_MODEL }}
+
+      - name: Install deps
+        run: pip install -r requirements.txt
 
       - name: Run agent
         env:
@@ -49,4 +27,4 @@ jobs:
           OLLAMA_MODEL: ${{ secrets.OLLAMA_MODEL }}
           OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: poetry run python scripts/run_algo_agent.py ${{ github.event.before }}
+        run: python scripts/run_algo_agent.py

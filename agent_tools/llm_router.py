@@ -1,11 +1,13 @@
 from os import getenv
 from typing import cast
 
-from langchain_core.language_models import BaseLLM
-from langchain_ollama import OllamaLLM
+from langchain_core.language_models import BaseChatModel
+from langchain_ollama import ChatOllama
 
 
-def get_llm() -> BaseLLM:
+def get_llm() -> BaseChatModel:
+    """Returns a ChatOllama model instance."""
     return cast(
-        BaseLLM, OllamaLLM(model=getenv("OLLAMA_MODEL", "openhermes:2.5-mistral"), temperature=0.2)
+        BaseChatModel,
+        ChatOllama(model=getenv("OLLAMA_MODEL", "llama3.1"), temperature=0.2),
     )

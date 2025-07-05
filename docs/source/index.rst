@@ -15,6 +15,8 @@ documentation for details.
    :maxdepth: 2
    :caption: Contents:
 
+   CONTRIBUTING
+
 .. toctree::
    :caption: API Reference
    :maxdepth: 2

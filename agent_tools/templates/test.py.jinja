@@ -1,0 +1,12 @@
+# This is a placeholder for the test generation template.
+# It will be populated with Jinja2 syntax to generate the
+# algorithm's tests based on the provided spec.
+
+import pytest
+from hypothesis import given, strategies as st
+
+from .{{ spec.name.lower().replace(" ", "_") }} import {{ spec.name.replace(" ", "") }}
+
+# Deterministic unit tests will be generated here.
+
+# Property-based tests with Hypothesis will be generated here.

@@ -1,0 +1,23 @@
+.. _{{ spec.name.lower().replace(" ", "-") }}:
+
+{{ spec.name }}
+{{ "=" * spec.name|length }}
+
+{{ spec.description }}
+
+Complexity
+----------
+
+- **Time Complexity:**
+  - Worst Case: ``{{ spec.complexity.time_worst }}``
+  - Average Case: ``{{ spec.complexity.time_average }}``
+  - Best Case: ``{{ spec.complexity.time_best }}``
+- **Space Complexity:** ``{{ spec.complexity.space_worst }}``
+
+API
+---
+
+.. automodule:: algolib.algorithms.{{ spec.category.lower() }}.{{ spec.name.lower().replace(" ", "_") }}
+   :members:
+   :undoc-members:
+   :show-inheritance:

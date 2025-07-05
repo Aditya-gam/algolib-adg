@@ -1,0 +1,15 @@
+# This is a placeholder for the benchmark generation template.
+# It will be populated with Jinja2 syntax to generate the
+# pytest-benchmark fixture based on the provided spec.
+
+import pytest
+
+from .{{ spec.name.lower().replace(" ", "_") }} import {{ spec.name.replace(" ", "") }}
+
+def test_benchmark_{{ spec.name.lower().replace(" ", "_") }}(benchmark):
+    # Benchmark fixture will be generated here.
+    # It should run the algorithm on a representative dataset.
+    benchmark(
+        {{ spec.name.replace(" ", "") }}().run,
+        # Add representative data here
+    )

@@ -1,0 +1,18 @@
+# This is a placeholder for the code generation template.
+# It will be populated with Jinja2 syntax to generate the
+# algorithm's source code based on the provided spec.
+
+from dataclasses import dataclass
+
+{% for dep in spec.dependencies %}
+from algolib.interfaces import {{ dep }}
+{% endfor %}
+
+@dataclass(slots=True)
+class {{ spec.name.replace(" ", "") }}:
+    """
+    {{ spec.description }}
+    """
+    def run(self, {% for param in spec.parameters %}{{ param.name }}: {{ param.type }}{% if not loop.last %}, {% endif %}{% endfor %}) -> {{ spec.returns.type }}:
+        # Algorithm implementation will be generated here.
+        pass

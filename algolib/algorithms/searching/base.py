@@ -11,14 +11,13 @@ class Searcher(Generic[ComparableT], ABC):
 
     @abstractmethod
     def search(self, data: Sequence[ComparableT], target: ComparableT) -> int | None:
-        """
-        Searches for a target in a sequence.
+        """Searches for a target value within a sequence.
 
         Args:
-            data (Sequence[ComparableT]): The sequence to search in.
-            target (ComparableT): The value to search for.
+            data: The sequence to search in.
+            target: The value to search for.
 
         Returns:
-            int | None: The index of the target if found, otherwise None.
+            The index of the target if found, otherwise None.
         """
         ...

@@ -11,13 +11,12 @@ class Sorter(Generic[ComparableT], ABC):
 
     @abstractmethod
     def sort(self, data: MutableSequence[ComparableT]) -> MutableSequence[ComparableT]:
-        """
-        Sorts a mutable sequence.
+        """Sorts a mutable sequence in place.
 
         Args:
-            data (MutableSequence[ComparableT]): The sequence to sort.
+            data: The mutable sequence to be sorted.
 
         Returns:
-            MutableSequence[ComparableT]: A new sequence containing the sorted elements.
+            The sorted mutable sequence.
         """
         ...

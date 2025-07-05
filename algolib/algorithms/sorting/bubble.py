@@ -7,8 +7,7 @@ from algolib.algorithms.sorting.base import Sorter
 
 
 class BubbleSorter(Sorter[ComparableT]):
-    """
-    Bubble sort implementation.
+    """Bubble sort implementation.
 
     This is a simple, stable sorting algorithm that repeatedly steps through the list,
     compares adjacent elements and swaps them if they are in the wrong order.
@@ -16,18 +15,17 @@ class BubbleSorter(Sorter[ComparableT]):
     """
 
     def sort(self, data: MutableSequence[ComparableT]) -> MutableSequence[ComparableT]:
-        """
-        Performs bubble sort on the given data.
+        """Sorts a mutable sequence using the bubble sort algorithm.
 
         This implementation includes an optimization to exit early if the list becomes
         sorted before all passes are complete. It creates a new list to avoid
         modifying the original data.
 
         Args:
-            data (MutableSequence[ComparableT]): The sequence to sort.
+            data: The sequence to sort.
 
         Returns:
-            MutableSequence[ComparableT]: A new list containing the sorted elements.
+            A new list containing the sorted elements.
         """
         if not data:
             return []

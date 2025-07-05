@@ -21,6 +21,8 @@ pytest-cov = "^6.2.1"
 ruff = "^0.12.2"
 sphinx = "^8.2.3"
 sphinx-autobuild = "^2024.10.3"
+ollama = ">=0.2.2"
+langchain-community = "^0.3.27"
 
 [tool.ruff]
 line-length = 100

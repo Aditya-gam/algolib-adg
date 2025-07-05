@@ -17,3 +17,5 @@ returns:
 dependencies:
 - Sorter
 - SupportsLessThan
+
+# Smoke test

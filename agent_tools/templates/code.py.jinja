@@ -1,6 +1,9 @@
-# This is a placeholder for the code generation template.
-# It will be populated with Jinja2 syntax to generate the
-# algorithm's source code based on the provided spec.
+"""
+This is the Jinja2 template for generating algorithm implementation code.
+It receives an `AlgorithmSpec` object as `spec`.
+"""
+
+# imports
 
 from dataclasses import dataclass
 
@@ -8,11 +11,17 @@ from dataclasses import dataclass
 from algolib.interfaces import {{ dep }}
 {% endfor %}
 
-@dataclass(slots=True)
+# Placeholder for {{ spec.name }}
+
 class {{ spec.name.replace(" ", "") }}:
     """
     {{ spec.description }}
     """
-    def run(self, {% for param in spec.parameters %}{{ param.name }}: {{ param.type }}{% if not loop.last %}, {% endif %}{% endfor %}) -> {{ spec.returns.type }}:
-        # Algorithm implementation will be generated here.
+    def __init__(self):
+        pass
+
+    def run(self, {% for p in spec.parameters %}{{ p.name }}: {{ p.type }}{% if not loop.last %}, {% endif %}{% endfor %}) -> {{ spec.returns.type }}:
+        """
+        {{ spec.description }}
+        """
         pass

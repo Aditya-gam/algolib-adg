@@ -13,3 +13,9 @@ def test_benchmark_{{ spec.name.lower().replace(" ", "_") }}(benchmark):
         {{ spec.name.replace(" ", "") }}().run,
         # Add representative data here
     )
+
+# Placeholder for {{ spec.name }} benchmark
+
+# TODO: Add benchmark tests
+def test_benchmark_{{ spec.name.lower().replace(" ", "_") }}_placeholder(benchmark):
+    benchmark(lambda: 1 + 1)

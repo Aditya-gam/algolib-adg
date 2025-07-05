@@ -1,6 +1,8 @@
-# This file will contain the LangChain agent that orchestrates the
-# different writer tools to generate the algorithm's code, tests,
-# documentation, and benchmarks.
+"""
+Main agent class that orchestrates the code generation process.
+"""
+
+from pathlib import Path
 
 from agent_tools.bench_runner import BenchRunner
 from agent_tools.code_writer import CodeWriter
@@ -11,11 +13,22 @@ from algolib.specs.schema import AlgorithmSpec
 
 
 class Agent:
+    """
+    Orchestrates the different writer tools to generate the algorithm's
+    code, tests, documentation, and benchmarks.
+    """
+
     def __init__(self, spec: AlgorithmSpec):
         self.spec = spec
         self.llm = get_llm()
 
-    def run(self) -> None:
+    def run(self) -> dict[str, Path]:
+        """
+        Runs the agent to generate all the necessary files.
+
+        Returns:
+            A dictionary mapping the file type to the generated file path.
+        """
         # 1. Generate code
         code_writer = CodeWriter(self.spec)
         code_path = code_writer.write()
@@ -28,7 +41,8 @@ class Agent:
 
         # 3. Generate docs
         doc_writer = DocWriter(self.spec)
-        doc_path = doc_writer.write()
+        # Docs are appended, not overwritten
+        doc_path = doc_writer.write(append=True)
         print(f"Generated docs at: {doc_path}")
 
         # 4. Generate benchmarks
@@ -36,7 +50,9 @@ class Agent:
         bench_path = bench_runner.write()
         print(f"Generated benchmarks at: {bench_path}")
 
-        # TODO: Add LangChain orchestration logic here.
-        # This will involve creating a chain or agent that can
-        # intelligently use the writer tools.
-        pass
+        return {
+            "code": code_path,
+            "tests": test_path,
+            "docs": doc_path,
+            "benchmarks": bench_path,
+        }

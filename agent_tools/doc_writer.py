@@ -1,19 +1,23 @@
 from pathlib import Path
 
 from agent_tools.base import FileWriter
-from algolib.specs.schema import AlgorithmSpec
 
 
 class DocWriter(FileWriter):
-    def __init__(self, spec: AlgorithmSpec):
-        super().__init__(spec, "doc.rst.jinja")
+    """Writes the algorithm's documentation in .rst format."""
 
-    def write(self) -> Path:
-        """
-        Renders the algorithm's documentation from a Jinja2 template
-        and writes it to a .rst file in the temporary directory.
-        """
-        content = self.render_template()
-        file_path = self.tmp_dir / f"{self.slug}.rst"
-        file_path.write_text(content)
-        return file_path
+    @property
+    def template_path(self) -> str:
+        return "doc.rst.jinja"
+
+    @property
+    def output_path(self) -> Path:
+        file_name = self.spec.name.lower().replace(" ", "_")
+        return (
+            self.tmp_dir
+            / "docs"
+            / "source"
+            / "algorithms"
+            / self.spec.category
+            / f"{file_name}.rst"
+        )

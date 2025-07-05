@@ -54,6 +54,9 @@ jobs:
         run: |
           poetry run pytest --cov=algolib --cov-report=xml --cov-report=term-missing --cov-fail-under=95 -q
 
+      - name: Interface compliance
+        run: python scripts/check_interface.py ${{ github.event.pull_request.base.sha || github.sha }}
+
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
         with:

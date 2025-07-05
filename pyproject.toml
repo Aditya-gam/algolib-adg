@@ -23,6 +23,8 @@ sphinx = "^8.2.3"
 sphinx-autobuild = "^2024.10.3"
 ollama = ">=0.2.2"
 langchain-community = "^0.3.27"
+streamlit = "^1.46.1"
+types-pyyaml = "^6.0.12.20250516"
 
 [tool.ruff]
 line-length = 100

@@ -18,11 +18,10 @@ repos:
     rev: v1.11.0
     hooks:
       - id: mypy
+        language: python
+        entry: poetry run mypy
         args:
           - --config-file=pyproject.toml
-        additional_dependencies:
-          - hypothesis
-          - pytest
 
   # Tests should be run separately as part of CI
   # - repo: local

@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Algorithm Specification",
+  "description": "Metadata for a computer science algorithm.",
+  "type": "object",
+  "properties": {
+    "name": {
+      "description": "The official name of the algorithm.",
+      "type": "string"
+    },
+    "description": {
+      "description": "A brief, clear explanation of how the algorithm works.",
+      "type": "string"
+    },
+    "category": {
+      "description": "The category of the algorithm (e.g., sorting, searching, graph traversal).",
+      "type": "string"
+    },
+    "complexity": {
+      "description": "Time and space complexity analysis.",
+      "type": "object",
+      "properties": {
+        "time_worst": { "type": "string" },
+        "time_average": { "type": "string" },
+        "time_best": { "type": "string" },
+        "space_worst": { "type": "string" }
+      },
+      "required": ["time_worst", "time_average", "time_best", "space_worst"]
+    },
+    "parameters": {
+      "description": "Input parameters for the algorithm.",
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "name": { "type": "string" },
+          "type": { "type": "string" },
+          "description": { "type": "string" }
+        },
+        "required": ["name", "type", "description"]
+      }
+    },
+    "returns": {
+      "description": "The output of the algorithm.",
+      "type": "object",
+      "properties": {
+        "type": { "type": "string" },
+        "description": { "type": "string" }
+      },
+      "required": ["type", "description"]
+    },
+    "dependencies": {
+      "description": "A list of abstract interfaces this algorithm depends on.",
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "required": ["name", "description", "category", "complexity", "parameters", "returns", "dependencies"]
+}

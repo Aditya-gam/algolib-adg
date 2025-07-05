@@ -2,7 +2,7 @@ aiohappyeyeballs==2.6.1
 aiohttp==3.12.13
 aiosignal==1.4.0
 alabaster==1.0.0
--e git+https://github.com/Aditya-gam/algolib-adg.git@bf514213b6620a6e139fb7b3e6b276a673c538e9#egg=algolib_adg
+-e git+https://github.com/Aditya-gam/algolib-adg.git@2987f6f7513ec821eb12070a5a0434f3526ce1c0#egg=algolib_adg
 altair==5.5.0
 annotated-types==0.7.0
 anyio==4.9.0
@@ -20,7 +20,6 @@ colorama==0.4.6
 coverage==7.9.2
 dataclasses-json==0.6.7
 distlib==0.3.9
-distro==1.9.0
 docutils==0.21.2
 filelock==3.18.0
 frozenlist==1.7.0
@@ -37,7 +36,6 @@ idna==3.10
 imagesize==1.4.1
 iniconfig==2.1.0
 Jinja2==3.1.6
-jiter==0.10.0
 jsonpatch==1.33
 jsonpointer==3.0.0
 jsonschema==4.24.0
@@ -45,7 +43,7 @@ jsonschema-specifications==2025.4.1
 langchain==0.3.26
 langchain-community==0.3.27
 langchain-core==0.3.68
-langchain-openai==0.3.27
+langchain-ollama==0.3.3
 langchain-text-splitters==0.3.8
 langsmith==0.4.4
 MarkupSafe==3.0.2
@@ -57,7 +55,6 @@ narwhals==1.45.0
 nodeenv==1.9.1
 numpy==2.3.1
 ollama==0.5.1
-openai==1.93.0
 orjson==3.10.18
 packaging==24.2
 pandas==2.3.0
@@ -83,7 +80,6 @@ python-dotenv==1.1.1
 pytz==2025.2
 PyYAML==6.0.2
 referencing==0.36.2
-regex==2024.11.6
 requests==2.32.4
 requests-toolbelt==1.0.0
 roman-numerals-py==3.1.0
@@ -108,10 +104,8 @@ SQLAlchemy==2.0.41
 starlette==0.47.1
 streamlit==1.46.1
 tenacity==9.1.2
-tiktoken==0.9.0
 toml==0.10.2
 tornado==6.5.1
-tqdm==4.67.1
 types-PyYAML==6.0.12.20250516
 typing-inspect==0.9.0
 typing-inspection==0.4.1

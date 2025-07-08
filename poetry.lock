@@ -2072,7 +2072,7 @@ version = "0.5.1"
 description = "The official Python client for Ollama."
 optional = false
 python-versions = ">=3.8"
-groups = ["main", "dev"]
+groups = ["main"]
 files = [
     {file = "ollama-0.5.1-py3-none-any.whl", hash = "sha256:4c8839f35bc173c7057b1eb2cbe7f498c1a7e134eafc9192824c8aecb3617506"},
     {file = "ollama-0.5.1.tar.gz", hash = "sha256:5a799e4dc4e7af638b11e3ae588ab17623ee019e496caaf4323efbaa8feeff93"},
@@ -2496,13 +2496,13 @@ testing = ["aboutcode-toolkit (>=6.0.0)", "black", "pytest (>=6,!=7.0.0)", "pyte
 
 [[package]]
 name = "plantuml"
-version = "0.2.1"
+version = "0.3.0"
 description = ""
 optional = false
 python-versions = "*"
 groups = ["dev"]
 files = [
-    {file = "plantuml-0.2.1-py3-none-any.whl", hash = "sha256:a117593c4864fce120e659db44e7235c34e7b3930c0fed421d659cfebf2ddabf"},
+    {file = "plantuml-0.3.0-py3-none-any.whl", hash = "sha256:f21789bc4abc3e8888d23a8fa010e942989f1a73d6e50e10a54688cbee52aa1c"},
 ]
 
 [package.dependencies]
@@ -4702,4 +4702,4 @@ cffi = ["cffi (>=1.11)"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.11,<4.0"
-content-hash = "1cd6420e12e4a1d640e3a622800a0132e7cefdc2bc9ea61a4c67e96e12f67ab9"
+content-hash = "6ed742894dae625664ddcabe2c975c41b4a21e3757ad21c288638ea66281030b"

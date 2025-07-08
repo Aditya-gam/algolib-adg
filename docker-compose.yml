@@ -1,40 +1,62 @@
-version: "3.9"
+version: '3.9'
+
 services:
   db:
-    image: postgres:15-alpine
+    image: postgres:13
+    restart: always
     environment:
-      POSTGRES_USER: algolib
-      POSTGRES_PASSWORD: algolib
-      POSTGRES_DB: algolib
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=testdb
+    ports:
+      - '5432:5432'
     volumes:
       - db-data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U algolib"]
-      interval: 5s
+      test: [ 'CMD-SHELL', 'pg_isready -U user -d testdb' ]
+      interval: 10s
+      timeout: 5s
       retries: 5
 
   api:
     build:
       context: .
       dockerfile: ./docker/api/Dockerfile
-    command: ["uvicorn", "algolib.api.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
+    restart: always
+    command: [ 'uvicorn', 'algolib.api.main:app', '--host', '0.0.0.0', '--port', '8000', '--reload' ]
     env_file: .env
-    depends_on: [db]
-    ports: ["8000:8000"]
+    # environment:
+    #   - PYTHONPATH=/app
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - '8000:8000'
     volumes:
       - ./algolib:/app/algolib
 
   streamlit:
-    build: ./docker/streamlit
+    build:
+      context: .
+      dockerfile: ./docker/streamlit/Dockerfile
+    restart: always
     env_file: .env
-    depends_on: [api]
-    ports: ["8501:8501"]
+    depends_on:
+      - api
+    ports:
+      - '8501:8501'
     volumes:
       - ./app.py:/app/app.py
       - ./algolib:/app/algolib
 
   ollama:
     image: ollama/ollama:latest
-    ports: ["11434:11434"]
+    restart: always
+    ports:
+      - '11434:11434'
+    volumes:
+      - ollama-data:/root/.ollama
+
 volumes:
   db-data:
+  ollama-data:

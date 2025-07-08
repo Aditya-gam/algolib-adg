@@ -1,0 +1,8 @@
+FROM python:3.11-slim
+WORKDIR /app
+COPY pyproject.toml poetry.lock ./
+RUN pip install poetry && poetry config virtualenvs.create false \
+    && poetry install --no-dev --extras api
+COPY algolib ./algolib
+COPY scripts ./scripts
+CMD ["uvicorn", "algolib.api.main:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]

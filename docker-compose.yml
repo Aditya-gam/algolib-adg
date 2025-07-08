@@ -1,0 +1,37 @@
+version: "3.9"
+services:
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_USER: algolib
+      POSTGRES_PASSWORD: algolib
+      POSTGRES_DB: algolib
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U algolib"]
+      interval: 5s
+      retries: 5
+
+  api:
+    build: ./docker/api
+    env_file: .env
+    depends_on: [db]
+    ports: ["8000:8000"]
+    volumes:
+      - ./algolib:/app/algolib
+
+  streamlit:
+    build: ./docker/streamlit
+    env_file: .env
+    depends_on: [api]
+    ports: ["8501:8501"]
+    volumes:
+      - ./app.py:/app/app.py
+      - ./algolib:/app/algolib
+
+  ollama:
+    image: ollama/ollama:latest
+    ports: ["11434:11434"]
+volumes:
+  db-data:

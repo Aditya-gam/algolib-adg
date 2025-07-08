@@ -47,7 +47,7 @@ def test_create_benchmark(session: Session) -> None:
     session.refresh(benchmark)
 
     assert benchmark.id is not None
-    assert benchmark.results["time"] == 1.23
+    assert benchmark.results["time"] == pytest.approx(1.23)
 
 
 def test_create_job_log(session: Session) -> None:

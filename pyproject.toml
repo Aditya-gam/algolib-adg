@@ -22,6 +22,7 @@ streamlit = {version = "^1.33", optional = true}
 ollama = "^0.5.1"
 psycopg2-binary = "^2.9.10"
 python-dotenv = "^1.1.1"
+python-multipart = "^0.0.20"
 
 [tool.poetry.group.dev.dependencies]
 furo = "^2024.8.6"
@@ -42,6 +43,7 @@ pyyaml = "^6.0.1"
 pip-audit = "^2.7.3"
 plantuml = "^0.3.0"
 pytest-dotenv = "^0.5.2"
+httpx = "^0.28.1"
 
 [tool.poetry.extras]
 api = ["fastapi", "uvicorn", "sqlmodel", "psycopg-binary", "alembic"]

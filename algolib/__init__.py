@@ -10,16 +10,21 @@ from .data_structures.graph import Graph
 from .data_structures.linked_list import LinkedList
 from .data_structures.queue import Queue
 from .data_structures.stack import Stack
+from .interfaces import Algorithm, GraphSolver, Searcher, Sorter
 
 __all__ = [
-    "Stack",
-    "Queue",
-    "LinkedList",
-    "Graph",
-    "DisjointSet",
-    "LinearSearcher",
+    "Algorithm",
+    "BFS",
     "BinarySearcher",
     "BubbleSorter",
+    "DisjointSet",
+    "Graph",
+    "GraphSolver",
+    "LinkedList",
+    "LinearSearcher",
     "MergeSorter",
-    "BFS",
+    "Queue",
+    "Searcher",
+    "Sorter",
+    "Stack",
 ]

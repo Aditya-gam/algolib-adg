@@ -15,15 +15,6 @@ repos:
         args: [--fix, --exit-non-zero-on-fix]
       - id: ruff-format
 
-  - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.11.0
-    hooks:
-      - id: mypy
-        language: python
-        entry: poetry run mypy
-        args: [--config-file=pyproject.toml]
-        exclude: ^(docs/|.*/templates/|app\.py|.*/generated/)
-
   - repo: local
     hooks:
       - id: pytest
@@ -39,3 +30,12 @@ repos:
         args: ["HEAD"]
         types: [python]
         pass_filenames: false
+
+  - repo: https://github.com/pre-commit/mirrors-mypy
+    rev: v1.11.0
+    hooks:
+      - id: mypy
+        language: python
+        entry: poetry run mypy
+        args: [--config-file=pyproject.toml]
+        exclude: ^(docs/|.*/templates/|app\.py|.*/generated/)

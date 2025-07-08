@@ -14,7 +14,14 @@ license = { text = "MIT" }
 requires-python = ">=3.11,<4.0"
 dependencies = [
     "typing-extensions>=4.14.1,<5.0.0",
-    "langchain-ollama>=0.3.3,<0.4.0",
+    "langchain-ollama",
+    "fastapi>=0.111.0,<0.112.0",
+    "uvicorn[standard]>=0.29.0,<0.30.0",
+    "sqlmodel>=0.0.16,<0.1.0",
+    "psycopg-binary>=3.1.0,<4.0.0",
+    "alembic>=1.13.0,<2.0.0",
+    "streamlit>=1.33.0,<2.0.0",
+    "ollama",
 ]
 
 [tool.poetry.group.dev.dependencies]
@@ -28,7 +35,7 @@ pytest-cov = "^6.2.1"
 ruff = "^0.12.2"
 sphinx = "^8.2.3"
 sphinx-autobuild = "^2024.10.3"
-ollama = ">=0.2.2"
+ollama = "*"
 langchain-community = "^0.3.27"
 streamlit = "^1.46.1"
 types-pyyaml = "^6.0.12.20250516"
@@ -37,6 +44,7 @@ astor = "^0.8.1"
 gitpython = "^3.1.43"
 pyyaml = "^6.0.1"
 pip-audit = "^2.7.3"
+plantuml = "^0.2.0"
 
 [tool.ruff]
 line-length = 100
@@ -46,6 +54,9 @@ target-version = "py311"
 # E (pycodestyle), F (pyflakes), I (isort), B (flake8-bugbear) …
 select = ["E", "F", "I", "B", "W", "C90"]
 ignore = ["E501"]   # long lines handled by formatter
+
+[tool.ruff.lint.isort]
+known-third-party = ["fastapi", "sqlmodel"]
 
 [tool.ruff.format]
 # Enables Black-compatible formatting

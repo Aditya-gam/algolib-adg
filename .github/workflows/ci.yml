@@ -10,6 +10,20 @@ jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 15
+    services:
+      postgres:
+        image: postgres:13
+        env:
+          POSTGRES_USER: user
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: testdb
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
 
     steps:
       - name: Checkout repository
@@ -41,6 +55,11 @@ jobs:
       - name: Install project
         run: poetry install --no-interaction --all-extras
 
+      - name: Initialize database
+        run: chmod +x scripts/db_init.sh && ./scripts/db_init.sh
+        env:
+          DATABASE_URL: postgresql://user:password@localhost:5432/testdb
+
       - name: Run Ruff (format + lint)
         run: |
           poetry run ruff format --check .
@@ -53,6 +72,20 @@ jobs:
       - name: Run tests with coverage
         run: |
           poetry run pytest --cov=algolib --cov-report=xml --cov-report=term-missing --cov-fail-under=95 -q
+        env:
+          DATABASE_URL: postgresql://user:password@localhost:5432/testdb
+
+      - name: Run FastAPI smoke test
+        run: |
+          poetry run uvicorn algolib.api.main:app --host 0.0.0.0 --port 8000 &
+          python - <<PY
+          import requests, time, os
+          time.sleep(5)
+          r = requests.get("http://localhost:8000/health/db")
+          assert r.json() == {"db": "ok"}
+          PY
+        env:
+          DATABASE_URL: postgresql://user:password@localhost:5432/testdb
 
       - name: Interface compliance
         run: python scripts/check_interface.py ${{ github.event.pull_request.base.sha || github.sha }}

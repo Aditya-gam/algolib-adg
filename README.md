@@ -75,6 +75,38 @@ poetry run python scripts/run_algo_agent.py --dry-run specs/BubbleSort.yml
 ```
 The generated files will be placed in the `.agent-tmp/` directory for your review.
 
+## Running Tests
+
+To run the full test suite, including coverage analysis:
+
+```bash
+poetry run pytest
+```
+
+## Database
+
+This project uses PostgreSQL as its database, managed with `SQLModel` and `Alembic`. The entire database setup is containerized using Docker.
+
+### Initializing the Database
+
+To create the database and apply all migrations, first ensure Docker is running, then run the following commands:
+
+```bash
+# Start the PostgreSQL container
+docker-compose up -d db
+
+# Apply migrations
+docker-compose exec api poetry run alembic upgrade head
+```
+
+You can also use the provided script to apply migrations after the container is running:
+
+```bash
+./scripts/db_init.sh
+```
+
+---
+
 ## 🤝 Contributing
 
 We welcome all contributions! Please see the `CONTRIBUTING.rst` file for more detailed instructions on our development standards and workflow.

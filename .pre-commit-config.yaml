@@ -11,8 +11,25 @@ repos:
     rev: v0.5.5
     hooks:
       - id: ruff
+        name: ruff check
         args: [--fix, --exit-non-zero-on-fix]
       - id: ruff-format
+
+  - repo: local
+    hooks:
+      - id: pytest
+        name: pytest
+        entry: poetry run pytest -q
+        language: system
+        pass_filenames: false
+        always_run: true
+      - id: check-interface
+        name: Check interface compliance
+        entry: scripts/check_interface.py
+        language: python
+        args: ["HEAD"]
+        types: [python]
+        pass_filenames: false
 
   - repo: https://github.com/pre-commit/mirrors-mypy
     rev: v1.11.0
@@ -22,23 +39,3 @@ repos:
         entry: poetry run mypy
         args: [--config-file=pyproject.toml]
         exclude: ^(docs/|.*/templates/|app\.py|.*/generated/)
-
-  # Tests should be run separately as part of CI
-  # - repo: local
-  #   hooks:
-  #     - id: pytest
-  #       name: pytest
-  #       entry: poetry run pytest
-  #       language: system
-  #       pass_filenames: false
-  #       always_run: true
-
-  - repo: local
-    hooks:
-      - id: check-interface
-        name: Check interface compliance
-        entry: scripts/check_interface.py
-        language: python
-        args: ["HEAD"]
-        types: [python]
-        pass_filenames: false

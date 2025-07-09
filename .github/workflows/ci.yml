@@ -96,7 +96,3 @@ jobs:
           files: ./coverage.xml
           fail_ci_if_error: true
           verbose: true
-
-      - name: Build documentation (HTML)
-        run: |
-          poetry run sphinx-build -b html docs/source docs/_build/html

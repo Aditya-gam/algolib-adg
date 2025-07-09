@@ -1,6 +1,7 @@
 # AlgoLib-ADG
 
 [![CI](https://github.com/Aditya-gam/algolib-adg/actions/workflows/ci.yml/badge.svg)](https://github.com/Aditya-gam/algolib-adg/actions/workflows/ci.yml)
+[![Docs](https://github.com/Aditya-gam/algolib-adg/actions/workflows/docs.yml/badge.svg)](https://github.com/Aditya-gam/algolib-adg/actions/workflows/docs.yml)
 [![Agent Success](https://img.shields.io/badge/Agent-Passing-brightgreen)](https://github.com/Aditya-gam/algolib-adg/actions/workflows/agent.yml) <!-- TODO: Update with real workflow -->
 [![codecov](https://codecov.io/gh/Aditya-gam/algolib-adg/branch/main/graph/badge.svg)](https://codecov.io/gh/Aditya-gam/algolib-adg)
 [![PyPI version](https://badge.fury.io/py/algolib-adg.svg)](https://badge.fury.io/py/algolib-adg)

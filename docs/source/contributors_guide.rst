@@ -80,6 +80,25 @@ The agent generates the boilerplate, but you must still implement the core algor
 
       poetry run pytest
 
+Testing
+-------
+
+Our project uses a two-tiered testing strategy to balance speed and thoroughness.
+
+**Pre-Commit Tests (Fast)**
+
+When you make a commit, a fast subset of our tests runs automatically via pre-commit hooks. This includes all standard unit and integration tests but **excludes** slower property-based tests. This ensures that your commits are validated quickly without a long wait.
+
+**Full Test Suite (Comprehensive)**
+
+Before submitting a pull request, you should run the entire test suite, including property-based tests, to ensure everything is working correctly. You can do this with a simple `make` command:
+
+.. code-block:: bash
+
+   make test-all
+
+This command runs the full `pytest` suite and is essential for catching more complex bugs that property tests are designed to find.
+
 Submitting Your Contribution
 ----------------------------
 

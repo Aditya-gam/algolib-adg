@@ -4,7 +4,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "algolib-adg"
-version = "0.1.0"
+version = "0.2.0"
 description = "A comprehensive library of algorithms and data structures, with a focus on clean code, SOLID principles, and thorough testing."
 authors = ["Aditya Gambhir"]
 license = "MIT"
@@ -44,6 +44,7 @@ pip-audit = "^2.7.3"
 plantuml = "^0.3.0"
 pytest-dotenv = "^0.5.2"
 httpx = "^0.28.1"
+commitizen = "^4.8.3"
 
 [tool.poetry.extras]
 api = ["fastapi", "uvicorn", "sqlmodel", "psycopg-binary", "alembic"]
@@ -87,4 +88,10 @@ testpaths = ["tests"]
 [tool.coverage.run]
 omit = [
     "algolib/interfaces/*",
+]
+
+[tool.commitizen]
+version = "0.2.0"
+version_files = [
+    "pyproject.toml:version"
 ]

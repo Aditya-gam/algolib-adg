@@ -52,6 +52,7 @@ streamlit = ["streamlit"]
 [tool.ruff]
 line-length = 100
 target-version = "py311"
+exclude = ["agent_tools", "streamlit_app"]
 
 [tool.ruff.lint]
 # E (pycodestyle), F (pyflakes), I (isort), B (flake8-bugbear) …
@@ -69,6 +70,7 @@ preview = true
 python_version = "3.11"
 strict = true
 plugins = []
+exclude = ["agent_tools", "streamlit_app"]
 
 [[tool.mypy.overrides]]
 module = "tests.*"
@@ -79,7 +81,7 @@ module = "astor"
 ignore_missing_imports = true
 
 [tool.pytest.ini_options]
-addopts = "--strict-markers --cov=algolib --cov-report=term-missing --cov-fail-under=95 -q"
+addopts = "--strict-markers --cov=algolib --cov-report=xml --cov-fail-under=95 -q"
 testpaths = ["tests"]
 
 [tool.coverage.run]

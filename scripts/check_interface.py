@@ -54,6 +54,35 @@ PROTECTED_MEMBERS: dict[str, Set[str]] = {
 }
 
 
+def _is_disallowed_protected_member_write(
+    node: ast.Attribute, current_class: str | None, file_path: Path
+) -> str | None:
+    """
+    Checks if an attribute write is a disallowed write to a protected member.
+
+    Returns an error message string if it is, otherwise None.
+    """
+    if not (
+        isinstance(node.ctx, ast.Store)
+        and isinstance(node.value, ast.Name)
+        and node.value.id == "self"
+    ):
+        return None
+
+    for class_name, members in PROTECTED_MEMBERS.items():
+        if node.attr in members:
+            if current_class != class_name:
+                return (
+                    f"{file_path}:{node.lineno}: Direct write to protected "
+                    f"member 'self.{node.attr}' is disallowed in class '{current_class}'. "
+                    f"It is defined in '{class_name}'."
+                )
+            # Legitimate write, stop checking.
+            return None
+
+    return None
+
+
 class InterfaceChecker(ast.NodeVisitor):
     """
     AST visitor that checks for interface violations in a Python file.
@@ -81,18 +110,10 @@ class InterfaceChecker(ast.NodeVisitor):
 
     def visit_Attribute(self, node: ast.Attribute) -> None:
         # Check for writes to protected members
-        if isinstance(node.ctx, ast.Store):
-            if isinstance(node.value, ast.Name) and node.value.id == "self":
-                for class_name, members in PROTECTED_MEMBERS.items():
-                    if node.attr in members:
-                        # Allow writes if they are inside the defining class
-                        if self._current_class == class_name:
-                            continue
-                        self.errors.append(
-                            f"{self.file_path}:{node.lineno}: Direct write to protected "
-                            f"member 'self.{node.attr}' is disallowed in class '{self._current_class}'. "
-                            f"It is defined in '{class_name}'."
-                        )
+        error = _is_disallowed_protected_member_write(node, self._current_class, self.file_path)
+        if error:
+            self.errors.append(error)
+
         self.generic_visit(node)
 
 

@@ -1,39 +1,31 @@
 """Abstract base classes for searching algorithms."""
 
 from abc import ABC, abstractmethod
-from typing import Any, Generic, Sequence, cast
+from typing import Any, Sequence
 
-from algolib._typing import ComparableT
+from algolib._typing import T
 from algolib.interfaces import Searcher as SearcherProtocol
 
 
-class Searcher(Generic[ComparableT], ABC):
+class Searcher(SearcherProtocol[T], ABC):
     """Abstract base class for searching algorithms."""
 
     @abstractmethod
-    def search(self, data: Sequence[ComparableT], target: ComparableT) -> int | None:
-        """Searches for a target value within a sequence.
+    def search(self, data: Sequence[T], item: T) -> int | None:
+        """Searches for an item in a sequence.
 
         Args:
-            data: The sequence to search in.
-            target: The value to search for.
+            data: The sequence to be searched.
+            item: The item to search for.
 
         Returns:
-            The index of the target if found, otherwise None.
+            The index of the item if found, otherwise None.
         """
         ...
 
     def run(self, data: Any) -> Any:
-        """Runs the searching algorithm."""
+        """Run the searching algorithm."""
         if not isinstance(data, tuple) or len(data) != 2:
-            raise TypeError("Expected a tuple (sequence, target) for searching.")
-
-        sequence, target = data
-        if not isinstance(sequence, Sequence) or isinstance(sequence, str):
-            raise TypeError("First element of the tuple must be a non-string sequence.")
-
-        return self.search(cast(Sequence[ComparableT], sequence), cast(ComparableT, target))
-
-
-# Type assertion to ensure Searcher conforms to the protocol
-_searcher_protocol_check: type[SearcherProtocol] = cast(type[SearcherProtocol], Searcher)
+            raise TypeError("Expected a tuple (sequence, item) for searching.")
+        sequence, item = data
+        return self.search(sequence, item)

@@ -1,13 +1,15 @@
 from collections import deque
-from typing import Any, Deque, Generic, List, Set, cast
+from typing import Any, Deque, List, Set
 
 from algolib._typing import T
 from algolib.data_structures.graph import Graph, Vertex
-from algolib.interfaces import GraphSolver
+from algolib.interfaces import GraphAlgo
 
 
-class BFS(Generic[T]):
-    """Breadth-First Search (BFS) graph traversal algorithm."""
+class BFS(GraphAlgo[T]):
+    """
+    Breadth-First Search (BFS) algorithm implemented for the Graph data structure.
+    """
 
     def traverse(self, graph: Graph[T], start_vertex: Vertex[T]) -> List[Vertex[T]]:
         """Performs a breadth-first traversal on a graph.
@@ -40,18 +42,14 @@ class BFS(Generic[T]):
 
         return traversal_order
 
-    def run(self, data: Any) -> Any:
+    def run(self, graph: Graph[T], start_vertex_key: T) -> List[Vertex[T]]:
         """Runs the BFS algorithm."""
-        if not isinstance(data, tuple) or len(data) != 2:
-            raise TypeError("Expected a tuple (graph, start_vertex) for BFS.")
+        start_vertex = graph.get_vertex(start_vertex_key)
+        if not start_vertex:
+            raise ValueError("Start vertex must be in the graph")
 
-        graph, start_vertex = data
-        if not isinstance(graph, Graph):
-            raise TypeError("First element of the tuple must be a Graph.")
-        if not isinstance(start_vertex, Vertex):
-            raise TypeError("Second element of the tuple must be a Vertex.")
-
-        return self.traverse(cast(Graph[T], graph), cast(Vertex[T], start_vertex))
+        return self.traverse(graph, start_vertex)
 
 
-_bfs_protocol_check: type[GraphSolver] = BFS
+# Protocol check to ensure BFS implements GraphAlgo
+_bfs_protocol_check: type[GraphAlgo[Any]] = BFS

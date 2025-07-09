@@ -39,11 +39,15 @@ class MockSearcher(Searcher[ComparableT]):
 
 
 class TestSearcherABC(unittest.TestCase):
-    def test_run_method(self) -> None:
+    def test_search(self) -> None:
         searcher: MockSearcher[int] = MockSearcher()
-        data = [3, 1, 4, 1, 5, 9, 2, 6]
-        self.assertEqual(searcher.run((data, 5)), 4)
-        self.assertIsNone(searcher.run((data, 7)))
+        self.assertEqual(searcher.search([1, 2, 3], 2), 1)
+        self.assertIsNone(searcher.search([1, 2, 3], 4))
+
+    def test_run(self) -> None:
+        searcher: MockSearcher[int] = MockSearcher()
+        self.assertEqual(searcher.run(([1, 2, 3], 2)), 1)
+        self.assertIsNone(searcher.run(([1, 2, 3], 4)))
 
     def test_run_with_invalid_data_type(self) -> None:
         searcher: MockSearcher[int] = MockSearcher()
@@ -51,5 +55,3 @@ class TestSearcherABC(unittest.TestCase):
             searcher.run("not a tuple")
         with self.assertRaises(TypeError):
             searcher.run((1, 2, 3))
-        with self.assertRaises(TypeError):
-            searcher.run(("not a sequence", 2))

@@ -139,3 +139,27 @@ cython_debug/
 
 # Agent temporary files
 .agent-tmp/
+
+# CI
+.coverage
+coverage.xml
+
+# Local development
+/tools/
+.idea
+.vscode
+*.pyc
+__pycache__
+.DS_Store
+.env
+venv
+.venv
+dist
+build
+*.egg-info
+.mypy_cache
+.pytest_cache
+*.log
+htmlcov
+algolib_adg.db
+algolib-adg.db

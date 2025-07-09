@@ -1,0 +1,33 @@
+@startuml
+title Stack Operations Sequence Diagram
+
+actor User
+participant "stack: Stack" as Stack
+
+User -> Stack: push(item)
+activate Stack
+Stack -> Stack: _storage.append(item)
+Stack --> User:
+deactivate Stack
+
+User -> Stack: pop()
+activate Stack
+alt is_empty() is false
+    Stack -> Stack: _storage.pop()
+    Stack --> User: returns item
+else is_empty() is true
+    Stack --> User: raises EmptyStackError
+end
+deactivate Stack
+
+User -> Stack: peek()
+activate Stack
+alt is_empty() is false
+    Stack -> Stack: _storage[-1]
+    Stack --> User: returns item
+else is_empty() is true
+    Stack --> User: raises EmptyStackError
+end
+deactivate Stack
+
+@enduml

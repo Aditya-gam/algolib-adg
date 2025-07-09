@@ -15,8 +15,11 @@ documentation for details.
    :maxdepth: 2
    :caption: Contents:
 
+   why
    agent_overview
    CONTRIBUTING
+   contributors_guide
+   complexity_cheatsheet
 
 .. toctree::
    :caption: API Reference
@@ -27,3 +30,9 @@ documentation for details.
    algorithms/searching/linear
    algorithms/searching/binary
    algorithms/graph/traversal/bfs
+
+.. toctree::
+   :caption: Data Structures
+   :maxdepth: 2
+
+   data_structures/stack

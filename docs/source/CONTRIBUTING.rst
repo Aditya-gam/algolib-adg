@@ -1,9 +1,5 @@
-.. Copyright (C) 2023, Aditya G.
-
-Contributor Workflow
+====================
+How to Contribute
 ====================
 
-#.  Copy :code:`specs/template.yml` → :code:`specs/MyAlgo.yml` and fill in fields.
-#.  Run :code:`pre-commit run --all-files` (validates YAML schema).
-#.  Commit and push – the bot creates code/tests/docs and opens a PR.
-#.  Review generated PR; merge when checks are green.
+Please see the detailed :doc:`contributors_guide` for information on our development process, coding standards, and how to submit a pull request.

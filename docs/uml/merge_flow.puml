@@ -1,0 +1,28 @@
+@startuml
+title Merge Sort Flow
+
+start
+:start with an unsorted list;
+
+while (list has more than one element?) is (yes)
+  :split list into two halves (left and right);
+  fork
+    :call Merge Sort on left half;
+  fork again
+    :call Merge Sort on right half;
+  end fork
+  :merge the two sorted halves;
+  note right
+    - create a new empty list
+    - compare elements from left and right
+    - copy smaller element to new list
+    - repeat until one half is empty
+    - copy remaining elements from other half
+  end note
+endwhile (no)
+
+:return the sorted list;
+
+stop
+
+@enduml

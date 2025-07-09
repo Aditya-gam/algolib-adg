@@ -1,13 +1,14 @@
+from dataclasses import dataclass, field
 from typing import Generic, List
 
 from algolib._typing import T
 
 
+@dataclass(slots=True)
 class Stack(Generic[T]):
     """A LIFO (Last-In, First-Out) stack."""
 
-    def __init__(self) -> None:
-        self._container: List[T] = []
+    _container: List[T] = field(default_factory=list, init=False, repr=False)
 
     def push(self, item: T) -> None:
         """Adds an item to the top of the stack."""

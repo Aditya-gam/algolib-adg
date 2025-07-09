@@ -1,8 +1,9 @@
 from collections import deque
-from typing import Deque, Generic, List, Set
+from typing import Any, Deque, Generic, List, Set, cast
 
 from algolib._typing import T
 from algolib.data_structures.graph import Graph, Vertex
+from algolib.interfaces import GraphSolver
 
 
 class BFS(Generic[T]):
@@ -38,3 +39,19 @@ class BFS(Generic[T]):
                     queue.append(neighbor)
 
         return traversal_order
+
+    def run(self, data: Any) -> Any:
+        """Runs the BFS algorithm."""
+        if not isinstance(data, tuple) or len(data) != 2:
+            raise TypeError("Expected a tuple (graph, start_vertex) for BFS.")
+
+        graph, start_vertex = data
+        if not isinstance(graph, Graph):
+            raise TypeError("First element of the tuple must be a Graph.")
+        if not isinstance(start_vertex, Vertex):
+            raise TypeError("Second element of the tuple must be a Vertex.")
+
+        return self.traverse(cast(Graph[T], graph), cast(Vertex[T], start_vertex))
+
+
+_bfs_protocol_check: type[GraphSolver] = BFS

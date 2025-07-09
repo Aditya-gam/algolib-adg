@@ -158,3 +158,25 @@ def test_bfs_with_cycle(graph: Graph[str]) -> None:
     traversal = bfs.traverse(graph, start_vertex)
     assert len(traversal) == len(graph)  # Should visit every node once
     assert len(set(traversal)) == len(graph)
+
+
+def test_bfs_run_method(graph: Graph[str]) -> None:
+    """Test the run method of the BFS algorithm."""
+    bfs = BFS[str]()
+    start_vertex = graph.get_vertex("0")
+    assert start_vertex is not None
+
+    # Test valid run
+    traversal = bfs.run((graph, start_vertex))
+    expected_reachable_nodes = {"0", "1", "2", "3", "4", "5", "6", "7"}
+    traversed_keys = {v.key for v in traversal}
+    assert traversed_keys == expected_reachable_nodes
+    assert len(traversal) == 8
+
+    # Test with invalid data types
+    with pytest.raises(TypeError, match="Expected a tuple"):
+        bfs.run("not a tuple")
+    with pytest.raises(TypeError, match="First element.*must be a Graph"):
+        bfs.run(("not a graph", start_vertex))
+    with pytest.raises(TypeError, match="Second element.*must be a Vertex"):
+        bfs.run((graph, "not a vertex"))

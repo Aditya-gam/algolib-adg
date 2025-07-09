@@ -1,10 +1,15 @@
+from dataclasses import dataclass
 from typing import Dict, Generic, Iterable, Optional
 
 from algolib._typing import T
 
 
+@dataclass(slots=True, init=False)
 class DisjointSet(Generic[T]):
     """A disjoint set data structure with path compression and union-by-rank."""
+
+    _parent: Dict[T, T]
+    _rank: Dict[T, int]
 
     def __init__(self, elements: Optional[Iterable[T]] = None) -> None:
         """Initializes the DisjointSet, optionally with an initial set of elements.
@@ -13,8 +18,8 @@ class DisjointSet(Generic[T]):
             elements: An iterable of initial elements to add to the disjoint set.
                       Each element will be in its own set.
         """
-        self._parent: Dict[T, T] = {}
-        self._rank: Dict[T, int] = {}
+        self._parent = {}
+        self._rank = {}
         if elements:
             for el in elements:
                 self._parent[el] = el

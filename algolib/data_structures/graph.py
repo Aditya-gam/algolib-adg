@@ -1,18 +1,14 @@
-from typing import Dict, Generic, Iterator, List, Optional, Tuple
+from dataclasses import dataclass
+from typing import Dict, Generic, Iterator, List, Optional, Tuple, cast
 
 from algolib._typing import T
 
 
+@dataclass(slots=True, frozen=True)
 class Vertex(Generic[T]):
     """A vertex in a graph."""
 
-    def __init__(self, key: T) -> None:
-        """Initializes a new Vertex.
-
-        Args:
-            key: The unique identifier for the vertex.
-        """
-        self.key = key
+    key: T
 
     def __hash__(self) -> int:
         """Computes the hash of the vertex key."""
@@ -22,13 +18,14 @@ class Vertex(Generic[T]):
         """Checks if two vertices are equal."""
         if not isinstance(other, Vertex):
             return NotImplemented
-        return bool(self.key == other.key)
+        return cast(bool, self.key == other.key)
 
     def __repr__(self) -> str:
         """Returns a string representation of the vertex."""
         return f"Vertex({self.key})"
 
 
+@dataclass(slots=True, init=False)
 class Graph(Generic[T]):
     """A graph represented using an adjacency list.
 
@@ -36,14 +33,18 @@ class Graph(Generic[T]):
         directed: Whether the graph is directed.
     """
 
+    _adj: Dict[Vertex[T], List[Tuple[Vertex[T], float]]]
+    _vertices: Dict[T, Vertex[T]]
+    directed: bool
+
     def __init__(self, directed: bool = False) -> None:
         """Initializes a new Graph.
 
         Args:
             directed: If True, the graph is directed. Defaults to False.
         """
-        self._adj: Dict[Vertex[T], List[Tuple[Vertex[T], float]]] = {}
-        self._vertices: Dict[T, Vertex[T]] = {}
+        self._adj = {}
+        self._vertices = {}
         self.directed = directed
 
     def add_vertex(self, key: T) -> Vertex[T]:

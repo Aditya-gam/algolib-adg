@@ -82,16 +82,16 @@ class InterfaceChecker(ast.NodeVisitor):
     def visit_Attribute(self, node: ast.Attribute) -> None:
         # Check for writes to protected members
         if isinstance(node.ctx, ast.Store):
-            # This check is a heuristic: it identifies writes to attributes on `self`.
-            # A more robust check might involve type inference, but for this
-            # project's conventions, this is a strong signal of an issue.
             if isinstance(node.value, ast.Name) and node.value.id == "self":
                 for class_name, members in PROTECTED_MEMBERS.items():
                     if node.attr in members:
+                        # Allow writes if they are inside the defining class
+                        if self._current_class == class_name:
+                            continue
                         self.errors.append(
                             f"{self.file_path}:{node.lineno}: Direct write to protected "
-                            f"member 'self.{node.attr}' is disallowed. "
-                            f"This may be a false positive if 'self' is not an instance of '{class_name}'."
+                            f"member 'self.{node.attr}' is disallowed in class '{self._current_class}'. "
+                            f"It is defined in '{class_name}'."
                         )
         self.generic_visit(node)
 

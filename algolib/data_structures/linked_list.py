@@ -1,20 +1,26 @@
+from dataclasses import dataclass, field
 from typing import Generic, Iterator, Optional
 
 from algolib._typing import T
 
 
+@dataclass(slots=True)
 class _Node(Generic[T]):
-    def __init__(self, data: T):
-        self.data = data
-        self.next: Optional[_Node[T]] = None
+    data: T
+    next: Optional["_Node[T]"] = field(default=None, repr=False)
 
 
+@dataclass(slots=True, init=False)
 class LinkedList(Generic[T]):
     """A singly linked list."""
 
+    _head: Optional[_Node[T]]
+    _tail: Optional[_Node[T]]
+    _size: int
+
     def __init__(self) -> None:
-        self._head: Optional[_Node[T]] = None
-        self._tail: Optional[_Node[T]] = None
+        self._head = None
+        self._tail = None
         self._size = 0
 
     def append(self, item: T) -> None:

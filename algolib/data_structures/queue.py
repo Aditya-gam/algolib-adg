@@ -1,14 +1,15 @@
 from collections import deque
+from dataclasses import dataclass, field
 from typing import Deque, Generic
 
 from algolib._typing import T
 
 
+@dataclass(slots=True)
 class Queue(Generic[T]):
     """A FIFO (First-In, First-Out) queue."""
 
-    def __init__(self) -> None:
-        self._container: Deque[T] = deque()
+    _container: Deque[T] = field(default_factory=deque, init=False, repr=False)
 
     def enqueue(self, item: T) -> None:
         """Adds an item to the end of the queue."""

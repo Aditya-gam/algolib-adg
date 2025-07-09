@@ -1,11 +1,10 @@
 # AlgoLib-ADG
 
-[![CI](https://github.com/Aditya-gam/algolib-adg/actions/workflows/ci.yml/badge.svg)](https://github.com/Aditya-gam/algolib-adg/actions/workflows/ci.yml)
-[![Docs](https://github.com/Aditya-gam/algolib-adg/actions/workflows/docs.yml/badge.svg)](https://github.com/Aditya-gam/algolib-adg/actions/workflows/docs.yml)
-[![Agent Success](https://img.shields.io/badge/Agent-Passing-brightgreen)](https://github.com/Aditya-gam/algolib-adg/actions/workflows/agent.yml) <!-- TODO: Update with real workflow -->
-[![codecov](https://codecov.io/gh/Aditya-gam/algolib-adg/branch/main/graph/badge.svg)](https://codecov.io/gh/Aditya-gam/algolib-adg)
-[![PyPI version](https://badge.fury.io/py/algolib-adg.svg)](https://badge.fury.io/py/algolib-adg)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/Aditya-gam/algolib-adg/ci.yml?branch=main&style=for-the-badge)](https://github.com/Aditya-gam/algolib-adg/actions/workflows/ci.yml)
+[![Documentation Status](https://img.shields.io/github/actions/workflow/status/Aditya-gam/algolib-adg/docs.yml?branch=main&style=for-the-badge)](https://github.com/Aditya-gam/algolib-adg/actions/workflows/docs.yml)
+[![Code Coverage](https://img.shields.io/codecov/c/github/Aditya-gam/algolib-adg?style=for-the-badge)](https://codecov.io/gh/Aditya-gam/algolib-adg)
+[![PyPI version](https://img.shields.io/pypi/v/algolib-adg?style=for-the-badge)](https://badge.fury.io/py/algolib-adg)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
 **AlgoLib-ADG** is a Python library of fundamental data structures and algorithms, uniquely built using an **AI-powered agentic workflow**. It combines classic computer science with cutting-edge automation, ensuring high-quality, well-tested, and fully documented code.
 

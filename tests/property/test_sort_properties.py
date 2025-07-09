@@ -1,15 +1,15 @@
 # ruff: noqa: D100,D101,D102,D103,D104,D105,D107
 import collections
-from typing import List, Type, MutableSequence
+from typing import List, Type
 
 import pytest
-from hypothesis import given, strategies as st
+from hypothesis import given
+from hypothesis import strategies as st
 
 from algolib.algorithms.sorting.base import Sorter
 from algolib.algorithms.sorting.bubble import BubbleSorter
 from algolib.algorithms.sorting.merge import MergeSorter
 from tests.property.strategies import random_int_list
-from algolib._typing import ComparableT
 
 # List of all Sorter implementations to be tested
 ALL_SORTERS: List[Type[Sorter[int]]] = [BubbleSorter, MergeSorter]

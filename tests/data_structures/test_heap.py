@@ -183,9 +183,9 @@ class TestMaxHeap:
         for value in values:
             heap.insert(value)
 
-        assert heap.peek() == 3.14
-        assert heap.extract_max() == 3.14
-        assert heap.extract_max() == 2.71
+        assert heap.peek() == pytest.approx(3.14)
+        assert heap.extract_max() == pytest.approx(3.14)
+        assert heap.extract_max() == pytest.approx(2.71)
 
     def test_negative_values(self, max_heap: MaxHeap[int]) -> None:
         """Test max heap with negative values."""

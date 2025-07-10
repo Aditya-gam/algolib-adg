@@ -42,7 +42,7 @@ class TestPermutationFinder:
         result = permutation_finder.permute([1, 2, 3, 4])
         assert len(result) == 24  # 4! = 24
         # Check that all permutations are unique
-        unique_perms = set(tuple(perm) for perm in result)
+        unique_perms = {tuple(perm) for perm in result}
         assert len(unique_perms) == 24
 
     def test_permute_with_duplicates(self, permutation_finder: PermutationFinder[int]) -> None:
@@ -78,7 +78,7 @@ class TestPermutationFinder:
         result = permutation_finder.permute([1, "a", 2.5])
         assert len(result) == 6
         # Check that all permutations are unique
-        unique_perms = set(tuple(str(item) for item in perm) for perm in result)
+        unique_perms = {tuple(str(item) for item in perm) for perm in result}
         assert len(unique_perms) == 6
 
     def test_permute_large_list(self, permutation_finder: PermutationFinder[int]) -> None:
@@ -86,7 +86,7 @@ class TestPermutationFinder:
         result = permutation_finder.permute([1, 2, 3, 4, 5])
         assert len(result) == 120  # 5! = 120
         # Check that all permutations are unique
-        unique_perms = set(tuple(perm) for perm in result)
+        unique_perms = {tuple(perm) for perm in result}
         assert len(unique_perms) == 120
 
     def test_permute_negative_numbers(self, permutation_finder: PermutationFinder[int]) -> None:
@@ -109,7 +109,7 @@ class TestPermutationFinder:
         result = permutation_finder.permute([1.1, 2.2, 3.3])
         assert len(result) == 6
         # Check that all permutations are unique
-        unique_perms = set(tuple(perm) for perm in result)
+        unique_perms = {tuple(perm) for perm in result}
         assert len(unique_perms) == 6
 
     def test_permute_zeros(self, permutation_finder: PermutationFinder[int]) -> None:
@@ -151,7 +151,7 @@ class TestPermutationFinder:
         result = permutation_finder.permute([1 + 1j, 2 + 2j, 3 + 3j])
         assert len(result) == 6
         # Check that all permutations are unique
-        unique_perms = set(tuple(str(item) for item in perm) for perm in result)
+        unique_perms = {tuple(str(item) for item in perm) for perm in result}
         assert len(unique_perms) == 6
 
     def test_permute_empty_strings(self) -> None:
@@ -168,7 +168,7 @@ class TestPermutationFinder:
         result = permutation_finder.permute(["α", "β", "γ"])
         assert len(result) == 6
         # Check that all permutations are unique
-        unique_perms = set(tuple(perm) for perm in result)
+        unique_perms = {tuple(perm) for perm in result}
         assert len(unique_perms) == 6
 
     def test_permute_lists(self) -> None:
@@ -177,9 +177,9 @@ class TestPermutationFinder:
         result = permutation_finder.permute([[1], [2], [3]])
         assert len(result) == 6
         # Check that all permutations are unique
-        unique_perms: set[tuple[tuple[int, ...], ...]] = set(
+        unique_perms: set[tuple[tuple[int, ...], ...]] = {
             tuple(tuple(item) for item in perm) for perm in result
-        )
+        }
         assert len(unique_perms) == 6
 
     def test_permute_tuples(self) -> None:
@@ -188,7 +188,7 @@ class TestPermutationFinder:
         result = permutation_finder.permute([(1,), (2,), (3,)])
         assert len(result) == 6
         # Check that all permutations are unique
-        unique_perms = set(tuple(perm) for perm in result)
+        unique_perms = {tuple(perm) for perm in result}
         assert len(unique_perms) == 6
 
     def test_permute_dictionaries(self) -> None:
@@ -197,7 +197,7 @@ class TestPermutationFinder:
         result = permutation_finder.permute([{"a": 1}, {"b": 2}, {"c": 3}])
         assert len(result) == 6
         # Check that all permutations are unique
-        unique_perms = set(tuple(str(item) for item in perm) for perm in result)
+        unique_perms = {tuple(str(item) for item in perm) for perm in result}
         assert len(unique_perms) == 6
 
     def test_permute_sets(self) -> None:
@@ -206,7 +206,7 @@ class TestPermutationFinder:
         result = permutation_finder.permute([{1}, {2}, {3}])
         assert len(result) == 6
         # Check that all permutations are unique
-        unique_perms = set(tuple(str(item) for item in perm) for perm in result)
+        unique_perms = {tuple(str(item) for item in perm) for perm in result}
         assert len(unique_perms) == 6
 
     def test_permute_nested_structures(self) -> None:
@@ -215,9 +215,9 @@ class TestPermutationFinder:
         result = permutation_finder.permute([[1, 2], [3, 4], [5, 6]])
         assert len(result) == 6
         # Check that all permutations are unique
-        unique_perms: set[tuple[tuple[int, ...], ...]] = set(
+        unique_perms: set[tuple[tuple[int, ...], ...]] = {
             tuple(tuple(item) for item in perm) for perm in result
-        )
+        }
         assert len(unique_perms) == 6
 
     def test_permute_with_custom_objects(self) -> None:
@@ -242,7 +242,7 @@ class TestPermutationFinder:
         result = permutation_finder.permute([obj1, obj2, obj3])
         assert len(result) == 6
         # Check that all permutations are unique
-        unique_perms = set(tuple(perm) for perm in result)
+        unique_perms = {tuple(perm) for perm in result}
         assert len(unique_perms) == 6
 
     def test_permute_property_based(self, permutation_finder: PermutationFinder[int]) -> None:
@@ -267,7 +267,7 @@ class TestPermutationFinder:
             assert len(result) == expected_count
 
             # Check all permutations are unique
-            assert len(set(tuple(perm) for perm in result)) == len(result)
+            assert len({tuple(perm) for perm in result}) == len(result)
 
             # Check all permutations have correct length
             assert all(len(perm) == len(data) for perm in result)

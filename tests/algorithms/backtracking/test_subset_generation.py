@@ -45,7 +45,7 @@ class TestSubsetGeneration:
         result = subset_generator.generate([1, 2, 3, 4])
         assert len(result) == 16  # 2^4 = 16
         # Check that all subsets are unique
-        unique_subsets = set(tuple(subset) for subset in result)
+        unique_subsets = {tuple(subset) for subset in result}
         assert len(unique_subsets) == 16
 
     def test_generate_with_duplicates(self, subset_generator: SubsetGeneration[int]) -> None:
@@ -59,7 +59,7 @@ class TestSubsetGeneration:
         for subset in expected_subsets:
             assert subset in result
         # Check that we have the right number of unique subsets
-        unique_subsets = set(tuple(subset) for subset in result)
+        unique_subsets = {tuple(subset) for subset in result}
         assert len(unique_subsets) == 6
 
     def test_generate_all_duplicates(self, subset_generator: SubsetGeneration[int]) -> None:
@@ -72,7 +72,7 @@ class TestSubsetGeneration:
         for subset in expected_subsets:
             assert subset in result
         # Check that we have the right number of unique subsets
-        unique_subsets = set(tuple(subset) for subset in result)
+        unique_subsets = {tuple(subset) for subset in result}
         assert len(unique_subsets) == 4
 
     def test_generate_strings(self) -> None:
@@ -91,7 +91,7 @@ class TestSubsetGeneration:
         result = subset_generator.generate([1, "a", 2.5])
         assert len(result) == 8
         # Check that all subsets are unique
-        unique_subsets = set(tuple(str(item) for item in subset) for subset in result)
+        unique_subsets = {tuple(str(item) for item in subset) for subset in result}
         assert len(unique_subsets) == 8
 
     def test_generate_large_list(self, subset_generator: SubsetGeneration[int]) -> None:
@@ -99,7 +99,7 @@ class TestSubsetGeneration:
         result = subset_generator.generate([1, 2, 3, 4, 5])
         assert len(result) == 32  # 2^5 = 32
         # Check that all subsets are unique
-        unique_subsets = set(tuple(subset) for subset in result)
+        unique_subsets = {tuple(subset) for subset in result}
         assert len(unique_subsets) == 32
 
     def test_generate_negative_numbers(self, subset_generator: SubsetGeneration[int]) -> None:
@@ -115,7 +115,7 @@ class TestSubsetGeneration:
         result = subset_generator.generate([1.1, 2.2, 3.3])
         assert len(result) == 8
         # Check that all subsets are unique
-        unique_subsets = set(tuple(subset) for subset in result)
+        unique_subsets = {tuple(subset) for subset in result}
         assert len(unique_subsets) == 8
 
     def test_generate_zeros(self, subset_generator: SubsetGeneration[int]) -> None:
@@ -128,7 +128,7 @@ class TestSubsetGeneration:
         for subset in expected_subsets:
             assert subset in result
         # Check that we have the right number of unique subsets
-        unique_subsets = set(tuple(subset) for subset in result)
+        unique_subsets = {tuple(subset) for subset in result}
         assert len(unique_subsets) == 4
 
     def test_generate_single_zero(self, subset_generator: SubsetGeneration[int]) -> None:
@@ -145,7 +145,7 @@ class TestSubsetGeneration:
         # Unique subsets: [], [0], [1], [0, 0], [0, 1], [1, 0], [0, 1, 0]
         assert len(result) == 8  # Total combinations
         # Check that we have the right number of unique subsets
-        unique_subsets = set(tuple(subset) for subset in result)
+        unique_subsets = {tuple(subset) for subset in result}
         assert len(unique_subsets) == 7
         # Check that all expected unique subsets are present
         expected_unique = {(), (0,), (1,), (0, 0), (0, 1), (1, 0), (0, 1, 0)}
@@ -159,7 +159,7 @@ class TestSubsetGeneration:
         # Unique subsets: [], [True], [False], [True, True], [True, False], [False, True], [True, False, True]
         assert len(result) == 8  # Total combinations
         # Check that we have the right number of unique subsets
-        unique_subsets = set(tuple(subset) for subset in result)
+        unique_subsets = {tuple(subset) for subset in result}
         assert len(unique_subsets) == 7
         # Check that all expected unique subsets are present
         expected_unique = {
@@ -183,7 +183,7 @@ class TestSubsetGeneration:
         # Unique subsets: [], [None], [1], [None, None], [None, 1], [1, None], [None, 1, None]
         assert len(result) == 8  # Total combinations
         # Check that we have the right number of unique subsets
-        unique_subsets = set(tuple(subset) for subset in result)
+        unique_subsets = {tuple(subset) for subset in result}
         assert len(unique_subsets) == 7
         # Check that all expected unique subsets are present
         expected_unique = {(), (None,), (1,), (None, None), (None, 1), (1, None), (None, 1, None)}
@@ -195,7 +195,7 @@ class TestSubsetGeneration:
         result = subset_generator.generate([1 + 1j, 2 + 2j, 3 + 3j])
         assert len(result) == 8
         # Check that all subsets are unique
-        unique_subsets = set(tuple(str(item) for item in subset) for subset in result)
+        unique_subsets = {tuple(str(item) for item in subset) for subset in result}
         assert len(unique_subsets) == 8
 
     def test_generate_empty_strings(self) -> None:
@@ -206,7 +206,7 @@ class TestSubsetGeneration:
         # Unique subsets: [], [''], ['a'], ['', ''], ['', 'a'], ['a', ''], ['', 'a', '']
         assert len(result) == 8  # Total combinations
         # Check that we have the right number of unique subsets
-        unique_subsets = set(tuple(subset) for subset in result)
+        unique_subsets = {tuple(subset) for subset in result}
         assert len(unique_subsets) == 7
         # Check that all expected unique subsets are present
         expected_unique = {(), ("",), ("a",), ("", ""), ("", "a"), ("a", ""), ("", "a", "")}
@@ -218,7 +218,7 @@ class TestSubsetGeneration:
         result = subset_generator.generate(["α", "β", "γ"])
         assert len(result) == 8
         # Check that all subsets are unique
-        unique_subsets = set(tuple(subset) for subset in result)
+        unique_subsets = {tuple(subset) for subset in result}
         assert len(unique_subsets) == 8
 
     def test_generate_lists(self) -> None:
@@ -227,7 +227,7 @@ class TestSubsetGeneration:
         result = subset_generator.generate([[1], [2], [3]])
         assert len(result) == 8
         # Check that all subsets are unique
-        unique_subsets = set(tuple(tuple(item) for item in subset) for subset in result)
+        unique_subsets = {tuple(tuple(item) for item in subset) for subset in result}
         assert len(unique_subsets) == 8
 
     def test_generate_tuples(self) -> None:
@@ -236,7 +236,7 @@ class TestSubsetGeneration:
         result = subset_generator.generate([(1,), (2,), (3,)])
         assert len(result) == 8
         # Check that all subsets are unique
-        unique_subsets = set(tuple(subset) for subset in result)
+        unique_subsets = {tuple(subset) for subset in result}
         assert len(unique_subsets) == 8
 
     def test_generate_dictionaries(self) -> None:
@@ -245,7 +245,7 @@ class TestSubsetGeneration:
         result = subset_generator.generate([{"a": 1}, {"b": 2}])
         assert len(result) == 4
         # Check that all subsets are unique
-        unique_subsets = set(tuple(frozenset(item.items()) for item in subset) for subset in result)
+        unique_subsets = {tuple(frozenset(item.items()) for item in subset) for subset in result}
         assert len(unique_subsets) == 4
 
     def test_generate_sets(self) -> None:
@@ -254,7 +254,7 @@ class TestSubsetGeneration:
         result = subset_generator.generate([{1}, {2}, {3}])
         assert len(result) == 8
         # Check that all subsets are unique
-        unique_subsets = set(tuple(frozenset(item) for item in subset) for subset in result)
+        unique_subsets = {tuple(frozenset(item) for item in subset) for subset in result}
         assert len(unique_subsets) == 8
 
     def test_generate_nested_structures(self) -> None:
@@ -265,7 +265,7 @@ class TestSubsetGeneration:
         result = subset_generator.generate([[1, 2], {"a": 1}, (1, 2)])
         assert len(result) == 8
         # Check that all subsets are unique
-        unique_subsets = set(tuple(str(item) for item in subset) for subset in result)
+        unique_subsets = {tuple(str(item) for item in subset) for subset in result}
         assert len(unique_subsets) == 8
 
     def test_generate_with_custom_objects(self) -> None:
@@ -289,7 +289,7 @@ class TestSubsetGeneration:
         result = subset_generator.generate([obj1, obj2])
         assert len(result) == 4
         # Check that all subsets are unique
-        unique_subsets = set(tuple(obj.value for obj in subset) for subset in result)
+        unique_subsets = {tuple(obj.value for obj in subset) for subset in result}
         assert len(unique_subsets) == 4
 
     def test_generate_property_based(self, subset_generator: SubsetGeneration[int]) -> None:
@@ -303,7 +303,7 @@ class TestSubsetGeneration:
             # Property 2: Empty subset should always be present
             assert [] in result
             # Property 3: All subsets should be unique (when converted to tuples)
-            unique_subsets = set(tuple(subset) for subset in result)
+            unique_subsets = {tuple(subset) for subset in result}
             # Note: The original list may have duplicates, but unique tuples should match
             # the number of unique combinations
             assert len(unique_subsets) <= len(result)
@@ -402,7 +402,7 @@ class TestSubsetGeneration:
         result = subset_generator.generate_iterative([1, 2, 3, 4, 5])
         assert len(result) == 32  # 2^5 = 32
         # Check that all subsets are unique
-        unique_subsets = set(tuple(subset) for subset in result)
+        unique_subsets = {tuple(subset) for subset in result}
         assert len(unique_subsets) == 32
 
     def test_generate_iterative_consistency_with_recursive(
@@ -414,8 +414,8 @@ class TestSubsetGeneration:
         iterative_result = subset_generator.generate_iterative(data)
 
         # Convert to sets of tuples for comparison
-        recursive_set = set(tuple(subset) for subset in recursive_result)
-        iterative_set = set(tuple(subset) for subset in iterative_result)
+        recursive_set = {tuple(subset) for subset in recursive_result}
+        iterative_set = {tuple(subset) for subset in iterative_result}
         assert recursive_set == iterative_set
 
     # Tests for generate_with_size method

@@ -183,32 +183,41 @@ class TestRedBlackTree:
             rb_tree.insert(value)
 
         # Check Red-Black properties
-        def check_properties(node: Optional[_RBNode[int]]) -> int:
+        def _check_root_property(node: _RBNode[int]) -> bool:
+            """Check Property 1: Root is black."""
+            return not (node == rb_tree._root and node.color == Color.RED)
+
+        def _check_red_children_property(node: _RBNode[int]) -> bool:
+            """Check Property 2: Red nodes have black children."""
+            if node.color != Color.RED:
+                return True
+            left_is_red = node.left and node.left.color == Color.RED
+            right_is_red = node.right and node.right.color == Color.RED
+            return not (left_is_red or right_is_red)
+
+        def _validate_subtree(node: Optional[_RBNode[int]]) -> int:
+            """Validate subtree and return black height."""
             if node is None:
                 return 1  # Black height for nil nodes
 
-            # Property 1: Root is black
-            if node == rb_tree._root and node.color == Color.RED:
-                return False
+            # Check properties
+            if not _check_root_property(node) or not _check_red_children_property(node):
+                return -1  # Invalid tree
 
-            # Property 2: Red nodes have black children
-            if node.color == Color.RED:
-                if (node.left and node.left.color == Color.RED) or (
-                    node.right and node.right.color == Color.RED
-                ):
-                    return False
+            # Recursively check children
+            left_height = _validate_subtree(node.left)
+            right_height = _validate_subtree(node.right)
 
-            # Property 3: All paths have same black height
-            left_black_height = check_properties(node.left)
-            right_black_height = check_properties(node.right)
+            # Validate heights match
+            if left_height == -1 or right_height == -1:
+                return -1
+            if left_height != right_height:
+                return -1
 
-            if left_black_height != right_black_height:
-                return False
+            # Return black height
+            return left_height + (0 if node.color == Color.RED else 1)
 
-            # Return black height including current node
-            return left_black_height + (0 if node.color == Color.RED else 1)
-
-        result = check_properties(rb_tree._root)
+        result = _validate_subtree(rb_tree._root)
         assert result > 0  # Should return valid black height
 
     def test_complex_operations_sequence(self, rb_tree: RedBlackTree[int]) -> None:
@@ -281,8 +290,8 @@ class TestRedBlackTree:
 
         assert rb_tree.search(3.14) is True
         assert rb_tree.search(2.0) is False
-        assert rb_tree.find_min() == 0.58
-        assert rb_tree.find_max() == 3.14
+        assert abs(rb_tree.find_min() - 0.58) < 1e-9
+        assert abs(rb_tree.find_max() - 3.14) < 1e-9
 
     def test_negative_values(self, rb_tree: RedBlackTree[int]) -> None:
         """Test Red-Black tree with negative values."""

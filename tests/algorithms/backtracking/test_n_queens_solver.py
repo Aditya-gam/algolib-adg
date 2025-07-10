@@ -94,7 +94,7 @@ class TestNQueensSolver:
     def test_solution_uniqueness(self, n_queens_solver: NQueensSolver) -> None:
         """Test that all solutions are unique."""
         solutions = n_queens_solver.solve(8)
-        unique_solutions = set(tuple(solution) for solution in solutions)
+        unique_solutions = {tuple(solution) for solution in solutions}
         assert len(unique_solutions) == len(solutions)
 
     def test_solution_format(self, n_queens_solver: NQueensSolver) -> None:

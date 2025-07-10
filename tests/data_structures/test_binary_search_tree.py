@@ -226,8 +226,8 @@ class TestBinarySearchTree:
 
         assert bst.search(3.14) is True
         assert bst.search(2.0) is False
-        assert bst.find_min() == 0.58
-        assert bst.find_max() == 3.14
+        assert bst.find_min() == pytest.approx(0.58)
+        assert bst.find_max() == pytest.approx(3.14)
 
     def test_negative_values(self, bst: BinarySearchTree[int]) -> None:
         """Test BST with negative values."""

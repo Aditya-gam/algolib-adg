@@ -169,7 +169,7 @@ class TestFibonacci:
         for i in range(10, len(sequence) - 1):
             ratio = sequence[i + 1] / sequence[i]
             # Allow some tolerance for approximation
-            assert abs(ratio - golden_ratio) < 0.1
+            assert ratio == pytest.approx(golden_ratio, abs=0.1)
 
     def test_fibonacci_overflow_handling(self, fibonacci_calculator: Fibonacci) -> None:
         """Test that large Fibonacci numbers are handled correctly."""
@@ -415,13 +415,13 @@ class TestFibonacci:
     def test_ratio_basic(self, fibonacci_calculator: Fibonacci) -> None:
         """Test ratio calculation for basic cases."""
         # F(2)/F(1) = 1/1 = 1.0
-        assert fibonacci_calculator.ratio(2) == 1.0
+        assert fibonacci_calculator.ratio(2) == pytest.approx(1.0)
 
         # F(3)/F(2) = 2/1 = 2.0
-        assert fibonacci_calculator.ratio(3) == 2.0
+        assert fibonacci_calculator.ratio(3) == pytest.approx(2.0)
 
         # F(4)/F(3) = 3/2 = 1.5
-        assert fibonacci_calculator.ratio(4) == 1.5
+        assert fibonacci_calculator.ratio(4) == pytest.approx(1.5)
 
     def test_ratio_golden_ratio_approximation(self, fibonacci_calculator: Fibonacci) -> None:
         """Test that ratio approaches golden ratio."""
@@ -437,9 +437,9 @@ class TestFibonacci:
         assert abs(ratio_15 - golden_ratio) < abs(ratio_10 - golden_ratio)
 
         # All ratios should be close to golden ratio
-        assert abs(ratio_10 - golden_ratio) < 0.1
-        assert abs(ratio_15 - golden_ratio) < 0.01
-        assert abs(ratio_20 - golden_ratio) < 0.001
+        assert ratio_10 == pytest.approx(golden_ratio, abs=0.1)
+        assert ratio_15 == pytest.approx(golden_ratio, abs=0.01)
+        assert ratio_20 == pytest.approx(golden_ratio, abs=0.001)
 
     def test_ratio_zero_raises_error(self, fibonacci_calculator: Fibonacci) -> None:
         """Test that ratio with zero raises error."""
@@ -460,7 +460,7 @@ class TestFibonacci:
         """Test ratio calculation with larger number."""
         ratio = fibonacci_calculator.ratio(25)
         golden_ratio = 1.618033988749895
-        assert abs(ratio - golden_ratio) < 0.0001
+        assert ratio == pytest.approx(golden_ratio, abs=0.0001)
 
     # Tests for __repr__ method
     def test_repr(self, fibonacci_calculator: Fibonacci) -> None:

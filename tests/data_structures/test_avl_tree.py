@@ -312,8 +312,8 @@ class TestAVLTree:
 
         assert avl_tree.search(3.14) is True
         assert avl_tree.search(2.0) is False
-        assert avl_tree.find_min() == 0.58
-        assert avl_tree.find_max() == 3.14
+        assert abs(avl_tree.find_min() - 0.58) < 1e-9
+        assert abs(avl_tree.find_max() - 3.14) < 1e-9
 
     def test_negative_values(self, avl_tree: AVLTree[int]) -> None:
         """Test AVL tree with negative values."""

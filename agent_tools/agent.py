@@ -43,7 +43,7 @@ SYSTEM_PROMPT = """You are Algo-Agent, a world-class Python programmer specializ
 """
 
 
-class BaseWriterTool(BaseTool):  # type: ignore[misc]
+class BaseWriterTool(BaseTool):
     """Base class for tools that write files using a FileWriter."""
 
     spec: AlgorithmSpec

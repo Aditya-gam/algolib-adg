@@ -34,6 +34,21 @@ class FractionalKnapsack:
 
         self._sorter = MergeSort(key=get_ratio)
 
+    def _process_item(
+        self, item: Item, remaining_capacity: float
+    ) -> Tuple[float, float, List[Tuple[Item, float]]]:
+        """Process a single item and return updated values."""
+        if item.weight == 0:
+            if item.value > 0:
+                return item.value, remaining_capacity, [(item, 1.0)]
+            return 0.0, remaining_capacity, []
+
+        if item.weight <= remaining_capacity:
+            return item.value, remaining_capacity - item.weight, [(item, 1.0)]
+
+        fraction = remaining_capacity / item.weight
+        return item.value * fraction, 0.0, [(item, fraction)]
+
     def solve(self, items: List[Item], capacity: float) -> Tuple[float, List[Tuple[Item, float]]]:
         """Return maximum value achievable and the selected item fractions."""
         if capacity < 0:
@@ -54,20 +69,12 @@ class FractionalKnapsack:
         for item in sorted_items:
             if remaining_capacity <= 0:
                 break
-            if item.weight == 0:
-                if item.value > 0:
-                    selection.append((item, 1.0))
-                    total_value += item.value
-                continue
-            if item.weight <= remaining_capacity:
-                selection.append((item, 1.0))
-                total_value += item.value
-                remaining_capacity -= item.weight
-            else:
-                fraction = remaining_capacity / item.weight
-                selection.append((item, fraction))
-                total_value += item.value * fraction
-                remaining_capacity = 0
+            value_gained, remaining_capacity, item_selection = self._process_item(
+                item, remaining_capacity
+            )
+            total_value += value_gained
+            selection.extend(item_selection)
+
         return total_value, selection
 
     def calculate_ratio(self, item: Item) -> float:

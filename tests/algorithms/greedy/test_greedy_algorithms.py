@@ -259,9 +259,9 @@ class TestFractionalKnapsack:
         assert total_value == 160  # 60 + 100
         assert len(selection) == 2
         assert selection[0][0] == Item(0, 60)
-        assert selection[0][1] == 1.0
+        assert abs(selection[0][1] - 1.0) < 1e-9
         assert selection[1][0] == Item(10, 100)
-        assert selection[1][1] == 1.0
+        assert abs(selection[1][1] - 1.0) < 1e-9
 
     def test_items_with_zero_value(self, knapsack_solver: FractionalKnapsack) -> None:
         """Test items with zero value."""
@@ -269,7 +269,7 @@ class TestFractionalKnapsack:
         total_value, selection = knapsack_solver.solve(items, 15)
         assert total_value == 100
         # Should only take the valuable item fully, and may take zero-value item partially
-        assert any(item.value == 100 and fraction == 1.0 for item, fraction in selection)
+        assert any(item.value == 100 and abs(fraction - 1.0) < 1e-9 for item, fraction in selection)
         assert sum(item.weight * fraction for item, fraction in selection) == 15
 
     def test_float_weights_and_values(self, knapsack_solver: FractionalKnapsack) -> None:
@@ -304,13 +304,13 @@ class TestFractionalKnapsack:
         # Should only take the valuable item
         assert len(selection) == 1
         assert selection[0][0] == Item(10, 100)
-        assert selection[0][1] == 1.0
+        assert abs(selection[0][1] - 1.0) < 1e-9
 
     def test_calculate_ratio_method(self, knapsack_solver: FractionalKnapsack) -> None:
         """Test the calculate_ratio method."""
         item = Item(10, 60)
         ratio = knapsack_solver.calculate_ratio(item)
-        assert ratio == 6.0
+        assert abs(ratio - 6.0) < 1e-9
 
     def test_calculate_ratio_zero_weight_raises_error(
         self, knapsack_solver: FractionalKnapsack
@@ -408,28 +408,28 @@ class TestHuffmanCoding:
     def test_compression_ratio_property(self, huffman_coder: HuffmanCoding) -> None:
         """Test that compression ratio is reasonable."""
         text = "hello world"
-        encoded, codes, tree = huffman_coder.compress(text)
+        encoded, _, _ = huffman_coder.compress(text)
         ratio = huffman_coder.calculate_compression_ratio(text, encoded)
         assert 0 <= ratio <= 1
 
     def test_encoding_table_property(self, huffman_coder: HuffmanCoding) -> None:
         """Test that encoding table contains all unique characters."""
         text = "hello world"
-        encoded, codes, tree = huffman_coder.compress(text)
+        _, codes, _ = huffman_coder.compress(text)
         unique_chars = set(text)
         assert set(codes.keys()) == unique_chars
 
     def test_encoded_text_length(self, huffman_coder: HuffmanCoding) -> None:
         """Test that encoded text length is reasonable."""
         text = "hello world"
-        encoded, codes, tree = huffman_coder.compress(text)
+        encoded, _, _ = huffman_coder.compress(text)
         if encoded:
             assert len(encoded) > 0
 
     def test_frequency_analysis(self, huffman_coder: HuffmanCoding) -> None:
         """Test that more frequent characters get shorter codes."""
         text = "aaabbbcccc"
-        encoded, codes, tree = huffman_coder.compress(text)
+        _, codes, _ = huffman_coder.compress(text)
         # 'c' should have shorter code than 'a' or 'b'
         if codes:
             c_code = codes.get("c", "")
@@ -441,7 +441,7 @@ class TestHuffmanCoding:
     def test_decode_functionality(self, huffman_coder: HuffmanCoding) -> None:
         """Test decode functionality."""
         text = "hello world"
-        encoded, codes, tree = huffman_coder.compress(text)
+        encoded, _, tree = huffman_coder.compress(text)
         # Build frequency map for decode
         freq_map: dict[str, int] = {}
         for ch in text:
@@ -540,7 +540,7 @@ class TestHuffmanCoding:
     def test_calculate_compression_ratio_empty_original(self, huffman_coder: HuffmanCoding) -> None:
         """Test compression ratio calculation with empty original string."""
         ratio = huffman_coder.calculate_compression_ratio("", "0")
-        assert ratio == 0.0
+        assert abs(ratio - 0.0) < 1e-9
 
     def test_huffman_node_comparison(self) -> None:
         """Test HuffmanNode comparison for heap operations."""

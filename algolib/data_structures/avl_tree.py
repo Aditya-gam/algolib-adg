@@ -93,25 +93,43 @@ class AVLTree(Generic[ComparableT], RotationMixin[_AVLNode[ComparableT]]):
             return node  # duplicates ignored
 
         node.height = 1 + max(self._height(node.left), self._height(node.right))
+        return self._rebalance_after_insertion(node, key)
+
+    def _rebalance_after_insertion(
+        self, node: _AVLNode[ComparableT], key: ComparableT
+    ) -> _AVLNode[ComparableT]:
+        """Rebalance the tree after insertion."""
         balance = self._balance_factor(node)
 
         # Left heavy
         if balance > 1:
-            if node.left and key < node.left.key:  # Left ‑ Left
-                return self._rotate_right(node)
-            else:  # Left ‑ Right
-                if node.left:
-                    node.left = self._rotate_left(node.left)
-                return self._rotate_right(node)
+            return self._handle_left_heavy_insertion(node, key)
         # Right heavy
         if balance < -1:
-            if node.right and key > node.right.key:  # Right ‑ Right
-                return self._rotate_left(node)
-            else:  # Right ‑ Left
-                if node.right:
-                    node.right = self._rotate_right(node.right)
-                return self._rotate_left(node)
+            return self._handle_right_heavy_insertion(node, key)
         return node
+
+    def _handle_left_heavy_insertion(
+        self, node: _AVLNode[ComparableT], key: ComparableT
+    ) -> _AVLNode[ComparableT]:
+        """Handle left-heavy case after insertion."""
+        if node.left and key < node.left.key:  # Left-Left
+            return self._rotate_right(node)
+        else:  # Left-Right
+            if node.left:
+                node.left = self._rotate_left(node.left)
+            return self._rotate_right(node)
+
+    def _handle_right_heavy_insertion(
+        self, node: _AVLNode[ComparableT], key: ComparableT
+    ) -> _AVLNode[ComparableT]:
+        """Handle right-heavy case after insertion."""
+        if node.right and key > node.right.key:  # Right-Right
+            return self._rotate_left(node)
+        else:  # Right-Left
+            if node.right:
+                node.right = self._rotate_right(node.right)
+            return self._rotate_left(node)
 
     def _height(self, node: Optional[_AVLNode[ComparableT]]) -> int:
         return node.height if node else 0

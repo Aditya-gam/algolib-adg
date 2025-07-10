@@ -13,6 +13,10 @@ class BinarySearcher(Searcher[ComparableT]):
     It works by repeatedly dividing the search interval in half.
     """
 
+    def _is_sorted(self, data: Sequence[ComparableT]) -> bool:
+        """Checks if the data is sorted in non-decreasing order."""
+        return all(data[i] <= data[i + 1] for i in range(len(data) - 1))
+
     def search(self, data: Sequence[ComparableT], target: ComparableT) -> int | None:
         """Performs an iterative binary search for a target in a sorted sequence.
 
@@ -22,7 +26,13 @@ class BinarySearcher(Searcher[ComparableT]):
 
         Returns:
             The index of the target, or None if not found.
+
+        Raises:
+            ValueError: If the input data is not sorted.
         """
+        if not self._is_sorted(data):
+            raise ValueError("Input data must be sorted for binary search.")
+
         low = 0
         high = len(data) - 1
 

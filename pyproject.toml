@@ -54,6 +54,7 @@ plantuml = "^0.3.0"
 pytest-dotenv = "^0.5.2"
 httpx = "^0.28.1"
 commitizen = "^4.8.3"
+typeguard = "^4.4.4"
 
 [tool.ruff]
 line-length = 100

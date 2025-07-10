@@ -83,6 +83,58 @@ def union_find_sequences(draw: st.DrawFn) -> Tuple[DisjointSet[int], List[Tuple[
 
 
 @st.composite
+def graph_with_negative_weights(
+    draw: st.DrawFn,
+) -> tuple[Graph[int], Vertex[int]]:
+    """Generates a directed graph with integer vertices and at least one negative edge weight."""
+    graph = Graph[int](directed=True)
+    vertices = draw(
+        st.lists(
+            st.integers(min_value=0, max_value=9),
+            min_size=2,
+            max_size=10,
+            unique=True,
+        )
+    )
+    for v_key in vertices:
+        graph.add_vertex(v_key)
+
+    start_vertex_key = draw(st.sampled_from(vertices))
+    start_vertex = graph.get_vertex(start_vertex_key)
+    assert start_vertex is not None, "Start vertex must exist"
+
+    other_vertices = [v for v in vertices if v != start_vertex_key]
+    if not other_vertices:  # If only one vertex, add another one
+        other_vertices.append(max(vertices) + 1)
+        graph.add_vertex(other_vertices[0])
+
+    target_vertex_key = draw(st.sampled_from(other_vertices))
+    negative_weight = draw(st.integers(min_value=-10, max_value=-1))
+    target_vertex = graph.get_vertex(target_vertex_key)
+    assert target_vertex is not None, "Target vertex must exist in graph"
+    graph.add_edge(start_vertex, target_vertex, negative_weight)
+
+    edge_tuples = draw(
+        st.lists(
+            st.tuples(
+                st.sampled_from(vertices),
+                st.sampled_from(vertices),
+                st.integers(min_value=-10, max_value=50),
+            ).filter(lambda e: e[0] != e[1]),
+            max_size=20,
+        )
+    )
+
+    for u_key, v_key, weight in edge_tuples:
+        u = graph.get_vertex(u_key)
+        v = graph.get_vertex(v_key)
+        if u and v:
+            graph.add_edge(u, v, weight)
+
+    return graph, start_vertex
+
+
+@st.composite
 def build_avl_tree(draw: st.DrawFn) -> AVLTree[int]:
     """Generates an AVLTree from a list of unique integers."""
     values = draw(st.lists(st.integers(), unique=True))

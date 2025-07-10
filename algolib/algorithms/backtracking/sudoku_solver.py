@@ -66,7 +66,7 @@ class SudokuSolver:
                 board[row][col] = 0  # backtrack
         return False
 
-    def _is_valid_board(self, board: Board) -> bool:  # pragma: no cover
+    def _is_valid_board(self, board: Board) -> bool:
         if len(board) != self._SIZE or any(len(row) != self._SIZE for row in board):
             return False
         # Check all values are in 0-9

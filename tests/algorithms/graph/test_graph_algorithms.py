@@ -3,9 +3,11 @@
 from typing import List, cast
 
 import pytest
+from hypothesis import HealthCheck, given, settings
 
 from algolib.algorithms.graph import DijkstraAlgorithm, KruskalMST, PrimMST, TopologicalSort
 from algolib.data_structures import Graph, Vertex
+from tests.property.strategies import graph_with_negative_weights
 
 
 class TestDijkstraAlgorithm:
@@ -99,6 +101,18 @@ class TestDijkstraAlgorithm:
 
         start_vertex = graph.get_vertex(0)
         assert start_vertex is not None
+        with pytest.raises(
+            ValueError, match="Dijkstra's algorithm doesn't work with negative weights"
+        ):
+            dijkstra_solver.run(graph, start_vertex)
+
+    @given(graph_data=graph_with_negative_weights())
+    @settings(suppress_health_check=[HealthCheck.function_scoped_fixture])
+    def test_dijkstra_negative_weights_property(
+        self, dijkstra_solver: DijkstraAlgorithm[int], graph_data: tuple[Graph[int], Vertex[int]]
+    ) -> None:
+        """Test that Dijkstra's algorithm raises ValueError on graphs with negative weights."""
+        graph, start_vertex = graph_data
         with pytest.raises(
             ValueError, match="Dijkstra's algorithm doesn't work with negative weights"
         ):

@@ -133,6 +133,14 @@ def test_search_in_large_list(searcher: BinarySearcher[int]) -> None:
     assert searcher.search(large_list, 10000) is None
 
 
+def test_search_unsorted_list_raises_value_error(
+    searcher: BinarySearcher[int],
+) -> None:
+    """Test that searching in an unsorted list raises a ValueError."""
+    with pytest.raises(ValueError, match="Input data must be sorted for binary search."):
+        searcher.search([1, 3, 2, 4], 2)
+
+
 class MockSearcher(Searcher[ComparableT]):
     def search(self, data: Sequence[ComparableT], target: ComparableT) -> int | None:
         try:

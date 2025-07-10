@@ -1,12 +1,16 @@
-"""Tests for the bubble sort algorithm."""
+"""Tests for bubble sort algorithm."""
 
+import unittest
 from collections import Counter
 from dataclasses import dataclass
+from typing import MutableSequence
 
 import pytest
 from hypothesis import given
 from hypothesis import strategies as st
 
+from algolib._typing import ComparableT
+from algolib.algorithms.sorting.base import Sorter
 from algolib.algorithms.sorting.bubble import BubbleSorter
 from tests.utils.helpers import is_sorted
 
@@ -26,6 +30,9 @@ class _ComparableItem:
 
     def __lt__(self, other: "_ComparableItem") -> bool:
         return self.key < other.key
+
+    def __le__(self, other: "_ComparableItem") -> bool:
+        return self.key <= other.key
 
 
 @pytest.fixture
@@ -168,3 +175,34 @@ def test_sort_list_with_zero(sorter: BubbleSorter[int]) -> None:
     sorted_data = sorter.sort(data)
     assert sorted_data == [-5, -2, 0, 2, 5]
     assert id(data) != id(sorted_data)
+
+
+class MockSorter(Sorter[ComparableT]):
+    def sort(self, data: MutableSequence[ComparableT]) -> MutableSequence[ComparableT]:
+        return sorted(data)
+
+
+class TestSorterABC(unittest.TestCase):
+    def test_sorter_abc_enforcement(self) -> None:
+        """Test that Sorter cannot be instantiated without implementing sort."""
+        with pytest.raises(TypeError, match="Can't instantiate abstract class"):
+
+            class IncompleteSorter(Sorter[int]):
+                pass
+
+            IncompleteSorter()  # type: ignore[abstract]
+
+    def test_sorter_subclass_must_implement_sort(self) -> None:
+        """Ensure a concrete subclass of Sorter must implement the sort method."""
+
+        class CompleteSorter(Sorter[int]):
+            def sort(self, data: MutableSequence[int]) -> MutableSequence[int]:
+                return sorted(data)
+
+        instance = CompleteSorter()
+        assert instance.sort([3, 1, 2]) == [1, 2, 3]
+
+    def test_run_method(self) -> None:
+        sorter: MockSorter[int] = MockSorter()
+        data = [3, 1, 4, 1, 5, 9, 2, 6]
+        self.assertEqual(sorter.run(data), sorted(data))

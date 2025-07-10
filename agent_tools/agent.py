@@ -43,7 +43,7 @@ SYSTEM_PROMPT = """You are Algo-Agent, a world-class Python programmer specializ
 """
 
 
-class BaseWriterTool(BaseTool):
+class BaseWriterTool(BaseTool):  # type: ignore[misc]
     """Base class for tools that write files using a FileWriter."""
 
     spec: AlgorithmSpec
@@ -104,7 +104,8 @@ class Agent:
         ])
 
         agent = create_tool_calling_agent(self.llm, self.tools, prompt)
-        self.agent_executor = AgentExecutor(agent=agent, tools=self.tools, verbose=True)
+        self.agent_executor = AgentExecutor(
+            agent=agent, tools=self.tools, verbose=True)
 
     def fix_code(self, file_path: Path, errors: str) -> None:
         """

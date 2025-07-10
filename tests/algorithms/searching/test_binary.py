@@ -1,9 +1,14 @@
-"""Tests for the binary search algorithm."""
+"""Tests for binary search algorithm."""
+
+import unittest
+from typing import Sequence
 
 import pytest
 from hypothesis import given
 from hypothesis import strategies as st
 
+from algolib._typing import ComparableT
+from algolib.algorithms.searching.base import Searcher
 from algolib.algorithms.searching.binary import BinarySearcher
 
 
@@ -126,3 +131,73 @@ def test_search_in_large_list(searcher: BinarySearcher[int]) -> None:
     large_list = list(range(10_000))
     assert searcher.search(large_list, 7777) == 7777
     assert searcher.search(large_list, 10000) is None
+
+
+class MockSearcher(Searcher[ComparableT]):
+    def search(self, data: Sequence[ComparableT], target: ComparableT) -> int | None:
+        try:
+            return list(data).index(target)
+        except ValueError:
+            return None
+
+
+class TestSearcherABC(unittest.TestCase):
+    def test_searcher_abc_enforcement(self) -> None:
+        """Test that Searcher cannot be instantiated without implementing search."""
+        with pytest.raises(TypeError, match="Can't instantiate abstract class"):
+
+            class IncompleteSearcher(Searcher[int]):
+                pass
+
+            IncompleteSearcher()  # type: ignore[abstract]
+
+    def test_searcher_subclass_must_implement_search(self) -> None:
+        """Ensure a concrete subclass of Searcher must implement the search method."""
+
+        class CompleteSearcher(Searcher[int]):
+            def search(self, data: Sequence[int], target: int) -> int | None:
+                return 42
+
+        instance = CompleteSearcher()
+        assert instance.search([], 0) == 42
+
+    def test_search(self) -> None:
+        searcher: MockSearcher[int] = MockSearcher()
+        self.assertEqual(searcher.search([1, 2, 3], 2), 1)
+        self.assertIsNone(searcher.search([1, 2, 3], 4))
+
+    def test_run(self) -> None:
+        searcher: MockSearcher[int] = MockSearcher()
+        self.assertEqual(searcher.run(([1, 2, 3], 2)), 1)
+        self.assertIsNone(searcher.run(([1, 2, 3], 4)))
+
+    def test_run_with_invalid_data_type(self) -> None:
+        searcher: MockSearcher[int] = MockSearcher()
+        with self.assertRaises(TypeError):
+            searcher.run("not a tuple")
+        with self.assertRaises(TypeError):
+            searcher.run((1, 2, 3))
+
+
+class DummySearcher(Searcher[int]):
+    def search(self, data: Sequence[int], item: int) -> int | None:
+        try:
+            return list(data).index(item)
+        except ValueError:
+            return None
+
+
+def test_searcher_run_calls_search() -> None:
+    searcher = DummySearcher()
+    data = ([1, 2, 3], 2)
+    assert searcher.run(data) == 1
+    data = ([1, 2, 3], 4)
+    assert searcher.run(data) is None
+
+
+def test_searcher_run_type_error() -> None:
+    searcher = DummySearcher()
+    with pytest.raises(TypeError):
+        searcher.run([1, 2, 3])
+    with pytest.raises(TypeError):
+        searcher.run((1, 2, 3))

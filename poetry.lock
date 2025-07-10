@@ -2993,6 +2993,23 @@ files = [
 test = ["flake8", "mypy", "pytest"]
 
 [[package]]
+name = "sphinxcontrib-plantuml"
+version = "0.26"
+description = "Sphinx \"plantuml\" extension"
+optional = false
+python-versions = "*"
+groups = ["dev"]
+files = [
+    {file = "sphinxcontrib-plantuml-0.26.tar.gz", hash = "sha256:adb3397d5cb0613632cd3dad7894381422bac24464c393cb050404dd6712b1a7"},
+]
+
+[package.dependencies]
+Sphinx = ">=1.6"
+
+[package.extras]
+test = ["Pillow", "flake8", "pytest"]
+
+[[package]]
 name = "sphinxcontrib-qthelp"
 version = "2.0.0"
 description = "sphinxcontrib-qthelp is a sphinx extension which outputs QtHelp documents"
@@ -3730,4 +3747,4 @@ streamlit = ["streamlit"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.11,<4.0"
-content-hash = "b5b14124b81fbdcf27311a4d28641458b6acb78f773c830a301ea7dd89d25890"
+content-hash = "20c2b29efb8c08b318f35242c3c3372ade2df9f14ead84b49fd6e14c9e1ed998"

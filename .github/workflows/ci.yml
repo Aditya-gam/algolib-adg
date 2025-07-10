@@ -55,6 +55,11 @@ jobs:
       - name: Install project
         run: poetry install --no-interaction --all-extras
 
+      - name: Run pip-audit
+        run: |
+          poetry run pip install pip-audit
+          poetry run pip-audit
+
       - name: Initialize database
         run: chmod +x scripts/db_init.sh && ./scripts/db_init.sh
         env:
@@ -96,3 +101,13 @@ jobs:
           files: ./coverage.xml
           fail_ci_if_error: true
           verbose: true
+
+  validate_pr:
+    name: Validate PR
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: wagoid/commitlint-github-action@v6

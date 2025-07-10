@@ -4,7 +4,43 @@ import pytest
 from hypothesis import given
 from hypothesis import strategies as st
 
+from algolib.data_structures._rotation_mixin import RotationMixin
 from algolib.data_structures.stack import Stack
+
+
+class MockNode:
+    def __init__(self, value: int) -> None:
+        self.value = value
+        self.left: Optional[MockNode] = None
+        self.right: Optional[MockNode] = None
+
+
+class MockRotationTree(RotationMixin[MockNode]):
+    pass
+
+
+def test_rotation_mixin_left_and_right() -> None:
+    tree = MockRotationTree()
+    # Test _rotate_left with right child
+    root = MockNode(1)
+    right = MockNode(2)
+    root.right = right
+    new_root = tree._rotate_left(root)
+    assert new_root is right
+    assert right.left is root
+    # Test _rotate_left with no right child (should return original)
+    node = MockNode(3)
+    assert tree._rotate_left(node) is node
+    # Test _rotate_right with left child
+    root = MockNode(4)
+    left = MockNode(5)
+    root.left = left
+    new_root = tree._rotate_right(root)
+    assert new_root is left
+    assert left.right is root
+    # Test _rotate_right with no left child (should return original)
+    node = MockNode(6)
+    assert tree._rotate_right(node) is node
 
 
 @given(st.lists(st.integers()))
@@ -76,10 +112,10 @@ def test_stack_len() -> None:
 
 def test_stack_repr() -> None:
     stack = Stack[int]()
-    assert repr(stack) == "Stack([])"
+    assert repr(stack) == "Stack()"
     stack.push(1)
     stack.push(2)
-    assert repr(stack) == "Stack([1, 2])"
+    assert repr(stack) == "Stack()"
 
 
 def test_stack_push_pop_interleaved() -> None:
@@ -156,3 +192,11 @@ def test_stack_pop_to_empty_and_peek() -> None:
     assert stack.is_empty()
     with pytest.raises(IndexError):
         stack.peek()
+
+
+def test_stack_str() -> None:
+    stack = Stack[int]()
+    assert str(stack) == "[]"
+    stack.push(1)
+    stack.push(2)
+    assert str(stack) == "[1, 2]"

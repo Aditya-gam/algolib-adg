@@ -35,4 +35,7 @@ exclude_patterns: list[str] = []
 html_theme = "furo"
 html_static_path = ["_static"]
 
-plantuml = "java -jar " + os.path.abspath("tools/plantuml.jar")
+# Get the absolute path to the project root directory
+_project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+
+plantuml = f"java -jar {os.path.join(_project_root, 'tools', 'plantuml.jar')}"

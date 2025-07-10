@@ -6,9 +6,9 @@
 algolib-adg documentation
 =========================
 
-Add your content using ``reStructuredText`` syntax. See the
-`reStructuredText <https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html>`_
-documentation for details.
+A comprehensive library of algorithms and data structures, with a focus on clean code, SOLID principles, and thorough testing.
+
+This documentation provides detailed information about the algorithms and data structures implemented in the algolib-adg library, along with usage examples, complexity analysis, and best practices.
 
 
 .. toctree::
@@ -17,6 +17,9 @@ documentation for details.
 
    why
    agent_overview
+   easy_ds
+   intermediate_algos
+   advanced_structures
    CONTRIBUTING
    contributors_guide
    complexity_cheatsheet
@@ -25,34 +28,7 @@ documentation for details.
    :caption: API Reference
    :maxdepth: 2
 
-   algorithms/graph/dijkstra
-   algorithms/graph/kruskal_mst
-   algorithms/graph/prim_mst
-   algorithms/graph/topological_sort
-   algorithms/graph/traversal/breadth_first_search
-   algorithms/graph/traversal/depth_first_search
-   algorithms/sorting/bubble
-   algorithms/sorting/counting_sort
-   algorithms/sorting/divide_conquer_sorter
-   algorithms/sorting/heap_sort
-   algorithms/sorting/insertion_sort
-   algorithms/sorting/merge
-   algorithms/sorting/quick_sort
-   algorithms/sorting/radix_sort
-   algorithms/sorting/selection_sort
-   algorithms/searching/linear
-   algorithms/searching/binary
-   algorithms/backtracking/n_queens_solver
-   algorithms/backtracking/permutation_generation
-   algorithms/backtracking/subset_generation
-   algorithms/backtracking/sudoku_solver
-   algorithms/dynamic_programming/knapsack
-   algorithms/dynamic_programming/longest_common_subsequence
-   algorithms/dynamic_programming/longest_increasing_subsequence
-   algorithms/greedy/activity_selection
-   algorithms/greedy/fractional_knapsack
-   algorithms/greedy/huffman_coding
-   algorithms/math/fibonacci
+   api/modules
 
 .. toctree::
    :caption: Data Structures

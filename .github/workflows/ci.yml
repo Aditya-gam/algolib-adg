@@ -76,7 +76,8 @@ jobs:
 
       - name: Run tests with coverage
         run: |
-          poetry run pytest
+          poetry run pytest -q -m "not benchmark"
+          poetry run coverage xml
         env:
           DATABASE_URL: postgresql://user:password@localhost:5432/testdb
 

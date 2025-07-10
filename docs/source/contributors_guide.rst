@@ -80,6 +80,35 @@ The agent generates the boilerplate, but you must still implement the core algor
 
       poetry run pytest
 
+Development Setup
+-----------------
+
+Before you begin contributing, you need to set up your development environment:
+
+**1. Install Pre-commit Hooks**
+
+We use pre-commit hooks to ensure code quality and consistency. Install them after setting up your environment:
+
+.. code-block:: bash
+
+   poetry install --all-extras
+   pre-commit install
+
+This will install hooks that run automatically on every commit, including:
+- Code formatting with Ruff
+- Linting with Ruff
+- Type checking with mypy
+- Test collection validation
+- Interface compliance checks
+
+**2. Verify Installation**
+
+Run the following to ensure everything is set up correctly:
+
+.. code-block:: bash
+
+   pre-commit run --all-files
+
 Testing
 -------
 
@@ -87,7 +116,7 @@ Our project uses a two-tiered testing strategy to balance speed and thoroughness
 
 **Pre-Commit Tests (Fast)**
 
-When you make a commit, a fast subset of our tests runs automatically via pre-commit hooks. This includes all standard unit and integration tests but **excludes** slower property-based tests. This ensures that your commits are validated quickly without a long wait.
+When you make a commit, a fast subset of our tests runs automatically via pre-commit hooks. This includes all standard unit and integration tests but **excludes** slower property-based tests and benchmarks. This ensures that your commits are validated quickly without a long wait.
 
 **Full Test Suite (Comprehensive)**
 
@@ -98,6 +127,10 @@ Before submitting a pull request, you should run the entire test suite, includin
    make test-all
 
 This command runs the full `pytest` suite and is essential for catching more complex bugs that property tests are designed to find.
+
+**Performance Benchmarks**
+
+Performance benchmarks run separately in our CI pipeline on a nightly schedule. These tests are marked with the `@pytest.mark.benchmark` decorator and are excluded from regular CI runs to keep them fast.
 
 Submitting Your Contribution
 ----------------------------

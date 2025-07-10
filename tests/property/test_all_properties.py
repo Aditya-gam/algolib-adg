@@ -6,21 +6,41 @@ import pytest
 from hypothesis import given
 from hypothesis import strategies as st
 
-from algolib.algorithms.graph.traversal.breadth_first_search import BreadthFirstSearch as BFS
+from algolib.algorithms.graph.traversal.breadth_first_search import (
+    BreadthFirstSearch as BFS,
+)
+from algolib.algorithms.graph.traversal.depth_first_search import (
+    DepthFirstSearch as DFS,
+)
 from algolib.algorithms.searching.base import Searcher
 from algolib.algorithms.searching.binary import BinarySearcher
 from algolib.algorithms.searching.linear import LinearSearcher
+from algolib.algorithms.sorting import (
+    BubbleSorter,
+    CountingSort,
+    HeapSort,
+    InsertionSort,
+    MergeSorter,
+    QuickSort,
+    RadixSort,
+    SelectionSort,
+)
 from algolib.algorithms.sorting.base import Sorter
-from algolib.algorithms.sorting.bubble import BubbleSorter
-from algolib.algorithms.sorting.merge import MergeSorter
+from algolib.data_structures.avl_tree import AVLTree
 from algolib.data_structures.disjoint_set import DisjointSet
 from algolib.data_structures.graph import Graph, Vertex
-from tests.property.strategies import random_int_list, small_graph, union_find_sequences
-
-
-def is_sorted(data: List[int]) -> bool:
-    """Checks if a list is sorted in non-decreasing order."""
-    return all(data[i] <= data[i + 1] for i in range(len(data) - 1))
+from algolib.data_structures.red_black_tree import (
+    Color,
+    RedBlackTree,
+    _RBNode,
+)
+from tests.property.strategies import (
+    build_avl_tree,
+    build_rbt,
+    random_int_list,
+    small_graph,
+    union_find_sequences,
+)
 
 
 def reference_dfs(graph: Graph[int], start_vertex: Vertex[int]) -> Set[Vertex[int]]:
@@ -47,7 +67,14 @@ sorted_list_and_element = st.lists(st.integers(), min_size=1).flatmap(
 )
 
 ALL_SEARCHERS: List[Type[Searcher[int]]] = [LinearSearcher, BinarySearcher]
-ALL_SORTERS: List[Type[Sorter[int]]] = [BubbleSorter, MergeSorter]
+ALL_SORTERS: List[Type[Sorter[int]]] = [
+    BubbleSorter,
+    MergeSorter,
+    InsertionSort,
+    SelectionSort,
+    QuickSort,
+    HeapSort,
+]
 
 
 @pytest.mark.property
@@ -101,60 +128,153 @@ def test_search_properties(
 @pytest.mark.property
 @pytest.mark.parametrize("sorter_class", ALL_SORTERS)
 @given(data=random_int_list)
-def test_sort_properties(sorter_class: Type[Sorter[int]], data: List[int]) -> None:
-    """
-    Tests two properties of sorting algorithms:
-    1. Idempotency: Applying the sort twice has the same result as applying it once.
-    2. Correctness: The output is sorted and is a permutation of the input.
-    """
+def test_generic_sort_property(sorter_class: Type[Sorter[int]], data: List[int]) -> None:
+    """Tests that a generic sorting algorithm correctly sorts a list."""
     sorter = sorter_class()
-
-    # Property 1: The output is sorted
     sorted_data = sorter.sort(data.copy())
-    assert is_sorted(list(sorted_data))
-
-    # Property 2: The output is a permutation of the input
-    assert collections.Counter(data) == collections.Counter(sorted_data)
+    assert sorted_data == sorted(data)
 
 
 @pytest.mark.property
-@pytest.mark.parametrize("sorter_class", ALL_SORTERS)
-@given(data=st.lists(st.integers(), min_size=1, max_size=100))
-def test_sort_idempotency(sorter_class: Type[Sorter[int]], data: List[int]) -> None:
-    """Tests that sorting an already sorted list does not change it."""
-    sorter = sorter_class()
-
-    # First sort
-    sorted_once = sorter.sort(data.copy())
-    assert is_sorted(list(sorted_once))
-
-    # Sorting again should not change the list
-    sorted_twice = sorter.sort(sorted_once[:])
-    assert sorted_once == sorted_twice
+@given(data=st.lists(st.integers(min_value=0, max_value=1000)))
+def test_counting_sort_property(data: list[int]) -> None:
+    """Tests that counting sort correctly sorts a list of non-negative integers."""
+    sorter = CountingSort(min_val=0, max_val=1000)
+    sorted_data = sorter.sort(data.copy())
+    assert sorted_data == sorted(data)
 
 
 @pytest.mark.property
-@given(graph=small_graph())
-def test_bfs_visits_all_reachable_nodes(graph: Graph[int]) -> None:
+@given(data=st.lists(st.integers(min_value=0)))
+def test_radix_sort_property(data: list[int]) -> None:
+    """Tests that radix sort correctly sorts a list of non-negative integers."""
+    sorter = RadixSort()
+    sorted_data = sorter.sort(data.copy())
+    assert sorted_data == sorted(data)
+
+
+@pytest.mark.property
+@given(graph_and_start=small_graph())
+def test_bfs_and_dfs_visit_all_reachable_nodes(
+    graph_and_start: Tuple[Graph[int], Vertex[int]],
+) -> None:
     """
-    Tests that BFS visits exactly the set of nodes reachable from a start node.
-    It uses a reference DFS to determine the set of all reachable nodes.
+    Tests that BFS and DFS visit exactly the set of nodes reachable
+    from a start node. It uses a reference DFS to determine the set
+    of all reachable nodes.
     """
-    if len(graph) == 0:
-        return  # Nothing to test in an empty graph
+    graph, start_vertex = graph_and_start
 
-    # Pick a starting vertex
-    start_key = list(graph._vertices.keys())[0]
-    start_vertex = graph.get_vertex(start_key)
-
-    if start_vertex is None:
-        return
-
-    # Get the set of visited nodes from BFS
+    # Get the set of visited nodes from BFS and DFS
     bfs_algo = BFS[int]()
     bfs_visited_vertices = set(bfs_algo.traverse(graph, start_vertex))
+
+    dfs_algo = DFS[int]()
+    dfs_visited_vertices = set(dfs_algo.traverse(graph, start_vertex))
 
     # Get the set of reachable nodes from the reference DFS
     reachable_vertices = reference_dfs(graph, start_vertex)
 
     assert bfs_visited_vertices == reachable_vertices
+    assert dfs_visited_vertices == reachable_vertices
+
+
+@pytest.mark.property
+@given(graph_and_start=small_graph())
+def test_bfs_depth_is_non_decreasing(graph_and_start: Tuple[Graph[int], Vertex[int]]) -> None:
+    """
+    Tests that the depth of nodes in a BFS traversal is non-decreasing.
+    """
+    graph, start_vertex = graph_and_start
+
+    # 1. Get the traversal order from the BFS algorithm under test
+    bfs_algo = BFS[int]()
+    traversal_order = bfs_algo.traverse(graph, start_vertex)
+
+    # 2. Get the ground-truth depth of each node using a simple BFS
+    depths = {start_vertex: 0}
+    queue = collections.deque([start_vertex])
+    visited_for_depth = {start_vertex}
+
+    while queue:
+        vertex = queue.popleft()
+        for neighbor, _ in graph.neighbors(vertex):
+            if neighbor not in visited_for_depth:
+                visited_for_depth.add(neighbor)
+                depths[neighbor] = depths[vertex] + 1
+                queue.append(neighbor)
+
+    # 3. Check that depths are non-decreasing in the traversal order
+    if not traversal_order:
+        return
+
+    # Get depths for traversed nodes, handling disconnected components
+    traversed_depths = [depths.get(v, -1) for v in traversal_order]
+
+    for i in range(len(traversed_depths) - 1):
+        assert traversed_depths[i] <= traversed_depths[i + 1]
+
+
+@pytest.mark.property
+@given(tree=build_avl_tree())
+def test_avl_tree_properties(tree: AVLTree[int]) -> None:
+    """
+    Tests the core properties of an AVL tree:
+    1. It maintains the Binary Search Tree (BST) property.
+    2. The balance factor of every node is in {-1, 0, 1}.
+    """
+    # 1. Verify BST property (in-order traversal is sorted)
+    inorder_nodes = list(tree.inorder())
+    assert inorder_nodes == sorted(inorder_nodes)
+
+    # 2. Verify AVL balance property
+    if tree.is_empty():
+        return
+
+    nodes_to_check = [tree._root]
+    while nodes_to_check:
+        current_node = nodes_to_check.pop()
+        if current_node:
+            balance_factor = tree._balance_factor(current_node)
+            assert balance_factor in {-1, 0, 1}
+            nodes_to_check.append(current_node.left)
+            nodes_to_check.append(current_node.right)
+
+
+@pytest.mark.property
+@given(tree=build_rbt())
+def test_rbt_properties(tree: RedBlackTree[int]) -> None:
+    """Tests the core properties of a Red-Black Tree."""
+    if tree.is_empty():
+        return
+
+    # Property 1: Root is black
+    assert tree._root is not None
+    assert tree._root.color == Color.BLACK
+
+    # Properties 2 & 4: No double reds, and all paths have same black-height
+    # We can check these with a single traversal.
+    # Property 2: No red node has a red child.
+    # Property 4: Equal black-height paths.
+    black_heights = set()
+
+    def check_node(node: _RBNode[int] | None, current_bh: int) -> None:
+        if node is None:
+            black_heights.add(current_bh)
+            return
+
+        if node.color == Color.BLACK:
+            current_bh += 1
+        else:  # Node is Red
+            # Property 2: Red node cannot have red children
+            if node.left:
+                assert node.left.color == Color.BLACK
+            if node.right:
+                assert node.right.color == Color.BLACK
+
+        check_node(node.left, current_bh)
+        check_node(node.right, current_bh)
+
+    check_node(tree._root, 0)
+    # If all paths have the same black height, the set will have one element.
+    assert len(black_heights) == 1

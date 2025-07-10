@@ -3,8 +3,6 @@
 from typing import MutableSequence
 
 import pytest
-from hypothesis import given
-from hypothesis import strategies as st
 
 from algolib.algorithms.sorting import (
     CountingSort,
@@ -15,56 +13,6 @@ from algolib.algorithms.sorting import (
     SelectionSort,
 )
 from algolib.algorithms.sorting.base import Sorter
-from tests.utils.helpers import is_sorted
-
-
-# Test data strategies
-@given(st.lists(st.integers(min_value=-10, max_value=1000)))
-def test_counting_sorter_property(data: list[int]) -> None:
-    """Test counting sort with property-based testing."""
-    sorter = CountingSort(min_val=-10, max_val=1000)
-    sorted_data = sorter.sort(data)
-    assert is_sorted(sorted_data)
-
-
-@given(st.lists(st.integers()))
-def test_heap_sorter_property(data: list[int]) -> None:
-    """Test heap sort with property-based testing."""
-    sorter: HeapSort[int] = HeapSort[int]()
-    sorted_data = sorter.sort(data)
-    assert is_sorted(sorted_data)
-
-
-@given(st.lists(st.integers()))
-def test_insertion_sorter_property(data: list[int]) -> None:
-    """Test insertion sort with property-based testing."""
-    sorter = InsertionSort()
-    sorted_data = sorter.sort(data)
-    assert is_sorted(sorted_data)
-
-
-@given(st.lists(st.integers()))
-def test_quick_sorter_property(data: list[int]) -> None:
-    """Test quick sort with property-based testing."""
-    sorter: QuickSort[int] = QuickSort[int]()
-    sorted_data = sorter.sort(data)
-    assert is_sorted(sorted_data)
-
-
-@given(st.lists(st.integers(min_value=0, max_value=999)))
-def test_radix_sorter_property(data: list[int]) -> None:
-    """Test radix sort with property-based testing."""
-    sorter = RadixSort()
-    sorted_data = sorter.sort(data)
-    assert is_sorted(sorted_data)
-
-
-@given(st.lists(st.integers()))
-def test_selection_sorter_property(data: list[int]) -> None:
-    """Test selection sort with property-based testing."""
-    sorter = SelectionSort()
-    sorted_data = sorter.sort(data)
-    assert is_sorted(sorted_data)
 
 
 class TestCountingSort:
@@ -158,80 +106,80 @@ class TestInsertionSort:
     """Test cases for Insertion Sort algorithm."""
 
     @pytest.fixture
-    def sorter(self) -> InsertionSort:
-        return InsertionSort()
+    def sorter(self) -> InsertionSort[int]:
+        return InsertionSort[int]()
 
-    def test_sort_empty_list(self, sorter: InsertionSort) -> None:
+    def test_sort_empty_list(self, sorter: InsertionSort[int]) -> None:
         """Test sorting an empty list."""
         assert sorter.sort([]) == []
 
-    def test_sort_single_element(self, sorter: InsertionSort) -> None:
+    def test_sort_single_element(self, sorter: InsertionSort[int]) -> None:
         """Test sorting a single element."""
         assert sorter.sort([5]) == [5]
 
-    def test_sort_sorted_list(self, sorter: InsertionSort) -> None:
+    def test_sort_sorted_list(self, sorter: InsertionSort[int]) -> None:
         """Test sorting an already sorted list."""
         data = [1, 2, 3, 4, 5]
         assert sorter.sort(data) == [1, 2, 3, 4, 5]
 
-    def test_sort_reverse_sorted_list(self, sorter: InsertionSort) -> None:
+    def test_sort_reverse_sorted_list(self, sorter: InsertionSort[int]) -> None:
         """Test sorting a reverse sorted list."""
         data = [5, 4, 3, 2, 1]
         assert sorter.sort(data) == [1, 2, 3, 4, 5]
 
-    def test_sort_with_duplicates(self, sorter: InsertionSort) -> None:
+    def test_sort_with_duplicates(self, sorter: InsertionSort[int]) -> None:
         """Test sorting with duplicate elements."""
         data = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5]
         assert sorter.sort(data) == [1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]
 
-    def test_sort_with_negative_numbers(self, sorter: InsertionSort) -> None:
+    def test_sort_with_negative_numbers(self, sorter: InsertionSort[int]) -> None:
         """Test sorting with negative numbers."""
         data = [-5, 3, -1, 0, -8, 5]
         assert sorter.sort(data) == [-8, -5, -1, 0, 3, 5]
 
-    def test_sort_small_list(self, sorter: InsertionSort) -> None:
+    def test_sort_small_list(self, sorter: InsertionSort[int]) -> None:
         """Test sorting a small list."""
         data = [3, 1, 2]
         assert sorter.sort(data) == [1, 2, 3]
 
     # Tests for sort_in_place method
-    def test_sort_in_place_empty_list(self, sorter: InsertionSort) -> None:
+    def test_sort_in_place_empty_list(self, sorter: InsertionSort[int]) -> None:
         """Test in-place sorting of empty list."""
         data: list[int] = []
         sorter.sort_in_place(data)
         assert data == []
 
-    def test_sort_in_place_single_element(self, sorter: InsertionSort) -> None:
+    def test_sort_in_place_single_element(self, sorter: InsertionSort[int]) -> None:
         """Test in-place sorting of single element."""
         data = [5]
         sorter.sort_in_place(data)
         assert data == [5]
 
-    def test_sort_in_place_sorted_list(self, sorter: InsertionSort) -> None:
+    def test_sort_in_place_sorted_list(self, sorter: InsertionSort[int]) -> None:
         """Test in-place sorting of already sorted list."""
         data = [1, 2, 3, 4, 5]
         sorter.sort_in_place(data)
         assert data == [1, 2, 3, 4, 5]
 
-    def test_sort_in_place_reverse_sorted_list(self, sorter: InsertionSort) -> None:
+    def test_sort_in_place_reverse_sorted_list(self, sorter: InsertionSort[int]) -> None:
         """Test in-place sorting of reverse sorted list."""
         data = [5, 4, 3, 2, 1]
         sorter.sort_in_place(data)
         assert data == [1, 2, 3, 4, 5]
 
-    def test_sort_in_place_with_duplicates(self, sorter: InsertionSort) -> None:
+    def test_sort_in_place_with_duplicates(self, sorter: InsertionSort[int]) -> None:
         """Test in-place sorting with duplicate elements."""
         data = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5]
         sorter.sort_in_place(data)
         assert data == [1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]
 
-    def test_sort_in_place_with_negative_numbers(self, sorter: InsertionSort) -> None:
+    def test_sort_in_place_with_negative_numbers(self, sorter: InsertionSort[int]) -> None:
         """Test in-place sorting with negative numbers."""
         data = [-5, 3, -1, 0, -8, 5]
         sorter.sort_in_place(data)
         assert data == [-8, -5, -1, 0, 3, 5]
 
-    def test_sort_in_place_modifies_original(self, sorter: InsertionSort) -> None:
+    def test_sort_in_place_modifies_original(self, sorter: InsertionSort[int]) -> None:
         """Test that sort_in_place modifies the original list."""
         original_data = [5, 2, 8, 1, 9]
         data = original_data.copy()
@@ -240,35 +188,35 @@ class TestInsertionSort:
         assert data is not original_data  # Should be the same object
 
     # Tests for binary_insertion_sort method
-    def test_binary_insertion_sort_empty_list(self, sorter: InsertionSort) -> None:
+    def test_binary_insertion_sort_empty_list(self, sorter: InsertionSort[int]) -> None:
         """Test binary insertion sort of empty list."""
         assert sorter.binary_insertion_sort([]) == []
 
-    def test_binary_insertion_sort_single_element(self, sorter: InsertionSort) -> None:
+    def test_binary_insertion_sort_single_element(self, sorter: InsertionSort[int]) -> None:
         """Test binary insertion sort of single element."""
         assert sorter.binary_insertion_sort([5]) == [5]
 
-    def test_binary_insertion_sort_sorted_list(self, sorter: InsertionSort) -> None:
+    def test_binary_insertion_sort_sorted_list(self, sorter: InsertionSort[int]) -> None:
         """Test binary insertion sort of already sorted list."""
         data = [1, 2, 3, 4, 5]
         assert sorter.binary_insertion_sort(data) == [1, 2, 3, 4, 5]
 
-    def test_binary_insertion_sort_reverse_sorted_list(self, sorter: InsertionSort) -> None:
+    def test_binary_insertion_sort_reverse_sorted_list(self, sorter: InsertionSort[int]) -> None:
         """Test binary insertion sort of reverse sorted list."""
         data = [5, 4, 3, 2, 1]
         assert sorter.binary_insertion_sort(data) == [1, 2, 3, 4, 5]
 
-    def test_binary_insertion_sort_with_duplicates(self, sorter: InsertionSort) -> None:
+    def test_binary_insertion_sort_with_duplicates(self, sorter: InsertionSort[int]) -> None:
         """Test binary insertion sort with duplicate elements."""
         data = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5]
         assert sorter.binary_insertion_sort(data) == [1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]
 
-    def test_binary_insertion_sort_with_negative_numbers(self, sorter: InsertionSort) -> None:
+    def test_binary_insertion_sort_with_negative_numbers(self, sorter: InsertionSort[int]) -> None:
         """Test binary insertion sort with negative numbers."""
         data = [-5, 3, -1, 0, -8, 5]
         assert sorter.binary_insertion_sort(data) == [-8, -5, -1, 0, 3, 5]
 
-    def test_binary_insertion_sort_consistency_with_sort(self, sorter: InsertionSort) -> None:
+    def test_binary_insertion_sort_consistency_with_sort(self, sorter: InsertionSort[int]) -> None:
         """Test that binary_insertion_sort produces same results as sort."""
         test_cases = [
             [],
@@ -286,74 +234,74 @@ class TestInsertionSort:
             assert sort_result == binary_result
 
     # Tests for is_sorted method
-    def test_is_sorted_empty_list(self, sorter: InsertionSort) -> None:
+    def test_is_sorted_empty_list(self, sorter: InsertionSort[int]) -> None:
         """Test is_sorted with empty list."""
         assert sorter.is_sorted([]) is True
 
-    def test_is_sorted_single_element(self, sorter: InsertionSort) -> None:
+    def test_is_sorted_single_element(self, sorter: InsertionSort[int]) -> None:
         """Test is_sorted with single element."""
         assert sorter.is_sorted([5]) is True
 
-    def test_is_sorted_sorted_list(self, sorter: InsertionSort) -> None:
+    def test_is_sorted_sorted_list(self, sorter: InsertionSort[int]) -> None:
         """Test is_sorted with sorted list."""
         assert sorter.is_sorted([1, 2, 3, 4, 5]) is True
 
-    def test_is_sorted_reverse_sorted_list(self, sorter: InsertionSort) -> None:
+    def test_is_sorted_reverse_sorted_list(self, sorter: InsertionSort[int]) -> None:
         """Test is_sorted with reverse sorted list."""
         assert sorter.is_sorted([5, 4, 3, 2, 1]) is False
 
-    def test_is_sorted_unsorted_list(self, sorter: InsertionSort) -> None:
+    def test_is_sorted_unsorted_list(self, sorter: InsertionSort[int]) -> None:
         """Test is_sorted with unsorted list."""
         assert sorter.is_sorted([3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5]) is False
 
-    def test_is_sorted_with_duplicates(self, sorter: InsertionSort) -> None:
+    def test_is_sorted_with_duplicates(self, sorter: InsertionSort[int]) -> None:
         """Test is_sorted with duplicates in sorted order."""
         assert sorter.is_sorted([1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]) is True
 
-    def test_is_sorted_with_negative_numbers(self, sorter: InsertionSort) -> None:
+    def test_is_sorted_with_negative_numbers(self, sorter: InsertionSort[int]) -> None:
         """Test is_sorted with negative numbers in sorted order."""
         assert sorter.is_sorted([-8, -5, -1, 0, 3, 5]) is True
 
-    def test_is_sorted_partially_sorted(self, sorter: InsertionSort) -> None:
+    def test_is_sorted_partially_sorted(self, sorter: InsertionSort[int]) -> None:
         """Test is_sorted with partially sorted list."""
         assert sorter.is_sorted([1, 2, 3, 5, 4, 6, 7]) is False
 
     # Tests for count_inversions method
-    def test_count_inversions_empty_list(self, sorter: InsertionSort) -> None:
+    def test_count_inversions_empty_list(self, sorter: InsertionSort[int]) -> None:
         """Test count_inversions with empty list."""
         assert sorter.count_inversions([]) == 0
 
-    def test_count_inversions_single_element(self, sorter: InsertionSort) -> None:
+    def test_count_inversions_single_element(self, sorter: InsertionSort[int]) -> None:
         """Test count_inversions with single element."""
         assert sorter.count_inversions([5]) == 0
 
-    def test_count_inversions_sorted_list(self, sorter: InsertionSort) -> None:
+    def test_count_inversions_sorted_list(self, sorter: InsertionSort[int]) -> None:
         """Test count_inversions with sorted list."""
         assert sorter.count_inversions([1, 2, 3, 4, 5]) == 0
 
-    def test_count_inversions_reverse_sorted_list(self, sorter: InsertionSort) -> None:
+    def test_count_inversions_reverse_sorted_list(self, sorter: InsertionSort[int]) -> None:
         """Test count_inversions with reverse sorted list."""
         # [5, 4, 3, 2, 1] has 10 inversions
         assert sorter.count_inversions([5, 4, 3, 2, 1]) == 10
 
-    def test_count_inversions_with_duplicates(self, sorter: InsertionSort) -> None:
+    def test_count_inversions_with_duplicates(self, sorter: InsertionSort[int]) -> None:
         """Test count_inversions with duplicates."""
         # [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5] has many inversions
         inversions = sorter.count_inversions([3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5])
         assert inversions > 0
 
-    def test_count_inversions_small_list(self, sorter: InsertionSort) -> None:
+    def test_count_inversions_small_list(self, sorter: InsertionSort[int]) -> None:
         """Test count_inversions with small list."""
         # [3, 1, 2] has 2 inversions: (3,1) and (3,2)
         assert sorter.count_inversions([3, 1, 2]) == 2
 
-    def test_count_inversions_with_negative_numbers(self, sorter: InsertionSort) -> None:
+    def test_count_inversions_with_negative_numbers(self, sorter: InsertionSort[int]) -> None:
         """Test count_inversions with negative numbers."""
         # [-5, 3, -1, 0, -8, 5] has inversions
         inversions = sorter.count_inversions([-5, 3, -1, 0, -8, 5])
         assert inversions > 0
 
-    def test_count_inversions_consistency(self, sorter: InsertionSort) -> None:
+    def test_count_inversions_consistency(self, sorter: InsertionSort[int]) -> None:
         """Test that count_inversions is consistent."""
         data = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5]
         inversions1 = sorter.count_inversions(data)
@@ -361,7 +309,7 @@ class TestInsertionSort:
         assert inversions1 == inversions2
 
     # Tests for sort_with_stats method
-    def test_sort_with_stats_empty_list(self, sorter: InsertionSort) -> None:
+    def test_sort_with_stats_empty_list(self, sorter: InsertionSort[int]) -> None:
         """Test sort_with_stats with empty list."""
         sorted_list: list[int]
         sorted_list, comparisons, shifts = sorter.sort_with_stats([])
@@ -369,14 +317,14 @@ class TestInsertionSort:
         assert comparisons == 0
         assert shifts == 0
 
-    def test_sort_with_stats_single_element(self, sorter: InsertionSort) -> None:
+    def test_sort_with_stats_single_element(self, sorter: InsertionSort[int]) -> None:
         """Test sort_with_stats with single element."""
         sorted_list, comparisons, shifts = sorter.sort_with_stats([5])
         assert sorted_list == [5]
         assert comparisons == 0
         assert shifts == 0
 
-    def test_sort_with_stats_sorted_list(self, sorter: InsertionSort) -> None:
+    def test_sort_with_stats_sorted_list(self, sorter: InsertionSort[int]) -> None:
         """Test sort_with_stats with sorted list."""
         data = [1, 2, 3, 4, 5]
         sorted_list, comparisons, shifts = sorter.sort_with_stats(data)
@@ -384,7 +332,7 @@ class TestInsertionSort:
         assert comparisons >= 0
         assert shifts >= 0
 
-    def test_sort_with_stats_reverse_sorted_list(self, sorter: InsertionSort) -> None:
+    def test_sort_with_stats_reverse_sorted_list(self, sorter: InsertionSort[int]) -> None:
         """Test sort_with_stats with reverse sorted list."""
         data = [5, 4, 3, 2, 1]
         sorted_list, comparisons, shifts = sorter.sort_with_stats(data)
@@ -392,7 +340,7 @@ class TestInsertionSort:
         assert comparisons > 0
         assert shifts > 0
 
-    def test_sort_with_stats_with_duplicates(self, sorter: InsertionSort) -> None:
+    def test_sort_with_stats_with_duplicates(self, sorter: InsertionSort[int]) -> None:
         """Test sort_with_stats with duplicates."""
         data = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5]
         sorted_list, comparisons, shifts = sorter.sort_with_stats(data)
@@ -400,7 +348,7 @@ class TestInsertionSort:
         assert comparisons > 0
         assert shifts > 0
 
-    def test_sort_with_stats_consistency_with_sort(self, sorter: InsertionSort) -> None:
+    def test_sort_with_stats_consistency_with_sort(self, sorter: InsertionSort[int]) -> None:
         """Test that sort_with_stats produces same sorted result as sort."""
         test_cases = [
             [],
@@ -417,7 +365,7 @@ class TestInsertionSort:
             stats_result, _, _ = sorter.sort_with_stats(data_list)
             assert sort_result == stats_result
 
-    def test_sort_with_stats_positive_stats(self, sorter: InsertionSort) -> None:
+    def test_sort_with_stats_positive_stats(self, sorter: InsertionSort[int]) -> None:
         """Test that sort_with_stats returns positive statistics."""
         data = [5, 4, 3, 2, 1]
         _, comparisons, shifts = sorter.sort_with_stats(data)
@@ -425,17 +373,17 @@ class TestInsertionSort:
         assert shifts >= 0
 
     # Tests for __repr__ method
-    def test_repr(self, sorter: InsertionSort) -> None:
+    def test_repr(self, sorter: InsertionSort[int]) -> None:
         """Test string representation."""
         assert repr(sorter) == "InsertionSort()"
 
-    def test_repr_consistency(self, sorter: InsertionSort) -> None:
+    def test_repr_consistency(self, sorter: InsertionSort[int]) -> None:
         """Test that repr is consistent."""
         repr1 = repr(sorter)
         repr2 = repr(sorter)
         assert repr1 == repr2
 
-    def test_repr_after_sorting(self, sorter: InsertionSort) -> None:
+    def test_repr_after_sorting(self, sorter: InsertionSort[int]) -> None:
         """Test that repr doesn't change after sorting."""
         repr_before = repr(sorter)
         sorter.sort([5, 2, 8, 1, 9])
@@ -584,80 +532,80 @@ class TestSelectionSort:
     """Test cases for Selection Sort algorithm."""
 
     @pytest.fixture
-    def sorter(self) -> SelectionSort:
-        return SelectionSort()
+    def sorter(self) -> SelectionSort[int]:
+        return SelectionSort[int]()
 
-    def test_sort_empty_list(self, sorter: SelectionSort) -> None:
+    def test_sort_empty_list(self, sorter: SelectionSort[int]) -> None:
         """Test sorting an empty list."""
         assert sorter.sort([]) == []
 
-    def test_sort_single_element(self, sorter: SelectionSort) -> None:
+    def test_sort_single_element(self, sorter: SelectionSort[int]) -> None:
         """Test sorting a single element."""
         assert sorter.sort([5]) == [5]
 
-    def test_sort_sorted_list(self, sorter: SelectionSort) -> None:
+    def test_sort_sorted_list(self, sorter: SelectionSort[int]) -> None:
         """Test sorting an already sorted list."""
         data = [1, 2, 3, 4, 5]
         assert sorter.sort(data) == [1, 2, 3, 4, 5]
 
-    def test_sort_reverse_sorted_list(self, sorter: SelectionSort) -> None:
+    def test_sort_reverse_sorted_list(self, sorter: SelectionSort[int]) -> None:
         """Test sorting a reverse sorted list."""
         data = [5, 4, 3, 2, 1]
         assert sorter.sort(data) == [1, 2, 3, 4, 5]
 
-    def test_sort_with_duplicates(self, sorter: SelectionSort) -> None:
+    def test_sort_with_duplicates(self, sorter: SelectionSort[int]) -> None:
         """Test sorting with duplicate elements."""
         data = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5]
         assert sorter.sort(data) == [1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]
 
-    def test_sort_with_negative_numbers(self, sorter: SelectionSort) -> None:
+    def test_sort_with_negative_numbers(self, sorter: SelectionSort[int]) -> None:
         """Test sorting with negative numbers."""
         data = [-5, 3, -1, 0, -8, 5]
         assert sorter.sort(data) == [-8, -5, -1, 0, 3, 5]
 
-    def test_sort_small_list(self, sorter: SelectionSort) -> None:
+    def test_sort_small_list(self, sorter: SelectionSort[int]) -> None:
         """Test sorting a small list."""
         data = [3, 1, 2]
         assert sorter.sort(data) == [1, 2, 3]
 
     # Tests for sort_in_place method
-    def test_sort_in_place_empty_list(self, sorter: SelectionSort) -> None:
+    def test_sort_in_place_empty_list(self, sorter: SelectionSort[int]) -> None:
         """Test in-place sorting of empty list."""
         data: list[int] = []
         sorter.sort_in_place(data)
         assert data == []
 
-    def test_sort_in_place_single_element(self, sorter: SelectionSort) -> None:
+    def test_sort_in_place_single_element(self, sorter: SelectionSort[int]) -> None:
         """Test in-place sorting of single element."""
         data = [5]
         sorter.sort_in_place(data)
         assert data == [5]
 
-    def test_sort_in_place_sorted_list(self, sorter: SelectionSort) -> None:
+    def test_sort_in_place_sorted_list(self, sorter: SelectionSort[int]) -> None:
         """Test in-place sorting of already sorted list."""
         data = [1, 2, 3, 4, 5]
         sorter.sort_in_place(data)
         assert data == [1, 2, 3, 4, 5]
 
-    def test_sort_in_place_reverse_sorted_list(self, sorter: SelectionSort) -> None:
+    def test_sort_in_place_reverse_sorted_list(self, sorter: SelectionSort[int]) -> None:
         """Test in-place sorting of reverse sorted list."""
         data = [5, 4, 3, 2, 1]
         sorter.sort_in_place(data)
         assert data == [1, 2, 3, 4, 5]
 
-    def test_sort_in_place_with_duplicates(self, sorter: SelectionSort) -> None:
+    def test_sort_in_place_with_duplicates(self, sorter: SelectionSort[int]) -> None:
         """Test in-place sorting with duplicate elements."""
         data = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5]
         sorter.sort_in_place(data)
         assert data == [1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]
 
-    def test_sort_in_place_with_negative_numbers(self, sorter: SelectionSort) -> None:
+    def test_sort_in_place_with_negative_numbers(self, sorter: SelectionSort[int]) -> None:
         """Test in-place sorting with negative numbers."""
         data = [-5, 3, -1, 0, -8, 5]
         sorter.sort_in_place(data)
         assert data == [-8, -5, -1, 0, 3, 5]
 
-    def test_sort_in_place_modifies_original(self, sorter: SelectionSort) -> None:
+    def test_sort_in_place_modifies_original(self, sorter: SelectionSort[int]) -> None:
         """Test that sort_in_place modifies the original list."""
         original_data = [5, 2, 8, 1, 9]
         data = original_data.copy()
@@ -666,7 +614,7 @@ class TestSelectionSort:
         assert data is not original_data  # Should be the same object
 
     # Tests for find_min_index method
-    def test_find_min_index_basic(self, sorter: SelectionSort) -> None:
+    def test_find_min_index_basic(self, sorter: SelectionSort[int]) -> None:
         """Test find_min_index with basic cases."""
         data = [5, 2, 8, 1, 9]
         assert sorter.find_min_index(data, 0, 5) == 3  # Index of 1
@@ -675,135 +623,139 @@ class TestSelectionSort:
         # Index of 2 in range [0,3)
         assert sorter.find_min_index(data, 0, 3) == 1
 
-    def test_find_min_index_single_element(self, sorter: SelectionSort) -> None:
+    def test_find_min_index_single_element(self, sorter: SelectionSort[int]) -> None:
         """Test find_min_index with single element range."""
         data = [5, 2, 8, 1, 9]
         assert sorter.find_min_index(data, 2, 3) == 2  # Only element 8
 
-    def test_find_min_index_first_element(self, sorter: SelectionSort) -> None:
+    def test_find_min_index_first_element(self, sorter: SelectionSort[int]) -> None:
         """Test find_min_index when first element is minimum."""
         data = [1, 5, 8, 2, 9]
         assert sorter.find_min_index(data, 0, 5) == 0  # Index of 1
 
-    def test_find_min_index_last_element(self, sorter: SelectionSort) -> None:
+    def test_find_min_index_last_element(self, sorter: SelectionSort[int]) -> None:
         """Test find_min_index when last element is minimum."""
         data = [5, 8, 2, 9, 1]
         assert sorter.find_min_index(data, 0, 5) == 4  # Index of 1
 
-    def test_find_min_index_with_duplicates(self, sorter: SelectionSort) -> None:
+    def test_find_min_index_with_duplicates(self, sorter: SelectionSort[int]) -> None:
         """Test find_min_index with duplicate minimum values."""
         data = [5, 2, 1, 8, 1, 9]
         # Should return the first occurrence of minimum
         assert sorter.find_min_index(data, 0, 6) == 2  # First index of 1
 
-    def test_find_min_index_invalid_range_start_equals_end(self, sorter: SelectionSort) -> None:
+    def test_find_min_index_invalid_range_start_equals_end(
+        self, sorter: SelectionSort[int]
+    ) -> None:
         """Test find_min_index with invalid range where start equals end."""
         data = [5, 2, 8, 1, 9]
         with pytest.raises(ValueError, match="Invalid range specified"):
             sorter.find_min_index(data, 2, 2)
 
     def test_find_min_index_invalid_range_start_greater_than_end(
-        self, sorter: SelectionSort
+        self, sorter: SelectionSort[int]
     ) -> None:
         """Test find_min_index with invalid range where start > end."""
         data = [5, 2, 8, 1, 9]
         with pytest.raises(ValueError, match="Invalid range specified"):
             sorter.find_min_index(data, 3, 2)
 
-    def test_find_min_index_invalid_range_negative_start(self, sorter: SelectionSort) -> None:
+    def test_find_min_index_invalid_range_negative_start(self, sorter: SelectionSort[int]) -> None:
         """Test find_min_index with negative start index."""
         data = [5, 2, 8, 1, 9]
         with pytest.raises(ValueError, match="Invalid range specified"):
             sorter.find_min_index(data, -1, 3)
 
-    def test_find_min_index_invalid_range_end_out_of_bounds(self, sorter: SelectionSort) -> None:
+    def test_find_min_index_invalid_range_end_out_of_bounds(
+        self, sorter: SelectionSort[int]
+    ) -> None:
         """Test find_min_index with end index out of bounds."""
         data = [5, 2, 8, 1, 9]
         with pytest.raises(ValueError, match="Invalid range specified"):
             sorter.find_min_index(data, 1, 6)
 
-    def test_find_min_index_with_negative_numbers(self, sorter: SelectionSort) -> None:
+    def test_find_min_index_with_negative_numbers(self, sorter: SelectionSort[int]) -> None:
         """Test find_min_index with negative numbers."""
         data = [-5, 3, -1, 0, -8, 5]
         assert sorter.find_min_index(data, 0, 6) == 4  # Index of -8
 
     # Tests for is_sorted method
-    def test_is_sorted_empty_list(self, sorter: SelectionSort) -> None:
+    def test_is_sorted_empty_list(self, sorter: SelectionSort[int]) -> None:
         """Test is_sorted with empty list."""
         assert sorter.is_sorted([]) is True
 
-    def test_is_sorted_single_element(self, sorter: SelectionSort) -> None:
+    def test_is_sorted_single_element(self, sorter: SelectionSort[int]) -> None:
         """Test is_sorted with single element."""
         assert sorter.is_sorted([5]) is True
 
-    def test_is_sorted_sorted_list(self, sorter: SelectionSort) -> None:
+    def test_is_sorted_sorted_list(self, sorter: SelectionSort[int]) -> None:
         """Test is_sorted with sorted list."""
         assert sorter.is_sorted([1, 2, 3, 4, 5]) is True
 
-    def test_is_sorted_reverse_sorted_list(self, sorter: SelectionSort) -> None:
+    def test_is_sorted_reverse_sorted_list(self, sorter: SelectionSort[int]) -> None:
         """Test is_sorted with reverse sorted list."""
         assert sorter.is_sorted([5, 4, 3, 2, 1]) is False
 
-    def test_is_sorted_unsorted_list(self, sorter: SelectionSort) -> None:
+    def test_is_sorted_unsorted_list(self, sorter: SelectionSort[int]) -> None:
         """Test is_sorted with unsorted list."""
         assert sorter.is_sorted([3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5]) is False
 
-    def test_is_sorted_with_duplicates(self, sorter: SelectionSort) -> None:
+    def test_is_sorted_with_duplicates(self, sorter: SelectionSort[int]) -> None:
         """Test is_sorted with duplicates in sorted order."""
         assert sorter.is_sorted([1, 1, 2, 3, 3, 4, 5, 5, 5, 6, 9]) is True
 
-    def test_is_sorted_with_negative_numbers(self, sorter: SelectionSort) -> None:
+    def test_is_sorted_with_negative_numbers(self, sorter: SelectionSort[int]) -> None:
         """Test is_sorted with negative numbers in sorted order."""
         assert sorter.is_sorted([-8, -5, -1, 0, 3, 5]) is True
 
-    def test_is_sorted_partially_sorted(self, sorter: SelectionSort) -> None:
+    def test_is_sorted_partially_sorted(self, sorter: SelectionSort[int]) -> None:
         """Test is_sorted with partially sorted list."""
         assert sorter.is_sorted([1, 2, 3, 5, 4, 6, 7]) is False
 
     # Tests for count_swaps method
-    def test_count_swaps_empty_list(self, sorter: SelectionSort) -> None:
+    def test_count_swaps_empty_list(self, sorter: SelectionSort[int]) -> None:
         """Test count_swaps with empty list."""
         assert sorter.count_swaps([]) == 0
 
-    def test_count_swaps_single_element(self, sorter: SelectionSort) -> None:
+    def test_count_swaps_single_element(self, sorter: SelectionSort[int]) -> None:
         """Test count_swaps with single element."""
         assert sorter.count_swaps([5]) == 0
 
-    def test_count_swaps_sorted_list(self, sorter: SelectionSort) -> None:
+    def test_count_swaps_sorted_list(self, sorter: SelectionSort[int]) -> None:
         """Test count_swaps with sorted list."""
         # Already sorted, no swaps needed
         assert sorter.count_swaps([1, 2, 3, 4, 5]) == 0
 
-    def test_count_swaps_reverse_sorted_list(self, sorter: SelectionSort) -> None:
+    def test_count_swaps_reverse_sorted_list(self, sorter: SelectionSort[int]) -> None:
         """Test count_swaps with reverse sorted list."""
         # [5, 4, 3, 2, 1] needs swaps to sort
         swaps = sorter.count_swaps([5, 4, 3, 2, 1])
         assert swaps > 0
 
-    def test_count_swaps_with_duplicates(self, sorter: SelectionSort) -> None:
+    def test_count_swaps_with_duplicates(self, sorter: SelectionSort[int]) -> None:
         """Test count_swaps with duplicates."""
         swaps = sorter.count_swaps([3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5])
         assert swaps >= 0
 
-    def test_count_swaps_small_list(self, sorter: SelectionSort) -> None:
+    def test_count_swaps_small_list(self, sorter: SelectionSort[int]) -> None:
         """Test count_swaps with small list."""
         # [3, 1, 2] needs swaps to sort
         swaps = sorter.count_swaps([3, 1, 2])
         assert swaps > 0
 
-    def test_count_swaps_with_negative_numbers(self, sorter: SelectionSort) -> None:
+    def test_count_swaps_with_negative_numbers(self, sorter: SelectionSort[int]) -> None:
         """Test count_swaps with negative numbers."""
         swaps = sorter.count_swaps([-5, 3, -1, 0, -8, 5])
         assert swaps >= 0
 
-    def test_count_swaps_consistency(self, sorter: SelectionSort) -> None:
+    def test_count_swaps_consistency(self, sorter: SelectionSort[int]) -> None:
         """Test that count_swaps is consistent."""
         data = [3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5]
         swaps1 = sorter.count_swaps(data)
         swaps2 = sorter.count_swaps(data)
         assert swaps1 == swaps2
 
-    def test_count_swaps_verification(self, sorter: SelectionSort) -> None:
+    def test_count_swaps_verification(self, sorter: SelectionSort[int]) -> None:
         """Test that count_swaps returns correct number of swaps."""
         # Test with a simple case where we can manually count swaps
         data = [3, 1, 2]
@@ -812,17 +764,17 @@ class TestSelectionSort:
         assert swaps == 2
 
     # Tests for __repr__ method
-    def test_repr(self, sorter: SelectionSort) -> None:
+    def test_repr(self, sorter: SelectionSort[int]) -> None:
         """Test string representation."""
         assert repr(sorter) == "SelectionSort()"
 
-    def test_repr_consistency(self, sorter: SelectionSort) -> None:
+    def test_repr_consistency(self, sorter: SelectionSort[int]) -> None:
         """Test that repr is consistent."""
         repr1 = repr(sorter)
         repr2 = repr(sorter)
         assert repr1 == repr2
 
-    def test_repr_after_sorting(self, sorter: SelectionSort) -> None:
+    def test_repr_after_sorting(self, sorter: SelectionSort[int]) -> None:
         """Test that repr doesn't change after sorting."""
         repr_before = repr(sorter)
         sorter.sort([5, 2, 8, 1, 9])

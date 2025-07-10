@@ -4,10 +4,11 @@ from dataclasses import dataclass
 from typing import List, MutableSequence
 
 from algolib._typing import ComparableT
+from algolib.algorithms.sorting.base import Sorter
 
 
 @dataclass(slots=True)
-class InsertionSort:
+class InsertionSort(Sorter[ComparableT]):
     """Insertion Sort algorithm - O(n²) time complexity, O(1) space complexity.
 
     Insertion sort is a simple sorting algorithm that builds the final sorted array

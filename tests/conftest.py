@@ -195,9 +195,9 @@ def heap_sorter() -> HeapSort[int]:
 
 
 @pytest.fixture
-def insertion_sorter() -> InsertionSort:
+def insertion_sorter() -> InsertionSort[int]:
     """Provide insertion sort instance."""
-    return InsertionSort()
+    return InsertionSort[int]()
 
 
 @pytest.fixture
@@ -219,9 +219,9 @@ def radix_sorter() -> RadixSort:
 
 
 @pytest.fixture
-def selection_sorter() -> SelectionSort:
+def selection_sorter() -> SelectionSort[int]:
     """Provide selection sort instance."""
-    return SelectionSort()
+    return SelectionSort[int]()
 
 
 # =============================================================================

@@ -4,10 +4,11 @@ from dataclasses import dataclass
 from typing import List, MutableSequence
 
 from algolib._typing import ComparableT
+from algolib.algorithms.sorting.base import Sorter
 
 
 @dataclass(slots=True)
-class SelectionSort:
+class SelectionSort(Sorter[ComparableT]):
     """Selection Sort algorithm - O(n²) time complexity, O(1) space complexity.
 
     Selection sort is a simple sorting algorithm that works by repeatedly finding

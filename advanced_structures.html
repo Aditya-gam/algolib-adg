@@ -1,0 +1,1106 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="How to Contribute" href="CONTRIBUTING.html" /><link rel="prev" title="Intermediate Algorithms" href="intermediate_algos.html" />
+
+    <!-- Generated with Sphinx 8.2.3 and Furo 2024.08.06 -->
+        <title>Advanced Data Structures - algolib-adg 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=302659d7" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">algolib-adg 0.0.1 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  
+  <span class="sidebar-brand-text">algolib-adg 0.0.1 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="why.html">Why AlgoLib-ADG Exists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agent_overview.html">How the Agent Works</a></li>
+<li class="toctree-l1"><a class="reference internal" href="easy_ds.html">Easy Data Structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intermediate_algos.html">Intermediate Algorithms</a></li>
+<li class="toctree-l1 current current-page"><a class="current reference internal" href="#">Advanced Data Structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">How to Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributors_guide.html">Contributor’s Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="complexity_cheatsheet.html">Complexity Cheatsheet</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="api/modules.html">algolib</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of algolib</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="api/algolib.html">algolib package</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of algolib package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="api/algolib.algorithms.html">algolib.algorithms package</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of algolib.algorithms package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4 has-children"><a class="reference internal" href="api/algolib.algorithms.backtracking.html">algolib.algorithms.backtracking package</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of algolib.algorithms.backtracking package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.backtracking.n_queens_solver.html">algolib.algorithms.backtracking.n_queens_solver module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.backtracking.permutation_generation.html">algolib.algorithms.backtracking.permutation_generation module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.backtracking.subset_generation.html">algolib.algorithms.backtracking.subset_generation module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.backtracking.sudoku_solver.html">algolib.algorithms.backtracking.sudoku_solver module</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="api/algolib.algorithms.dynamic_programming.html">algolib.algorithms.dynamic_programming package</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of algolib.algorithms.dynamic_programming package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.dynamic_programming.knapsack.html">algolib.algorithms.dynamic_programming.knapsack module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.dynamic_programming.longest_common_subsequence.html">algolib.algorithms.dynamic_programming.longest_common_subsequence module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.dynamic_programming.longest_increasing_subsequence.html">algolib.algorithms.dynamic_programming.longest_increasing_subsequence module</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="api/algolib.algorithms.graph.html">algolib.algorithms.graph package</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of algolib.algorithms.graph package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l5 has-children"><a class="reference internal" href="api/algolib.algorithms.graph.traversal.html">algolib.algorithms.graph.traversal package</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of algolib.algorithms.graph.traversal package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="api/algolib.algorithms.graph.traversal.breadth_first_search.html">algolib.algorithms.graph.traversal.breadth_first_search module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="api/algolib.algorithms.graph.traversal.depth_first_search.html">algolib.algorithms.graph.traversal.depth_first_search module</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.graph.dijkstra.html">algolib.algorithms.graph.dijkstra module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.graph.kruskal_mst.html">algolib.algorithms.graph.kruskal_mst module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.graph.prim_mst.html">algolib.algorithms.graph.prim_mst module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.graph.topological_sort.html">algolib.algorithms.graph.topological_sort module</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="api/algolib.algorithms.greedy.html">algolib.algorithms.greedy package</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of algolib.algorithms.greedy package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.greedy.activity_selection.html">algolib.algorithms.greedy.activity_selection module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.greedy.fractional_knapsack.html">algolib.algorithms.greedy.fractional_knapsack module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.greedy.huffman_coding.html">algolib.algorithms.greedy.huffman_coding module</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="api/algolib.algorithms.math.html">algolib.algorithms.math package</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of algolib.algorithms.math package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.math.fibonacci.html">algolib.algorithms.math.fibonacci module</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="api/algolib.algorithms.searching.html">algolib.algorithms.searching package</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle navigation of algolib.algorithms.searching package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.searching.base.html">algolib.algorithms.searching.base module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.searching.binary.html">algolib.algorithms.searching.binary module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.searching.linear.html">algolib.algorithms.searching.linear module</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="api/algolib.algorithms.sorting.html">algolib.algorithms.sorting package</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle navigation of algolib.algorithms.sorting package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.sorting.base.html">algolib.algorithms.sorting.base module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.sorting.bubble.html">algolib.algorithms.sorting.bubble module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.sorting.counting_sort.html">algolib.algorithms.sorting.counting_sort module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.sorting.divide_conquer_sorter.html">algolib.algorithms.sorting.divide_conquer_sorter module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.sorting.heap_sort.html">algolib.algorithms.sorting.heap_sort module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.sorting.insertion_sort.html">algolib.algorithms.sorting.insertion_sort module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.sorting.merge.html">algolib.algorithms.sorting.merge module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.sorting.merge_sort.html">algolib.algorithms.sorting.merge_sort module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.sorting.quick_sort.html">algolib.algorithms.sorting.quick_sort module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.sorting.radix_sort.html">algolib.algorithms.sorting.radix_sort module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.sorting.selection_sort.html">algolib.algorithms.sorting.selection_sort module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="api/algolib.api.html">algolib.api package</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle navigation of algolib.api package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/algolib.api.main.html">algolib.api.main module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="api/algolib.data_structures.html">algolib.data_structures package</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><div class="visually-hidden">Toggle navigation of algolib.data_structures package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/algolib.data_structures.avl_tree.html">algolib.data_structures.avl_tree module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/algolib.data_structures.binary_search_tree.html">algolib.data_structures.binary_search_tree module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/algolib.data_structures.binary_tree.html">algolib.data_structures.binary_tree module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/algolib.data_structures.disjoint_set.html">algolib.data_structures.disjoint_set module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/algolib.data_structures.graph.html">algolib.data_structures.graph module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/algolib.data_structures.heap.html">algolib.data_structures.heap module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/algolib.data_structures.linked_list.html">algolib.data_structures.linked_list module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/algolib.data_structures.queue.html">algolib.data_structures.queue module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/algolib.data_structures.red_black_tree.html">algolib.data_structures.red_black_tree module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/algolib.data_structures.stack.html">algolib.data_structures.stack module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/algolib.data_structures.trie.html">algolib.data_structures.trie module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="api/algolib.db.html">algolib.db package</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" role="switch" type="checkbox"/><label for="toctree-checkbox-14"><div class="visually-hidden">Toggle navigation of algolib.db package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/algolib.db.models.html">algolib.db.models module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/algolib.db.session.html">algolib.db.session module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="api/algolib.specs.html">algolib.specs package</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><div class="visually-hidden">Toggle navigation of algolib.specs package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/algolib.specs.schema.html">algolib.specs.schema module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/algolib.interfaces.html">algolib.interfaces module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Data Structures</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="data_structures/avl_tree.html">AVL Tree</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_structures/binary_search_tree.html">Binary Search Tree</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_structures/binary_tree.html">Binary Tree</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_structures/disjoint_set.html">Disjoint Set</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_structures/graph.html">Graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_structures/heap.html">Heap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_structures/linked_list.html">Linked List</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_structures/queue.html">Queue</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_structures/red_black_tree.html">Red-Black Tree</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_structures/stack.html">Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_structures/trie.html">Trie</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="_sources/advanced_structures.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="advanced-data-structures">
+<h1>Advanced Data Structures<a class="headerlink" href="#advanced-data-structures" title="Link to this heading">¶</a></h1>
+<p>This guide covers advanced data structures that provide sophisticated functionality and performance characteristics for complex applications.</p>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">¶</a></h2>
+<p>Advanced data structures build upon basic concepts to provide specialized functionality, better performance guarantees, and solutions to complex problems.</p>
+</section>
+<section id="self-balancing-binary-search-trees">
+<h2>Self-Balancing Binary Search Trees<a class="headerlink" href="#self-balancing-binary-search-trees" title="Link to this heading">¶</a></h2>
+<p>Self-balancing trees automatically maintain their height to ensure efficient operations regardless of the order of insertions and deletions.</p>
+<section id="avl-tree">
+<h3>AVL Tree<a class="headerlink" href="#avl-tree" title="Link to this heading">¶</a></h3>
+<p>An AVL tree is a self-balancing binary search tree where the heights of the two child subtrees of any node differ by at most one.</p>
+<p>AVL Tree (self-balancing BST) implementation.</p>
+<dl class="py class">
+<dt class="sig sig-object py">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">algolib.data_structures.avl_tree.</span></span><span class="sig-name descname"><span class="pre">AVLTree</span></span></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">ComparableT</span></code>], <code class="xref py py-class docutils literal notranslate"><span class="pre">RotationMixin</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">_AVLNode</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">ComparableT</span></code>]]</p>
+<p>Self-balancing AVL Tree supporting insertion &amp; search.</p>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">clear</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">contains</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ComparableT</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ComparableT</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">find_max</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ComparableT</span></span></span></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">find_min</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ComparableT</span></span></span></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">height</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">inorder</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">ComparableT</span><span class="p"><span class="pre">]</span></span></span></span></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">insert</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ComparableT</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">is_empty</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">postorder</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">ComparableT</span><span class="p"><span class="pre">]</span></span></span></span></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">preorder</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">ComparableT</span><span class="p"><span class="pre">]</span></span></span></span></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">search</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ComparableT</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">size</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<p><strong>Time Complexity:</strong>
+- Search: O(log n)
+- Insert: O(log n)
+- Delete: O(log n)</p>
+<p><strong>Space Complexity:</strong> O(n)</p>
+<p><strong>Key Features:</strong>
+- Strict height balancing
+- Guaranteed O(log n) performance
+- More rotations than Red-Black trees</p>
+</section>
+<section id="avl-tree-rotations">
+<h3>AVL Tree Rotations<a class="headerlink" href="#avl-tree-rotations" title="Link to this heading">¶</a></h3>
+<p>AVL trees use rotations to maintain balance after insertions and deletions.</p>
+<p><strong>Rotation Types:</strong>
+- <strong>Left Rotation</strong>: Used when the right subtree is taller
+- <strong>Right Rotation</strong>: Used when the left subtree is taller
+- <strong>Left-Right Rotation</strong>: Double rotation for left-right imbalance
+- <strong>Right-Left Rotation</strong>: Double rotation for right-left imbalance</p>
+</section>
+<section id="red-black-tree">
+<h3>Red-Black Tree<a class="headerlink" href="#red-black-tree" title="Link to this heading">¶</a></h3>
+<p>A Red-Black tree is a self-balancing binary search tree with additional properties that ensure the tree remains approximately balanced.</p>
+<p>Red-Black Tree implementation (insertion only).</p>
+<dl class="py class">
+<dt class="sig sig-object py">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">algolib.data_structures.red_black_tree.</span></span><span class="sig-name descname"><span class="pre">Color</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">value</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Enum</span></code></p>
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">BLACK</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">2</span></em></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">RED</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">1</span></em></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">algolib.data_structures.red_black_tree.</span></span><span class="sig-name descname"><span class="pre">RedBlackTree</span></span></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">ComparableT</span></code>], <code class="xref py py-class docutils literal notranslate"><span class="pre">RotationMixin</span></code>[<code class="xref py py-class docutils literal notranslate"><span class="pre">_RBNode</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">ComparableT</span></code>]]</p>
+<p>Red-Black Tree with insert and search operations.</p>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">clear</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">contains</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ComparableT</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">delete</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ComparableT</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">find_max</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ComparableT</span></span></span></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">find_min</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">ComparableT</span></span></span></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">height</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">inorder</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">ComparableT</span><span class="p"><span class="pre">]</span></span></span></span></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">insert</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ComparableT</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">is_empty</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">postorder</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">ComparableT</span><span class="p"><span class="pre">]</span></span></span></span></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">preorder</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">ComparableT</span><span class="p"><span class="pre">]</span></span></span></span></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">search</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">ComparableT</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">size</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<p><strong>Time Complexity:</strong>
+- Search: O(log n)
+- Insert: O(log n)
+- Delete: O(log n)</p>
+<p><strong>Space Complexity:</strong> O(n)</p>
+<p><strong>Properties:</strong>
+1. Every node is either red or black
+2. The root is always black
+3. Red nodes cannot have red children
+4. Every path from root to leaves has the same number of black nodes</p>
+</section>
+<section id="red-black-tree-fix-up-operations">
+<h3>Red-Black Tree Fix-up Operations<a class="headerlink" href="#red-black-tree-fix-up-operations" title="Link to this heading">¶</a></h3>
+<p>Red-Black trees use color changes and rotations to maintain properties after insertions and deletions.</p>
+<p><strong>Insertion Fix-up Cases:</strong>
+- <strong>Case 1</strong>: Uncle is red - recolor parent, uncle, and grandparent
+- <strong>Case 2</strong>: Uncle is black, triangle case - rotate parent
+- <strong>Case 3</strong>: Uncle is black, line case - rotate grandparent and recolor</p>
+<p><strong>Deletion Fix-up Cases:</strong>
+- <strong>Case 1</strong>: Sibling is red - rotate parent and recolor
+- <strong>Case 2</strong>: Sibling and nephews are black - recolor sibling
+- <strong>Case 3</strong>: Sibling is black, far nephew is black - rotate sibling
+- <strong>Case 4</strong>: Sibling is black, far nephew is red - rotate parent and recolor</p>
+</section>
+</section>
+<section id="heap-data-structure">
+<h2>Heap Data Structure<a class="headerlink" href="#heap-data-structure" title="Link to this heading">¶</a></h2>
+<p>A heap is a specialized tree-based data structure that satisfies the heap property.</p>
+<p>Max Heap implementation for HeapSort and other algorithms.</p>
+<dl class="py class">
+<dt class="sig sig-object py">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">algolib.data_structures.heap.</span></span><span class="sig-name descname"><span class="pre">MaxHeap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Callable</span><span class="p"><span class="pre">[</span></span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">object</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">T</span></code>]</p>
+<p>A max heap implementation supporting custom comparison functions.</p>
+<p>This max heap uses a list-based representation where for any node at index i:
+- Left child is at index 2*i + 1
+- Right child is at index 2*i + 2
+- Parent is at index (i-1)//2</p>
+<dl class="simple">
+<dt>Time Complexity:</dt><dd><ul class="simple">
+<li><p>insert: O(log n)</p></li>
+<li><p>extract_max: O(log n)</p></li>
+<li><p>peek: O(1)</p></li>
+<li><p>build_heap: O(n)</p></li>
+</ul>
+</dd>
+</dl>
+<p>Space Complexity: O(n)</p>
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">_heap</span></span></dt>
+<dd><p>The internal list representation of the heap</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List[algolib._typing.T]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">_key_func</span></span></dt>
+<dd><p>Optional function to extract comparison key from elements</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Callable[[algolib._typing.T], object] | None</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">build_heap</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">items</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span></dt>
+<dd><p>Build a heap from a list of items in O(n) time.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>items</strong> – List of items to build the heap from</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">extract_max</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">T</span></span></span></dt>
+<dd><p>Remove and return the maximum element from the heap.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The maximum element</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>IndexError</strong> – If the heap is empty</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">insert</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">item</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span></dt>
+<dd><p>Insert an item into the heap.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>item</strong> – The item to insert</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">is_empty</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span></dt>
+<dd><p>Check if the heap is empty.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>True if the heap is empty, False otherwise</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">peek</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">T</span></span></span></dt>
+<dd><p>Return the maximum element without removing it.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The maximum element</p>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>IndexError</strong> – If the heap is empty</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">size</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">int</span></span></span></dt>
+<dd><p>Get the number of items in the heap.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The number of items in the heap</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<p><strong>Time Complexity:</strong>
+- Insert: O(log n)
+- Extract Max/Min: O(log n)
+- Peek: O(1)
+- Build Heap: O(n)</p>
+<p><strong>Space Complexity:</strong> O(n)</p>
+<p><strong>Common Applications:</strong>
+- Priority queues
+- Heap sort
+- Graph algorithms (Dijkstra’s, Prim’s)
+- Task scheduling</p>
+</section>
+<section id="disjoint-set-union-find">
+<h2>Disjoint Set (Union-Find)<a class="headerlink" href="#disjoint-set-union-find" title="Link to this heading">¶</a></h2>
+<p>A disjoint set data structure tracks a set of elements partitioned into a number of disjoint subsets.</p>
+<dl class="py class">
+<dt class="sig sig-object py">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">algolib.data_structures.disjoint_set.</span></span><span class="sig-name descname"><span class="pre">DisjointSet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">elements</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Iterable</span><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">T</span></code>]</p>
+<p>A disjoint set data structure with path compression and union-by-rank.</p>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">find</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">item</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">T</span></span></span></dt>
+<dd><p>Finds the representative of the set containing the item.</p>
+<p>This method uses path compression for optimization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>item</strong> – The item to find.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The representative of the set containing the item.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>KeyError</strong> – If the item is not in the disjoint set.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">union</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">item1</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">T</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">item2</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span></dt>
+<dd><p>Merges the sets containing item1 and item2.</p>
+<p>This method uses union by rank (or size) for optimization.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>item1</strong> – An item in the first set.</p></li>
+<li><p><strong>item2</strong> – An item in the second set.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<p><strong>Time Complexity:</strong>
+- Union: O(α(n)) amortized
+- Find: O(α(n)) amortized
+- Make Set: O(1)</p>
+<p><strong>Space Complexity:</strong> O(n)</p>
+<p><strong>Common Applications:</strong>
+- Kruskal’s minimum spanning tree algorithm
+- Connected components in graphs
+- Image processing
+- Network connectivity</p>
+</section>
+<section id="trie-prefix-tree">
+<h2>Trie (Prefix Tree)<a class="headerlink" href="#trie-prefix-tree" title="Link to this heading">¶</a></h2>
+<p>A trie is a tree-like data structure used to store a dynamic set of strings where the keys are usually strings.</p>
+<p>Trie (prefix tree) implementation for efficient string storage &amp; lookup.</p>
+<dl class="py class">
+<dt class="sig sig-object py">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">algolib.data_structures.trie.</span></span><span class="sig-name descname"><span class="pre">Trie</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">_root:</span> <span class="pre">~algolib.data_structures.trie._TrieNode</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>Trie with insert, search and prefix checking operations.</p>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">insert</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">word</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span></dt>
+<dd><p>Insert <em>word</em> into the trie.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">search</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">word</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span></dt>
+<dd><p>Return True if <em>word</em> exists in the trie.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">starts_with</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span></dt>
+<dd><p>Return True if any word in the trie starts with <em>prefix</em>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">words_with_prefix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">prefix</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span></dt>
+<dd><p>Return all words beginning with <em>prefix</em> (for debugging).</p>
+</dd></dl>
+
+</dd></dl>
+
+<p><strong>Time Complexity:</strong>
+- Insert: O(m) where m is key length
+- Search: O(m) where m is key length
+- Delete: O(m) where m is key length</p>
+<p><strong>Space Complexity:</strong> O(ALPHABET_SIZE * m * n)</p>
+<p><strong>Common Applications:</strong>
+- Autocomplete systems
+- Spell checkers
+- IP routing tables
+- Dictionary implementations</p>
+</section>
+<section id="graph-data-structure">
+<h2>Graph Data Structure<a class="headerlink" href="#graph-data-structure" title="Link to this heading">¶</a></h2>
+<p>A graph is a collection of nodes (vertices) connected by edges, representing relationships between objects.</p>
+<dl class="py class">
+<dt class="sig sig-object py">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">algolib.data_structures.graph.</span></span><span class="sig-name descname"><span class="pre">Graph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directed</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">T</span></code>]</p>
+<p>A graph represented using an adjacency list.</p>
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">add_edge</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">u</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="data_structures/graph.html#algolib.data_structures.graph.Vertex" title="algolib.data_structures.graph.Vertex"><span class="pre">Vertex</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">v</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="data_structures/graph.html#algolib.data_structures.graph.Vertex" title="algolib.data_structures.graph.Vertex"><span class="pre">Vertex</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weight</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1.0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span></dt>
+<dd><p>Adds an edge between two vertices.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>u</strong> – The source vertex.</p></li>
+<li><p><strong>v</strong> – The destination vertex.</p></li>
+<li><p><strong>weight</strong> – The weight of the edge. Defaults to 1.0.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>ValueError</strong> – If either vertex is not in the graph.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">add_vertex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="data_structures/graph.html#algolib.data_structures.graph.Vertex" title="algolib.data_structures.graph.Vertex"><span class="pre">Vertex</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></span></dt>
+<dd><p>Adds a vertex to the graph or returns it if it already exists.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>key</strong> – The key of the vertex to add.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The Vertex object.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">directed</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span></em></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">get_neighbors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="data_structures/graph.html#algolib.data_structures.graph.Vertex" title="algolib.data_structures.graph.Vertex"><span class="pre">Vertex</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="data_structures/graph.html#algolib.data_structures.graph.Vertex" title="algolib.data_structures.graph.Vertex"><span class="pre">Vertex</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span></dt>
+<dd><p>Gets all neighbor vertices of a given vertex.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> – The vertex whose neighbors to retrieve.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>A list of neighbor vertices.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">get_vertex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="data_structures/graph.html#algolib.data_structures.graph.Vertex" title="algolib.data_structures.graph.Vertex"><span class="pre">Vertex</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span></span></dt>
+<dd><p>Gets a vertex by its key.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>key</strong> – The key of the vertex to get.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The Vertex object if found, otherwise None.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">neighbors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">v</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="data_structures/graph.html#algolib.data_structures.graph.Vertex" title="algolib.data_structures.graph.Vertex"><span class="pre">Vertex</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><span class="pre">Tuple</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="data_structures/graph.html#algolib.data_structures.graph.Vertex" title="algolib.data_structures.graph.Vertex"><span class="pre">Vertex</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span></dt>
+<dd><p>Returns an iterator over the neighbors of a vertex and edge weights.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>v</strong> – The vertex whose neighbors to get.</p>
+</dd>
+<dt class="field-even">Yields<span class="colon">:</span></dt>
+<dd class="field-even"><p>A tuple containing the neighbor vertex and the edge weight.</p>
+</dd>
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – If the vertex is not in the graph.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">vertices</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Iterator</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="data_structures/graph.html#algolib.data_structures.graph.Vertex" title="algolib.data_structures.graph.Vertex"><span class="pre">Vertex</span></a><span class="p"><span class="pre">[</span></span><span class="pre">T</span><span class="p"><span class="pre">]</span></span><span class="p"><span class="pre">]</span></span></span></span></dt>
+<dd><p>Returns an iterator over all vertices in the graph.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>An iterator over all vertices.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py">
+<em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">algolib.data_structures.graph.</span></span><span class="sig-name descname"><span class="pre">Vertex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">key</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">T</span></span></em><span class="sig-paren">)</span></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">Generic</span></code>[<code class="xref py py-obj docutils literal notranslate"><span class="pre">T</span></code>]</p>
+<p>A vertex in a graph.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">key</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">T</span></em></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<p><strong>Representations:</strong>
+- Adjacency Matrix: O(V²) space, O(1) edge queries
+- Adjacency List: O(V + E) space, O(degree) edge queries</p>
+<p><strong>Common Applications:</strong>
+- Social networks
+- Transportation networks
+- Computer networks
+- Dependency graphs</p>
+</section>
+<section id="getting-started">
+<h2>Getting Started<a class="headerlink" href="#getting-started" title="Link to this heading">¶</a></h2>
+<p>To use these advanced data structures:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">algolib.data_structures</span><span class="w"> </span><span class="kn">import</span> <span class="n">AVLTree</span><span class="p">,</span> <span class="n">RedBlackTree</span><span class="p">,</span> <span class="n">Heap</span><span class="p">,</span> <span class="n">DisjointSet</span><span class="p">,</span> <span class="n">Trie</span>
+
+<span class="c1"># AVL Tree</span>
+<span class="n">avl</span> <span class="o">=</span> <span class="n">AVLTree</span><span class="p">[</span><span class="nb">int</span><span class="p">]()</span>
+<span class="n">avl</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">avl</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">avl</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+
+<span class="c1"># Red-Black Tree</span>
+<span class="n">rb_tree</span> <span class="o">=</span> <span class="n">RedBlackTree</span><span class="p">[</span><span class="nb">int</span><span class="p">]()</span>
+<span class="n">rb_tree</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span>
+<span class="n">rb_tree</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">25</span><span class="p">)</span>
+<span class="n">rb_tree</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">35</span><span class="p">)</span>
+
+<span class="c1"># Heap (Max Heap)</span>
+<span class="n">heap</span> <span class="o">=</span> <span class="n">Heap</span><span class="p">[</span><span class="nb">int</span><span class="p">]()</span>
+<span class="n">heap</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">heap</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="n">heap</span><span class="o">.</span><span class="n">push</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">max_value</span> <span class="o">=</span> <span class="n">heap</span><span class="o">.</span><span class="n">pop</span><span class="p">()</span>  <span class="c1"># 20</span>
+
+<span class="c1"># Disjoint Set</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">DisjointSet</span><span class="p">[</span><span class="nb">int</span><span class="p">]()</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">make_set</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">make_set</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+
+<span class="c1"># Trie</span>
+<span class="n">trie</span> <span class="o">=</span> <span class="n">Trie</span><span class="p">()</span>
+<span class="n">trie</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span>
+<span class="n">trie</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="s2">&quot;world&quot;</span><span class="p">)</span>
+<span class="n">contains_hello</span> <span class="o">=</span> <span class="n">trie</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span>  <span class="c1"># True</span>
+</pre></div>
+</div>
+</section>
+<section id="performance-comparison">
+<h2>Performance Comparison<a class="headerlink" href="#performance-comparison" title="Link to this heading">¶</a></h2>
+<div class="line-block">
+<div class="line">Structure | Search | Insert | Delete | Space |</div>
+</div>
+<p><a href="#id1"><span class="problematic" id="id2">|-----------|</span></a>——–<a href="#id3"><span class="problematic" id="id4">|--------|</span></a>——–<a href="#id5"><span class="problematic" id="id6">|-------|</span></a>
+| AVL Tree | O(log n) | O(log n) | O(log n) | O(n) |
+| Red-Black Tree | O(log n) | O(log n) | O(log n) | O(n) |
+| Heap | O(n) | O(log n) | O(log n) | O(n) |
+| Disjoint Set | O(α(n)) | O(α(n)) | - | O(n) |
+| Trie | O(m) | O(m) | O(m) | O(ALPHABET_SIZE * m * n) |</p>
+</section>
+<section id="when-to-use-each-structure">
+<h2>When to Use Each Structure<a class="headerlink" href="#when-to-use-each-structure" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p><strong>AVL Tree</strong>: When you need guaranteed O(log n) performance and can tolerate more rotations</p></li>
+<li><p><strong>Red-Black Tree</strong>: When you want good average performance with fewer rotations</p></li>
+<li><p><strong>Heap</strong>: For priority queue operations and heap sort</p></li>
+<li><p><strong>Disjoint Set</strong>: For tracking connected components and union-find operations</p></li>
+<li><p><strong>Trie</strong>: For string operations, autocomplete, and prefix matching</p></li>
+<li><p><strong>Graph</strong>: For representing relationships and network structures</p></li>
+</ol>
+</section>
+<section id="best-practices">
+<h2>Best Practices<a class="headerlink" href="#best-practices" title="Link to this heading">¶</a></h2>
+<ol class="arabic simple">
+<li><p><strong>Choose Based on Operations</strong>: Consider which operations you’ll perform most frequently</p></li>
+<li><p><strong>Understand Trade-offs</strong>: Balance between time complexity, space complexity, and implementation complexity</p></li>
+<li><p><strong>Consider Memory Usage</strong>: Advanced structures may use more memory than simpler alternatives</p></li>
+<li><p><strong>Profile Performance</strong>: Test with your specific use case and data patterns</p></li>
+</ol>
+</section>
+<section id="next-steps">
+<h2>Next Steps<a class="headerlink" href="#next-steps" title="Link to this heading">¶</a></h2>
+<p>Explore related topics:
+- <a class="reference internal" href="algorithms/graph/dijkstra.html"><span class="doc">Dijkstra’s Algorithm</span></a> for graph algorithms using these structures
+- <a class="reference internal" href="algorithms/greedy/activity_selection.html"><span class="doc">Activity Selection Problem</span></a> for greedy algorithms
+- <a class="reference internal" href="algorithms/dynamic_programming/knapsack.html"><span class="doc">Knapsack Problem</span></a> for dynamic programming
+- <a class="reference internal" href="complexity_cheatsheet.html"><span class="doc">Complexity Cheatsheet</span></a> for detailed performance analysis</p>
+</section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="CONTRIBUTING.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">How to Contribute</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="intermediate_algos.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Intermediate Algorithms</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2025, Aditya Gambhir
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Advanced Data Structures</a><ul>
+<li><a class="reference internal" href="#overview">Overview</a></li>
+<li><a class="reference internal" href="#self-balancing-binary-search-trees">Self-Balancing Binary Search Trees</a><ul>
+<li><a class="reference internal" href="#avl-tree">AVL Tree</a></li>
+<li><a class="reference internal" href="#avl-tree-rotations">AVL Tree Rotations</a></li>
+<li><a class="reference internal" href="#red-black-tree">Red-Black Tree</a></li>
+<li><a class="reference internal" href="#red-black-tree-fix-up-operations">Red-Black Tree Fix-up Operations</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#heap-data-structure">Heap Data Structure</a></li>
+<li><a class="reference internal" href="#disjoint-set-union-find">Disjoint Set (Union-Find)</a></li>
+<li><a class="reference internal" href="#trie-prefix-tree">Trie (Prefix Tree)</a></li>
+<li><a class="reference internal" href="#graph-data-structure">Graph Data Structure</a></li>
+<li><a class="reference internal" href="#getting-started">Getting Started</a></li>
+<li><a class="reference internal" href="#performance-comparison">Performance Comparison</a></li>
+<li><a class="reference internal" href="#when-to-use-each-structure">When to Use Each Structure</a></li>
+<li><a class="reference internal" href="#best-practices">Best Practices</a></li>
+<li><a class="reference internal" href="#next-steps">Next Steps</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/documentation_options.js?v=d45e8c67"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/furo.js?v=5fa4622c"></script>
+    </body>
+</html>

@@ -1,0 +1,2371 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><link rel="index" title="Index" href="#" /><link rel="search" title="Search" href="search.html" />
+
+    <!-- Generated with Sphinx 8.2.3 and Furo 2024.08.06 --><title>Index - algolib-adg 0.0.1 documentation</title>
+<link rel="stylesheet" type="text/css" href="_static/pygments.css?v=8f2a1f02" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=354aac6f" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=302659d7" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">algolib-adg 0.0.1 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon no-toc" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  
+  <span class="sidebar-brand-text">algolib-adg 0.0.1 documentation</span>
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="why.html">Why AlgoLib-ADG Exists</a></li>
+<li class="toctree-l1"><a class="reference internal" href="agent_overview.html">How the Agent Works</a></li>
+<li class="toctree-l1"><a class="reference internal" href="easy_ds.html">Easy Data Structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intermediate_algos.html">Intermediate Algorithms</a></li>
+<li class="toctree-l1"><a class="reference internal" href="advanced_structures.html">Advanced Data Structures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="CONTRIBUTING.html">How to Contribute</a></li>
+<li class="toctree-l1"><a class="reference internal" href="contributors_guide.html">Contributor’s Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="complexity_cheatsheet.html">Complexity Cheatsheet</a></li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">API Reference</span></p>
+<ul>
+<li class="toctree-l1 has-children"><a class="reference internal" href="api/modules.html">algolib</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of algolib</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2 has-children"><a class="reference internal" href="api/algolib.html">algolib package</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of algolib package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l3 has-children"><a class="reference internal" href="api/algolib.algorithms.html">algolib.algorithms package</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" role="switch" type="checkbox"/><label for="toctree-checkbox-3"><div class="visually-hidden">Toggle navigation of algolib.algorithms package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4 has-children"><a class="reference internal" href="api/algolib.algorithms.backtracking.html">algolib.algorithms.backtracking package</a><input class="toctree-checkbox" id="toctree-checkbox-4" name="toctree-checkbox-4" role="switch" type="checkbox"/><label for="toctree-checkbox-4"><div class="visually-hidden">Toggle navigation of algolib.algorithms.backtracking package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.backtracking.n_queens_solver.html">algolib.algorithms.backtracking.n_queens_solver module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.backtracking.permutation_generation.html">algolib.algorithms.backtracking.permutation_generation module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.backtracking.subset_generation.html">algolib.algorithms.backtracking.subset_generation module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.backtracking.sudoku_solver.html">algolib.algorithms.backtracking.sudoku_solver module</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="api/algolib.algorithms.dynamic_programming.html">algolib.algorithms.dynamic_programming package</a><input class="toctree-checkbox" id="toctree-checkbox-5" name="toctree-checkbox-5" role="switch" type="checkbox"/><label for="toctree-checkbox-5"><div class="visually-hidden">Toggle navigation of algolib.algorithms.dynamic_programming package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.dynamic_programming.knapsack.html">algolib.algorithms.dynamic_programming.knapsack module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.dynamic_programming.longest_common_subsequence.html">algolib.algorithms.dynamic_programming.longest_common_subsequence module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.dynamic_programming.longest_increasing_subsequence.html">algolib.algorithms.dynamic_programming.longest_increasing_subsequence module</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="api/algolib.algorithms.graph.html">algolib.algorithms.graph package</a><input class="toctree-checkbox" id="toctree-checkbox-6" name="toctree-checkbox-6" role="switch" type="checkbox"/><label for="toctree-checkbox-6"><div class="visually-hidden">Toggle navigation of algolib.algorithms.graph package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l5 has-children"><a class="reference internal" href="api/algolib.algorithms.graph.traversal.html">algolib.algorithms.graph.traversal package</a><input class="toctree-checkbox" id="toctree-checkbox-7" name="toctree-checkbox-7" role="switch" type="checkbox"/><label for="toctree-checkbox-7"><div class="visually-hidden">Toggle navigation of algolib.algorithms.graph.traversal package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l6"><a class="reference internal" href="api/algolib.algorithms.graph.traversal.breadth_first_search.html">algolib.algorithms.graph.traversal.breadth_first_search module</a></li>
+<li class="toctree-l6"><a class="reference internal" href="api/algolib.algorithms.graph.traversal.depth_first_search.html">algolib.algorithms.graph.traversal.depth_first_search module</a></li>
+</ul>
+</li>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.graph.dijkstra.html">algolib.algorithms.graph.dijkstra module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.graph.kruskal_mst.html">algolib.algorithms.graph.kruskal_mst module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.graph.prim_mst.html">algolib.algorithms.graph.prim_mst module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.graph.topological_sort.html">algolib.algorithms.graph.topological_sort module</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="api/algolib.algorithms.greedy.html">algolib.algorithms.greedy package</a><input class="toctree-checkbox" id="toctree-checkbox-8" name="toctree-checkbox-8" role="switch" type="checkbox"/><label for="toctree-checkbox-8"><div class="visually-hidden">Toggle navigation of algolib.algorithms.greedy package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.greedy.activity_selection.html">algolib.algorithms.greedy.activity_selection module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.greedy.fractional_knapsack.html">algolib.algorithms.greedy.fractional_knapsack module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.greedy.huffman_coding.html">algolib.algorithms.greedy.huffman_coding module</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="api/algolib.algorithms.math.html">algolib.algorithms.math package</a><input class="toctree-checkbox" id="toctree-checkbox-9" name="toctree-checkbox-9" role="switch" type="checkbox"/><label for="toctree-checkbox-9"><div class="visually-hidden">Toggle navigation of algolib.algorithms.math package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.math.fibonacci.html">algolib.algorithms.math.fibonacci module</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="api/algolib.algorithms.searching.html">algolib.algorithms.searching package</a><input class="toctree-checkbox" id="toctree-checkbox-10" name="toctree-checkbox-10" role="switch" type="checkbox"/><label for="toctree-checkbox-10"><div class="visually-hidden">Toggle navigation of algolib.algorithms.searching package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.searching.base.html">algolib.algorithms.searching.base module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.searching.binary.html">algolib.algorithms.searching.binary module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.searching.linear.html">algolib.algorithms.searching.linear module</a></li>
+</ul>
+</li>
+<li class="toctree-l4 has-children"><a class="reference internal" href="api/algolib.algorithms.sorting.html">algolib.algorithms.sorting package</a><input class="toctree-checkbox" id="toctree-checkbox-11" name="toctree-checkbox-11" role="switch" type="checkbox"/><label for="toctree-checkbox-11"><div class="visually-hidden">Toggle navigation of algolib.algorithms.sorting package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.sorting.base.html">algolib.algorithms.sorting.base module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.sorting.bubble.html">algolib.algorithms.sorting.bubble module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.sorting.counting_sort.html">algolib.algorithms.sorting.counting_sort module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.sorting.divide_conquer_sorter.html">algolib.algorithms.sorting.divide_conquer_sorter module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.sorting.heap_sort.html">algolib.algorithms.sorting.heap_sort module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.sorting.insertion_sort.html">algolib.algorithms.sorting.insertion_sort module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.sorting.merge.html">algolib.algorithms.sorting.merge module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.sorting.merge_sort.html">algolib.algorithms.sorting.merge_sort module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.sorting.quick_sort.html">algolib.algorithms.sorting.quick_sort module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.sorting.radix_sort.html">algolib.algorithms.sorting.radix_sort module</a></li>
+<li class="toctree-l5"><a class="reference internal" href="api/algolib.algorithms.sorting.selection_sort.html">algolib.algorithms.sorting.selection_sort module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="api/algolib.api.html">algolib.api package</a><input class="toctree-checkbox" id="toctree-checkbox-12" name="toctree-checkbox-12" role="switch" type="checkbox"/><label for="toctree-checkbox-12"><div class="visually-hidden">Toggle navigation of algolib.api package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/algolib.api.main.html">algolib.api.main module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="api/algolib.data_structures.html">algolib.data_structures package</a><input class="toctree-checkbox" id="toctree-checkbox-13" name="toctree-checkbox-13" role="switch" type="checkbox"/><label for="toctree-checkbox-13"><div class="visually-hidden">Toggle navigation of algolib.data_structures package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/algolib.data_structures.avl_tree.html">algolib.data_structures.avl_tree module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/algolib.data_structures.binary_search_tree.html">algolib.data_structures.binary_search_tree module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/algolib.data_structures.binary_tree.html">algolib.data_structures.binary_tree module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/algolib.data_structures.disjoint_set.html">algolib.data_structures.disjoint_set module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/algolib.data_structures.graph.html">algolib.data_structures.graph module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/algolib.data_structures.heap.html">algolib.data_structures.heap module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/algolib.data_structures.linked_list.html">algolib.data_structures.linked_list module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/algolib.data_structures.queue.html">algolib.data_structures.queue module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/algolib.data_structures.red_black_tree.html">algolib.data_structures.red_black_tree module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/algolib.data_structures.stack.html">algolib.data_structures.stack module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/algolib.data_structures.trie.html">algolib.data_structures.trie module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="api/algolib.db.html">algolib.db package</a><input class="toctree-checkbox" id="toctree-checkbox-14" name="toctree-checkbox-14" role="switch" type="checkbox"/><label for="toctree-checkbox-14"><div class="visually-hidden">Toggle navigation of algolib.db package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/algolib.db.models.html">algolib.db.models module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="api/algolib.db.session.html">algolib.db.session module</a></li>
+</ul>
+</li>
+<li class="toctree-l3 has-children"><a class="reference internal" href="api/algolib.specs.html">algolib.specs package</a><input class="toctree-checkbox" id="toctree-checkbox-15" name="toctree-checkbox-15" role="switch" type="checkbox"/><label for="toctree-checkbox-15"><div class="visually-hidden">Toggle navigation of algolib.specs package</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l4"><a class="reference internal" href="api/algolib.specs.schema.html">algolib.specs.schema module</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="api/algolib.interfaces.html">algolib.interfaces module</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p class="caption" role="heading"><span class="caption-text">Data Structures</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="data_structures/avl_tree.html">AVL Tree</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_structures/binary_search_tree.html">Binary Search Tree</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_structures/binary_tree.html">Binary Tree</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_structures/disjoint_set.html">Disjoint Set</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_structures/graph.html">Graph</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_structures/heap.html">Heap</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_structures/linked_list.html">Linked List</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_structures/queue.html">Queue</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_structures/red_black_tree.html">Red-Black Tree</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_structures/stack.html">Stack</a></li>
+<li class="toctree-l1"><a class="reference internal" href="data_structures/trie.html">Trie</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon no-toc" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          
+<section class="genindex-section">
+  <h1 id="index">Index</h1>
+  <div class="genindex-jumpbox"><a href="#_"><strong>_</strong></a> | <a href="#A"><strong>A</strong></a> | <a href="#B"><strong>B</strong></a> | <a href="#C"><strong>C</strong></a> | <a href="#D"><strong>D</strong></a> | <a href="#E"><strong>E</strong></a> | <a href="#F"><strong>F</strong></a> | <a href="#G"><strong>G</strong></a> | <a href="#H"><strong>H</strong></a> | <a href="#I"><strong>I</strong></a> | <a href="#K"><strong>K</strong></a> | <a href="#L"><strong>L</strong></a> | <a href="#M"><strong>M</strong></a> | <a href="#N"><strong>N</strong></a> | <a href="#P"><strong>P</strong></a> | <a href="#Q"><strong>Q</strong></a> | <a href="#R"><strong>R</strong></a> | <a href="#S"><strong>S</strong></a> | <a href="#T"><strong>T</strong></a> | <a href="#U"><strong>U</strong></a> | <a href="#V"><strong>V</strong></a> | <a href="#W"><strong>W</strong></a></div>
+</section>
+<section id="_" class="genindex-section">
+  <h2>_</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/algolib.data_structures.heap.html#algolib.data_structures.heap.MaxHeap._heap">_heap (algolib.data_structures.heap.MaxHeap attribute)</a>, <a href="data_structures/heap.html#algolib.data_structures.heap.MaxHeap._heap">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.MaxHeap._heap">(algolib.data_structures.MaxHeap attribute)</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/algolib.data_structures.heap.html#algolib.data_structures.heap.MaxHeap._key_func">_key_func (algolib.data_structures.heap.MaxHeap attribute)</a>, <a href="data_structures/heap.html#algolib.data_structures.heap.MaxHeap._key_func">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.MaxHeap._key_func">(algolib.data_structures.MaxHeap attribute)</a>
+</li>
+        </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="A" class="genindex-section">
+  <h2>A</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="algorithms/greedy/activity_selection.html#algolib.algorithms.greedy.activity_selection.Activity">Activity (class in algolib.algorithms.greedy.activity_selection)</a>, <a href="api/algolib.algorithms.greedy.activity_selection.html#algolib.algorithms.greedy.activity_selection.Activity">[1]</a>
+</li>
+        <li><a href="api/algolib.algorithms.greedy.html#algolib.algorithms.greedy.ActivitySelection">ActivitySelection (class in algolib.algorithms.greedy)</a>
+
+        <ul>
+          <li><a href="algorithms/greedy/activity_selection.html#algolib.algorithms.greedy.activity_selection.ActivitySelection">(class in algolib.algorithms.greedy.activity_selection)</a>, <a href="api/algolib.algorithms.greedy.activity_selection.html#algolib.algorithms.greedy.activity_selection.ActivitySelection">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.data_structures.html#algolib.data_structures.Graph.add_edge">add_edge() (algolib.data_structures.Graph method)</a>
+
+        <ul>
+          <li><a href="api/algolib.data_structures.graph.html#algolib.data_structures.graph.Graph.add_edge">(algolib.data_structures.graph.Graph method)</a>, <a href="data_structures/graph.html#algolib.data_structures.graph.Graph.add_edge">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.data_structures.html#algolib.data_structures.Graph.add_vertex">add_vertex() (algolib.data_structures.Graph method)</a>
+
+        <ul>
+          <li><a href="api/algolib.data_structures.graph.html#algolib.data_structures.graph.Graph.add_vertex">(algolib.data_structures.graph.Graph method)</a>, <a href="data_structures/graph.html#algolib.data_structures.graph.Graph.add_vertex">[1]</a>
+</li>
+        </ul></li>
+        <li>
+    algolib
+
+        <ul>
+          <li><a href="api/algolib.html#module-algolib">module</a>
+</li>
+        </ul></li>
+        <li>
+    algolib.algorithms
+
+        <ul>
+          <li><a href="api/algolib.algorithms.html#module-algolib.algorithms">module</a>
+</li>
+        </ul></li>
+        <li>
+    algolib.algorithms.backtracking
+
+        <ul>
+          <li><a href="api/algolib.algorithms.backtracking.html#module-algolib.algorithms.backtracking">module</a>
+</li>
+        </ul></li>
+        <li>
+    algolib.algorithms.backtracking.n_queens_solver
+
+        <ul>
+          <li><a href="algorithms/backtracking/n_queens_solver.html#module-algolib.algorithms.backtracking.n_queens_solver">module</a>, <a href="api/algolib.algorithms.backtracking.n_queens_solver.html#module-algolib.algorithms.backtracking.n_queens_solver">[1]</a>
+</li>
+        </ul></li>
+        <li>
+    algolib.algorithms.backtracking.permutation_generation
+
+        <ul>
+          <li><a href="algorithms/backtracking/permutation_generation.html#module-algolib.algorithms.backtracking.permutation_generation">module</a>, <a href="api/algolib.algorithms.backtracking.permutation_generation.html#module-algolib.algorithms.backtracking.permutation_generation">[1]</a>
+</li>
+        </ul></li>
+        <li>
+    algolib.algorithms.backtracking.subset_generation
+
+        <ul>
+          <li><a href="algorithms/backtracking/subset_generation.html#module-algolib.algorithms.backtracking.subset_generation">module</a>, <a href="api/algolib.algorithms.backtracking.subset_generation.html#module-algolib.algorithms.backtracking.subset_generation">[1]</a>
+</li>
+        </ul></li>
+        <li>
+    algolib.algorithms.backtracking.sudoku_solver
+
+        <ul>
+          <li><a href="algorithms/backtracking/sudoku_solver.html#module-algolib.algorithms.backtracking.sudoku_solver">module</a>, <a href="api/algolib.algorithms.backtracking.sudoku_solver.html#module-algolib.algorithms.backtracking.sudoku_solver">[1]</a>
+</li>
+        </ul></li>
+        <li>
+    algolib.algorithms.dynamic_programming
+
+        <ul>
+          <li><a href="api/algolib.algorithms.dynamic_programming.html#module-algolib.algorithms.dynamic_programming">module</a>
+</li>
+        </ul></li>
+        <li>
+    algolib.algorithms.dynamic_programming.knapsack
+
+        <ul>
+          <li><a href="algorithms/dynamic_programming/knapsack.html#module-algolib.algorithms.dynamic_programming.knapsack">module</a>, <a href="api/algolib.algorithms.dynamic_programming.knapsack.html#module-algolib.algorithms.dynamic_programming.knapsack">[1]</a>
+</li>
+        </ul></li>
+        <li>
+    algolib.algorithms.dynamic_programming.longest_common_subsequence
+
+        <ul>
+          <li><a href="algorithms/dynamic_programming/longest_common_subsequence.html#module-algolib.algorithms.dynamic_programming.longest_common_subsequence">module</a>, <a href="api/algolib.algorithms.dynamic_programming.longest_common_subsequence.html#module-algolib.algorithms.dynamic_programming.longest_common_subsequence">[1]</a>
+</li>
+        </ul></li>
+        <li>
+    algolib.algorithms.dynamic_programming.longest_increasing_subsequence
+
+        <ul>
+          <li><a href="algorithms/dynamic_programming/longest_increasing_subsequence.html#module-algolib.algorithms.dynamic_programming.longest_increasing_subsequence">module</a>, <a href="api/algolib.algorithms.dynamic_programming.longest_increasing_subsequence.html#module-algolib.algorithms.dynamic_programming.longest_increasing_subsequence">[1]</a>
+</li>
+        </ul></li>
+        <li>
+    algolib.algorithms.graph
+
+        <ul>
+          <li><a href="api/algolib.algorithms.graph.html#module-algolib.algorithms.graph">module</a>
+</li>
+        </ul></li>
+        <li>
+    algolib.algorithms.graph.dijkstra
+
+        <ul>
+          <li><a href="algorithms/graph/dijkstra.html#module-algolib.algorithms.graph.dijkstra">module</a>, <a href="api/algolib.algorithms.graph.dijkstra.html#module-algolib.algorithms.graph.dijkstra">[1]</a>
+</li>
+        </ul></li>
+        <li>
+    algolib.algorithms.graph.kruskal_mst
+
+        <ul>
+          <li><a href="algorithms/graph/kruskal_mst.html#module-algolib.algorithms.graph.kruskal_mst">module</a>, <a href="api/algolib.algorithms.graph.kruskal_mst.html#module-algolib.algorithms.graph.kruskal_mst">[1]</a>
+</li>
+        </ul></li>
+        <li>
+    algolib.algorithms.graph.prim_mst
+
+        <ul>
+          <li><a href="algorithms/graph/prim_mst.html#module-algolib.algorithms.graph.prim_mst">module</a>, <a href="api/algolib.algorithms.graph.prim_mst.html#module-algolib.algorithms.graph.prim_mst">[1]</a>
+</li>
+        </ul></li>
+        <li>
+    algolib.algorithms.graph.topological_sort
+
+        <ul>
+          <li><a href="algorithms/graph/topological_sort.html#module-algolib.algorithms.graph.topological_sort">module</a>, <a href="api/algolib.algorithms.graph.topological_sort.html#module-algolib.algorithms.graph.topological_sort">[1]</a>
+</li>
+        </ul></li>
+        <li>
+    algolib.algorithms.graph.traversal
+
+        <ul>
+          <li><a href="api/algolib.algorithms.graph.traversal.html#module-algolib.algorithms.graph.traversal">module</a>
+</li>
+        </ul></li>
+        <li>
+    algolib.algorithms.graph.traversal.breadth_first_search
+
+        <ul>
+          <li><a href="algorithms/graph/traversal/breadth_first_search.html#module-algolib.algorithms.graph.traversal.breadth_first_search">module</a>, <a href="api/algolib.algorithms.graph.traversal.breadth_first_search.html#module-algolib.algorithms.graph.traversal.breadth_first_search">[1]</a>
+</li>
+        </ul></li>
+        <li>
+    algolib.algorithms.graph.traversal.depth_first_search
+
+        <ul>
+          <li><a href="algorithms/graph/traversal/depth_first_search.html#module-algolib.algorithms.graph.traversal.depth_first_search">module</a>, <a href="api/algolib.algorithms.graph.traversal.depth_first_search.html#module-algolib.algorithms.graph.traversal.depth_first_search">[1]</a>
+</li>
+        </ul></li>
+        <li>
+    algolib.algorithms.greedy
+
+        <ul>
+          <li><a href="api/algolib.algorithms.greedy.html#module-algolib.algorithms.greedy">module</a>
+</li>
+        </ul></li>
+        <li>
+    algolib.algorithms.greedy.activity_selection
+
+        <ul>
+          <li><a href="algorithms/greedy/activity_selection.html#module-algolib.algorithms.greedy.activity_selection">module</a>, <a href="api/algolib.algorithms.greedy.activity_selection.html#module-algolib.algorithms.greedy.activity_selection">[1]</a>
+</li>
+        </ul></li>
+        <li>
+    algolib.algorithms.greedy.fractional_knapsack
+
+        <ul>
+          <li><a href="algorithms/greedy/fractional_knapsack.html#module-algolib.algorithms.greedy.fractional_knapsack">module</a>, <a href="api/algolib.algorithms.greedy.fractional_knapsack.html#module-algolib.algorithms.greedy.fractional_knapsack">[1]</a>
+</li>
+        </ul></li>
+        <li>
+    algolib.algorithms.greedy.huffman_coding
+
+        <ul>
+          <li><a href="algorithms/greedy/huffman_coding.html#module-algolib.algorithms.greedy.huffman_coding">module</a>, <a href="api/algolib.algorithms.greedy.huffman_coding.html#module-algolib.algorithms.greedy.huffman_coding">[1]</a>
+</li>
+        </ul></li>
+        <li>
+    algolib.algorithms.math
+
+        <ul>
+          <li><a href="api/algolib.algorithms.math.html#module-algolib.algorithms.math">module</a>
+</li>
+        </ul></li>
+        <li>
+    algolib.algorithms.math.fibonacci
+
+        <ul>
+          <li><a href="algorithms/math/fibonacci.html#module-algolib.algorithms.math.fibonacci">module</a>, <a href="api/algolib.algorithms.math.fibonacci.html#module-algolib.algorithms.math.fibonacci">[1]</a>
+</li>
+        </ul></li>
+        <li>
+    algolib.algorithms.searching
+
+        <ul>
+          <li><a href="api/algolib.algorithms.searching.html#module-algolib.algorithms.searching">module</a>
+</li>
+        </ul></li>
+        <li>
+    algolib.algorithms.searching.base
+
+        <ul>
+          <li><a href="api/algolib.algorithms.searching.base.html#module-algolib.algorithms.searching.base">module</a>
+</li>
+        </ul></li>
+        <li>
+    algolib.algorithms.searching.binary
+
+        <ul>
+          <li><a href="algorithms/searching/binary.html#module-algolib.algorithms.searching.binary">module</a>, <a href="api/algolib.algorithms.searching.binary.html#module-algolib.algorithms.searching.binary">[1]</a>
+</li>
+        </ul></li>
+        <li>
+    algolib.algorithms.searching.linear
+
+        <ul>
+          <li><a href="algorithms/searching/linear.html#module-algolib.algorithms.searching.linear">module</a>, <a href="api/algolib.algorithms.searching.linear.html#module-algolib.algorithms.searching.linear">[1]</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li>
+    algolib.algorithms.sorting
+
+        <ul>
+          <li><a href="api/algolib.algorithms.sorting.html#module-algolib.algorithms.sorting">module</a>
+</li>
+        </ul></li>
+        <li>
+    algolib.algorithms.sorting.base
+
+        <ul>
+          <li><a href="api/algolib.algorithms.sorting.base.html#module-algolib.algorithms.sorting.base">module</a>
+</li>
+        </ul></li>
+        <li>
+    algolib.algorithms.sorting.bubble
+
+        <ul>
+          <li><a href="algorithms/sorting/bubble.html#module-algolib.algorithms.sorting.bubble">module</a>, <a href="api/algolib.algorithms.sorting.bubble.html#module-algolib.algorithms.sorting.bubble">[1]</a>
+</li>
+        </ul></li>
+        <li>
+    algolib.algorithms.sorting.counting_sort
+
+        <ul>
+          <li><a href="algorithms/sorting/counting_sort.html#module-algolib.algorithms.sorting.counting_sort">module</a>, <a href="api/algolib.algorithms.sorting.counting_sort.html#module-algolib.algorithms.sorting.counting_sort">[1]</a>
+</li>
+        </ul></li>
+        <li>
+    algolib.algorithms.sorting.divide_conquer_sorter
+
+        <ul>
+          <li><a href="algorithms/sorting/divide_conquer_sorter.html#module-algolib.algorithms.sorting.divide_conquer_sorter">module</a>, <a href="api/algolib.algorithms.sorting.divide_conquer_sorter.html#module-algolib.algorithms.sorting.divide_conquer_sorter">[1]</a>
+</li>
+        </ul></li>
+        <li>
+    algolib.algorithms.sorting.heap_sort
+
+        <ul>
+          <li><a href="algorithms/sorting/heap_sort.html#module-algolib.algorithms.sorting.heap_sort">module</a>, <a href="api/algolib.algorithms.sorting.heap_sort.html#module-algolib.algorithms.sorting.heap_sort">[1]</a>
+</li>
+        </ul></li>
+        <li>
+    algolib.algorithms.sorting.insertion_sort
+
+        <ul>
+          <li><a href="algorithms/sorting/insertion_sort.html#module-algolib.algorithms.sorting.insertion_sort">module</a>, <a href="api/algolib.algorithms.sorting.insertion_sort.html#module-algolib.algorithms.sorting.insertion_sort">[1]</a>
+</li>
+        </ul></li>
+        <li>
+    algolib.algorithms.sorting.merge
+
+        <ul>
+          <li><a href="algorithms/sorting/merge.html#module-algolib.algorithms.sorting.merge">module</a>, <a href="api/algolib.algorithms.sorting.merge.html#module-algolib.algorithms.sorting.merge">[1]</a>
+</li>
+        </ul></li>
+        <li>
+    algolib.algorithms.sorting.merge_sort
+
+        <ul>
+          <li><a href="api/algolib.algorithms.sorting.merge_sort.html#module-algolib.algorithms.sorting.merge_sort">module</a>
+</li>
+        </ul></li>
+        <li>
+    algolib.algorithms.sorting.quick_sort
+
+        <ul>
+          <li><a href="algorithms/sorting/quick_sort.html#module-algolib.algorithms.sorting.quick_sort">module</a>, <a href="api/algolib.algorithms.sorting.quick_sort.html#module-algolib.algorithms.sorting.quick_sort">[1]</a>
+</li>
+        </ul></li>
+        <li>
+    algolib.algorithms.sorting.radix_sort
+
+        <ul>
+          <li><a href="algorithms/sorting/radix_sort.html#module-algolib.algorithms.sorting.radix_sort">module</a>, <a href="api/algolib.algorithms.sorting.radix_sort.html#module-algolib.algorithms.sorting.radix_sort">[1]</a>
+</li>
+        </ul></li>
+        <li>
+    algolib.algorithms.sorting.selection_sort
+
+        <ul>
+          <li><a href="algorithms/sorting/selection_sort.html#module-algolib.algorithms.sorting.selection_sort">module</a>, <a href="api/algolib.algorithms.sorting.selection_sort.html#module-algolib.algorithms.sorting.selection_sort">[1]</a>
+</li>
+        </ul></li>
+        <li>
+    algolib.api
+
+        <ul>
+          <li><a href="api/algolib.api.html#module-algolib.api">module</a>
+</li>
+        </ul></li>
+        <li>
+    algolib.data_structures
+
+        <ul>
+          <li><a href="api/algolib.data_structures.html#module-algolib.data_structures">module</a>
+</li>
+        </ul></li>
+        <li>
+    algolib.data_structures.avl_tree
+
+        <ul>
+          <li><a href="api/algolib.data_structures.avl_tree.html#module-algolib.data_structures.avl_tree">module</a>, <a href="data_structures/avl_tree.html#module-algolib.data_structures.avl_tree">[1]</a>
+</li>
+        </ul></li>
+        <li>
+    algolib.data_structures.binary_search_tree
+
+        <ul>
+          <li><a href="api/algolib.data_structures.binary_search_tree.html#module-algolib.data_structures.binary_search_tree">module</a>, <a href="data_structures/binary_search_tree.html#module-algolib.data_structures.binary_search_tree">[1]</a>
+</li>
+        </ul></li>
+        <li>
+    algolib.data_structures.binary_tree
+
+        <ul>
+          <li><a href="api/algolib.data_structures.binary_tree.html#module-algolib.data_structures.binary_tree">module</a>, <a href="data_structures/binary_tree.html#module-algolib.data_structures.binary_tree">[1]</a>
+</li>
+        </ul></li>
+        <li>
+    algolib.data_structures.disjoint_set
+
+        <ul>
+          <li><a href="api/algolib.data_structures.disjoint_set.html#module-algolib.data_structures.disjoint_set">module</a>, <a href="data_structures/disjoint_set.html#module-algolib.data_structures.disjoint_set">[1]</a>
+</li>
+        </ul></li>
+        <li>
+    algolib.data_structures.graph
+
+        <ul>
+          <li><a href="api/algolib.data_structures.graph.html#module-algolib.data_structures.graph">module</a>, <a href="data_structures/graph.html#module-algolib.data_structures.graph">[1]</a>
+</li>
+        </ul></li>
+        <li>
+    algolib.data_structures.heap
+
+        <ul>
+          <li><a href="api/algolib.data_structures.heap.html#module-algolib.data_structures.heap">module</a>, <a href="data_structures/heap.html#module-algolib.data_structures.heap">[1]</a>
+</li>
+        </ul></li>
+        <li>
+    algolib.data_structures.linked_list
+
+        <ul>
+          <li><a href="api/algolib.data_structures.linked_list.html#module-algolib.data_structures.linked_list">module</a>, <a href="data_structures/linked_list.html#module-algolib.data_structures.linked_list">[1]</a>
+</li>
+        </ul></li>
+        <li>
+    algolib.data_structures.queue
+
+        <ul>
+          <li><a href="api/algolib.data_structures.queue.html#module-algolib.data_structures.queue">module</a>, <a href="data_structures/queue.html#module-algolib.data_structures.queue">[1]</a>
+</li>
+        </ul></li>
+        <li>
+    algolib.data_structures.red_black_tree
+
+        <ul>
+          <li><a href="api/algolib.data_structures.red_black_tree.html#module-algolib.data_structures.red_black_tree">module</a>, <a href="data_structures/red_black_tree.html#module-algolib.data_structures.red_black_tree">[1]</a>
+</li>
+        </ul></li>
+        <li>
+    algolib.data_structures.stack
+
+        <ul>
+          <li><a href="api/algolib.data_structures.stack.html#module-algolib.data_structures.stack">module</a>, <a href="data_structures/stack.html#module-algolib.data_structures.stack">[1]</a>
+</li>
+        </ul></li>
+        <li>
+    algolib.data_structures.trie
+
+        <ul>
+          <li><a href="api/algolib.data_structures.trie.html#module-algolib.data_structures.trie">module</a>, <a href="data_structures/trie.html#module-algolib.data_structures.trie">[1]</a>
+</li>
+        </ul></li>
+        <li>
+    algolib.db
+
+        <ul>
+          <li><a href="api/algolib.db.html#module-algolib.db">module</a>
+</li>
+        </ul></li>
+        <li>
+    algolib.interfaces
+
+        <ul>
+          <li><a href="api/algolib.interfaces.html#module-algolib.interfaces">module</a>
+</li>
+        </ul></li>
+        <li>
+    algolib.specs
+
+        <ul>
+          <li><a href="api/algolib.specs.html#module-algolib.specs">module</a>
+</li>
+        </ul></li>
+        <li>
+    algolib.specs.schema
+
+        <ul>
+          <li><a href="api/algolib.specs.schema.html#module-algolib.specs.schema">module</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.specs.schema.html#algolib.specs.schema.AlgorithmSpec">AlgorithmSpec (class in algolib.specs.schema)</a>
+</li>
+        <li><a href="algorithms/dynamic_programming/knapsack.html#algolib.algorithms.dynamic_programming.knapsack.KnapsackDP.analyze_solution">analyze_solution() (algolib.algorithms.dynamic_programming.knapsack.KnapsackDP method)</a>, <a href="api/algolib.algorithms.dynamic_programming.knapsack.html#algolib.algorithms.dynamic_programming.knapsack.KnapsackDP.analyze_solution">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.algorithms.dynamic_programming.html#algolib.algorithms.dynamic_programming.KnapsackDP.analyze_solution">(algolib.algorithms.dynamic_programming.KnapsackDP method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.data_structures.linked_list.html#algolib.data_structures.linked_list.LinkedList.append">append() (algolib.data_structures.linked_list.LinkedList method)</a>, <a href="data_structures/linked_list.html#algolib.data_structures.linked_list.LinkedList.append">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.LinkedList.append">(algolib.data_structures.LinkedList method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.data_structures.html#algolib.data_structures.AVLTree">AVLTree (class in algolib.data_structures)</a>
+
+        <ul>
+          <li><a href="api/algolib.data_structures.avl_tree.html#algolib.data_structures.avl_tree.AVLTree">(class in algolib.data_structures.avl_tree)</a>, <a href="data_structures/avl_tree.html#algolib.data_structures.avl_tree.AVLTree">[1]</a>
+</li>
+        </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="B" class="genindex-section">
+  <h2>B</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="algorithms/sorting/insertion_sort.html#algolib.algorithms.sorting.insertion_sort.InsertionSort.binary_insertion_sort">binary_insertion_sort() (algolib.algorithms.sorting.insertion_sort.InsertionSort method)</a>, <a href="api/algolib.algorithms.sorting.insertion_sort.html#algolib.algorithms.sorting.insertion_sort.InsertionSort.binary_insertion_sort">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.algorithms.sorting.html#algolib.algorithms.sorting.InsertionSort.binary_insertion_sort">(algolib.algorithms.sorting.InsertionSort method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.algorithms.searching.html#algolib.algorithms.searching.BinarySearcher">BinarySearcher (class in algolib.algorithms.searching)</a>
+
+        <ul>
+          <li><a href="algorithms/searching/binary.html#algolib.algorithms.searching.binary.BinarySearcher">(class in algolib.algorithms.searching.binary)</a>, <a href="api/algolib.algorithms.searching.binary.html#algolib.algorithms.searching.binary.BinarySearcher">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.data_structures.html#algolib.data_structures.BinarySearchTree">BinarySearchTree (class in algolib.data_structures)</a>
+
+        <ul>
+          <li><a href="api/algolib.data_structures.binary_search_tree.html#algolib.data_structures.binary_search_tree.BinarySearchTree">(class in algolib.data_structures.binary_search_tree)</a>, <a href="data_structures/binary_search_tree.html#algolib.data_structures.binary_search_tree.BinarySearchTree">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.data_structures.html#algolib.data_structures.BinaryTree">BinaryTree (class in algolib.data_structures)</a>
+
+        <ul>
+          <li><a href="api/algolib.data_structures.binary_tree.html#algolib.data_structures.binary_tree.BinaryTree">(class in algolib.data_structures.binary_tree)</a>, <a href="data_structures/binary_tree.html#algolib.data_structures.binary_tree.BinaryTree">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.data_structures.html#algolib.data_structures.Color.BLACK">BLACK (algolib.data_structures.Color attribute)</a>
+
+        <ul>
+          <li><a href="api/algolib.data_structures.red_black_tree.html#algolib.data_structures.red_black_tree.Color.BLACK">(algolib.data_structures.red_black_tree.Color attribute)</a>, <a href="data_structures/red_black_tree.html#algolib.data_structures.red_black_tree.Color.BLACK">[1]</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/algolib.algorithms.graph.html#algolib.algorithms.graph.BreadthFirstSearch">BreadthFirstSearch (class in algolib.algorithms.graph)</a>
+
+        <ul>
+          <li><a href="api/algolib.algorithms.graph.traversal.html#algolib.algorithms.graph.traversal.BreadthFirstSearch">(class in algolib.algorithms.graph.traversal)</a>
+</li>
+          <li><a href="algorithms/graph/traversal/breadth_first_search.html#algolib.algorithms.graph.traversal.breadth_first_search.BreadthFirstSearch">(class in algolib.algorithms.graph.traversal.breadth_first_search)</a>, <a href="api/algolib.algorithms.graph.traversal.breadth_first_search.html#algolib.algorithms.graph.traversal.breadth_first_search.BreadthFirstSearch">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.data_structures.binary_search_tree.html#algolib.data_structures.binary_search_tree.BSTNode">BSTNode (class in algolib.data_structures.binary_search_tree)</a>, <a href="data_structures/binary_search_tree.html#algolib.data_structures.binary_search_tree.BSTNode">[1]</a>
+</li>
+        <li><a href="api/algolib.algorithms.sorting.html#algolib.algorithms.sorting.BubbleSorter">BubbleSorter (class in algolib.algorithms.sorting)</a>
+
+        <ul>
+          <li><a href="algorithms/sorting/bubble.html#algolib.algorithms.sorting.bubble.BubbleSorter">(class in algolib.algorithms.sorting.bubble)</a>, <a href="api/algolib.algorithms.sorting.bubble.html#algolib.algorithms.sorting.bubble.BubbleSorter">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.data_structures.heap.html#algolib.data_structures.heap.MaxHeap.build_heap">build_heap() (algolib.data_structures.heap.MaxHeap method)</a>, <a href="data_structures/heap.html#algolib.data_structures.heap.MaxHeap.build_heap">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.MaxHeap.build_heap">(algolib.data_structures.MaxHeap method)</a>
+</li>
+        </ul></li>
+        <li><a href="algorithms/greedy/huffman_coding.html#algolib.algorithms.greedy.huffman_coding.HuffmanCoding.build_tree">build_tree() (algolib.algorithms.greedy.huffman_coding.HuffmanCoding method)</a>, <a href="api/algolib.algorithms.greedy.huffman_coding.html#algolib.algorithms.greedy.huffman_coding.HuffmanCoding.build_tree">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.algorithms.greedy.html#algolib.algorithms.greedy.HuffmanCoding.build_tree">(algolib.algorithms.greedy.HuffmanCoding method)</a>
+</li>
+        </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="C" class="genindex-section">
+  <h2>C</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/algolib.algorithms.math.html#algolib.algorithms.math.Fibonacci.cache_size">cache_size() (algolib.algorithms.math.Fibonacci method)</a>
+
+        <ul>
+          <li><a href="algorithms/math/fibonacci.html#algolib.algorithms.math.fibonacci.Fibonacci.cache_size">(algolib.algorithms.math.fibonacci.Fibonacci method)</a>, <a href="api/algolib.algorithms.math.fibonacci.html#algolib.algorithms.math.fibonacci.Fibonacci.cache_size">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="algorithms/greedy/huffman_coding.html#algolib.algorithms.greedy.huffman_coding.HuffmanCoding.calculate_compression_ratio">calculate_compression_ratio() (algolib.algorithms.greedy.huffman_coding.HuffmanCoding method)</a>, <a href="api/algolib.algorithms.greedy.huffman_coding.html#algolib.algorithms.greedy.huffman_coding.HuffmanCoding.calculate_compression_ratio">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.algorithms.greedy.html#algolib.algorithms.greedy.HuffmanCoding.calculate_compression_ratio">(algolib.algorithms.greedy.HuffmanCoding method)</a>
+</li>
+        </ul></li>
+        <li><a href="algorithms/greedy/fractional_knapsack.html#algolib.algorithms.greedy.fractional_knapsack.FractionalKnapsack.calculate_ratio">calculate_ratio() (algolib.algorithms.greedy.fractional_knapsack.FractionalKnapsack method)</a>, <a href="api/algolib.algorithms.greedy.fractional_knapsack.html#algolib.algorithms.greedy.fractional_knapsack.FractionalKnapsack.calculate_ratio">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.algorithms.greedy.html#algolib.algorithms.greedy.FractionalKnapsack.calculate_ratio">(algolib.algorithms.greedy.FractionalKnapsack method)</a>
+</li>
+        </ul></li>
+        <li><a href="algorithms/dynamic_programming/knapsack.html#algolib.algorithms.dynamic_programming.knapsack.KnapsackDP.can_achieve_value">can_achieve_value() (algolib.algorithms.dynamic_programming.knapsack.KnapsackDP method)</a>, <a href="api/algolib.algorithms.dynamic_programming.knapsack.html#algolib.algorithms.dynamic_programming.knapsack.KnapsackDP.can_achieve_value">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.algorithms.dynamic_programming.html#algolib.algorithms.dynamic_programming.KnapsackDP.can_achieve_value">(algolib.algorithms.dynamic_programming.KnapsackDP method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.specs.schema.html#algolib.specs.schema.AlgorithmSpec.category">category (algolib.specs.schema.AlgorithmSpec attribute)</a>
+</li>
+        <li><a href="api/algolib.data_structures.avl_tree.html#algolib.data_structures.avl_tree.AVLTree.clear">clear() (algolib.data_structures.avl_tree.AVLTree method)</a>, <a href="data_structures/avl_tree.html#algolib.data_structures.avl_tree.AVLTree.clear">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.AVLTree.clear">(algolib.data_structures.AVLTree method)</a>
+</li>
+          <li><a href="api/algolib.data_structures.red_black_tree.html#algolib.data_structures.red_black_tree.RedBlackTree.clear">(algolib.data_structures.red_black_tree.RedBlackTree method)</a>, <a href="data_structures/red_black_tree.html#algolib.data_structures.red_black_tree.RedBlackTree.clear">[1]</a>
+</li>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.RedBlackTree.clear">(algolib.data_structures.RedBlackTree method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.algorithms.math.html#algolib.algorithms.math.Fibonacci.clear_cache">clear_cache() (algolib.algorithms.math.Fibonacci method)</a>
+
+        <ul>
+          <li><a href="algorithms/math/fibonacci.html#algolib.algorithms.math.fibonacci.Fibonacci.clear_cache">(algolib.algorithms.math.fibonacci.Fibonacci method)</a>, <a href="api/algolib.algorithms.math.fibonacci.html#algolib.algorithms.math.fibonacci.Fibonacci.clear_cache">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.data_structures.html#algolib.data_structures.Color">Color (class in algolib.data_structures)</a>
+
+        <ul>
+          <li><a href="api/algolib.data_structures.red_black_tree.html#algolib.data_structures.red_black_tree.Color">(class in algolib.data_structures.red_black_tree)</a>, <a href="data_structures/red_black_tree.html#algolib.data_structures.red_black_tree.Color">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.specs.schema.html#algolib.specs.schema.AlgorithmSpec.complexity">complexity (algolib.specs.schema.AlgorithmSpec attribute)</a>
+</li>
+        <li><a href="api/algolib.specs.schema.html#algolib.specs.schema.Complexity">Complexity (class in algolib.specs.schema)</a>
+</li>
+        <li><a href="algorithms/greedy/huffman_coding.html#algolib.algorithms.greedy.huffman_coding.HuffmanCoding.compress">compress() (algolib.algorithms.greedy.huffman_coding.HuffmanCoding method)</a>, <a href="api/algolib.algorithms.greedy.huffman_coding.html#algolib.algorithms.greedy.huffman_coding.HuffmanCoding.compress">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.algorithms.greedy.html#algolib.algorithms.greedy.HuffmanCoding.compress">(algolib.algorithms.greedy.HuffmanCoding method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.algorithms.dynamic_programming.html#algolib.algorithms.dynamic_programming.LCS.compute">compute() (algolib.algorithms.dynamic_programming.LCS method)</a>
+
+        <ul>
+          <li><a href="algorithms/dynamic_programming/longest_common_subsequence.html#algolib.algorithms.dynamic_programming.longest_common_subsequence.LCS.compute">(algolib.algorithms.dynamic_programming.longest_common_subsequence.LCS method)</a>, <a href="api/algolib.algorithms.dynamic_programming.longest_common_subsequence.html#algolib.algorithms.dynamic_programming.longest_common_subsequence.LCS.compute">[1]</a>
+</li>
+          <li><a href="api/algolib.algorithms.math.html#algolib.algorithms.math.Fibonacci.compute">(algolib.algorithms.math.Fibonacci method)</a>
+</li>
+          <li><a href="algorithms/math/fibonacci.html#algolib.algorithms.math.fibonacci.Fibonacci.compute">(algolib.algorithms.math.fibonacci.Fibonacci method)</a>, <a href="api/algolib.algorithms.math.fibonacci.html#algolib.algorithms.math.fibonacci.Fibonacci.compute">[1]</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/algolib.algorithms.math.html#algolib.algorithms.math.Fibonacci.compute_iterative">compute_iterative() (algolib.algorithms.math.Fibonacci method)</a>
+
+        <ul>
+          <li><a href="algorithms/math/fibonacci.html#algolib.algorithms.math.fibonacci.Fibonacci.compute_iterative">(algolib.algorithms.math.fibonacci.Fibonacci method)</a>, <a href="api/algolib.algorithms.math.fibonacci.html#algolib.algorithms.math.fibonacci.Fibonacci.compute_iterative">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.data_structures.avl_tree.html#algolib.data_structures.avl_tree.AVLTree.contains">contains() (algolib.data_structures.avl_tree.AVLTree method)</a>, <a href="data_structures/avl_tree.html#algolib.data_structures.avl_tree.AVLTree.contains">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.AVLTree.contains">(algolib.data_structures.AVLTree method)</a>
+</li>
+          <li><a href="api/algolib.data_structures.red_black_tree.html#algolib.data_structures.red_black_tree.RedBlackTree.contains">(algolib.data_structures.red_black_tree.RedBlackTree method)</a>, <a href="data_structures/red_black_tree.html#algolib.data_structures.red_black_tree.RedBlackTree.contains">[1]</a>
+</li>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.RedBlackTree.contains">(algolib.data_structures.RedBlackTree method)</a>
+</li>
+        </ul></li>
+        <li><a href="algorithms/greedy/activity_selection.html#algolib.algorithms.greedy.activity_selection.ActivitySelection.count_activities">count_activities() (algolib.algorithms.greedy.activity_selection.ActivitySelection method)</a>, <a href="api/algolib.algorithms.greedy.activity_selection.html#algolib.algorithms.greedy.activity_selection.ActivitySelection.count_activities">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.algorithms.greedy.html#algolib.algorithms.greedy.ActivitySelection.count_activities">(algolib.algorithms.greedy.ActivitySelection method)</a>
+</li>
+        </ul></li>
+        <li><a href="algorithms/sorting/insertion_sort.html#algolib.algorithms.sorting.insertion_sort.InsertionSort.count_inversions">count_inversions() (algolib.algorithms.sorting.insertion_sort.InsertionSort method)</a>, <a href="api/algolib.algorithms.sorting.insertion_sort.html#algolib.algorithms.sorting.insertion_sort.InsertionSort.count_inversions">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.algorithms.sorting.html#algolib.algorithms.sorting.InsertionSort.count_inversions">(algolib.algorithms.sorting.InsertionSort method)</a>
+</li>
+        </ul></li>
+        <li><a href="algorithms/backtracking/n_queens_solver.html#algolib.algorithms.backtracking.n_queens_solver.NQueensSolver.count_solutions">count_solutions() (algolib.algorithms.backtracking.n_queens_solver.NQueensSolver method)</a>, <a href="api/algolib.algorithms.backtracking.n_queens_solver.html#algolib.algorithms.backtracking.n_queens_solver.NQueensSolver.count_solutions">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.algorithms.backtracking.html#algolib.algorithms.backtracking.NQueensSolver.count_solutions">(algolib.algorithms.backtracking.NQueensSolver method)</a>
+</li>
+        </ul></li>
+        <li><a href="algorithms/backtracking/subset_generation.html#algolib.algorithms.backtracking.subset_generation.SubsetGeneration.count_subsets">count_subsets() (algolib.algorithms.backtracking.subset_generation.SubsetGeneration method)</a>, <a href="api/algolib.algorithms.backtracking.subset_generation.html#algolib.algorithms.backtracking.subset_generation.SubsetGeneration.count_subsets">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.algorithms.backtracking.html#algolib.algorithms.backtracking.SubsetGeneration.count_subsets">(algolib.algorithms.backtracking.SubsetGeneration method)</a>
+</li>
+        </ul></li>
+        <li><a href="algorithms/backtracking/subset_generation.html#algolib.algorithms.backtracking.subset_generation.SubsetGeneration.count_subsets_with_size">count_subsets_with_size() (algolib.algorithms.backtracking.subset_generation.SubsetGeneration method)</a>, <a href="api/algolib.algorithms.backtracking.subset_generation.html#algolib.algorithms.backtracking.subset_generation.SubsetGeneration.count_subsets_with_size">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.algorithms.backtracking.html#algolib.algorithms.backtracking.SubsetGeneration.count_subsets_with_size">(algolib.algorithms.backtracking.SubsetGeneration method)</a>
+</li>
+        </ul></li>
+        <li><a href="algorithms/sorting/selection_sort.html#algolib.algorithms.sorting.selection_sort.SelectionSort.count_swaps">count_swaps() (algolib.algorithms.sorting.selection_sort.SelectionSort method)</a>, <a href="api/algolib.algorithms.sorting.selection_sort.html#algolib.algorithms.sorting.selection_sort.SelectionSort.count_swaps">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.algorithms.sorting.html#algolib.algorithms.sorting.SelectionSort.count_swaps">(algolib.algorithms.sorting.SelectionSort method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.algorithms.sorting.html#algolib.algorithms.sorting.CountingSort">CountingSort (class in algolib.algorithms.sorting)</a>
+
+        <ul>
+          <li><a href="algorithms/sorting/counting_sort.html#algolib.algorithms.sorting.counting_sort.CountingSort">(class in algolib.algorithms.sorting.counting_sort)</a>, <a href="api/algolib.algorithms.sorting.counting_sort.html#algolib.algorithms.sorting.counting_sort.CountingSort">[1]</a>
+</li>
+        </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="D" class="genindex-section">
+  <h2>D</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/algolib.data_structures.binary_search_tree.html#algolib.data_structures.binary_search_tree.BSTNode.data">data (algolib.data_structures.binary_search_tree.BSTNode attribute)</a>, <a href="data_structures/binary_search_tree.html#algolib.data_structures.binary_search_tree.BSTNode.data">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.data_structures.binary_tree.html#algolib.data_structures.binary_tree.TreeNode.data">(algolib.data_structures.binary_tree.TreeNode attribute)</a>, <a href="data_structures/binary_tree.html#algolib.data_structures.binary_tree.TreeNode.data">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="algorithms/greedy/huffman_coding.html#algolib.algorithms.greedy.huffman_coding.HuffmanCoding.decode">decode() (algolib.algorithms.greedy.huffman_coding.HuffmanCoding method)</a>, <a href="api/algolib.algorithms.greedy.huffman_coding.html#algolib.algorithms.greedy.huffman_coding.HuffmanCoding.decode">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.algorithms.greedy.html#algolib.algorithms.greedy.HuffmanCoding.decode">(algolib.algorithms.greedy.HuffmanCoding method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.data_structures.avl_tree.html#algolib.data_structures.avl_tree.AVLTree.delete">delete() (algolib.data_structures.avl_tree.AVLTree method)</a>, <a href="data_structures/avl_tree.html#algolib.data_structures.avl_tree.AVLTree.delete">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.AVLTree.delete">(algolib.data_structures.AVLTree method)</a>
+</li>
+          <li><a href="api/algolib.data_structures.binary_search_tree.html#algolib.data_structures.binary_search_tree.BinarySearchTree.delete">(algolib.data_structures.binary_search_tree.BinarySearchTree method)</a>, <a href="data_structures/binary_search_tree.html#algolib.data_structures.binary_search_tree.BinarySearchTree.delete">[1]</a>
+</li>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.BinarySearchTree.delete">(algolib.data_structures.BinarySearchTree method)</a>
+</li>
+          <li><a href="api/algolib.data_structures.red_black_tree.html#algolib.data_structures.red_black_tree.RedBlackTree.delete">(algolib.data_structures.red_black_tree.RedBlackTree method)</a>, <a href="data_structures/red_black_tree.html#algolib.data_structures.red_black_tree.RedBlackTree.delete">[1]</a>
+</li>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.RedBlackTree.delete">(algolib.data_structures.RedBlackTree method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.specs.schema.html#algolib.specs.schema.AlgorithmSpec.dependencies">dependencies (algolib.specs.schema.AlgorithmSpec attribute)</a>
+</li>
+        <li><a href="api/algolib.algorithms.graph.html#algolib.algorithms.graph.DepthFirstSearch">DepthFirstSearch (class in algolib.algorithms.graph)</a>
+
+        <ul>
+          <li><a href="api/algolib.algorithms.graph.traversal.html#algolib.algorithms.graph.traversal.DepthFirstSearch">(class in algolib.algorithms.graph.traversal)</a>
+</li>
+          <li><a href="algorithms/graph/traversal/depth_first_search.html#algolib.algorithms.graph.traversal.depth_first_search.DepthFirstSearch">(class in algolib.algorithms.graph.traversal.depth_first_search)</a>, <a href="api/algolib.algorithms.graph.traversal.depth_first_search.html#algolib.algorithms.graph.traversal.depth_first_search.DepthFirstSearch">[1]</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/algolib.data_structures.html#algolib.data_structures.Queue.dequeue">dequeue() (algolib.data_structures.Queue method)</a>
+
+        <ul>
+          <li><a href="api/algolib.data_structures.queue.html#algolib.data_structures.queue.Queue.dequeue">(algolib.data_structures.queue.Queue method)</a>, <a href="data_structures/queue.html#algolib.data_structures.queue.Queue.dequeue">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.specs.schema.html#algolib.specs.schema.AlgorithmSpec.description">description (algolib.specs.schema.AlgorithmSpec attribute)</a>
+
+        <ul>
+          <li><a href="api/algolib.specs.schema.html#algolib.specs.schema.Parameter.description">(algolib.specs.schema.Parameter attribute)</a>
+</li>
+          <li><a href="api/algolib.specs.schema.html#algolib.specs.schema.Returns.description">(algolib.specs.schema.Returns attribute)</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.algorithms.graph.html#algolib.algorithms.graph.DijkstraAlgorithm">DijkstraAlgorithm (class in algolib.algorithms.graph)</a>
+
+        <ul>
+          <li><a href="algorithms/graph/dijkstra.html#algolib.algorithms.graph.dijkstra.DijkstraAlgorithm">(class in algolib.algorithms.graph.dijkstra)</a>, <a href="api/algolib.algorithms.graph.dijkstra.html#algolib.algorithms.graph.dijkstra.DijkstraAlgorithm">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.data_structures.html#algolib.data_structures.Graph.directed">directed (algolib.data_structures.Graph attribute)</a>
+
+        <ul>
+          <li><a href="api/algolib.data_structures.graph.html#algolib.data_structures.graph.Graph.directed">(algolib.data_structures.graph.Graph attribute)</a>, <a href="data_structures/graph.html#algolib.data_structures.graph.Graph.directed">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.data_structures.html#algolib.data_structures.DisjointSet">DisjointSet (class in algolib.data_structures)</a>
+
+        <ul>
+          <li><a href="api/algolib.data_structures.disjoint_set.html#algolib.data_structures.disjoint_set.DisjointSet">(class in algolib.data_structures.disjoint_set)</a>, <a href="data_structures/disjoint_set.html#algolib.data_structures.disjoint_set.DisjointSet">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="algorithms/sorting/divide_conquer_sorter.html#algolib.algorithms.sorting.divide_conquer_sorter.DivideConquerSorter">DivideConquerSorter (class in algolib.algorithms.sorting.divide_conquer_sorter)</a>, <a href="api/algolib.algorithms.sorting.divide_conquer_sorter.html#algolib.algorithms.sorting.divide_conquer_sorter.DivideConquerSorter">[1]</a>
+</li>
+        <li><a href="api/algolib.algorithms.dynamic_programming.html#algolib.algorithms.dynamic_programming.DPItem">DPItem (class in algolib.algorithms.dynamic_programming)</a>
+
+        <ul>
+          <li><a href="algorithms/dynamic_programming/knapsack.html#algolib.algorithms.dynamic_programming.knapsack.DPItem">(class in algolib.algorithms.dynamic_programming.knapsack)</a>, <a href="api/algolib.algorithms.dynamic_programming.knapsack.html#algolib.algorithms.dynamic_programming.knapsack.DPItem">[1]</a>
+</li>
+        </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="E" class="genindex-section">
+  <h2>E</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="algorithms/greedy/huffman_coding.html#algolib.algorithms.greedy.huffman_coding.HuffmanCoding.encode">encode() (algolib.algorithms.greedy.huffman_coding.HuffmanCoding method)</a>, <a href="api/algolib.algorithms.greedy.huffman_coding.html#algolib.algorithms.greedy.huffman_coding.HuffmanCoding.encode">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.algorithms.greedy.html#algolib.algorithms.greedy.HuffmanCoding.encode">(algolib.algorithms.greedy.HuffmanCoding method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.data_structures.html#algolib.data_structures.Queue.enqueue">enqueue() (algolib.data_structures.Queue method)</a>
+
+        <ul>
+          <li><a href="api/algolib.data_structures.queue.html#algolib.data_structures.queue.Queue.enqueue">(algolib.data_structures.queue.Queue method)</a>, <a href="data_structures/queue.html#algolib.data_structures.queue.Queue.enqueue">[1]</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/algolib.data_structures.heap.html#algolib.data_structures.heap.MaxHeap.extract_max">extract_max() (algolib.data_structures.heap.MaxHeap method)</a>, <a href="data_structures/heap.html#algolib.data_structures.heap.MaxHeap.extract_max">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.MaxHeap.extract_max">(algolib.data_structures.MaxHeap method)</a>
+</li>
+        </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="F" class="genindex-section">
+  <h2>F</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/algolib.algorithms.math.html#algolib.algorithms.math.Fibonacci">Fibonacci (class in algolib.algorithms.math)</a>
+
+        <ul>
+          <li><a href="algorithms/math/fibonacci.html#algolib.algorithms.math.fibonacci.Fibonacci">(class in algolib.algorithms.math.fibonacci)</a>, <a href="api/algolib.algorithms.math.fibonacci.html#algolib.algorithms.math.fibonacci.Fibonacci">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.data_structures.disjoint_set.html#algolib.data_structures.disjoint_set.DisjointSet.find">find() (algolib.data_structures.disjoint_set.DisjointSet method)</a>, <a href="data_structures/disjoint_set.html#algolib.data_structures.disjoint_set.DisjointSet.find">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.DisjointSet.find">(algolib.data_structures.DisjointSet method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.algorithms.math.html#algolib.algorithms.math.Fibonacci.find_index">find_index() (algolib.algorithms.math.Fibonacci method)</a>
+
+        <ul>
+          <li><a href="algorithms/math/fibonacci.html#algolib.algorithms.math.fibonacci.Fibonacci.find_index">(algolib.algorithms.math.fibonacci.Fibonacci method)</a>, <a href="api/algolib.algorithms.math.fibonacci.html#algolib.algorithms.math.fibonacci.Fibonacci.find_index">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.data_structures.avl_tree.html#algolib.data_structures.avl_tree.AVLTree.find_max">find_max() (algolib.data_structures.avl_tree.AVLTree method)</a>, <a href="data_structures/avl_tree.html#algolib.data_structures.avl_tree.AVLTree.find_max">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.AVLTree.find_max">(algolib.data_structures.AVLTree method)</a>
+</li>
+          <li><a href="api/algolib.data_structures.binary_search_tree.html#algolib.data_structures.binary_search_tree.BinarySearchTree.find_max">(algolib.data_structures.binary_search_tree.BinarySearchTree method)</a>, <a href="data_structures/binary_search_tree.html#algolib.data_structures.binary_search_tree.BinarySearchTree.find_max">[1]</a>
+</li>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.BinarySearchTree.find_max">(algolib.data_structures.BinarySearchTree method)</a>
+</li>
+          <li><a href="api/algolib.data_structures.red_black_tree.html#algolib.data_structures.red_black_tree.RedBlackTree.find_max">(algolib.data_structures.red_black_tree.RedBlackTree method)</a>, <a href="data_structures/red_black_tree.html#algolib.data_structures.red_black_tree.RedBlackTree.find_max">[1]</a>
+</li>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.RedBlackTree.find_max">(algolib.data_structures.RedBlackTree method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.data_structures.avl_tree.html#algolib.data_structures.avl_tree.AVLTree.find_min">find_min() (algolib.data_structures.avl_tree.AVLTree method)</a>, <a href="data_structures/avl_tree.html#algolib.data_structures.avl_tree.AVLTree.find_min">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.AVLTree.find_min">(algolib.data_structures.AVLTree method)</a>
+</li>
+          <li><a href="api/algolib.data_structures.binary_search_tree.html#algolib.data_structures.binary_search_tree.BinarySearchTree.find_min">(algolib.data_structures.binary_search_tree.BinarySearchTree method)</a>, <a href="data_structures/binary_search_tree.html#algolib.data_structures.binary_search_tree.BinarySearchTree.find_min">[1]</a>
+</li>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.BinarySearchTree.find_min">(algolib.data_structures.BinarySearchTree method)</a>
+</li>
+          <li><a href="api/algolib.data_structures.red_black_tree.html#algolib.data_structures.red_black_tree.RedBlackTree.find_min">(algolib.data_structures.red_black_tree.RedBlackTree method)</a>, <a href="data_structures/red_black_tree.html#algolib.data_structures.red_black_tree.RedBlackTree.find_min">[1]</a>
+</li>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.RedBlackTree.find_min">(algolib.data_structures.RedBlackTree method)</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="algorithms/sorting/selection_sort.html#algolib.algorithms.sorting.selection_sort.SelectionSort.find_min_index">find_min_index() (algolib.algorithms.sorting.selection_sort.SelectionSort method)</a>, <a href="api/algolib.algorithms.sorting.selection_sort.html#algolib.algorithms.sorting.selection_sort.SelectionSort.find_min_index">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.algorithms.sorting.html#algolib.algorithms.sorting.SelectionSort.find_min_index">(algolib.algorithms.sorting.SelectionSort method)</a>
+</li>
+        </ul></li>
+        <li><a href="algorithms/dynamic_programming/knapsack.html#algolib.algorithms.dynamic_programming.knapsack.KnapsackDP.find_minimum_capacity">find_minimum_capacity() (algolib.algorithms.dynamic_programming.knapsack.KnapsackDP method)</a>, <a href="api/algolib.algorithms.dynamic_programming.knapsack.html#algolib.algorithms.dynamic_programming.knapsack.KnapsackDP.find_minimum_capacity">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.algorithms.dynamic_programming.html#algolib.algorithms.dynamic_programming.KnapsackDP.find_minimum_capacity">(algolib.algorithms.dynamic_programming.KnapsackDP method)</a>
+</li>
+        </ul></li>
+        <li><a href="algorithms/greedy/activity_selection.html#algolib.algorithms.greedy.activity_selection.Activity.finish">finish (algolib.algorithms.greedy.activity_selection.Activity attribute)</a>, <a href="api/algolib.algorithms.greedy.activity_selection.html#algolib.algorithms.greedy.activity_selection.Activity.finish">[1]</a>
+</li>
+        <li><a href="api/algolib.algorithms.greedy.html#algolib.algorithms.greedy.FractionalKnapsack">FractionalKnapsack (class in algolib.algorithms.greedy)</a>
+
+        <ul>
+          <li><a href="algorithms/greedy/fractional_knapsack.html#algolib.algorithms.greedy.fractional_knapsack.FractionalKnapsack">(class in algolib.algorithms.greedy.fractional_knapsack)</a>, <a href="api/algolib.algorithms.greedy.fractional_knapsack.html#algolib.algorithms.greedy.fractional_knapsack.FractionalKnapsack">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.specs.schema.html#algolib.specs.schema.AlgorithmSpec.from_file">from_file() (algolib.specs.schema.AlgorithmSpec class method)</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="G" class="genindex-section">
+  <h2>G</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="algorithms/backtracking/permutation_generation.html#algolib.algorithms.backtracking.permutation_generation.PermutationFinder.generate">generate() (algolib.algorithms.backtracking.permutation_generation.PermutationFinder method)</a>, <a href="api/algolib.algorithms.backtracking.permutation_generation.html#algolib.algorithms.backtracking.permutation_generation.PermutationFinder.generate">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.algorithms.backtracking.html#algolib.algorithms.backtracking.PermutationFinder.generate">(algolib.algorithms.backtracking.PermutationFinder method)</a>
+</li>
+          <li><a href="algorithms/backtracking/subset_generation.html#algolib.algorithms.backtracking.subset_generation.SubsetGeneration.generate">(algolib.algorithms.backtracking.subset_generation.SubsetGeneration method)</a>, <a href="api/algolib.algorithms.backtracking.subset_generation.html#algolib.algorithms.backtracking.subset_generation.SubsetGeneration.generate">[1]</a>
+</li>
+          <li><a href="api/algolib.algorithms.backtracking.html#algolib.algorithms.backtracking.SubsetGeneration.generate">(algolib.algorithms.backtracking.SubsetGeneration method)</a>
+</li>
+        </ul></li>
+        <li><a href="algorithms/greedy/huffman_coding.html#algolib.algorithms.greedy.huffman_coding.HuffmanCoding.generate_codes">generate_codes() (algolib.algorithms.greedy.huffman_coding.HuffmanCoding method)</a>, <a href="api/algolib.algorithms.greedy.huffman_coding.html#algolib.algorithms.greedy.huffman_coding.HuffmanCoding.generate_codes">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.algorithms.greedy.html#algolib.algorithms.greedy.HuffmanCoding.generate_codes">(algolib.algorithms.greedy.HuffmanCoding method)</a>
+</li>
+        </ul></li>
+        <li><a href="algorithms/backtracking/subset_generation.html#algolib.algorithms.backtracking.subset_generation.SubsetGeneration.generate_iterative">generate_iterative() (algolib.algorithms.backtracking.subset_generation.SubsetGeneration method)</a>, <a href="api/algolib.algorithms.backtracking.subset_generation.html#algolib.algorithms.backtracking.subset_generation.SubsetGeneration.generate_iterative">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.algorithms.backtracking.html#algolib.algorithms.backtracking.SubsetGeneration.generate_iterative">(algolib.algorithms.backtracking.SubsetGeneration method)</a>
+</li>
+        </ul></li>
+        <li><a href="algorithms/backtracking/subset_generation.html#algolib.algorithms.backtracking.subset_generation.SubsetGeneration.generate_with_size">generate_with_size() (algolib.algorithms.backtracking.subset_generation.SubsetGeneration method)</a>, <a href="api/algolib.algorithms.backtracking.subset_generation.html#algolib.algorithms.backtracking.subset_generation.SubsetGeneration.generate_with_size">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.algorithms.backtracking.html#algolib.algorithms.backtracking.SubsetGeneration.generate_with_size">(algolib.algorithms.backtracking.SubsetGeneration method)</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/algolib.data_structures.html#algolib.data_structures.Graph.get_neighbors">get_neighbors() (algolib.data_structures.Graph method)</a>
+
+        <ul>
+          <li><a href="api/algolib.data_structures.graph.html#algolib.data_structures.graph.Graph.get_neighbors">(algolib.data_structures.graph.Graph method)</a>, <a href="data_structures/graph.html#algolib.data_structures.graph.Graph.get_neighbors">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.data_structures.html#algolib.data_structures.Graph.get_vertex">get_vertex() (algolib.data_structures.Graph method)</a>
+
+        <ul>
+          <li><a href="api/algolib.data_structures.graph.html#algolib.data_structures.graph.Graph.get_vertex">(algolib.data_structures.graph.Graph method)</a>, <a href="data_structures/graph.html#algolib.data_structures.graph.Graph.get_vertex">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.data_structures.html#algolib.data_structures.Graph">Graph (class in algolib.data_structures)</a>
+
+        <ul>
+          <li><a href="api/algolib.data_structures.graph.html#algolib.data_structures.graph.Graph">(class in algolib.data_structures.graph)</a>, <a href="data_structures/graph.html#algolib.data_structures.graph.Graph">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.html#algolib.GraphAlgo">GraphAlgo (class in algolib)</a>
+
+        <ul>
+          <li><a href="api/algolib.interfaces.html#algolib.interfaces.GraphAlgo">(class in algolib.interfaces)</a>
+</li>
+        </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="H" class="genindex-section">
+  <h2>H</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/algolib.algorithms.sorting.html#algolib.algorithms.sorting.HeapSort">HeapSort (class in algolib.algorithms.sorting)</a>
+
+        <ul>
+          <li><a href="algorithms/sorting/heap_sort.html#algolib.algorithms.sorting.heap_sort.HeapSort">(class in algolib.algorithms.sorting.heap_sort)</a>, <a href="api/algolib.algorithms.sorting.heap_sort.html#algolib.algorithms.sorting.heap_sort.HeapSort">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.data_structures.avl_tree.html#algolib.data_structures.avl_tree.AVLTree.height">height() (algolib.data_structures.avl_tree.AVLTree method)</a>, <a href="data_structures/avl_tree.html#algolib.data_structures.avl_tree.AVLTree.height">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.AVLTree.height">(algolib.data_structures.AVLTree method)</a>
+</li>
+          <li><a href="api/algolib.data_structures.binary_search_tree.html#algolib.data_structures.binary_search_tree.BinarySearchTree.height">(algolib.data_structures.binary_search_tree.BinarySearchTree method)</a>, <a href="data_structures/binary_search_tree.html#algolib.data_structures.binary_search_tree.BinarySearchTree.height">[1]</a>
+</li>
+          <li><a href="api/algolib.data_structures.binary_tree.html#algolib.data_structures.binary_tree.BinaryTree.height">(algolib.data_structures.binary_tree.BinaryTree method)</a>, <a href="data_structures/binary_tree.html#algolib.data_structures.binary_tree.BinaryTree.height">[1]</a>
+</li>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.BinarySearchTree.height">(algolib.data_structures.BinarySearchTree method)</a>
+</li>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.BinaryTree.height">(algolib.data_structures.BinaryTree method)</a>
+</li>
+          <li><a href="api/algolib.data_structures.red_black_tree.html#algolib.data_structures.red_black_tree.RedBlackTree.height">(algolib.data_structures.red_black_tree.RedBlackTree method)</a>, <a href="data_structures/red_black_tree.html#algolib.data_structures.red_black_tree.RedBlackTree.height">[1]</a>
+</li>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.RedBlackTree.height">(algolib.data_structures.RedBlackTree method)</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/algolib.algorithms.greedy.html#algolib.algorithms.greedy.HuffmanCoding">HuffmanCoding (class in algolib.algorithms.greedy)</a>
+
+        <ul>
+          <li><a href="algorithms/greedy/huffman_coding.html#algolib.algorithms.greedy.huffman_coding.HuffmanCoding">(class in algolib.algorithms.greedy.huffman_coding)</a>, <a href="api/algolib.algorithms.greedy.huffman_coding.html#algolib.algorithms.greedy.huffman_coding.HuffmanCoding">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="algorithms/greedy/huffman_coding.html#algolib.algorithms.greedy.huffman_coding.HuffmanNode">HuffmanNode (class in algolib.algorithms.greedy.huffman_coding)</a>, <a href="api/algolib.algorithms.greedy.huffman_coding.html#algolib.algorithms.greedy.huffman_coding.HuffmanNode">[1]</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="I" class="genindex-section">
+  <h2>I</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/algolib.data_structures.avl_tree.html#algolib.data_structures.avl_tree.AVLTree.inorder">inorder() (algolib.data_structures.avl_tree.AVLTree method)</a>, <a href="data_structures/avl_tree.html#algolib.data_structures.avl_tree.AVLTree.inorder">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.AVLTree.inorder">(algolib.data_structures.AVLTree method)</a>
+</li>
+          <li><a href="api/algolib.data_structures.binary_search_tree.html#algolib.data_structures.binary_search_tree.BinarySearchTree.inorder">(algolib.data_structures.binary_search_tree.BinarySearchTree method)</a>, <a href="data_structures/binary_search_tree.html#algolib.data_structures.binary_search_tree.BinarySearchTree.inorder">[1]</a>
+</li>
+          <li><a href="api/algolib.data_structures.binary_tree.html#algolib.data_structures.binary_tree.BinaryTree.inorder">(algolib.data_structures.binary_tree.BinaryTree method)</a>, <a href="data_structures/binary_tree.html#algolib.data_structures.binary_tree.BinaryTree.inorder">[1]</a>
+</li>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.BinarySearchTree.inorder">(algolib.data_structures.BinarySearchTree method)</a>
+</li>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.BinaryTree.inorder">(algolib.data_structures.BinaryTree method)</a>
+</li>
+          <li><a href="api/algolib.data_structures.red_black_tree.html#algolib.data_structures.red_black_tree.RedBlackTree.inorder">(algolib.data_structures.red_black_tree.RedBlackTree method)</a>, <a href="data_structures/red_black_tree.html#algolib.data_structures.red_black_tree.RedBlackTree.inorder">[1]</a>
+</li>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.RedBlackTree.inorder">(algolib.data_structures.RedBlackTree method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.data_structures.avl_tree.html#algolib.data_structures.avl_tree.AVLTree.insert">insert() (algolib.data_structures.avl_tree.AVLTree method)</a>, <a href="data_structures/avl_tree.html#algolib.data_structures.avl_tree.AVLTree.insert">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.AVLTree.insert">(algolib.data_structures.AVLTree method)</a>
+</li>
+          <li><a href="api/algolib.data_structures.binary_search_tree.html#algolib.data_structures.binary_search_tree.BinarySearchTree.insert">(algolib.data_structures.binary_search_tree.BinarySearchTree method)</a>, <a href="data_structures/binary_search_tree.html#algolib.data_structures.binary_search_tree.BinarySearchTree.insert">[1]</a>
+</li>
+          <li><a href="api/algolib.data_structures.binary_tree.html#algolib.data_structures.binary_tree.BinaryTree.insert">(algolib.data_structures.binary_tree.BinaryTree method)</a>, <a href="data_structures/binary_tree.html#algolib.data_structures.binary_tree.BinaryTree.insert">[1]</a>
+</li>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.BinarySearchTree.insert">(algolib.data_structures.BinarySearchTree method)</a>
+</li>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.BinaryTree.insert">(algolib.data_structures.BinaryTree method)</a>
+</li>
+          <li><a href="api/algolib.data_structures.heap.html#algolib.data_structures.heap.MaxHeap.insert">(algolib.data_structures.heap.MaxHeap method)</a>, <a href="data_structures/heap.html#algolib.data_structures.heap.MaxHeap.insert">[1]</a>
+</li>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.MaxHeap.insert">(algolib.data_structures.MaxHeap method)</a>
+</li>
+          <li><a href="api/algolib.data_structures.red_black_tree.html#algolib.data_structures.red_black_tree.RedBlackTree.insert">(algolib.data_structures.red_black_tree.RedBlackTree method)</a>, <a href="data_structures/red_black_tree.html#algolib.data_structures.red_black_tree.RedBlackTree.insert">[1]</a>
+</li>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.RedBlackTree.insert">(algolib.data_structures.RedBlackTree method)</a>
+</li>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.Trie.insert">(algolib.data_structures.Trie method)</a>
+</li>
+          <li><a href="api/algolib.data_structures.trie.html#algolib.data_structures.trie.Trie.insert">(algolib.data_structures.trie.Trie method)</a>, <a href="data_structures/trie.html#algolib.data_structures.trie.Trie.insert">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.data_structures.linked_list.html#algolib.data_structures.linked_list.LinkedList.insert_at">insert_at() (algolib.data_structures.linked_list.LinkedList method)</a>, <a href="data_structures/linked_list.html#algolib.data_structures.linked_list.LinkedList.insert_at">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.LinkedList.insert_at">(algolib.data_structures.LinkedList method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.algorithms.sorting.html#algolib.algorithms.sorting.InsertionSort">InsertionSort (class in algolib.algorithms.sorting)</a>
+
+        <ul>
+          <li><a href="algorithms/sorting/insertion_sort.html#algolib.algorithms.sorting.insertion_sort.InsertionSort">(class in algolib.algorithms.sorting.insertion_sort)</a>, <a href="api/algolib.algorithms.sorting.insertion_sort.html#algolib.algorithms.sorting.insertion_sort.InsertionSort">[1]</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/algolib.data_structures.avl_tree.html#algolib.data_structures.avl_tree.AVLTree.is_empty">is_empty() (algolib.data_structures.avl_tree.AVLTree method)</a>, <a href="data_structures/avl_tree.html#algolib.data_structures.avl_tree.AVLTree.is_empty">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.AVLTree.is_empty">(algolib.data_structures.AVLTree method)</a>
+</li>
+          <li><a href="api/algolib.data_structures.binary_search_tree.html#algolib.data_structures.binary_search_tree.BinarySearchTree.is_empty">(algolib.data_structures.binary_search_tree.BinarySearchTree method)</a>, <a href="data_structures/binary_search_tree.html#algolib.data_structures.binary_search_tree.BinarySearchTree.is_empty">[1]</a>
+</li>
+          <li><a href="api/algolib.data_structures.binary_tree.html#algolib.data_structures.binary_tree.BinaryTree.is_empty">(algolib.data_structures.binary_tree.BinaryTree method)</a>, <a href="data_structures/binary_tree.html#algolib.data_structures.binary_tree.BinaryTree.is_empty">[1]</a>
+</li>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.BinarySearchTree.is_empty">(algolib.data_structures.BinarySearchTree method)</a>
+</li>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.BinaryTree.is_empty">(algolib.data_structures.BinaryTree method)</a>
+</li>
+          <li><a href="api/algolib.data_structures.heap.html#algolib.data_structures.heap.MaxHeap.is_empty">(algolib.data_structures.heap.MaxHeap method)</a>, <a href="data_structures/heap.html#algolib.data_structures.heap.MaxHeap.is_empty">[1]</a>
+</li>
+          <li><a href="api/algolib.data_structures.linked_list.html#algolib.data_structures.linked_list.LinkedList.is_empty">(algolib.data_structures.linked_list.LinkedList method)</a>, <a href="data_structures/linked_list.html#algolib.data_structures.linked_list.LinkedList.is_empty">[1]</a>
+</li>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.LinkedList.is_empty">(algolib.data_structures.LinkedList method)</a>
+</li>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.MaxHeap.is_empty">(algolib.data_structures.MaxHeap method)</a>
+</li>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.Queue.is_empty">(algolib.data_structures.Queue method)</a>
+</li>
+          <li><a href="api/algolib.data_structures.queue.html#algolib.data_structures.queue.Queue.is_empty">(algolib.data_structures.queue.Queue method)</a>, <a href="data_structures/queue.html#algolib.data_structures.queue.Queue.is_empty">[1]</a>
+</li>
+          <li><a href="api/algolib.data_structures.red_black_tree.html#algolib.data_structures.red_black_tree.RedBlackTree.is_empty">(algolib.data_structures.red_black_tree.RedBlackTree method)</a>, <a href="data_structures/red_black_tree.html#algolib.data_structures.red_black_tree.RedBlackTree.is_empty">[1]</a>
+</li>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.RedBlackTree.is_empty">(algolib.data_structures.RedBlackTree method)</a>
+</li>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.Stack.is_empty">(algolib.data_structures.Stack method)</a>
+</li>
+          <li><a href="api/algolib.data_structures.stack.html#algolib.data_structures.stack.Stack.is_empty">(algolib.data_structures.stack.Stack method)</a>, <a href="data_structures/stack.html#algolib.data_structures.stack.Stack.is_empty">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.algorithms.math.html#algolib.algorithms.math.Fibonacci.is_fibonacci">is_fibonacci() (algolib.algorithms.math.Fibonacci method)</a>
+
+        <ul>
+          <li><a href="algorithms/math/fibonacci.html#algolib.algorithms.math.fibonacci.Fibonacci.is_fibonacci">(algolib.algorithms.math.fibonacci.Fibonacci method)</a>, <a href="api/algolib.algorithms.math.fibonacci.html#algolib.algorithms.math.fibonacci.Fibonacci.is_fibonacci">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="algorithms/sorting/insertion_sort.html#algolib.algorithms.sorting.insertion_sort.InsertionSort.is_sorted">is_sorted() (algolib.algorithms.sorting.insertion_sort.InsertionSort method)</a>, <a href="api/algolib.algorithms.sorting.insertion_sort.html#algolib.algorithms.sorting.insertion_sort.InsertionSort.is_sorted">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.algorithms.sorting.html#algolib.algorithms.sorting.InsertionSort.is_sorted">(algolib.algorithms.sorting.InsertionSort method)</a>
+</li>
+          <li><a href="algorithms/sorting/selection_sort.html#algolib.algorithms.sorting.selection_sort.SelectionSort.is_sorted">(algolib.algorithms.sorting.selection_sort.SelectionSort method)</a>, <a href="api/algolib.algorithms.sorting.selection_sort.html#algolib.algorithms.sorting.selection_sort.SelectionSort.is_sorted">[1]</a>
+</li>
+          <li><a href="api/algolib.algorithms.sorting.html#algolib.algorithms.sorting.SelectionSort.is_sorted">(algolib.algorithms.sorting.SelectionSort method)</a>
+</li>
+        </ul></li>
+        <li><a href="algorithms/backtracking/subset_generation.html#algolib.algorithms.backtracking.subset_generation.SubsetGeneration.is_subset">is_subset() (algolib.algorithms.backtracking.subset_generation.SubsetGeneration method)</a>, <a href="api/algolib.algorithms.backtracking.subset_generation.html#algolib.algorithms.backtracking.subset_generation.SubsetGeneration.is_subset">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.algorithms.backtracking.html#algolib.algorithms.backtracking.SubsetGeneration.is_subset">(algolib.algorithms.backtracking.SubsetGeneration method)</a>
+</li>
+        </ul></li>
+        <li><a href="algorithms/greedy/fractional_knapsack.html#algolib.algorithms.greedy.fractional_knapsack.Item">Item (class in algolib.algorithms.greedy.fractional_knapsack)</a>, <a href="api/algolib.algorithms.greedy.fractional_knapsack.html#algolib.algorithms.greedy.fractional_knapsack.Item">[1]</a>
+</li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="K" class="genindex-section">
+  <h2>K</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/algolib.data_structures.graph.html#algolib.data_structures.graph.Vertex.key">key (algolib.data_structures.graph.Vertex attribute)</a>, <a href="data_structures/graph.html#algolib.data_structures.graph.Vertex.key">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.Vertex.key">(algolib.data_structures.Vertex attribute)</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.algorithms.dynamic_programming.html#algolib.algorithms.dynamic_programming.KnapsackDP">KnapsackDP (class in algolib.algorithms.dynamic_programming)</a>
+
+        <ul>
+          <li><a href="algorithms/dynamic_programming/knapsack.html#algolib.algorithms.dynamic_programming.knapsack.KnapsackDP">(class in algolib.algorithms.dynamic_programming.knapsack)</a>, <a href="api/algolib.algorithms.dynamic_programming.knapsack.html#algolib.algorithms.dynamic_programming.knapsack.KnapsackDP">[1]</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/algolib.algorithms.graph.html#algolib.algorithms.graph.KruskalMST">KruskalMST (class in algolib.algorithms.graph)</a>
+
+        <ul>
+          <li><a href="algorithms/graph/kruskal_mst.html#algolib.algorithms.graph.kruskal_mst.KruskalMST">(class in algolib.algorithms.graph.kruskal_mst)</a>, <a href="api/algolib.algorithms.graph.kruskal_mst.html#algolib.algorithms.graph.kruskal_mst.KruskalMST">[1]</a>
+</li>
+        </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="L" class="genindex-section">
+  <h2>L</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/algolib.algorithms.dynamic_programming.html#algolib.algorithms.dynamic_programming.LCS">LCS (class in algolib.algorithms.dynamic_programming)</a>
+
+        <ul>
+          <li><a href="algorithms/dynamic_programming/longest_common_subsequence.html#algolib.algorithms.dynamic_programming.longest_common_subsequence.LCS">(class in algolib.algorithms.dynamic_programming.longest_common_subsequence)</a>, <a href="api/algolib.algorithms.dynamic_programming.longest_common_subsequence.html#algolib.algorithms.dynamic_programming.longest_common_subsequence.LCS">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.data_structures.binary_search_tree.html#algolib.data_structures.binary_search_tree.BSTNode.left">left (algolib.data_structures.binary_search_tree.BSTNode attribute)</a>, <a href="data_structures/binary_search_tree.html#algolib.data_structures.binary_search_tree.BSTNode.left">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.data_structures.binary_tree.html#algolib.data_structures.binary_tree.TreeNode.left">(algolib.data_structures.binary_tree.TreeNode attribute)</a>, <a href="data_structures/binary_tree.html#algolib.data_structures.binary_tree.TreeNode.left">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.algorithms.dynamic_programming.html#algolib.algorithms.dynamic_programming.LIS.length">length() (algolib.algorithms.dynamic_programming.LIS method)</a>
+
+        <ul>
+          <li><a href="algorithms/dynamic_programming/longest_increasing_subsequence.html#algolib.algorithms.dynamic_programming.longest_increasing_subsequence.LIS.length">(algolib.algorithms.dynamic_programming.longest_increasing_subsequence.LIS method)</a>, <a href="api/algolib.algorithms.dynamic_programming.longest_increasing_subsequence.html#algolib.algorithms.dynamic_programming.longest_increasing_subsequence.LIS.length">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.data_structures.binary_tree.html#algolib.data_structures.binary_tree.BinaryTree.levelorder">levelorder() (algolib.data_structures.binary_tree.BinaryTree method)</a>, <a href="data_structures/binary_tree.html#algolib.data_structures.binary_tree.BinaryTree.levelorder">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.BinaryTree.levelorder">(algolib.data_structures.BinaryTree method)</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/algolib.algorithms.searching.html#algolib.algorithms.searching.LinearSearcher">LinearSearcher (class in algolib.algorithms.searching)</a>
+
+        <ul>
+          <li><a href="algorithms/searching/linear.html#algolib.algorithms.searching.linear.LinearSearcher">(class in algolib.algorithms.searching.linear)</a>, <a href="api/algolib.algorithms.searching.linear.html#algolib.algorithms.searching.linear.LinearSearcher">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.data_structures.html#algolib.data_structures.LinkedList">LinkedList (class in algolib.data_structures)</a>
+
+        <ul>
+          <li><a href="api/algolib.data_structures.linked_list.html#algolib.data_structures.linked_list.LinkedList">(class in algolib.data_structures.linked_list)</a>, <a href="data_structures/linked_list.html#algolib.data_structures.linked_list.LinkedList">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.algorithms.dynamic_programming.html#algolib.algorithms.dynamic_programming.LIS">LIS (class in algolib.algorithms.dynamic_programming)</a>
+
+        <ul>
+          <li><a href="algorithms/dynamic_programming/longest_increasing_subsequence.html#algolib.algorithms.dynamic_programming.longest_increasing_subsequence.LIS">(class in algolib.algorithms.dynamic_programming.longest_increasing_subsequence)</a>, <a href="api/algolib.algorithms.dynamic_programming.longest_increasing_subsequence.html#algolib.algorithms.dynamic_programming.longest_increasing_subsequence.LIS">[1]</a>
+</li>
+        </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="M" class="genindex-section">
+  <h2>M</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/algolib.data_structures.html#algolib.data_structures.MaxHeap">MaxHeap (class in algolib.data_structures)</a>
+
+        <ul>
+          <li><a href="api/algolib.data_structures.heap.html#algolib.data_structures.heap.MaxHeap">(class in algolib.data_structures.heap)</a>, <a href="data_structures/heap.html#algolib.data_structures.heap.MaxHeap">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.algorithms.sorting.html#algolib.algorithms.sorting.MergeSort">MergeSort (class in algolib.algorithms.sorting)</a>
+
+        <ul>
+          <li><a href="api/algolib.algorithms.sorting.merge_sort.html#algolib.algorithms.sorting.merge_sort.MergeSort">(class in algolib.algorithms.sorting.merge_sort)</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.algorithms.sorting.html#algolib.algorithms.sorting.MergeSorter">MergeSorter (in module algolib.algorithms.sorting)</a>
+
+        <ul>
+          <li><a href="algorithms/sorting/merge.html#algolib.algorithms.sorting.merge.MergeSorter">(in module algolib.algorithms.sorting.merge)</a>, <a href="api/algolib.algorithms.sorting.merge.html#algolib.algorithms.sorting.merge.MergeSorter">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.specs.schema.html#algolib.specs.schema.AlgorithmSpec.model_config">model_config (algolib.specs.schema.AlgorithmSpec attribute)</a>
+
+        <ul>
+          <li><a href="api/algolib.specs.schema.html#algolib.specs.schema.Complexity.model_config">(algolib.specs.schema.Complexity attribute)</a>
+</li>
+          <li><a href="api/algolib.specs.schema.html#algolib.specs.schema.Parameter.model_config">(algolib.specs.schema.Parameter attribute)</a>
+</li>
+          <li><a href="api/algolib.specs.schema.html#algolib.specs.schema.Returns.model_config">(algolib.specs.schema.Returns attribute)</a>
+</li>
+          <li><a href="api/algolib.specs.schema.html#algolib.specs.schema.SpecList.model_config">(algolib.specs.schema.SpecList attribute)</a>
+</li>
+        </ul></li>
+        <li>
+    module
+
+        <ul>
+          <li><a href="api/algolib.html#module-algolib">algolib</a>
+</li>
+          <li><a href="api/algolib.algorithms.html#module-algolib.algorithms">algolib.algorithms</a>
+</li>
+          <li><a href="api/algolib.algorithms.backtracking.html#module-algolib.algorithms.backtracking">algolib.algorithms.backtracking</a>
+</li>
+          <li><a href="algorithms/backtracking/n_queens_solver.html#module-algolib.algorithms.backtracking.n_queens_solver">algolib.algorithms.backtracking.n_queens_solver</a>, <a href="api/algolib.algorithms.backtracking.n_queens_solver.html#module-algolib.algorithms.backtracking.n_queens_solver">[1]</a>
+</li>
+          <li><a href="algorithms/backtracking/permutation_generation.html#module-algolib.algorithms.backtracking.permutation_generation">algolib.algorithms.backtracking.permutation_generation</a>, <a href="api/algolib.algorithms.backtracking.permutation_generation.html#module-algolib.algorithms.backtracking.permutation_generation">[1]</a>
+</li>
+          <li><a href="algorithms/backtracking/subset_generation.html#module-algolib.algorithms.backtracking.subset_generation">algolib.algorithms.backtracking.subset_generation</a>, <a href="api/algolib.algorithms.backtracking.subset_generation.html#module-algolib.algorithms.backtracking.subset_generation">[1]</a>
+</li>
+          <li><a href="algorithms/backtracking/sudoku_solver.html#module-algolib.algorithms.backtracking.sudoku_solver">algolib.algorithms.backtracking.sudoku_solver</a>, <a href="api/algolib.algorithms.backtracking.sudoku_solver.html#module-algolib.algorithms.backtracking.sudoku_solver">[1]</a>
+</li>
+          <li><a href="api/algolib.algorithms.dynamic_programming.html#module-algolib.algorithms.dynamic_programming">algolib.algorithms.dynamic_programming</a>
+</li>
+          <li><a href="algorithms/dynamic_programming/knapsack.html#module-algolib.algorithms.dynamic_programming.knapsack">algolib.algorithms.dynamic_programming.knapsack</a>, <a href="api/algolib.algorithms.dynamic_programming.knapsack.html#module-algolib.algorithms.dynamic_programming.knapsack">[1]</a>
+</li>
+          <li><a href="algorithms/dynamic_programming/longest_common_subsequence.html#module-algolib.algorithms.dynamic_programming.longest_common_subsequence">algolib.algorithms.dynamic_programming.longest_common_subsequence</a>, <a href="api/algolib.algorithms.dynamic_programming.longest_common_subsequence.html#module-algolib.algorithms.dynamic_programming.longest_common_subsequence">[1]</a>
+</li>
+          <li><a href="algorithms/dynamic_programming/longest_increasing_subsequence.html#module-algolib.algorithms.dynamic_programming.longest_increasing_subsequence">algolib.algorithms.dynamic_programming.longest_increasing_subsequence</a>, <a href="api/algolib.algorithms.dynamic_programming.longest_increasing_subsequence.html#module-algolib.algorithms.dynamic_programming.longest_increasing_subsequence">[1]</a>
+</li>
+          <li><a href="api/algolib.algorithms.graph.html#module-algolib.algorithms.graph">algolib.algorithms.graph</a>
+</li>
+          <li><a href="algorithms/graph/dijkstra.html#module-algolib.algorithms.graph.dijkstra">algolib.algorithms.graph.dijkstra</a>, <a href="api/algolib.algorithms.graph.dijkstra.html#module-algolib.algorithms.graph.dijkstra">[1]</a>
+</li>
+          <li><a href="algorithms/graph/kruskal_mst.html#module-algolib.algorithms.graph.kruskal_mst">algolib.algorithms.graph.kruskal_mst</a>, <a href="api/algolib.algorithms.graph.kruskal_mst.html#module-algolib.algorithms.graph.kruskal_mst">[1]</a>
+</li>
+          <li><a href="algorithms/graph/prim_mst.html#module-algolib.algorithms.graph.prim_mst">algolib.algorithms.graph.prim_mst</a>, <a href="api/algolib.algorithms.graph.prim_mst.html#module-algolib.algorithms.graph.prim_mst">[1]</a>
+</li>
+          <li><a href="algorithms/graph/topological_sort.html#module-algolib.algorithms.graph.topological_sort">algolib.algorithms.graph.topological_sort</a>, <a href="api/algolib.algorithms.graph.topological_sort.html#module-algolib.algorithms.graph.topological_sort">[1]</a>
+</li>
+          <li><a href="api/algolib.algorithms.graph.traversal.html#module-algolib.algorithms.graph.traversal">algolib.algorithms.graph.traversal</a>
+</li>
+          <li><a href="algorithms/graph/traversal/breadth_first_search.html#module-algolib.algorithms.graph.traversal.breadth_first_search">algolib.algorithms.graph.traversal.breadth_first_search</a>, <a href="api/algolib.algorithms.graph.traversal.breadth_first_search.html#module-algolib.algorithms.graph.traversal.breadth_first_search">[1]</a>
+</li>
+          <li><a href="algorithms/graph/traversal/depth_first_search.html#module-algolib.algorithms.graph.traversal.depth_first_search">algolib.algorithms.graph.traversal.depth_first_search</a>, <a href="api/algolib.algorithms.graph.traversal.depth_first_search.html#module-algolib.algorithms.graph.traversal.depth_first_search">[1]</a>
+</li>
+          <li><a href="api/algolib.algorithms.greedy.html#module-algolib.algorithms.greedy">algolib.algorithms.greedy</a>
+</li>
+          <li><a href="algorithms/greedy/activity_selection.html#module-algolib.algorithms.greedy.activity_selection">algolib.algorithms.greedy.activity_selection</a>, <a href="api/algolib.algorithms.greedy.activity_selection.html#module-algolib.algorithms.greedy.activity_selection">[1]</a>
+</li>
+          <li><a href="algorithms/greedy/fractional_knapsack.html#module-algolib.algorithms.greedy.fractional_knapsack">algolib.algorithms.greedy.fractional_knapsack</a>, <a href="api/algolib.algorithms.greedy.fractional_knapsack.html#module-algolib.algorithms.greedy.fractional_knapsack">[1]</a>
+</li>
+          <li><a href="algorithms/greedy/huffman_coding.html#module-algolib.algorithms.greedy.huffman_coding">algolib.algorithms.greedy.huffman_coding</a>, <a href="api/algolib.algorithms.greedy.huffman_coding.html#module-algolib.algorithms.greedy.huffman_coding">[1]</a>
+</li>
+          <li><a href="api/algolib.algorithms.math.html#module-algolib.algorithms.math">algolib.algorithms.math</a>
+</li>
+          <li><a href="algorithms/math/fibonacci.html#module-algolib.algorithms.math.fibonacci">algolib.algorithms.math.fibonacci</a>, <a href="api/algolib.algorithms.math.fibonacci.html#module-algolib.algorithms.math.fibonacci">[1]</a>
+</li>
+          <li><a href="api/algolib.algorithms.searching.html#module-algolib.algorithms.searching">algolib.algorithms.searching</a>
+</li>
+          <li><a href="api/algolib.algorithms.searching.base.html#module-algolib.algorithms.searching.base">algolib.algorithms.searching.base</a>
+</li>
+          <li><a href="algorithms/searching/binary.html#module-algolib.algorithms.searching.binary">algolib.algorithms.searching.binary</a>, <a href="api/algolib.algorithms.searching.binary.html#module-algolib.algorithms.searching.binary">[1]</a>
+</li>
+          <li><a href="algorithms/searching/linear.html#module-algolib.algorithms.searching.linear">algolib.algorithms.searching.linear</a>, <a href="api/algolib.algorithms.searching.linear.html#module-algolib.algorithms.searching.linear">[1]</a>
+</li>
+          <li><a href="api/algolib.algorithms.sorting.html#module-algolib.algorithms.sorting">algolib.algorithms.sorting</a>
+</li>
+          <li><a href="api/algolib.algorithms.sorting.base.html#module-algolib.algorithms.sorting.base">algolib.algorithms.sorting.base</a>
+</li>
+          <li><a href="algorithms/sorting/bubble.html#module-algolib.algorithms.sorting.bubble">algolib.algorithms.sorting.bubble</a>, <a href="api/algolib.algorithms.sorting.bubble.html#module-algolib.algorithms.sorting.bubble">[1]</a>
+</li>
+          <li><a href="algorithms/sorting/counting_sort.html#module-algolib.algorithms.sorting.counting_sort">algolib.algorithms.sorting.counting_sort</a>, <a href="api/algolib.algorithms.sorting.counting_sort.html#module-algolib.algorithms.sorting.counting_sort">[1]</a>
+</li>
+          <li><a href="algorithms/sorting/divide_conquer_sorter.html#module-algolib.algorithms.sorting.divide_conquer_sorter">algolib.algorithms.sorting.divide_conquer_sorter</a>, <a href="api/algolib.algorithms.sorting.divide_conquer_sorter.html#module-algolib.algorithms.sorting.divide_conquer_sorter">[1]</a>
+</li>
+          <li><a href="algorithms/sorting/heap_sort.html#module-algolib.algorithms.sorting.heap_sort">algolib.algorithms.sorting.heap_sort</a>, <a href="api/algolib.algorithms.sorting.heap_sort.html#module-algolib.algorithms.sorting.heap_sort">[1]</a>
+</li>
+          <li><a href="algorithms/sorting/insertion_sort.html#module-algolib.algorithms.sorting.insertion_sort">algolib.algorithms.sorting.insertion_sort</a>, <a href="api/algolib.algorithms.sorting.insertion_sort.html#module-algolib.algorithms.sorting.insertion_sort">[1]</a>
+</li>
+          <li><a href="algorithms/sorting/merge.html#module-algolib.algorithms.sorting.merge">algolib.algorithms.sorting.merge</a>, <a href="api/algolib.algorithms.sorting.merge.html#module-algolib.algorithms.sorting.merge">[1]</a>
+</li>
+          <li><a href="api/algolib.algorithms.sorting.merge_sort.html#module-algolib.algorithms.sorting.merge_sort">algolib.algorithms.sorting.merge_sort</a>
+</li>
+          <li><a href="algorithms/sorting/quick_sort.html#module-algolib.algorithms.sorting.quick_sort">algolib.algorithms.sorting.quick_sort</a>, <a href="api/algolib.algorithms.sorting.quick_sort.html#module-algolib.algorithms.sorting.quick_sort">[1]</a>
+</li>
+          <li><a href="algorithms/sorting/radix_sort.html#module-algolib.algorithms.sorting.radix_sort">algolib.algorithms.sorting.radix_sort</a>, <a href="api/algolib.algorithms.sorting.radix_sort.html#module-algolib.algorithms.sorting.radix_sort">[1]</a>
+</li>
+          <li><a href="algorithms/sorting/selection_sort.html#module-algolib.algorithms.sorting.selection_sort">algolib.algorithms.sorting.selection_sort</a>, <a href="api/algolib.algorithms.sorting.selection_sort.html#module-algolib.algorithms.sorting.selection_sort">[1]</a>
+</li>
+          <li><a href="api/algolib.api.html#module-algolib.api">algolib.api</a>
+</li>
+          <li><a href="api/algolib.data_structures.html#module-algolib.data_structures">algolib.data_structures</a>
+</li>
+          <li><a href="api/algolib.data_structures.avl_tree.html#module-algolib.data_structures.avl_tree">algolib.data_structures.avl_tree</a>, <a href="data_structures/avl_tree.html#module-algolib.data_structures.avl_tree">[1]</a>
+</li>
+          <li><a href="api/algolib.data_structures.binary_search_tree.html#module-algolib.data_structures.binary_search_tree">algolib.data_structures.binary_search_tree</a>, <a href="data_structures/binary_search_tree.html#module-algolib.data_structures.binary_search_tree">[1]</a>
+</li>
+          <li><a href="api/algolib.data_structures.binary_tree.html#module-algolib.data_structures.binary_tree">algolib.data_structures.binary_tree</a>, <a href="data_structures/binary_tree.html#module-algolib.data_structures.binary_tree">[1]</a>
+</li>
+          <li><a href="api/algolib.data_structures.disjoint_set.html#module-algolib.data_structures.disjoint_set">algolib.data_structures.disjoint_set</a>, <a href="data_structures/disjoint_set.html#module-algolib.data_structures.disjoint_set">[1]</a>
+</li>
+          <li><a href="api/algolib.data_structures.graph.html#module-algolib.data_structures.graph">algolib.data_structures.graph</a>, <a href="data_structures/graph.html#module-algolib.data_structures.graph">[1]</a>
+</li>
+          <li><a href="api/algolib.data_structures.heap.html#module-algolib.data_structures.heap">algolib.data_structures.heap</a>, <a href="data_structures/heap.html#module-algolib.data_structures.heap">[1]</a>
+</li>
+          <li><a href="api/algolib.data_structures.linked_list.html#module-algolib.data_structures.linked_list">algolib.data_structures.linked_list</a>, <a href="data_structures/linked_list.html#module-algolib.data_structures.linked_list">[1]</a>
+</li>
+          <li><a href="api/algolib.data_structures.queue.html#module-algolib.data_structures.queue">algolib.data_structures.queue</a>, <a href="data_structures/queue.html#module-algolib.data_structures.queue">[1]</a>
+</li>
+          <li><a href="api/algolib.data_structures.red_black_tree.html#module-algolib.data_structures.red_black_tree">algolib.data_structures.red_black_tree</a>, <a href="data_structures/red_black_tree.html#module-algolib.data_structures.red_black_tree">[1]</a>
+</li>
+          <li><a href="api/algolib.data_structures.stack.html#module-algolib.data_structures.stack">algolib.data_structures.stack</a>, <a href="data_structures/stack.html#module-algolib.data_structures.stack">[1]</a>
+</li>
+          <li><a href="api/algolib.data_structures.trie.html#module-algolib.data_structures.trie">algolib.data_structures.trie</a>, <a href="data_structures/trie.html#module-algolib.data_structures.trie">[1]</a>
+</li>
+          <li><a href="api/algolib.db.html#module-algolib.db">algolib.db</a>
+</li>
+          <li><a href="api/algolib.interfaces.html#module-algolib.interfaces">algolib.interfaces</a>
+</li>
+          <li><a href="api/algolib.specs.html#module-algolib.specs">algolib.specs</a>
+</li>
+          <li><a href="api/algolib.specs.schema.html#module-algolib.specs.schema">algolib.specs.schema</a>
+</li>
+        </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="N" class="genindex-section">
+  <h2>N</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/algolib.algorithms.dynamic_programming.html#algolib.algorithms.dynamic_programming.DPItem.name">name (algolib.algorithms.dynamic_programming.DPItem attribute)</a>
+
+        <ul>
+          <li><a href="algorithms/dynamic_programming/knapsack.html#algolib.algorithms.dynamic_programming.knapsack.DPItem.name">(algolib.algorithms.dynamic_programming.knapsack.DPItem attribute)</a>, <a href="api/algolib.algorithms.dynamic_programming.knapsack.html#algolib.algorithms.dynamic_programming.knapsack.DPItem.name">[1]</a>
+</li>
+          <li><a href="algorithms/greedy/activity_selection.html#algolib.algorithms.greedy.activity_selection.Activity.name">(algolib.algorithms.greedy.activity_selection.Activity attribute)</a>, <a href="api/algolib.algorithms.greedy.activity_selection.html#algolib.algorithms.greedy.activity_selection.Activity.name">[1]</a>
+</li>
+          <li><a href="algorithms/greedy/fractional_knapsack.html#algolib.algorithms.greedy.fractional_knapsack.Item.name">(algolib.algorithms.greedy.fractional_knapsack.Item attribute)</a>, <a href="api/algolib.algorithms.greedy.fractional_knapsack.html#algolib.algorithms.greedy.fractional_knapsack.Item.name">[1]</a>
+</li>
+          <li><a href="api/algolib.specs.schema.html#algolib.specs.schema.AlgorithmSpec.name">(algolib.specs.schema.AlgorithmSpec attribute)</a>
+</li>
+          <li><a href="api/algolib.specs.schema.html#algolib.specs.schema.Parameter.name">(algolib.specs.schema.Parameter attribute)</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/algolib.data_structures.html#algolib.data_structures.Graph.neighbors">neighbors() (algolib.data_structures.Graph method)</a>
+
+        <ul>
+          <li><a href="api/algolib.data_structures.graph.html#algolib.data_structures.graph.Graph.neighbors">(algolib.data_structures.graph.Graph method)</a>, <a href="data_structures/graph.html#algolib.data_structures.graph.Graph.neighbors">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.algorithms.backtracking.html#algolib.algorithms.backtracking.NQueensSolver">NQueensSolver (class in algolib.algorithms.backtracking)</a>
+
+        <ul>
+          <li><a href="algorithms/backtracking/n_queens_solver.html#algolib.algorithms.backtracking.n_queens_solver.NQueensSolver">(class in algolib.algorithms.backtracking.n_queens_solver)</a>, <a href="api/algolib.algorithms.backtracking.n_queens_solver.html#algolib.algorithms.backtracking.n_queens_solver.NQueensSolver">[1]</a>
+</li>
+        </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="P" class="genindex-section">
+  <h2>P</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/algolib.specs.schema.html#algolib.specs.schema.Parameter">Parameter (class in algolib.specs.schema)</a>
+</li>
+        <li><a href="api/algolib.specs.schema.html#algolib.specs.schema.AlgorithmSpec.parameters">parameters (algolib.specs.schema.AlgorithmSpec attribute)</a>
+</li>
+        <li><a href="api/algolib.data_structures.heap.html#algolib.data_structures.heap.MaxHeap.peek">peek() (algolib.data_structures.heap.MaxHeap method)</a>, <a href="data_structures/heap.html#algolib.data_structures.heap.MaxHeap.peek">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.MaxHeap.peek">(algolib.data_structures.MaxHeap method)</a>
+</li>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.Queue.peek">(algolib.data_structures.Queue method)</a>
+</li>
+          <li><a href="api/algolib.data_structures.queue.html#algolib.data_structures.queue.Queue.peek">(algolib.data_structures.queue.Queue method)</a>, <a href="data_structures/queue.html#algolib.data_structures.queue.Queue.peek">[1]</a>
+</li>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.Stack.peek">(algolib.data_structures.Stack method)</a>
+</li>
+          <li><a href="api/algolib.data_structures.stack.html#algolib.data_structures.stack.Stack.peek">(algolib.data_structures.stack.Stack method)</a>, <a href="data_structures/stack.html#algolib.data_structures.stack.Stack.peek">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.algorithms.backtracking.html#algolib.algorithms.backtracking.PermutationFinder">PermutationFinder (class in algolib.algorithms.backtracking)</a>
+
+        <ul>
+          <li><a href="algorithms/backtracking/permutation_generation.html#algolib.algorithms.backtracking.permutation_generation.PermutationFinder">(class in algolib.algorithms.backtracking.permutation_generation)</a>, <a href="api/algolib.algorithms.backtracking.permutation_generation.html#algolib.algorithms.backtracking.permutation_generation.PermutationFinder">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="algorithms/backtracking/permutation_generation.html#algolib.algorithms.backtracking.permutation_generation.PermutationFinder.permute">permute() (algolib.algorithms.backtracking.permutation_generation.PermutationFinder method)</a>, <a href="api/algolib.algorithms.backtracking.permutation_generation.html#algolib.algorithms.backtracking.permutation_generation.PermutationFinder.permute">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.algorithms.backtracking.html#algolib.algorithms.backtracking.PermutationFinder.permute">(algolib.algorithms.backtracking.PermutationFinder method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.data_structures.html#algolib.data_structures.Stack.pop">pop() (algolib.data_structures.Stack method)</a>
+
+        <ul>
+          <li><a href="api/algolib.data_structures.stack.html#algolib.data_structures.stack.Stack.pop">(algolib.data_structures.stack.Stack method)</a>, <a href="data_structures/stack.html#algolib.data_structures.stack.Stack.pop">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.data_structures.avl_tree.html#algolib.data_structures.avl_tree.AVLTree.postorder">postorder() (algolib.data_structures.avl_tree.AVLTree method)</a>, <a href="data_structures/avl_tree.html#algolib.data_structures.avl_tree.AVLTree.postorder">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.AVLTree.postorder">(algolib.data_structures.AVLTree method)</a>
+</li>
+          <li><a href="api/algolib.data_structures.binary_tree.html#algolib.data_structures.binary_tree.BinaryTree.postorder">(algolib.data_structures.binary_tree.BinaryTree method)</a>, <a href="data_structures/binary_tree.html#algolib.data_structures.binary_tree.BinaryTree.postorder">[1]</a>
+</li>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.BinaryTree.postorder">(algolib.data_structures.BinaryTree method)</a>
+</li>
+          <li><a href="api/algolib.data_structures.red_black_tree.html#algolib.data_structures.red_black_tree.RedBlackTree.postorder">(algolib.data_structures.red_black_tree.RedBlackTree method)</a>, <a href="data_structures/red_black_tree.html#algolib.data_structures.red_black_tree.RedBlackTree.postorder">[1]</a>
+</li>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.RedBlackTree.postorder">(algolib.data_structures.RedBlackTree method)</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/algolib.data_structures.avl_tree.html#algolib.data_structures.avl_tree.AVLTree.preorder">preorder() (algolib.data_structures.avl_tree.AVLTree method)</a>, <a href="data_structures/avl_tree.html#algolib.data_structures.avl_tree.AVLTree.preorder">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.AVLTree.preorder">(algolib.data_structures.AVLTree method)</a>
+</li>
+          <li><a href="api/algolib.data_structures.binary_tree.html#algolib.data_structures.binary_tree.BinaryTree.preorder">(algolib.data_structures.binary_tree.BinaryTree method)</a>, <a href="data_structures/binary_tree.html#algolib.data_structures.binary_tree.BinaryTree.preorder">[1]</a>
+</li>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.BinaryTree.preorder">(algolib.data_structures.BinaryTree method)</a>
+</li>
+          <li><a href="api/algolib.data_structures.red_black_tree.html#algolib.data_structures.red_black_tree.RedBlackTree.preorder">(algolib.data_structures.red_black_tree.RedBlackTree method)</a>, <a href="data_structures/red_black_tree.html#algolib.data_structures.red_black_tree.RedBlackTree.preorder">[1]</a>
+</li>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.RedBlackTree.preorder">(algolib.data_structures.RedBlackTree method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.data_structures.linked_list.html#algolib.data_structures.linked_list.LinkedList.prepend">prepend() (algolib.data_structures.linked_list.LinkedList method)</a>, <a href="data_structures/linked_list.html#algolib.data_structures.linked_list.LinkedList.prepend">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.LinkedList.prepend">(algolib.data_structures.LinkedList method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.algorithms.graph.html#algolib.algorithms.graph.PrimMST">PrimMST (class in algolib.algorithms.graph)</a>
+
+        <ul>
+          <li><a href="algorithms/graph/prim_mst.html#algolib.algorithms.graph.prim_mst.PrimMST">(class in algolib.algorithms.graph.prim_mst)</a>, <a href="api/algolib.algorithms.graph.prim_mst.html#algolib.algorithms.graph.prim_mst.PrimMST">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.data_structures.html#algolib.data_structures.Stack.push">push() (algolib.data_structures.Stack method)</a>
+
+        <ul>
+          <li><a href="api/algolib.data_structures.stack.html#algolib.data_structures.stack.Stack.push">(algolib.data_structures.stack.Stack method)</a>, <a href="data_structures/stack.html#algolib.data_structures.stack.Stack.push">[1]</a>
+</li>
+        </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="Q" class="genindex-section">
+  <h2>Q</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/algolib.data_structures.html#algolib.data_structures.Queue">Queue (class in algolib.data_structures)</a>
+
+        <ul>
+          <li><a href="api/algolib.data_structures.queue.html#algolib.data_structures.queue.Queue">(class in algolib.data_structures.queue)</a>, <a href="data_structures/queue.html#algolib.data_structures.queue.Queue">[1]</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/algolib.algorithms.sorting.html#algolib.algorithms.sorting.QuickSort">QuickSort (class in algolib.algorithms.sorting)</a>
+
+        <ul>
+          <li><a href="algorithms/sorting/quick_sort.html#algolib.algorithms.sorting.quick_sort.QuickSort">(class in algolib.algorithms.sorting.quick_sort)</a>, <a href="api/algolib.algorithms.sorting.quick_sort.html#algolib.algorithms.sorting.quick_sort.QuickSort">[1]</a>
+</li>
+        </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="R" class="genindex-section">
+  <h2>R</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/algolib.algorithms.sorting.html#algolib.algorithms.sorting.RadixSort">RadixSort (class in algolib.algorithms.sorting)</a>
+
+        <ul>
+          <li><a href="algorithms/sorting/radix_sort.html#algolib.algorithms.sorting.radix_sort.RadixSort">(class in algolib.algorithms.sorting.radix_sort)</a>, <a href="api/algolib.algorithms.sorting.radix_sort.html#algolib.algorithms.sorting.radix_sort.RadixSort">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.algorithms.math.html#algolib.algorithms.math.Fibonacci.ratio">ratio() (algolib.algorithms.math.Fibonacci method)</a>
+
+        <ul>
+          <li><a href="algorithms/math/fibonacci.html#algolib.algorithms.math.fibonacci.Fibonacci.ratio">(algolib.algorithms.math.fibonacci.Fibonacci method)</a>, <a href="api/algolib.algorithms.math.fibonacci.html#algolib.algorithms.math.fibonacci.Fibonacci.ratio">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.data_structures.html#algolib.data_structures.Color.RED">RED (algolib.data_structures.Color attribute)</a>
+
+        <ul>
+          <li><a href="api/algolib.data_structures.red_black_tree.html#algolib.data_structures.red_black_tree.Color.RED">(algolib.data_structures.red_black_tree.Color attribute)</a>, <a href="data_structures/red_black_tree.html#algolib.data_structures.red_black_tree.Color.RED">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.data_structures.html#algolib.data_structures.RedBlackTree">RedBlackTree (class in algolib.data_structures)</a>
+
+        <ul>
+          <li><a href="api/algolib.data_structures.red_black_tree.html#algolib.data_structures.red_black_tree.RedBlackTree">(class in algolib.data_structures.red_black_tree)</a>, <a href="data_structures/red_black_tree.html#algolib.data_structures.red_black_tree.RedBlackTree">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.data_structures.linked_list.html#algolib.data_structures.linked_list.LinkedList.remove">remove() (algolib.data_structures.linked_list.LinkedList method)</a>, <a href="data_structures/linked_list.html#algolib.data_structures.linked_list.LinkedList.remove">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.LinkedList.remove">(algolib.data_structures.LinkedList method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.specs.schema.html#algolib.specs.schema.AlgorithmSpec.returns">returns (algolib.specs.schema.AlgorithmSpec attribute)</a>
+</li>
+        <li><a href="api/algolib.specs.schema.html#algolib.specs.schema.Returns">Returns (class in algolib.specs.schema)</a>
+</li>
+        <li><a href="api/algolib.data_structures.binary_search_tree.html#algolib.data_structures.binary_search_tree.BSTNode.right">right (algolib.data_structures.binary_search_tree.BSTNode attribute)</a>, <a href="data_structures/binary_search_tree.html#algolib.data_structures.binary_search_tree.BSTNode.right">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.data_structures.binary_tree.html#algolib.data_structures.binary_tree.TreeNode.right">(algolib.data_structures.binary_tree.TreeNode attribute)</a>, <a href="data_structures/binary_tree.html#algolib.data_structures.binary_tree.TreeNode.right">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.specs.schema.html#algolib.specs.schema.SpecList.root">root (algolib.specs.schema.SpecList attribute)</a>
+</li>
+        <li><a href="api/algolib.algorithms.graph.html#algolib.algorithms.graph.BreadthFirstSearch.run">run() (algolib.algorithms.graph.BreadthFirstSearch method)</a>
+
+        <ul>
+          <li><a href="api/algolib.algorithms.graph.html#algolib.algorithms.graph.DepthFirstSearch.run">(algolib.algorithms.graph.DepthFirstSearch method)</a>
+</li>
+          <li><a href="algorithms/graph/dijkstra.html#algolib.algorithms.graph.dijkstra.DijkstraAlgorithm.run">(algolib.algorithms.graph.dijkstra.DijkstraAlgorithm method)</a>, <a href="api/algolib.algorithms.graph.dijkstra.html#algolib.algorithms.graph.dijkstra.DijkstraAlgorithm.run">[1]</a>
+</li>
+          <li><a href="api/algolib.algorithms.graph.html#algolib.algorithms.graph.DijkstraAlgorithm.run">(algolib.algorithms.graph.DijkstraAlgorithm method)</a>
+</li>
+          <li><a href="algorithms/graph/kruskal_mst.html#algolib.algorithms.graph.kruskal_mst.KruskalMST.run">(algolib.algorithms.graph.kruskal_mst.KruskalMST method)</a>, <a href="api/algolib.algorithms.graph.kruskal_mst.html#algolib.algorithms.graph.kruskal_mst.KruskalMST.run">[1]</a>
+</li>
+          <li><a href="api/algolib.algorithms.graph.html#algolib.algorithms.graph.KruskalMST.run">(algolib.algorithms.graph.KruskalMST method)</a>
+</li>
+          <li><a href="algorithms/graph/prim_mst.html#algolib.algorithms.graph.prim_mst.PrimMST.run">(algolib.algorithms.graph.prim_mst.PrimMST method)</a>, <a href="api/algolib.algorithms.graph.prim_mst.html#algolib.algorithms.graph.prim_mst.PrimMST.run">[1]</a>
+</li>
+          <li><a href="api/algolib.algorithms.graph.html#algolib.algorithms.graph.PrimMST.run">(algolib.algorithms.graph.PrimMST method)</a>
+</li>
+          <li><a href="algorithms/graph/topological_sort.html#algolib.algorithms.graph.topological_sort.TopologicalSort.run">(algolib.algorithms.graph.topological_sort.TopologicalSort method)</a>, <a href="api/algolib.algorithms.graph.topological_sort.html#algolib.algorithms.graph.topological_sort.TopologicalSort.run">[1]</a>
+</li>
+          <li><a href="api/algolib.algorithms.graph.html#algolib.algorithms.graph.TopologicalSort.run">(algolib.algorithms.graph.TopologicalSort method)</a>
+</li>
+          <li><a href="algorithms/graph/traversal/breadth_first_search.html#algolib.algorithms.graph.traversal.breadth_first_search.BreadthFirstSearch.run">(algolib.algorithms.graph.traversal.breadth_first_search.BreadthFirstSearch method)</a>, <a href="api/algolib.algorithms.graph.traversal.breadth_first_search.html#algolib.algorithms.graph.traversal.breadth_first_search.BreadthFirstSearch.run">[1]</a>
+</li>
+          <li><a href="api/algolib.algorithms.graph.traversal.html#algolib.algorithms.graph.traversal.BreadthFirstSearch.run">(algolib.algorithms.graph.traversal.BreadthFirstSearch method)</a>
+</li>
+          <li><a href="algorithms/graph/traversal/depth_first_search.html#algolib.algorithms.graph.traversal.depth_first_search.DepthFirstSearch.run">(algolib.algorithms.graph.traversal.depth_first_search.DepthFirstSearch method)</a>, <a href="api/algolib.algorithms.graph.traversal.depth_first_search.html#algolib.algorithms.graph.traversal.depth_first_search.DepthFirstSearch.run">[1]</a>
+</li>
+          <li><a href="api/algolib.algorithms.graph.traversal.html#algolib.algorithms.graph.traversal.DepthFirstSearch.run">(algolib.algorithms.graph.traversal.DepthFirstSearch method)</a>
+</li>
+          <li><a href="api/algolib.algorithms.searching.base.html#algolib.algorithms.searching.base.Searcher.run">(algolib.algorithms.searching.base.Searcher method)</a>
+</li>
+          <li><a href="api/algolib.algorithms.searching.html#algolib.algorithms.searching.Searcher.run">(algolib.algorithms.searching.Searcher method)</a>
+</li>
+          <li><a href="api/algolib.algorithms.sorting.base.html#algolib.algorithms.sorting.base.Sorter.run">(algolib.algorithms.sorting.base.Sorter method)</a>
+</li>
+          <li><a href="api/algolib.algorithms.sorting.html#algolib.algorithms.sorting.Sorter.run">(algolib.algorithms.sorting.Sorter method)</a>
+</li>
+          <li><a href="api/algolib.html#algolib.GraphAlgo.run">(algolib.GraphAlgo method)</a>
+</li>
+          <li><a href="api/algolib.interfaces.html#algolib.interfaces.GraphAlgo.run">(algolib.interfaces.GraphAlgo method)</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/algolib.algorithms.graph.html#algolib.algorithms.graph.DepthFirstSearch.run_iterative">run_iterative() (algolib.algorithms.graph.DepthFirstSearch method)</a>
+
+        <ul>
+          <li><a href="algorithms/graph/traversal/depth_first_search.html#algolib.algorithms.graph.traversal.depth_first_search.DepthFirstSearch.run_iterative">(algolib.algorithms.graph.traversal.depth_first_search.DepthFirstSearch method)</a>, <a href="api/algolib.algorithms.graph.traversal.depth_first_search.html#algolib.algorithms.graph.traversal.depth_first_search.DepthFirstSearch.run_iterative">[1]</a>
+</li>
+          <li><a href="api/algolib.algorithms.graph.traversal.html#algolib.algorithms.graph.traversal.DepthFirstSearch.run_iterative">(algolib.algorithms.graph.traversal.DepthFirstSearch method)</a>
+</li>
+        </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="S" class="genindex-section">
+  <h2>S</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/algolib.algorithms.searching.base.html#algolib.algorithms.searching.base.Searcher.search">search() (algolib.algorithms.searching.base.Searcher method)</a>
+
+        <ul>
+          <li><a href="algorithms/searching/binary.html#algolib.algorithms.searching.binary.BinarySearcher.search">(algolib.algorithms.searching.binary.BinarySearcher method)</a>, <a href="api/algolib.algorithms.searching.binary.html#algolib.algorithms.searching.binary.BinarySearcher.search">[1]</a>
+</li>
+          <li><a href="api/algolib.algorithms.searching.html#algolib.algorithms.searching.BinarySearcher.search">(algolib.algorithms.searching.BinarySearcher method)</a>
+</li>
+          <li><a href="algorithms/searching/linear.html#algolib.algorithms.searching.linear.LinearSearcher.search">(algolib.algorithms.searching.linear.LinearSearcher method)</a>, <a href="api/algolib.algorithms.searching.linear.html#algolib.algorithms.searching.linear.LinearSearcher.search">[1]</a>
+</li>
+          <li><a href="api/algolib.algorithms.searching.html#algolib.algorithms.searching.LinearSearcher.search">(algolib.algorithms.searching.LinearSearcher method)</a>
+</li>
+          <li><a href="api/algolib.algorithms.searching.html#algolib.algorithms.searching.Searcher.search">(algolib.algorithms.searching.Searcher method)</a>
+</li>
+          <li><a href="api/algolib.data_structures.avl_tree.html#algolib.data_structures.avl_tree.AVLTree.search">(algolib.data_structures.avl_tree.AVLTree method)</a>, <a href="data_structures/avl_tree.html#algolib.data_structures.avl_tree.AVLTree.search">[1]</a>
+</li>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.AVLTree.search">(algolib.data_structures.AVLTree method)</a>
+</li>
+          <li><a href="api/algolib.data_structures.binary_search_tree.html#algolib.data_structures.binary_search_tree.BinarySearchTree.search">(algolib.data_structures.binary_search_tree.BinarySearchTree method)</a>, <a href="data_structures/binary_search_tree.html#algolib.data_structures.binary_search_tree.BinarySearchTree.search">[1]</a>
+</li>
+          <li><a href="api/algolib.data_structures.binary_tree.html#algolib.data_structures.binary_tree.BinaryTree.search">(algolib.data_structures.binary_tree.BinaryTree method)</a>, <a href="data_structures/binary_tree.html#algolib.data_structures.binary_tree.BinaryTree.search">[1]</a>
+</li>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.BinarySearchTree.search">(algolib.data_structures.BinarySearchTree method)</a>
+</li>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.BinaryTree.search">(algolib.data_structures.BinaryTree method)</a>
+</li>
+          <li><a href="api/algolib.data_structures.linked_list.html#algolib.data_structures.linked_list.LinkedList.search">(algolib.data_structures.linked_list.LinkedList method)</a>, <a href="data_structures/linked_list.html#algolib.data_structures.linked_list.LinkedList.search">[1]</a>
+</li>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.LinkedList.search">(algolib.data_structures.LinkedList method)</a>
+</li>
+          <li><a href="api/algolib.data_structures.red_black_tree.html#algolib.data_structures.red_black_tree.RedBlackTree.search">(algolib.data_structures.red_black_tree.RedBlackTree method)</a>, <a href="data_structures/red_black_tree.html#algolib.data_structures.red_black_tree.RedBlackTree.search">[1]</a>
+</li>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.RedBlackTree.search">(algolib.data_structures.RedBlackTree method)</a>
+</li>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.Trie.search">(algolib.data_structures.Trie method)</a>
+</li>
+          <li><a href="api/algolib.data_structures.trie.html#algolib.data_structures.trie.Trie.search">(algolib.data_structures.trie.Trie method)</a>, <a href="data_structures/trie.html#algolib.data_structures.trie.Trie.search">[1]</a>
+</li>
+          <li><a href="api/algolib.interfaces.html#algolib.interfaces.Searcher.search">(algolib.interfaces.Searcher method)</a>
+</li>
+          <li><a href="api/algolib.html#algolib.Searcher.search">(algolib.Searcher method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.html#algolib.Searcher">Searcher (class in algolib)</a>
+
+        <ul>
+          <li><a href="api/algolib.algorithms.searching.html#algolib.algorithms.searching.Searcher">(class in algolib.algorithms.searching)</a>
+</li>
+          <li><a href="api/algolib.algorithms.searching.base.html#algolib.algorithms.searching.base.Searcher">(class in algolib.algorithms.searching.base)</a>
+</li>
+          <li><a href="api/algolib.interfaces.html#algolib.interfaces.Searcher">(class in algolib.interfaces)</a>
+</li>
+        </ul></li>
+        <li><a href="algorithms/greedy/activity_selection.html#algolib.algorithms.greedy.activity_selection.ActivitySelection.select">select() (algolib.algorithms.greedy.activity_selection.ActivitySelection method)</a>, <a href="api/algolib.algorithms.greedy.activity_selection.html#algolib.algorithms.greedy.activity_selection.ActivitySelection.select">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.algorithms.greedy.html#algolib.algorithms.greedy.ActivitySelection.select">(algolib.algorithms.greedy.ActivitySelection method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.algorithms.sorting.html#algolib.algorithms.sorting.SelectionSort">SelectionSort (class in algolib.algorithms.sorting)</a>
+
+        <ul>
+          <li><a href="algorithms/sorting/selection_sort.html#algolib.algorithms.sorting.selection_sort.SelectionSort">(class in algolib.algorithms.sorting.selection_sort)</a>, <a href="api/algolib.algorithms.sorting.selection_sort.html#algolib.algorithms.sorting.selection_sort.SelectionSort">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.algorithms.dynamic_programming.html#algolib.algorithms.dynamic_programming.LCS.sequence">sequence() (algolib.algorithms.dynamic_programming.LCS method)</a>
+
+        <ul>
+          <li><a href="algorithms/dynamic_programming/longest_common_subsequence.html#algolib.algorithms.dynamic_programming.longest_common_subsequence.LCS.sequence">(algolib.algorithms.dynamic_programming.longest_common_subsequence.LCS method)</a>, <a href="api/algolib.algorithms.dynamic_programming.longest_common_subsequence.html#algolib.algorithms.dynamic_programming.longest_common_subsequence.LCS.sequence">[1]</a>
+</li>
+          <li><a href="api/algolib.algorithms.math.html#algolib.algorithms.math.Fibonacci.sequence">(algolib.algorithms.math.Fibonacci method)</a>
+</li>
+          <li><a href="algorithms/math/fibonacci.html#algolib.algorithms.math.fibonacci.Fibonacci.sequence">(algolib.algorithms.math.fibonacci.Fibonacci method)</a>, <a href="api/algolib.algorithms.math.fibonacci.html#algolib.algorithms.math.fibonacci.Fibonacci.sequence">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.algorithms.graph.html#algolib.algorithms.graph.BreadthFirstSearch.shortest_path">shortest_path() (algolib.algorithms.graph.BreadthFirstSearch method)</a>
+
+        <ul>
+          <li><a href="algorithms/graph/dijkstra.html#algolib.algorithms.graph.dijkstra.DijkstraAlgorithm.shortest_path">(algolib.algorithms.graph.dijkstra.DijkstraAlgorithm method)</a>, <a href="api/algolib.algorithms.graph.dijkstra.html#algolib.algorithms.graph.dijkstra.DijkstraAlgorithm.shortest_path">[1]</a>
+</li>
+          <li><a href="api/algolib.algorithms.graph.html#algolib.algorithms.graph.DijkstraAlgorithm.shortest_path">(algolib.algorithms.graph.DijkstraAlgorithm method)</a>
+</li>
+          <li><a href="algorithms/graph/traversal/breadth_first_search.html#algolib.algorithms.graph.traversal.breadth_first_search.BreadthFirstSearch.shortest_path">(algolib.algorithms.graph.traversal.breadth_first_search.BreadthFirstSearch method)</a>, <a href="api/algolib.algorithms.graph.traversal.breadth_first_search.html#algolib.algorithms.graph.traversal.breadth_first_search.BreadthFirstSearch.shortest_path">[1]</a>
+</li>
+          <li><a href="api/algolib.algorithms.graph.traversal.html#algolib.algorithms.graph.traversal.BreadthFirstSearch.shortest_path">(algolib.algorithms.graph.traversal.BreadthFirstSearch method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.data_structures.avl_tree.html#algolib.data_structures.avl_tree.AVLTree.size">size() (algolib.data_structures.avl_tree.AVLTree method)</a>, <a href="data_structures/avl_tree.html#algolib.data_structures.avl_tree.AVLTree.size">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.AVLTree.size">(algolib.data_structures.AVLTree method)</a>
+</li>
+          <li><a href="api/algolib.data_structures.binary_search_tree.html#algolib.data_structures.binary_search_tree.BinarySearchTree.size">(algolib.data_structures.binary_search_tree.BinarySearchTree method)</a>, <a href="data_structures/binary_search_tree.html#algolib.data_structures.binary_search_tree.BinarySearchTree.size">[1]</a>
+</li>
+          <li><a href="api/algolib.data_structures.binary_tree.html#algolib.data_structures.binary_tree.BinaryTree.size">(algolib.data_structures.binary_tree.BinaryTree method)</a>, <a href="data_structures/binary_tree.html#algolib.data_structures.binary_tree.BinaryTree.size">[1]</a>
+</li>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.BinarySearchTree.size">(algolib.data_structures.BinarySearchTree method)</a>
+</li>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.BinaryTree.size">(algolib.data_structures.BinaryTree method)</a>
+</li>
+          <li><a href="api/algolib.data_structures.heap.html#algolib.data_structures.heap.MaxHeap.size">(algolib.data_structures.heap.MaxHeap method)</a>, <a href="data_structures/heap.html#algolib.data_structures.heap.MaxHeap.size">[1]</a>
+</li>
+          <li><a href="api/algolib.data_structures.linked_list.html#algolib.data_structures.linked_list.LinkedList.size">(algolib.data_structures.linked_list.LinkedList method)</a>, <a href="data_structures/linked_list.html#algolib.data_structures.linked_list.LinkedList.size">[1]</a>
+</li>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.LinkedList.size">(algolib.data_structures.LinkedList method)</a>
+</li>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.MaxHeap.size">(algolib.data_structures.MaxHeap method)</a>
+</li>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.Queue.size">(algolib.data_structures.Queue method)</a>
+</li>
+          <li><a href="api/algolib.data_structures.queue.html#algolib.data_structures.queue.Queue.size">(algolib.data_structures.queue.Queue method)</a>, <a href="data_structures/queue.html#algolib.data_structures.queue.Queue.size">[1]</a>
+</li>
+          <li><a href="api/algolib.data_structures.red_black_tree.html#algolib.data_structures.red_black_tree.RedBlackTree.size">(algolib.data_structures.red_black_tree.RedBlackTree method)</a>, <a href="data_structures/red_black_tree.html#algolib.data_structures.red_black_tree.RedBlackTree.size">[1]</a>
+</li>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.RedBlackTree.size">(algolib.data_structures.RedBlackTree method)</a>
+</li>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.Stack.size">(algolib.data_structures.Stack method)</a>
+</li>
+          <li><a href="api/algolib.data_structures.stack.html#algolib.data_structures.stack.Stack.size">(algolib.data_structures.stack.Stack method)</a>, <a href="data_structures/stack.html#algolib.data_structures.stack.Stack.size">[1]</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="algorithms/backtracking/n_queens_solver.html#algolib.algorithms.backtracking.n_queens_solver.NQueensSolver.solve">solve() (algolib.algorithms.backtracking.n_queens_solver.NQueensSolver method)</a>, <a href="api/algolib.algorithms.backtracking.n_queens_solver.html#algolib.algorithms.backtracking.n_queens_solver.NQueensSolver.solve">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.algorithms.backtracking.html#algolib.algorithms.backtracking.NQueensSolver.solve">(algolib.algorithms.backtracking.NQueensSolver method)</a>
+</li>
+          <li><a href="algorithms/backtracking/sudoku_solver.html#algolib.algorithms.backtracking.sudoku_solver.SudokuSolver.solve">(algolib.algorithms.backtracking.sudoku_solver.SudokuSolver method)</a>, <a href="api/algolib.algorithms.backtracking.sudoku_solver.html#algolib.algorithms.backtracking.sudoku_solver.SudokuSolver.solve">[1]</a>
+</li>
+          <li><a href="api/algolib.algorithms.backtracking.html#algolib.algorithms.backtracking.SudokuSolver.solve">(algolib.algorithms.backtracking.SudokuSolver method)</a>
+</li>
+          <li><a href="algorithms/dynamic_programming/knapsack.html#algolib.algorithms.dynamic_programming.knapsack.KnapsackDP.solve">(algolib.algorithms.dynamic_programming.knapsack.KnapsackDP method)</a>, <a href="api/algolib.algorithms.dynamic_programming.knapsack.html#algolib.algorithms.dynamic_programming.knapsack.KnapsackDP.solve">[1]</a>
+</li>
+          <li><a href="api/algolib.algorithms.dynamic_programming.html#algolib.algorithms.dynamic_programming.KnapsackDP.solve">(algolib.algorithms.dynamic_programming.KnapsackDP method)</a>
+</li>
+          <li><a href="algorithms/greedy/fractional_knapsack.html#algolib.algorithms.greedy.fractional_knapsack.FractionalKnapsack.solve">(algolib.algorithms.greedy.fractional_knapsack.FractionalKnapsack method)</a>, <a href="api/algolib.algorithms.greedy.fractional_knapsack.html#algolib.algorithms.greedy.fractional_knapsack.FractionalKnapsack.solve">[1]</a>
+</li>
+          <li><a href="api/algolib.algorithms.greedy.html#algolib.algorithms.greedy.FractionalKnapsack.solve">(algolib.algorithms.greedy.FractionalKnapsack method)</a>
+</li>
+        </ul></li>
+        <li><a href="algorithms/dynamic_programming/knapsack.html#algolib.algorithms.dynamic_programming.knapsack.KnapsackDP.solve_bounded">solve_bounded() (algolib.algorithms.dynamic_programming.knapsack.KnapsackDP method)</a>, <a href="api/algolib.algorithms.dynamic_programming.knapsack.html#algolib.algorithms.dynamic_programming.knapsack.KnapsackDP.solve_bounded">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.algorithms.dynamic_programming.html#algolib.algorithms.dynamic_programming.KnapsackDP.solve_bounded">(algolib.algorithms.dynamic_programming.KnapsackDP method)</a>
+</li>
+        </ul></li>
+        <li><a href="algorithms/dynamic_programming/knapsack.html#algolib.algorithms.dynamic_programming.knapsack.KnapsackDP.solve_optimized">solve_optimized() (algolib.algorithms.dynamic_programming.knapsack.KnapsackDP method)</a>, <a href="api/algolib.algorithms.dynamic_programming.knapsack.html#algolib.algorithms.dynamic_programming.knapsack.KnapsackDP.solve_optimized">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.algorithms.dynamic_programming.html#algolib.algorithms.dynamic_programming.KnapsackDP.solve_optimized">(algolib.algorithms.dynamic_programming.KnapsackDP method)</a>
+</li>
+        </ul></li>
+        <li><a href="algorithms/graph/topological_sort.html#algolib.algorithms.graph.topological_sort.TopologicalSort.sort">sort() (algolib.algorithms.graph.topological_sort.TopologicalSort method)</a>, <a href="api/algolib.algorithms.graph.topological_sort.html#algolib.algorithms.graph.topological_sort.TopologicalSort.sort">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.algorithms.graph.html#algolib.algorithms.graph.TopologicalSort.sort">(algolib.algorithms.graph.TopologicalSort method)</a>
+</li>
+          <li><a href="api/algolib.algorithms.sorting.base.html#algolib.algorithms.sorting.base.Sorter.sort">(algolib.algorithms.sorting.base.Sorter method)</a>
+</li>
+          <li><a href="algorithms/sorting/bubble.html#algolib.algorithms.sorting.bubble.BubbleSorter.sort">(algolib.algorithms.sorting.bubble.BubbleSorter method)</a>, <a href="api/algolib.algorithms.sorting.bubble.html#algolib.algorithms.sorting.bubble.BubbleSorter.sort">[1]</a>
+</li>
+          <li><a href="api/algolib.algorithms.sorting.html#algolib.algorithms.sorting.BubbleSorter.sort">(algolib.algorithms.sorting.BubbleSorter method)</a>
+</li>
+          <li><a href="algorithms/sorting/counting_sort.html#algolib.algorithms.sorting.counting_sort.CountingSort.sort">(algolib.algorithms.sorting.counting_sort.CountingSort method)</a>, <a href="api/algolib.algorithms.sorting.counting_sort.html#algolib.algorithms.sorting.counting_sort.CountingSort.sort">[1]</a>
+</li>
+          <li><a href="api/algolib.algorithms.sorting.html#algolib.algorithms.sorting.CountingSort.sort">(algolib.algorithms.sorting.CountingSort method)</a>
+</li>
+          <li><a href="algorithms/sorting/divide_conquer_sorter.html#algolib.algorithms.sorting.divide_conquer_sorter.DivideConquerSorter.sort">(algolib.algorithms.sorting.divide_conquer_sorter.DivideConquerSorter method)</a>, <a href="api/algolib.algorithms.sorting.divide_conquer_sorter.html#algolib.algorithms.sorting.divide_conquer_sorter.DivideConquerSorter.sort">[1]</a>
+</li>
+          <li><a href="algorithms/sorting/heap_sort.html#algolib.algorithms.sorting.heap_sort.HeapSort.sort">(algolib.algorithms.sorting.heap_sort.HeapSort method)</a>, <a href="api/algolib.algorithms.sorting.heap_sort.html#algolib.algorithms.sorting.heap_sort.HeapSort.sort">[1]</a>
+</li>
+          <li><a href="api/algolib.algorithms.sorting.html#algolib.algorithms.sorting.HeapSort.sort">(algolib.algorithms.sorting.HeapSort method)</a>
+</li>
+          <li><a href="algorithms/sorting/insertion_sort.html#algolib.algorithms.sorting.insertion_sort.InsertionSort.sort">(algolib.algorithms.sorting.insertion_sort.InsertionSort method)</a>, <a href="api/algolib.algorithms.sorting.insertion_sort.html#algolib.algorithms.sorting.insertion_sort.InsertionSort.sort">[1]</a>
+</li>
+          <li><a href="api/algolib.algorithms.sorting.html#algolib.algorithms.sorting.InsertionSort.sort">(algolib.algorithms.sorting.InsertionSort method)</a>
+</li>
+          <li><a href="api/algolib.algorithms.sorting.merge_sort.html#algolib.algorithms.sorting.merge_sort.MergeSort.sort">(algolib.algorithms.sorting.merge_sort.MergeSort method)</a>
+</li>
+          <li><a href="api/algolib.algorithms.sorting.html#algolib.algorithms.sorting.MergeSort.sort">(algolib.algorithms.sorting.MergeSort method)</a>
+</li>
+          <li><a href="algorithms/sorting/radix_sort.html#algolib.algorithms.sorting.radix_sort.RadixSort.sort">(algolib.algorithms.sorting.radix_sort.RadixSort method)</a>, <a href="api/algolib.algorithms.sorting.radix_sort.html#algolib.algorithms.sorting.radix_sort.RadixSort.sort">[1]</a>
+</li>
+          <li><a href="api/algolib.algorithms.sorting.html#algolib.algorithms.sorting.RadixSort.sort">(algolib.algorithms.sorting.RadixSort method)</a>
+</li>
+          <li><a href="algorithms/sorting/selection_sort.html#algolib.algorithms.sorting.selection_sort.SelectionSort.sort">(algolib.algorithms.sorting.selection_sort.SelectionSort method)</a>, <a href="api/algolib.algorithms.sorting.selection_sort.html#algolib.algorithms.sorting.selection_sort.SelectionSort.sort">[1]</a>
+</li>
+          <li><a href="api/algolib.algorithms.sorting.html#algolib.algorithms.sorting.SelectionSort.sort">(algolib.algorithms.sorting.SelectionSort method)</a>
+</li>
+          <li><a href="api/algolib.algorithms.sorting.html#algolib.algorithms.sorting.Sorter.sort">(algolib.algorithms.sorting.Sorter method)</a>
+</li>
+          <li><a href="api/algolib.interfaces.html#algolib.interfaces.Sorter.sort">(algolib.interfaces.Sorter method)</a>
+</li>
+          <li><a href="api/algolib.html#algolib.Sorter.sort">(algolib.Sorter method)</a>
+</li>
+        </ul></li>
+        <li><a href="algorithms/sorting/insertion_sort.html#algolib.algorithms.sorting.insertion_sort.InsertionSort.sort_in_place">sort_in_place() (algolib.algorithms.sorting.insertion_sort.InsertionSort method)</a>, <a href="api/algolib.algorithms.sorting.insertion_sort.html#algolib.algorithms.sorting.insertion_sort.InsertionSort.sort_in_place">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.algorithms.sorting.html#algolib.algorithms.sorting.InsertionSort.sort_in_place">(algolib.algorithms.sorting.InsertionSort method)</a>
+</li>
+          <li><a href="algorithms/sorting/selection_sort.html#algolib.algorithms.sorting.selection_sort.SelectionSort.sort_in_place">(algolib.algorithms.sorting.selection_sort.SelectionSort method)</a>, <a href="api/algolib.algorithms.sorting.selection_sort.html#algolib.algorithms.sorting.selection_sort.SelectionSort.sort_in_place">[1]</a>
+</li>
+          <li><a href="api/algolib.algorithms.sorting.html#algolib.algorithms.sorting.SelectionSort.sort_in_place">(algolib.algorithms.sorting.SelectionSort method)</a>
+</li>
+        </ul></li>
+        <li><a href="algorithms/sorting/insertion_sort.html#algolib.algorithms.sorting.insertion_sort.InsertionSort.sort_with_stats">sort_with_stats() (algolib.algorithms.sorting.insertion_sort.InsertionSort method)</a>, <a href="api/algolib.algorithms.sorting.insertion_sort.html#algolib.algorithms.sorting.insertion_sort.InsertionSort.sort_with_stats">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.algorithms.sorting.html#algolib.algorithms.sorting.InsertionSort.sort_with_stats">(algolib.algorithms.sorting.InsertionSort method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.html#algolib.Sorter">Sorter (class in algolib)</a>
+
+        <ul>
+          <li><a href="api/algolib.algorithms.sorting.html#algolib.algorithms.sorting.Sorter">(class in algolib.algorithms.sorting)</a>
+</li>
+          <li><a href="api/algolib.algorithms.sorting.base.html#algolib.algorithms.sorting.base.Sorter">(class in algolib.algorithms.sorting.base)</a>
+</li>
+          <li><a href="api/algolib.interfaces.html#algolib.interfaces.Sorter">(class in algolib.interfaces)</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.specs.schema.html#algolib.specs.schema.Complexity.space_worst">space_worst (algolib.specs.schema.Complexity attribute)</a>
+</li>
+        <li><a href="api/algolib.specs.schema.html#algolib.specs.schema.SpecList">SpecList (class in algolib.specs.schema)</a>
+</li>
+        <li><a href="api/algolib.data_structures.html#algolib.data_structures.Stack">Stack (class in algolib.data_structures)</a>
+
+        <ul>
+          <li><a href="api/algolib.data_structures.stack.html#algolib.data_structures.stack.Stack">(class in algolib.data_structures.stack)</a>, <a href="data_structures/stack.html#algolib.data_structures.stack.Stack">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="algorithms/greedy/activity_selection.html#algolib.algorithms.greedy.activity_selection.Activity.start">start (algolib.algorithms.greedy.activity_selection.Activity attribute)</a>, <a href="api/algolib.algorithms.greedy.activity_selection.html#algolib.algorithms.greedy.activity_selection.Activity.start">[1]</a>
+</li>
+        <li><a href="api/algolib.data_structures.html#algolib.data_structures.Trie.starts_with">starts_with() (algolib.data_structures.Trie method)</a>
+
+        <ul>
+          <li><a href="api/algolib.data_structures.trie.html#algolib.data_structures.trie.Trie.starts_with">(algolib.data_structures.trie.Trie method)</a>, <a href="data_structures/trie.html#algolib.data_structures.trie.Trie.starts_with">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.algorithms.backtracking.html#algolib.algorithms.backtracking.SubsetGeneration">SubsetGeneration (class in algolib.algorithms.backtracking)</a>
+
+        <ul>
+          <li><a href="algorithms/backtracking/subset_generation.html#algolib.algorithms.backtracking.subset_generation.SubsetGeneration">(class in algolib.algorithms.backtracking.subset_generation)</a>, <a href="api/algolib.algorithms.backtracking.subset_generation.html#algolib.algorithms.backtracking.subset_generation.SubsetGeneration">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.algorithms.backtracking.html#algolib.algorithms.backtracking.SudokuSolver">SudokuSolver (class in algolib.algorithms.backtracking)</a>
+
+        <ul>
+          <li><a href="algorithms/backtracking/sudoku_solver.html#algolib.algorithms.backtracking.sudoku_solver.SudokuSolver">(class in algolib.algorithms.backtracking.sudoku_solver)</a>, <a href="api/algolib.algorithms.backtracking.sudoku_solver.html#algolib.algorithms.backtracking.sudoku_solver.SudokuSolver">[1]</a>
+</li>
+        </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="T" class="genindex-section">
+  <h2>T</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/algolib.specs.schema.html#algolib.specs.schema.Complexity.time_average">time_average (algolib.specs.schema.Complexity attribute)</a>
+</li>
+        <li><a href="api/algolib.specs.schema.html#algolib.specs.schema.Complexity.time_best">time_best (algolib.specs.schema.Complexity attribute)</a>
+</li>
+        <li><a href="api/algolib.specs.schema.html#algolib.specs.schema.Complexity.time_worst">time_worst (algolib.specs.schema.Complexity attribute)</a>
+</li>
+        <li><a href="api/algolib.algorithms.graph.html#algolib.algorithms.graph.TopologicalSort">TopologicalSort (class in algolib.algorithms.graph)</a>
+
+        <ul>
+          <li><a href="algorithms/graph/topological_sort.html#algolib.algorithms.graph.topological_sort.TopologicalSort">(class in algolib.algorithms.graph.topological_sort)</a>, <a href="api/algolib.algorithms.graph.topological_sort.html#algolib.algorithms.graph.topological_sort.TopologicalSort">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="algorithms/greedy/activity_selection.html#algolib.algorithms.greedy.activity_selection.ActivitySelection.total_time">total_time() (algolib.algorithms.greedy.activity_selection.ActivitySelection method)</a>, <a href="api/algolib.algorithms.greedy.activity_selection.html#algolib.algorithms.greedy.activity_selection.ActivitySelection.total_time">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.algorithms.greedy.html#algolib.algorithms.greedy.ActivitySelection.total_time">(algolib.algorithms.greedy.ActivitySelection method)</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.algorithms.graph.html#algolib.algorithms.graph.BreadthFirstSearch.traverse">traverse() (algolib.algorithms.graph.BreadthFirstSearch method)</a>
+
+        <ul>
+          <li><a href="api/algolib.algorithms.graph.html#algolib.algorithms.graph.DepthFirstSearch.traverse">(algolib.algorithms.graph.DepthFirstSearch method)</a>
+</li>
+          <li><a href="algorithms/graph/traversal/breadth_first_search.html#algolib.algorithms.graph.traversal.breadth_first_search.BreadthFirstSearch.traverse">(algolib.algorithms.graph.traversal.breadth_first_search.BreadthFirstSearch method)</a>, <a href="api/algolib.algorithms.graph.traversal.breadth_first_search.html#algolib.algorithms.graph.traversal.breadth_first_search.BreadthFirstSearch.traverse">[1]</a>
+</li>
+          <li><a href="api/algolib.algorithms.graph.traversal.html#algolib.algorithms.graph.traversal.BreadthFirstSearch.traverse">(algolib.algorithms.graph.traversal.BreadthFirstSearch method)</a>
+</li>
+          <li><a href="algorithms/graph/traversal/depth_first_search.html#algolib.algorithms.graph.traversal.depth_first_search.DepthFirstSearch.traverse">(algolib.algorithms.graph.traversal.depth_first_search.DepthFirstSearch method)</a>, <a href="api/algolib.algorithms.graph.traversal.depth_first_search.html#algolib.algorithms.graph.traversal.depth_first_search.DepthFirstSearch.traverse">[1]</a>
+</li>
+          <li><a href="api/algolib.algorithms.graph.traversal.html#algolib.algorithms.graph.traversal.DepthFirstSearch.traverse">(algolib.algorithms.graph.traversal.DepthFirstSearch method)</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/algolib.data_structures.binary_tree.html#algolib.data_structures.binary_tree.TreeNode">TreeNode (class in algolib.data_structures.binary_tree)</a>, <a href="data_structures/binary_tree.html#algolib.data_structures.binary_tree.TreeNode">[1]</a>
+</li>
+        <li><a href="api/algolib.data_structures.html#algolib.data_structures.Trie">Trie (class in algolib.data_structures)</a>
+
+        <ul>
+          <li><a href="api/algolib.data_structures.trie.html#algolib.data_structures.trie.Trie">(class in algolib.data_structures.trie)</a>, <a href="data_structures/trie.html#algolib.data_structures.trie.Trie">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.specs.schema.html#algolib.specs.schema.Parameter.type">type (algolib.specs.schema.Parameter attribute)</a>
+
+        <ul>
+          <li><a href="api/algolib.specs.schema.html#algolib.specs.schema.Returns.type">(algolib.specs.schema.Returns attribute)</a>
+</li>
+        </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="U" class="genindex-section">
+  <h2>U</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/algolib.data_structures.disjoint_set.html#algolib.data_structures.disjoint_set.DisjointSet.union">union() (algolib.data_structures.disjoint_set.DisjointSet method)</a>, <a href="data_structures/disjoint_set.html#algolib.data_structures.disjoint_set.DisjointSet.union">[1]</a>
+
+        <ul>
+          <li><a href="api/algolib.data_structures.html#algolib.data_structures.DisjointSet.union">(algolib.data_structures.DisjointSet method)</a>
+</li>
+        </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="V" class="genindex-section">
+  <h2>V</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/algolib.algorithms.dynamic_programming.html#algolib.algorithms.dynamic_programming.DPItem.value">value (algolib.algorithms.dynamic_programming.DPItem attribute)</a>
+
+        <ul>
+          <li><a href="algorithms/dynamic_programming/knapsack.html#algolib.algorithms.dynamic_programming.knapsack.DPItem.value">(algolib.algorithms.dynamic_programming.knapsack.DPItem attribute)</a>, <a href="api/algolib.algorithms.dynamic_programming.knapsack.html#algolib.algorithms.dynamic_programming.knapsack.DPItem.value">[1]</a>
+</li>
+          <li><a href="algorithms/greedy/fractional_knapsack.html#algolib.algorithms.greedy.fractional_knapsack.Item.value">(algolib.algorithms.greedy.fractional_knapsack.Item attribute)</a>, <a href="api/algolib.algorithms.greedy.fractional_knapsack.html#algolib.algorithms.greedy.fractional_knapsack.Item.value">[1]</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/algolib.data_structures.html#algolib.data_structures.Vertex">Vertex (class in algolib.data_structures)</a>
+
+        <ul>
+          <li><a href="api/algolib.data_structures.graph.html#algolib.data_structures.graph.Vertex">(class in algolib.data_structures.graph)</a>, <a href="data_structures/graph.html#algolib.data_structures.graph.Vertex">[1]</a>
+</li>
+        </ul></li>
+        <li><a href="api/algolib.data_structures.html#algolib.data_structures.Graph.vertices">vertices() (algolib.data_structures.Graph method)</a>
+
+        <ul>
+          <li><a href="api/algolib.data_structures.graph.html#algolib.data_structures.graph.Graph.vertices">(algolib.data_structures.graph.Graph method)</a>, <a href="data_structures/graph.html#algolib.data_structures.graph.Graph.vertices">[1]</a>
+</li>
+        </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
+<section id="W" class="genindex-section">
+  <h2>W</h2>
+  <table style="width: 100%" class="indextable genindextable"><tr>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/algolib.algorithms.dynamic_programming.html#algolib.algorithms.dynamic_programming.DPItem.weight">weight (algolib.algorithms.dynamic_programming.DPItem attribute)</a>
+
+        <ul>
+          <li><a href="algorithms/dynamic_programming/knapsack.html#algolib.algorithms.dynamic_programming.knapsack.DPItem.weight">(algolib.algorithms.dynamic_programming.knapsack.DPItem attribute)</a>, <a href="api/algolib.algorithms.dynamic_programming.knapsack.html#algolib.algorithms.dynamic_programming.knapsack.DPItem.weight">[1]</a>
+</li>
+          <li><a href="algorithms/greedy/fractional_knapsack.html#algolib.algorithms.greedy.fractional_knapsack.Item.weight">(algolib.algorithms.greedy.fractional_knapsack.Item attribute)</a>, <a href="api/algolib.algorithms.greedy.fractional_knapsack.html#algolib.algorithms.greedy.fractional_knapsack.Item.weight">[1]</a>
+</li>
+        </ul></li>
+    </ul></td>
+    <td style="width: 33%; vertical-align: top;"><ul>
+        <li><a href="api/algolib.data_structures.html#algolib.data_structures.Trie.words_with_prefix">words_with_prefix() (algolib.data_structures.Trie method)</a>
+
+        <ul>
+          <li><a href="api/algolib.data_structures.trie.html#algolib.data_structures.trie.Trie.words_with_prefix">(algolib.data_structures.trie.Trie method)</a>, <a href="data_structures/trie.html#algolib.data_structures.trie.Trie.words_with_prefix">[1]</a>
+</li>
+        </ul></li>
+    </ul></td>
+  </tr></table>
+</section>
+
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          
+          
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2025, Aditya Gambhir
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer no-toc">
+      
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/documentation_options.js?v=d45e8c67"></script>
+    <script src="_static/doctools.js?v=9bcbadda"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/furo.js?v=5fa4622c"></script>
+    </body>
+</html>

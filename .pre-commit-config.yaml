@@ -19,7 +19,7 @@ repos:
     hooks:
       - id: pytest
         name: pytest
-        entry: poetry run pytest -q -m "not property"
+        entry: poetry run pytest -q -m "not property and not benchmark"
         language: system
         pass_filenames: false
         always_run: true
@@ -31,11 +31,18 @@ repos:
         types: [python]
         pass_filenames: false
 
-  - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.11.0
+  - repo: local
     hooks:
+      - id: pytest-collect
+        name: pytest collect
+        entry: pytest --collect-only
+        language: system
+        pass_filenames: false
+        always_run: true
       - id: mypy
-        language: python
+        name: mypy
         entry: poetry run mypy
-        args: [--config-file=pyproject.toml]
+        language: system
+        args: [--config-file=pyproject.toml, --explicit-package-bases, algolib, tests]
         exclude: ^(docs/|.*/templates/|app\.py|.*/generated/)
+        pass_filenames: false

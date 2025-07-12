@@ -6,9 +6,9 @@
 algolib-adg documentation
 =========================
 
-Add your content using ``reStructuredText`` syntax. See the
-`reStructuredText <https://www.sphinx-doc.org/en/master/usage/restructuredtext/index.html>`_
-documentation for details.
+A comprehensive library of algorithms and data structures, with a focus on clean code, SOLID principles, and thorough testing.
+
+This documentation provides detailed information about the algorithms and data structures implemented in the algolib-adg library, along with usage examples, complexity analysis, and best practices.
 
 
 .. toctree::
@@ -17,6 +17,9 @@ documentation for details.
 
    why
    agent_overview
+   easy_ds
+   intermediate_algos
+   advanced_structures
    CONTRIBUTING
    contributors_guide
    complexity_cheatsheet
@@ -25,14 +28,20 @@ documentation for details.
    :caption: API Reference
    :maxdepth: 2
 
-   algorithms/sorting/bubble
-   algorithms/sorting/merge
-   algorithms/searching/linear
-   algorithms/searching/binary
-   algorithms/graph/traversal/bfs
+   api/modules
 
 .. toctree::
    :caption: Data Structures
    :maxdepth: 2
 
+   data_structures/avl_tree
+   data_structures/binary_search_tree
+   data_structures/binary_tree
+   data_structures/disjoint_set
+   data_structures/graph
+   data_structures/heap
+   data_structures/linked_list
+   data_structures/queue
+   data_structures/red_black_tree
    data_structures/stack
+   data_structures/trie

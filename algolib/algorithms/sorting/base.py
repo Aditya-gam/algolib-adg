@@ -1,17 +1,17 @@
 """Abstract base classes for sorting algorithms."""
 
 from abc import ABC, abstractmethod
-from typing import Any, Generic, MutableSequence, cast
+from typing import Any, MutableSequence, cast
 
-from algolib._typing import ComparableT
+from algolib._typing import T
 from algolib.interfaces import Sorter as SorterProtocol
 
 
-class Sorter(Generic[ComparableT], ABC):
+class Sorter(SorterProtocol[T], ABC):
     """Abstract base class for sorting algorithms."""
 
     @abstractmethod
-    def sort(self, data: MutableSequence[ComparableT]) -> MutableSequence[ComparableT]:
+    def sort(self, data: MutableSequence[T]) -> MutableSequence[T]:
         """Sorts a mutable sequence in place.
 
         Args:
@@ -24,8 +24,4 @@ class Sorter(Generic[ComparableT], ABC):
 
     def run(self, data: Any) -> Any:
         """Run the sorting algorithm."""
-        return self.sort(cast(MutableSequence[ComparableT], data))
-
-
-# Type assertion to ensure Sorter conforms to the protocol
-_sorter_protocol_check: type[SorterProtocol] = cast(type[SorterProtocol], Sorter)
+        return self.sort(cast(MutableSequence[T], data))

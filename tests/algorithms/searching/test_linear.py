@@ -14,6 +14,9 @@ class _ComparableNone:
     def __lt__(self, other: Any) -> bool:
         return False
 
+    def __le__(self, other: Any) -> bool:
+        return isinstance(other, _ComparableNone)
+
 
 @pytest.fixture
 def searcher() -> LinearSearcher[int]:

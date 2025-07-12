@@ -27,11 +27,7 @@ class Vertex(Generic[T]):
 
 @dataclass(slots=True, init=False)
 class Graph(Generic[T]):
-    """A graph represented using an adjacency list.
-
-    Attributes:
-        directed: Whether the graph is directed.
-    """
+    """A graph represented using an adjacency list."""
 
     _adj: Dict[Vertex[T], List[Tuple[Vertex[T], float]]]
     _vertices: Dict[T, Vertex[T]]
@@ -134,3 +130,11 @@ class Graph(Generic[T]):
             A list of neighbor vertices.
         """
         return [neighbor for neighbor, _ in self.neighbors(v)]
+
+    def vertices(self) -> Iterator[Vertex[T]]:
+        """Returns an iterator over all vertices in the graph.
+
+        Returns:
+            An iterator over all vertices.
+        """
+        return iter(self._vertices.values())

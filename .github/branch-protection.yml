@@ -1,0 +1,94 @@
+# Branch Protection Rules for main branch
+# This file defines the protection rules that will be applied to the main branch
+
+branch_protection:
+  main:
+    # Require pull request reviews before merging
+    required_pull_request_reviews:
+      required_approving_review_count: 2
+      dismiss_stale_reviews: true
+      require_code_owner_reviews: true
+      require_last_push_approval: true
+
+    # Require status checks to pass before merging
+    required_status_checks:
+      strict: true
+      contexts:
+        - "CI"
+        - "Validate PR"
+
+    # Enforce restrictions on who can push to this branch
+    restrictions:
+      users: []  # No direct pushes allowed
+      teams: []  # No team direct pushes allowed
+
+    # Additional protections
+    enforce_admins: true
+    allow_force_pushes: false
+    allow_deletions: false
+    block_creations: true
+    required_conversation_resolution: true
+
+    # Require linear history
+    required_linear_history: true
+
+    # Require signed commits
+    required_signatures: false  # Set to true if GPG signing is required
+
+    # Lock branch
+    lock_branch: false  # Set to true to prevent any changes
+
+    # Allow fork syncing
+    allow_fork_syncing: true
+
+# Protection rules for feature branches
+feature_branches:
+  "feat/**":
+    required_pull_request_reviews:
+      required_approving_review_count: 1
+      dismiss_stale_reviews: true
+      require_code_owner_reviews: false
+
+    required_status_checks:
+      strict: true
+      contexts:
+        - "CI"
+
+    restrictions:
+      users: []
+      teams: []
+
+    enforce_admins: false
+    allow_force_pushes: false
+    allow_deletions: true
+    block_creations: false
+    required_conversation_resolution: true
+    required_linear_history: false
+    allow_fork_syncing: true
+
+# Protection rules for hotfix branches
+hotfix_branches:
+  "hotfix/**":
+    required_pull_request_reviews:
+      required_approving_review_count: 2
+      dismiss_stale_reviews: true
+      require_code_owner_reviews: true
+      require_last_push_approval: true
+
+    required_status_checks:
+      strict: true
+      contexts:
+        - "CI"
+        - "Validate PR"
+
+    restrictions:
+      users: []
+      teams: []
+
+    enforce_admins: true
+    allow_force_pushes: false
+    allow_deletions: false
+    block_creations: true
+    required_conversation_resolution: true
+    required_linear_history: true
+    allow_fork_syncing: false

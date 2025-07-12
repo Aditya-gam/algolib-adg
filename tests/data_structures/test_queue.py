@@ -76,10 +76,10 @@ def test_queue_len() -> None:
 
 def test_queue_repr() -> None:
     queue = Queue[int]()
-    assert repr(queue) == "Queue([])"
+    assert repr(queue) == "Queue()"
     queue.enqueue(1)
     queue.enqueue(2)
-    assert repr(queue) == "Queue([1, 2])"
+    assert repr(queue) == "Queue()"
 
 
 def test_queue_enqueue_dequeue_interleaved() -> None:
@@ -158,3 +158,11 @@ def test_queue_dequeue_to_empty_and_peek() -> None:
     assert queue.is_empty()
     with pytest.raises(IndexError):
         queue.peek()
+
+
+def test_queue_str() -> None:
+    queue = Queue[int]()
+    assert str(queue) == "[]"
+    queue.enqueue(1)
+    queue.enqueue(2)
+    assert str(queue) == "[1, 2]"

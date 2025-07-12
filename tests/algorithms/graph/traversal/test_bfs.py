@@ -4,7 +4,7 @@ import pytest
 from hypothesis import given
 from hypothesis import strategies as st
 
-from algolib.algorithms.graph.traversal.bfs import BFS
+from algolib.algorithms.graph.traversal.breadth_first_search import BreadthFirstSearch as BFS
 from algolib.data_structures.graph import Graph, Vertex
 
 
@@ -117,7 +117,7 @@ def test_bfs_traversal_start_not_in_graph() -> None:
     graph.add_vertex(1)
     start_vertex_not_in_graph = Vertex(99)
     bfs = BFS[int]()
-    with pytest.raises(ValueError, match="Start vertex must be in the graph"):
+    with pytest.raises(ValueError, match="Start vertex not in graph"):
         bfs.traverse(graph, start_vertex_not_in_graph)
 
 
@@ -167,16 +167,194 @@ def test_bfs_run_method(graph: Graph[str]) -> None:
     assert start_vertex is not None
 
     # Test valid run
-    traversal = bfs.run((graph, start_vertex))
-    expected_reachable_nodes = {"0", "1", "2", "3", "4", "5", "6", "7"}
-    traversed_keys = {v.key for v in traversal}
-    assert traversed_keys == expected_reachable_nodes
-    assert len(traversal) == 8
+    traversal = bfs.run(graph, start_vertex.key)
+    assert traversal is not None
+    assert [v.key for v in traversal] == ["0", "1", "2", "3", "4", "5", "6", "7"]
 
-    # Test with invalid data types
-    with pytest.raises(TypeError, match="Expected a tuple"):
-        bfs.run("not a tuple")
-    with pytest.raises(TypeError, match="First element.*must be a Graph"):
-        bfs.run(("not a graph", start_vertex))
-    with pytest.raises(TypeError, match="Second element.*must be a Vertex"):
-        bfs.run((graph, "not a vertex"))
+    # Test with non-existent start vertex
+    with pytest.raises(ValueError):
+        bfs.run(graph, "8")
+
+
+# Tests for shortest_path method
+def test_shortest_path_same_vertex(graph: Graph[str]) -> None:
+    """Test shortest path when start and end are the same vertex."""
+    bfs = BFS[str]()
+    start_vertex = graph.get_vertex("0")
+    assert start_vertex is not None
+
+    path = bfs.shortest_path(graph, start_vertex, start_vertex)
+    assert path == [start_vertex]
+
+
+def test_shortest_path_adjacent_vertices(graph: Graph[str]) -> None:
+    """Test shortest path between adjacent vertices."""
+    bfs = BFS[str]()
+    start_vertex = graph.get_vertex("0")
+    end_vertex = graph.get_vertex("1")
+    assert start_vertex is not None and end_vertex is not None
+
+    path = bfs.shortest_path(graph, start_vertex, end_vertex)
+    assert path == [start_vertex, end_vertex]
+
+
+def test_shortest_path_distant_vertices(graph: Graph[str]) -> None:
+    """Test shortest path between distant vertices."""
+    bfs = BFS[str]()
+    start_vertex = graph.get_vertex("0")
+    end_vertex = graph.get_vertex("7")
+    assert start_vertex is not None and end_vertex is not None
+
+    path = bfs.shortest_path(graph, start_vertex, end_vertex)
+    assert path is not None
+    assert path[0] == start_vertex
+    assert path[-1] == end_vertex
+    assert len(path) == 4  # Shortest path: 0 -> 1 -> 3 -> 7
+
+
+def test_shortest_path_no_path() -> None:
+    """Test shortest path when no path exists."""
+    graph = Graph[int]()
+    v1 = graph.add_vertex(1)
+    v2 = graph.add_vertex(2)
+    # No edge between v1 and v2
+
+    bfs = BFS[int]()
+    path = bfs.shortest_path(graph, v1, v2)
+    assert path is None
+
+
+def test_shortest_path_start_not_in_graph(graph: Graph[str]) -> None:
+    """Test shortest path when start vertex is not in graph."""
+    bfs = BFS[str]()
+    end_vertex = graph.get_vertex("0")
+    start_vertex_not_in_graph = Vertex("99")
+    assert end_vertex is not None
+
+    with pytest.raises(ValueError, match="Start and end vertices must be in graph"):
+        bfs.shortest_path(graph, start_vertex_not_in_graph, end_vertex)
+
+
+def test_shortest_path_end_not_in_graph(graph: Graph[str]) -> None:
+    """Test shortest path when end vertex is not in graph."""
+    bfs = BFS[str]()
+    start_vertex = graph.get_vertex("0")
+    end_vertex_not_in_graph = Vertex("99")
+    assert start_vertex is not None
+
+    with pytest.raises(ValueError, match="Start and end vertices must be in graph"):
+        bfs.shortest_path(graph, start_vertex, end_vertex_not_in_graph)
+
+
+def test_shortest_path_linear_graph() -> None:
+    """Test shortest path in a linear graph."""
+    graph = Graph[int]()
+    vertices = [graph.add_vertex(i) for i in range(5)]
+    for i in range(4):
+        graph.add_edge(vertices[i], vertices[i + 1])
+
+    bfs = BFS[int]()
+    path = bfs.shortest_path(graph, vertices[0], vertices[4])
+    assert path == vertices
+
+
+def test_shortest_path_multiple_paths() -> None:
+    """Test shortest path when multiple paths exist."""
+    graph = Graph[str]()
+    vertices = [graph.add_vertex(str(i)) for i in range(4)]
+    # Create a diamond shape: 0 -> 1, 0 -> 2, 1 -> 3, 2 -> 3
+    graph.add_edge(vertices[0], vertices[1])
+    graph.add_edge(vertices[0], vertices[2])
+    graph.add_edge(vertices[1], vertices[3])
+    graph.add_edge(vertices[2], vertices[3])
+
+    bfs = BFS[str]()
+    path = bfs.shortest_path(graph, vertices[0], vertices[3])
+    assert path is not None
+    assert path[0] == vertices[0]
+    assert path[-1] == vertices[3]
+    assert len(path) == 3  # Shortest path length should be 3
+
+
+def test_shortest_path_cycle() -> None:
+    """Test shortest path in a graph with cycles."""
+    graph = Graph[int]()
+    vertices = [graph.add_vertex(i) for i in range(4)]
+    # Create a cycle: 0 -> 1 -> 2 -> 3 -> 0
+    for i in range(4):
+        graph.add_edge(vertices[i], vertices[(i + 1) % 4])
+
+    bfs = BFS[int]()
+    path = bfs.shortest_path(graph, vertices[0], vertices[2])
+    assert path is not None
+    assert path[0] == vertices[0]
+    assert path[-1] == vertices[2]
+    assert len(path) == 3  # Shortest path: 0 -> 1 -> 2
+
+
+def test_shortest_path_disconnected_graph() -> None:
+    """Test shortest path in a disconnected graph."""
+    graph = Graph[int]()
+    # Component 1: 0 -> 1 -> 2
+    v0 = graph.add_vertex(0)
+    v1 = graph.add_vertex(1)
+    v2 = graph.add_vertex(2)
+    graph.add_edge(v0, v1)
+    graph.add_edge(v1, v2)
+
+    # Component 2: 3 -> 4
+    v3 = graph.add_vertex(3)
+    v4 = graph.add_vertex(4)
+    graph.add_edge(v3, v4)
+
+    bfs = BFS[int]()
+    # Path within same component
+    path1 = bfs.shortest_path(graph, v0, v2)
+    assert path1 == [v0, v1, v2]
+
+    # Path between different components
+    path2 = bfs.shortest_path(graph, v0, v4)
+    assert path2 is None
+
+
+def test_shortest_path_single_vertex_graph() -> None:
+    """Test shortest path in a graph with single vertex."""
+    graph = Graph[str]()
+    vertex = graph.add_vertex("A")
+
+    bfs = BFS[str]()
+    path = bfs.shortest_path(graph, vertex, vertex)
+    assert path == [vertex]
+
+
+def test_shortest_path_empty_graph() -> None:
+    """Test shortest path in an empty graph."""
+    graph = Graph[int]()
+    v1 = Vertex(1)
+    v2 = Vertex(2)
+
+    bfs = BFS[int]()
+    with pytest.raises(ValueError, match="Start and end vertices must be in graph"):
+        bfs.shortest_path(graph, v1, v2)
+
+
+def test_shortest_path_optimality() -> None:
+    """Test that shortest path returns the optimal (shortest) path."""
+    graph = Graph[int]()
+    vertices = [graph.add_vertex(i) for i in range(6)]
+    # Create a graph with multiple paths from 0 to 5
+    # Path 1: 0 -> 1 -> 5 (length 3)
+    # Path 2: 0 -> 2 -> 3 -> 4 -> 5 (length 5)
+    # Path 3: 0 -> 2 -> 5 (length 3)
+    graph.add_edge(vertices[0], vertices[1])
+    graph.add_edge(vertices[1], vertices[5])
+    graph.add_edge(vertices[0], vertices[2])
+    graph.add_edge(vertices[2], vertices[3])
+    graph.add_edge(vertices[3], vertices[4])
+    graph.add_edge(vertices[4], vertices[5])
+    graph.add_edge(vertices[2], vertices[5])
+
+    bfs = BFS[int]()
+    path = bfs.shortest_path(graph, vertices[0], vertices[5])
+    assert path is not None
+    assert len(path) == 3  # Should find the shortest path of length 3

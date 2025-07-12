@@ -17,7 +17,7 @@ ENV PATH="/root/.local/bin:$PATH"
 # Copy project files
 WORKDIR /app
 COPY pyproject.toml poetry.lock* ./
-RUN poetry config virtualenvs.create false && poetry install --no-interaction --no-ansi --all-extras
+RUN poetry config virtualenvs.create false && poetry install --no-interaction --no-ansi --with api,streamlit,dev
 
 # Copy the rest of the code
 COPY . .

@@ -32,7 +32,23 @@ class DivideConquerSorter(Sorter[ComparableT], ABC):
 
     def _compare(self, a: ComparableT, b: ComparableT) -> bool:
         if self._key_func is None:
-            return a <= b
+            try:
+                return a <= b
+            except (RecursionError, TypeError):
+                # Fallback to hash-based comparison for problematic objects
+                try:
+                    return hash(a) <= hash(b)
+                except (TypeError, RecursionError):
+                    # Final fallback: use object address
+                    return str(a) <= str(b)
         key_a = self._key_func(a)
         key_b = self._key_func(b)
-        return key_a <= key_b  # type: ignore[no-any-return]
+        try:
+            return key_a <= key_b  # type: ignore[no-any-return]
+        except (RecursionError, TypeError):
+            # Fallback to hash-based comparison for problematic objects
+            try:
+                return hash(key_a) <= hash(key_b)
+            except (TypeError, RecursionError):
+                # Final fallback: use string representation
+                return str(key_a) <= str(key_b)

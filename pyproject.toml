@@ -6,7 +6,7 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.poetry]
 name = "algolib-adg"
-version = "0.2.0"
+version = "0.2.5"
 description = "A comprehensive library of algorithms and data structures, with a focus on clean code, SOLID principles, and thorough testing."
 authors = ["Aditya Gambhir"]
 license = "MIT"
@@ -131,7 +131,7 @@ exclude_lines = [
 ]
 
 [tool.commitizen]
-version = "0.2.0"
+version = "0.2.5"
 version_files = [
     "pyproject.toml:version"
 ]

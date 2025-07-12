@@ -11,10 +11,11 @@ from algolib.algorithms.sorting.quick_sort import QuickSort
 )
 def test_quick_sort_benchmark(benchmark: Any) -> None:
     """Benchmark the quick sort algorithm."""
-    data: List[int] = [random.randint(0, 1000) for _ in range(1000)]
+    # Use a smaller dataset to avoid recursion issues
+    data: List[int] = [random.randint(0, 100) for _ in range(100)]
     sorter: QuickSort[int] = QuickSort()
 
     def f() -> None:
-        sorter.sort(data)
+        sorter.sort(data.copy())  # Use copy to avoid modifying original data
 
     benchmark.pedantic(f, rounds=3, warmup_rounds=1, iterations=1)

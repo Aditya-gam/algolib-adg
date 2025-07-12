@@ -91,7 +91,7 @@ We use pre-commit hooks to ensure code quality and consistency. Install them aft
 
 .. code-block:: bash
 
-   poetry install --all-extras
+   poetry install --with api,streamlit,dev
    pre-commit install
 
 This will install hooks that run automatically on every commit, including:

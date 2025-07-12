@@ -56,7 +56,7 @@ While the agent handles most of the work, you can also run it locally.
 
 2.  **Install dependencies with Poetry:**
     ```bash
-    poetry install --all-extras
+    poetry install --with api,streamlit,dev
     ```
 
 3.  **Set up pre-commit hooks:**

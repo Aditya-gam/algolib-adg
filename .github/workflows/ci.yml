@@ -54,10 +54,10 @@ jobs:
 
       - name: Install dependencies
         if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
-        run: poetry install --no-interaction --no-root --all-extras
+        run: poetry install --no-interaction --no-root --with api,streamlit,dev
 
       - name: Install project
-        run: poetry install --no-interaction --all-extras
+        run: poetry install --no-interaction --with api,streamlit,dev
 
       - name: Verify alembic installation
         run: poetry run alembic --version

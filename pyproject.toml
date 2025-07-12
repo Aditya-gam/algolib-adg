@@ -38,8 +38,17 @@ optional = true
 [tool.poetry.group.streamlit.dependencies]
 streamlit = ">=1.33"
 
-[tool.poetry.group.dev.dependencies]
+[tool.poetry.group.docs]
+optional = true
+
+[tool.poetry.group.docs.dependencies]
 furo = "^2024.8.6"
+sphinx = "^8.2.3"
+sphinx-autobuild = "^2024.10.3"
+sphinxcontrib-plantuml = "^0.26"
+plantuml = "^0.3.0"
+
+[tool.poetry.group.dev.dependencies]
 hypothesis = "^6.135.24"
 mypy = "^1.16.1"
 pre-commit = "^4.2.0"
@@ -47,16 +56,12 @@ pytest = "^8.4.1"
 pytest-benchmark = "^5.1.0"
 pytest-cov = "^6.2.1"
 ruff = "^0.12.2"
-sphinx = "^8.2.3"
-sphinx-autobuild = "^2024.10.3"
-sphinxcontrib-plantuml = "^0.26"
 types-pyyaml = "^6.0.12.20250516"
 jinja2 = "^3.1.6"
 astor = "^0.8.1"
 gitpython = "^3.1.43"
 pyyaml = "^6.0.1"
 pip-audit = "^2.7.3"
-plantuml = "^0.3.0"
 pytest-dotenv = "^0.5.2"
 httpx = "^0.28.1"
 commitizen = "^4.8.3"

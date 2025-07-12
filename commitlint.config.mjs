@@ -98,8 +98,8 @@ export default {
       ],
     ],
 
-    // Enforce breaking change format
-    'breaking-change': [2, 'always'],
+    // Enforce breaking change format (use body-leading-blank instead)
+    // 'breaking-change': [2, 'always'], // This rule doesn't exist in current commitlint
 
     // Enforce footer format
     'footer-leading-blank': [2, 'always'],

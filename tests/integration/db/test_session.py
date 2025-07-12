@@ -30,16 +30,20 @@ class TestDatabaseSession:
 
             if "algolib.db.session" in sys.modules:
                 del sys.modules["algolib.db.session"]
-            with pytest.raises(ValueError, match="DATABASE_URL environment variable not set"):
-                import algolib.db.session  # noqa: F401
+            from algolib.db.session import get_session
 
-    def test_none_database_url_raises_sqlalchemy_error(self) -> None:
-        """Test that 'None' DATABASE_URL raises SQLAlchemy ArgumentError."""
+            with pytest.raises(ValueError, match="DATABASE_URL environment variable not set"):
+                next(get_session())
+
+    def test_none_database_url_raises_value_error(self) -> None:
+        """Test that 'None' DATABASE_URL raises ValueError."""
         with patch.dict(os.environ, {"DATABASE_URL": "None"}):
             import sys
 
             if "algolib.db.session" in sys.modules:
                 del sys.modules["algolib.db.session"]
 
+            from algolib.db.session import get_session
+
             with pytest.raises(ValueError, match="DATABASE_URL environment variable not set"):
-                import algolib.db.session  # noqa: F401
+                next(get_session())

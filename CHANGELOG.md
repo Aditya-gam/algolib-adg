@@ -1,9 +1,39 @@
-## 0.2.0 (2025-07-08)
+## v0.2.5 (2025-07-12)
+
+### BREAKING CHANGE
+
+- Benchmarking and coverage are now fully separated in CI and local workflows.
+- Directory and import structure for algorithms and data structures has changed. See docs for migration details.
 
 ### Feat
 
+- **ci**: implement CI & pre-commit pipeline updates
+- **benchmarks**: add detailed benchmark harness for merge, quick, heap sort and Dijkstra
+- **runtime**: add runtime checks and property-based tests
+- **core**: major refactor and expansion of core algorithm/data-structure library
+- **scaffolding**: Add core interfaces and directory structure
+- **docs**: add PlantUML tooling and developer UX updates
 - **docs**: add dedicated docs deployment workflow
 - **testing**: enable property-based testing with Hypothesis
+
+### Fix
+
+- resolve quick sort recursion error in benchmarks and improve fallback comparison logic
+- **docs**: add missing docs group to poetry for CI compatibility
+- **core/scripts**: ensure commit message scripts and config pass strict typing, ruff, and pre-commit
+- **api**: add requests dependency to resolve ModuleNotFoundError in CI
+- **db/session**: lazy engine creation and type annotations for mypy strict mode
+- **ci**: resolve alembic not found error in CI pipeline
+- **ci**: migrate commitlint config to ES module format
+- **ci**: improve auto-label error handling and permissions for draft PR workflow
+- **ci**: add GitHub Actions permissions for draft PR management
+- **ci**: resolve alembic command not found error in database initialization
+- **pyproject**: resolve Poetry config errors, unify classic [tool.poetry] format, and ensure CI compatibility\n\n- Move all metadata and dependencies to [tool.poetry]\n- Remove [project] section\n- Add python version constraint to dependencies\n- Update poetry.lock\n- Pass pre-commit, mypy, ruff, and all checks
+- **ci**: Resolve pytest collection warning
+
+### Refactor
+
+- improve code quality and maintainability across multiple modules
 
 ## v0.1.0 (2025-07-08)
 

@@ -7,6 +7,7 @@ This script helps rewrite commit messages to meet the following requirements:
 - Subject lines lowercase
 - Valid scopes from predefined list
 - Footer lines ≤ 300 characters
+- Body max length ≤ 800 characters
 """
 
 import re
@@ -76,17 +77,51 @@ def wrap_text(text: str, max_length: int = 300) -> str:
     return "\n".join(lines)
 
 
+def truncate_body(body: str, max_length: int = 800) -> str:
+    """Truncate body to fit within max_length while preserving structure."""
+    if len(body) <= max_length:
+        return body
+
+    # Try to truncate at sentence boundaries
+    sentences = body.split(". ")
+    truncated = ""
+    for sentence in sentences:
+        if len(truncated + sentence + ". ") <= max_length - 3:  # Leave room for "..."
+            truncated += sentence + ". "
+        else:
+            break
+
+    if truncated:
+        return truncated.rstrip() + "..."
+
+    # If no sentence fits, truncate at word boundaries
+    words = body.split()
+    truncated = ""
+    for word in words:
+        if len(truncated + word + " ") <= max_length - 3:
+            truncated += word + " "
+        else:
+            break
+
+    return truncated.rstrip() + "..."
+
+
 def fix_commit_message(message: str) -> str:
     """Fix a commit message to comply with commitlint rules."""
     lines = message.strip().split("\n")
     if not lines:
         return message
+
     header = lines[0]
     body_lines = lines[1:] if len(lines) > 1 else []
+
     header_pattern = r"^(\w+)\(([^)]*)\):\s*(.+)$"
     match = re.match(header_pattern, header)
+
     if match:
         commit_type, scope, subject = match.groups()
+
+        # Map scopes to valid ones
         scope_mapping = {
             "scaffolding": "core",
             "deps": "deps",
@@ -97,24 +132,43 @@ def fix_commit_message(message: str) -> str:
             "pyproject": "config",
             "pr": "docs",
             "review-merge": "ci",
+            "runtime": "core",
+            "quality-gate": "ci",
+            "benchmarks": "benchmarks",
         }
+
         fixed_scope = scope_mapping.get(scope, "core")
         fixed_subject = subject.lower()
         fixed_header = f"{commit_type}({fixed_scope}): {fixed_subject}"
     else:
         fixed_header = header.lower()
+
+    # Process body lines
     fixed_body_lines = []
+    body_text = ""
+
     for line in body_lines:
         if line.strip():
             wrapped_line = wrap_text(line, 300)
             if wrapped_line:
                 fixed_body_lines.append(wrapped_line)
+                body_text += wrapped_line + "\n"
         else:
             fixed_body_lines.append("")
+            body_text += "\n"
+
+    # Truncate body if too long
+    if len(body_text) > 800:
+        body_text = truncate_body(body_text, 800)
+        # Rebuild body lines from truncated text
+        fixed_body_lines = [line for line in body_text.split("\n") if line.strip()]
+
+    # Build result
     result_lines = [fixed_header]
     if fixed_body_lines:
         result_lines.append("")
         result_lines.extend(fixed_body_lines)
+
     return "\n".join(result_lines)
 
 

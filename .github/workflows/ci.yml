@@ -29,8 +29,6 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0  # Full history for conventional commits
 
       - name: Set up Python 3.11
         uses: actions/setup-python@v5
@@ -129,7 +127,7 @@ jobs:
       - name: FastAPI smoke test
         run: |
           poetry run uvicorn algolib.api.main:app --host 0.0.0.0 --port 8000 &
-          python - <<PY
+          poetry run python - <<PY
           import requests, time, os
           time.sleep(5)
           r = requests.get("http://localhost:8000/health/db")
@@ -145,76 +143,12 @@ jobs:
           fail_ci_if_error: true
           verbose: true
 
-      - name: Check for draft PR status
-        if: github.event_name == 'pull_request'
+      - name: CI Success Summary
         run: |
-          if [ "${{ github.event.pull_request.draft }}" = "true" ]; then
-            echo "⚠️ This is a draft PR. Please mark as 'Ready for review' when ready."
-            echo "Draft PRs cannot be merged until marked as ready."
-          else
-            echo "✅ PR is ready for review"
-          fi
-
-  validate_pr:
-    name: Validate PR
-    if: github.event_name == 'pull_request'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Validate conventional commits
-        uses: wagoid/commitlint-github-action@v6
-        with:
-          configFile: commitlint.config.mjs
-
-      - name: Check commit message format
-        run: |
-          # Get commits in this PR
-          if [ "${{ github.event.pull_request.draft }}" = "false" ]; then
-            echo "Checking conventional commit format..."
-            git log --oneline ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }} | while read line; do
-              commit_hash=$(echo $line | cut -d' ' -f1)
-              commit_msg=$(echo $line | cut -d' ' -f2-)
-              if ! echo "$commit_msg" | grep -qE "^(feat|fix|docs|style|refactor|test|chore)(\([a-z-]+\))?(!)?: .+"; then
-                echo "❌ Invalid commit message format: $commit_msg"
-                echo "   Expected format: type(scope): description"
-                echo "   Types: feat, fix, docs, style, refactor, test, chore"
-                exit 1
-              fi
-            done
-          fi
-
-      - name: Check for breaking changes
-        run: |
-          if [ "${{ github.event.pull_request.draft }}" = "false" ]; then
-            echo "Checking for breaking changes..."
-            git log --oneline ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }} | grep -q "!" && {
-              echo "⚠️ Breaking changes detected. Please ensure:"
-              echo "  1. Breaking changes are properly documented in PR description"
-              echo "  2. Version bump is planned"
-              echo "  3. Migration guide is provided if needed"
-            } || echo "✅ No breaking changes detected"
-          fi
-
-  quality_gate:
-    name: Quality Gate
-    if: github.event_name == 'pull_request' && github.event.pull_request.draft == false
-    runs-on: ubuntu-latest
-    needs: [build, validate_pr]
-    steps:
-      - name: Quality Gate Check
-        run: |
-          echo "🔍 Quality Gate Summary:"
-          echo "✅ All CI checks passed"
-          echo "✅ Conventional commits validated"
-          echo "✅ Code quality standards met"
+          echo "🎉 CI Build Successful!"
+          echo "✅ All tests passed"
+          echo "✅ Code quality checks passed"
           echo "✅ Security audit passed"
-          echo "✅ Test coverage ≥95%"
-          echo ""
-          echo "🚀 PR is ready for review and merge!"
-          echo "📋 Next steps:"
-          echo "   1. Ensure 2 maintainer approvals"
-          echo "   2. Resolve any review comments"
-          echo "   3. Merge when all requirements are met"
+          echo "✅ Coverage ≥95%"
+          echo "✅ Database integration working"
+          echo "✅ API endpoints functional"

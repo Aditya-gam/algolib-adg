@@ -26,8 +26,8 @@ export default {
     // Enforce lowercase scopes
     'scope-case': [2, 'always', 'lower-case'],
 
-    // Allow both lowercase and title case subjects (be flexible with existing commits)
-    'subject-case': [1, 'always', 'lower-case'],
+    // Enforce lowercase subjects
+    'subject-case': [2, 'always', 'lower-case'],
 
     // Require subject to end without period
     'subject-full-stop': [2, 'never', '.'],
@@ -99,6 +99,8 @@ export default {
         // Additional scopes used in commits
         'scaffolding',
         'property',
+        'runtime',
+        'quality-gate',
       ],
     ],
 
@@ -108,8 +110,8 @@ export default {
     // Enforce body format
     'body-leading-blank': [2, 'always'],
 
-    // Enforce body max length
-    'body-max-length': [2, 'always', 1000],
+    // Enforce body max length - reduced to 800 characters to be more reasonable
+    'body-max-length': [2, 'always', 800],
   },
 
   // Custom parser for better error messages

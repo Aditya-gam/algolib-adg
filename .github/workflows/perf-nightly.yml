@@ -40,6 +40,7 @@ jobs:
           version: "1.8.2"
           virtualenvs-create: true
           virtualenvs-in-project: true
+          installer-parallel: true
 
       - name: Load cached venv
         id: cached-poetry-dependencies
@@ -55,8 +56,13 @@ jobs:
       - name: Install project
         run: poetry install --no-interaction --all-extras
 
+      - name: Verify alembic installation
+        run: poetry run alembic --version
+
       - name: Initialize database
-        run: chmod +x scripts/db_init.sh && ./scripts/db_init.sh
+        run: |
+          chmod +x scripts/db_init.sh
+          ./scripts/db_init.sh
         env:
           DATABASE_URL: postgresql://user:password@localhost:5432/testdb
 

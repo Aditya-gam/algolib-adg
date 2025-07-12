@@ -43,6 +43,7 @@ jobs:
           version: "1.8.2"
           virtualenvs-create: true
           virtualenvs-in-project: true
+          installer-parallel: true
 
       - name: Load cached venv
         id: cached-poetry-dependencies
@@ -57,6 +58,14 @@ jobs:
 
       - name: Install project
         run: poetry install --no-interaction --all-extras
+
+      - name: Verify alembic installation
+        run: poetry run alembic --version
+
+      - name: Verify api group dependencies
+        run: |
+          echo "Checking if api group dependencies are installed..."
+          poetry run pip list | grep -E "(alembic|fastapi|uvicorn|sqlmodel)"
 
       - name: Run pip-audit for security vulnerabilities
         run: |
@@ -83,7 +92,9 @@ jobs:
           fi
 
       - name: Initialize database
-        run: chmod +x scripts/db_init.sh && ./scripts/db_init.sh
+        run: |
+          chmod +x scripts/db_init.sh
+          ./scripts/db_init.sh
         env:
           DATABASE_URL: postgresql://user:password@localhost:5432/testdb
 

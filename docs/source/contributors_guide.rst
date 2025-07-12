@@ -109,6 +109,22 @@ Run the following to ensure everything is set up correctly:
 
    pre-commit run --all-files
 
+**3. Quality Gate Enforcement**
+
+Our project enforces strict quality gates to maintain code quality. You can run all quality checks locally using:
+
+.. code-block:: bash
+
+   make quality-gate
+
+This command runs:
+- **Ruff formatting check**: Ensures consistent code style
+- **Ruff linting**: Catches common issues including unused imports (F401)
+- **mypy strict type checking**: Validates type annotations
+- **Test coverage**: Ensures ≥95% test coverage is maintained
+
+The same checks are enforced in our CI pipeline, and **all must pass** before any pull request can be merged.
+
 Testing
 -------
 
@@ -127,6 +143,14 @@ Before submitting a pull request, you should run the entire test suite, includin
    make test-all
 
 This command runs the full `pytest` suite and is essential for catching more complex bugs that property tests are designed to find.
+
+**Coverage Requirements**
+
+Our project maintains a strict **95% minimum test coverage** requirement. This is enforced both locally and in CI. If your changes cause the coverage to drop below 95%, the build will fail. You can check coverage locally with:
+
+.. code-block:: bash
+
+   poetry run pytest --cov=algolib --cov-fail-under=95 --cov-report=term-missing
 
 **Performance Benchmarks**
 

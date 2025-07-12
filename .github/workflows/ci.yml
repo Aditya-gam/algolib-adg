@@ -70,14 +70,17 @@ jobs:
           poetry run ruff format --check .
           poetry run ruff check .
 
+      - name: Run pre-commit on all files
+        run: |
+          poetry run pre-commit run --all-files --show-diff-on-failure
+
       - name: Run mypy (strict)
         run: |
           poetry run mypy --strict algolib tests
 
       - name: Run tests with coverage
         run: |
-          poetry run pytest -q -m "not benchmark"
-          poetry run coverage xml
+          poetry run pytest -q -m "not benchmark" --cov=algolib --cov-fail-under=95 --cov-report=term-missing --cov-report=xml
         env:
           DATABASE_URL: postgresql://user:password@localhost:5432/testdb
 

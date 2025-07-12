@@ -103,6 +103,22 @@ omit = [
     "algolib/interfaces/*",
 ]
 
+[tool.coverage.report]
+fail_under = 95.0
+show_missing = true
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "if self.debug:",
+    "if settings.DEBUG",
+    "raise AssertionError",
+    "raise NotImplementedError",
+    "if 0:",
+    "if __name__ == .__main__.:",
+    "class .*\\bProtocol\\):",
+    "@(abc\\.)?abstractmethod",
+]
+
 [tool.commitizen]
 version = "0.2.0"
 version_files = [

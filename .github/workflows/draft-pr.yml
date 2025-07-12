@@ -7,6 +7,10 @@ on:
     workflows: ["CI"]
     types: [completed]
 
+permissions:
+  pull-requests: write
+  issues: write
+
 jobs:
   manage-draft-status:
     name: Manage Draft PR Status

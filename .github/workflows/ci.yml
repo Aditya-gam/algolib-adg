@@ -167,7 +167,7 @@ jobs:
       - name: Validate conventional commits
         uses: wagoid/commitlint-github-action@v6
         with:
-          configFile: commitlint.config.js
+          configFile: commitlint.config.mjs
 
       - name: Check commit message format
         run: |

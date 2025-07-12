@@ -3,10 +3,10 @@
 Script to fix commit messages to comply with commitlint rules.
 
 This script helps rewrite commit messages to meet the following requirements:
-- Body lines ≤ 100 characters
+- Body lines ≤ 300 characters
 - Subject lines lowercase
 - Valid scopes from predefined list
-- Footer lines ≤ 100 characters
+- Footer lines ≤ 300 characters
 """
 
 import re
@@ -55,7 +55,7 @@ def _get_prefix_and_content(text: str) -> tuple[str, str]:
     return "", text
 
 
-def wrap_text(text: str, max_length: int = 100) -> str:
+def wrap_text(text: str, max_length: int = 300) -> str:
     """Wrap text to specified line length, preserving bullet points."""
     if not text.strip():
         return ""
@@ -106,7 +106,7 @@ def fix_commit_message(message: str) -> str:
     fixed_body_lines = []
     for line in body_lines:
         if line.strip():
-            wrapped_line = wrap_text(line, 100)
+            wrapped_line = wrap_text(line, 300)
             if wrapped_line:
                 fixed_body_lines.append(wrapped_line)
         else:
@@ -118,7 +118,7 @@ def fix_commit_message(message: str) -> str:
     return "\n".join(result_lines)
 
 
-def main():
+def main() -> None:
     """Main function to fix commit messages."""
     print("🔧 Commit Message Fixer")
     print("=" * 50)

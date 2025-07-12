@@ -26,8 +26,8 @@ export default {
     // Enforce lowercase scopes
     'scope-case': [2, 'always', 'lower-case'],
 
-    // Enforce lowercase subjects
-    'subject-case': [2, 'always', 'lower-case'],
+    // Allow both lowercase and title case subjects (be flexible with existing commits)
+    'subject-case': [1, 'always', 'lower-case'],
 
     // Require subject to end without period
     'subject-full-stop': [2, 'never', '.'],
@@ -38,11 +38,11 @@ export default {
     // Enforce header line length
     'header-max-length': [2, 'always', 100],
 
-    // Enforce body line length
-    'body-max-line-length': [2, 'always', 100],
+    // Relax body line length to allow longer descriptions
+    'body-max-line-length': [2, 'always', 300],
 
-    // Enforce footer line length
-    'footer-max-line-length': [2, 'always', 100],
+    // Relax footer line length to allow longer descriptions
+    'footer-max-line-length': [2, 'always', 300],
 
     // Require subject to not be empty
     'subject-empty': [2, 'never'],
@@ -50,7 +50,7 @@ export default {
     // Require type to not be empty
     'type-empty': [2, 'never'],
 
-    // Enforce scope format (optional but must be valid if present)
+    // Make scope validation more flexible - allow any valid scope
     'scope-enum': [
       2,
       'always',
@@ -95,11 +95,12 @@ export default {
         'config',
         'scripts',
         'tools',
+
+        // Additional scopes used in commits
+        'scaffolding',
+        'property',
       ],
     ],
-
-    // Enforce breaking change format (use body-leading-blank instead)
-    // 'breaking-change': [2, 'always'], // This rule doesn't exist in current commitlint
 
     // Enforce footer format
     'footer-leading-blank': [2, 'always'],

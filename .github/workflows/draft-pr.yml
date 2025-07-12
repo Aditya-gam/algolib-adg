@@ -10,6 +10,7 @@ on:
 permissions:
   pull-requests: write
   issues: write
+  contents: write
 
 jobs:
   manage-draft-status:
@@ -216,10 +217,31 @@ jobs:
 
             // Apply labels
             if (labels.size > 0) {
-              await github.rest.issues.addLabels({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: context.payload.pull_request.number,
-                labels: Array.from(labels)
-              });
+              try {
+                await github.rest.issues.addLabels({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: context.payload.pull_request.number,
+                  labels: Array.from(labels)
+                });
+                console.log(`✅ Added labels: ${Array.from(labels).join(', ')}`);
+              } catch (error) {
+                console.log(`⚠️ Failed to add labels: ${error.message}`);
+                console.log(`Labels attempted: ${Array.from(labels).join(', ')}`);
+
+                // Try to add labels one by one to identify which ones fail
+                for (const label of labels) {
+                  try {
+                    await github.rest.issues.addLabels({
+                      owner: context.repo.owner,
+                      repo: context.repo.repo,
+                      issue_number: context.payload.pull_request.number,
+                      labels: [label]
+                    });
+                    console.log(`✅ Added label: ${label}`);
+                  } catch (labelError) {
+                    console.log(`❌ Failed to add label '${label}': ${labelError.message}`);
+                  }
+                }
+              }
             }

@@ -1,0 +1,221 @@
+name: Draft PR Management
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, ready_for_review]
+  workflow_run:
+    workflows: ["CI"]
+    types: [completed]
+
+jobs:
+  manage-draft-status:
+    name: Manage Draft PR Status
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: Check PR Status
+        id: check-status
+        run: |
+          if [ "${{ github.event.pull_request.draft }}" = "true" ]; then
+            echo "status=draft" >> $GITHUB_OUTPUT
+          else
+            echo "status=ready" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Get CI Status
+        id: ci-status
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data: checks } = await github.rest.checks.listForRef({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              ref: context.payload.pull_request.head.sha,
+            });
+
+            const ciCheck = checks.check_runs.find(check =>
+              check.name === 'CI' || check.name === 'build'
+            );
+
+            if (!ciCheck) {
+              core.setOutput('status', 'pending');
+              return;
+            }
+
+            core.setOutput('status', ciCheck.conclusion || 'pending');
+            core.setOutput('details', ciCheck.output?.summary || '');
+
+      - name: Convert to Draft if CI Fails
+        if: steps.check-status.outputs.status == 'ready' && steps.ci-status.outputs.status == 'failure'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.pulls.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.payload.pull_request.number,
+              draft: true
+            });
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.pull_request.number,
+              body: `⚠️ **PR Converted to Draft**
+
+              This PR has been automatically converted to draft status because CI checks failed.
+
+              **Next Steps:**
+              1. Review the CI failure details below
+              2. Fix the issues in your code
+              3. Push your changes
+              4. Once CI passes, mark the PR as "Ready for review"
+
+              **CI Failure Details:**
+              \`\`\`
+              ${{ steps.ci-status.outputs.details }}
+              \`\`\`
+
+              **Common Issues to Check:**
+              - Code formatting (run \`poetry run ruff format .\`)
+              - Type checking (run \`poetry run mypy --strict algolib tests\`)
+              - Test coverage (ensure ≥95% coverage)
+              - Conventional commit format
+              - Security vulnerabilities (run \`poetry run pip-audit\`)
+
+              Need help? Check our [Contributing Guide](https://github.com/${{ github.repository }}/blob/main/docs/CONTRIBUTING.rst) for detailed guidelines.`
+            });
+
+      - name: Provide Draft PR Guidance
+        if: steps.check-status.outputs.status == 'draft'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.pull_request.number,
+            });
+
+            const hasGuidance = comments.some(comment =>
+              comment.body.includes('Draft PR Guidance') &&
+              comment.user.type === 'Bot'
+            );
+
+            if (!hasGuidance) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.payload.pull_request.number,
+                body: `📋 **Draft PR Guidance**
+
+                This PR is currently in draft status. Here's what you need to do:
+
+                **Before Marking as Ready:**
+                - [ ] All CI checks pass locally
+                - [ ] Code follows project standards
+                - [ ] Tests are comprehensive (≥95% coverage)
+                - [ ] Documentation is updated
+                - [ ] Self-review completed
+
+                **Local Testing Commands:**
+                \`\`\`bash
+                # Format and lint
+                poetry run ruff format .
+                poetry run ruff check .
+
+                # Type checking
+                poetry run mypy --strict algolib tests
+
+                # Run tests with coverage
+                poetry run pytest --cov=algolib --cov-fail-under=95
+
+                # Security audit
+                poetry run pip-audit
+
+                # Pre-commit hooks
+                poetry run pre-commit run --all-files
+                \`\`\`
+
+                **When Ready:**
+                1. Click "Ready for review" button
+                2. Ensure all CI checks pass
+                3. Request reviews from maintainers
+
+                **Review Requirements:**
+                - Minimum 2 maintainer approvals
+                - All CI checks must pass
+                - No merge conflicts
+                - Follows [Contributing Guidelines](https://github.com/${{ github.repository }}/blob/main/docs/CONTRIBUTING.rst)
+
+                Good luck! 🚀`
+              });
+            }
+
+  auto-label:
+    name: Auto-label PR
+    runs-on: ubuntu-latest
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: Auto-label based on files changed
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { data: files } = await github.rest.pulls.listFiles({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.payload.pull_request.number,
+            });
+
+            const labels = new Set();
+
+            // Check for algorithm changes
+            if (files.some(file => file.filename.startsWith('algolib/algorithms/'))) {
+              labels.add('algorithms');
+            }
+
+            // Check for data structure changes
+            if (files.some(file => file.filename.startsWith('algolib/data_structures/'))) {
+              labels.add('data-structures');
+            }
+
+            // Check for CI/CD changes
+            if (files.some(file => file.filename.startsWith('.github/') || file.filename.includes('ci.yml'))) {
+              labels.add('ci-cd');
+            }
+
+            // Check for documentation changes
+            if (files.some(file => file.filename.startsWith('docs/') || file.filename.endsWith('.md'))) {
+              labels.add('documentation');
+            }
+
+            // Check for test changes
+            if (files.some(file => file.filename.startsWith('tests/') || file.filename.includes('test_'))) {
+              labels.add('tests');
+            }
+
+            // Add breaking change label if commit messages contain '!'
+            const { data: commits } = await github.rest.pulls.listCommits({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.payload.pull_request.number,
+            });
+
+            if (commits.some(commit => commit.commit.message.includes('!'))) {
+              labels.add('breaking-change');
+            }
+
+            // Add draft label if PR is in draft
+            if (context.payload.pull_request.draft) {
+              labels.add('draft');
+            }
+
+            // Apply labels
+            if (labels.size > 0) {
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.payload.pull_request.number,
+                labels: Array.from(labels)
+              });
+            }

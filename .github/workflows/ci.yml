@@ -2,9 +2,10 @@ name: CI
 
 on:
   push:
-    branches: [ "main", "feat/**" ]
+    branches: [ "main", "feat/**", "hotfix/**" ]
   pull_request:
     branches: [ "main" ]
+    types: [opened, synchronize, reopened, ready_for_review]
 
 jobs:
   build:
@@ -28,6 +29,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for conventional commits
 
       - name: Set up Python 3.11
         uses: actions/setup-python@v5
@@ -55,36 +58,50 @@ jobs:
       - name: Install project
         run: poetry install --no-interaction --all-extras
 
-      - name: Run pip-audit
+      - name: Run pip-audit for security vulnerabilities
         run: |
           poetry run pip install pip-audit
-          poetry run pip-audit
+          poetry run pip-audit --format=json --output=pip-audit-report.json || true
+          if [ -s pip-audit-report.json ]; then
+            echo "⚠️ Security vulnerabilities found:"
+            cat pip-audit-report.json | jq -r '.vulnerabilities[] | "  - \(.package_name) \(.installed_version): \(.description)"'
+            exit 1
+          fi
 
       - name: Initialize database
         run: chmod +x scripts/db_init.sh && ./scripts/db_init.sh
         env:
           DATABASE_URL: postgresql://user:password@localhost:5432/testdb
 
-      - name: Run Ruff (format + lint)
+      - name: Run Ruff (format + lint) with strict rules
         run: |
           poetry run ruff format --check .
-          poetry run ruff check .
+          poetry run ruff check --select=E,F,I,B,W,C90 --ignore=E501 .
+          poetry run ruff check --select=F401 .  # Enforce unused imports
 
       - name: Run pre-commit on all files
         run: |
           poetry run pre-commit run --all-files --show-diff-on-failure
 
-      - name: Run mypy (strict)
+      - name: Run mypy (strict) with comprehensive checks
         run: |
-          poetry run mypy --strict algolib tests
+          poetry run mypy --strict --show-error-codes --show-column-numbers algolib tests
+          poetry run mypy --strict --show-error-codes --show-column-numbers scripts/
 
-      - name: Run tests with coverage
+      - name: Run tests with coverage and quality gates
         run: |
-          poetry run pytest -q -m "not benchmark" --cov=algolib --cov-fail-under=95 --cov-report=term-missing --cov-report=xml
+          poetry run pytest -q -m "not benchmark" --cov=algolib --cov-fail-under=95 --cov-report=term-missing --cov-report=xml --cov-report=html
         env:
           DATABASE_URL: postgresql://user:password@localhost:5432/testdb
 
-      - name: Run FastAPI smoke test
+      - name: Run property-based tests
+        run: |
+          poetry run pytest -q -m "property" --tb=short
+
+      - name: Interface compliance check
+        run: python scripts/check_interface.py ${{ github.event.pull_request.base.sha || github.sha }}
+
+      - name: FastAPI smoke test
         run: |
           poetry run uvicorn algolib.api.main:app --host 0.0.0.0 --port 8000 &
           python - <<PY
@@ -96,15 +113,22 @@ jobs:
         env:
           DATABASE_URL: postgresql://user:password@localhost:5432/testdb
 
-      - name: Interface compliance
-        run: python scripts/check_interface.py ${{ github.event.pull_request.base.sha || github.sha }}
-
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
         with:
           files: ./coverage.xml
           fail_ci_if_error: true
           verbose: true
+
+      - name: Check for draft PR status
+        if: github.event_name == 'pull_request'
+        run: |
+          if [ "${{ github.event.pull_request.draft }}" = "true" ]; then
+            echo "⚠️ This is a draft PR. Please mark as 'Ready for review' when ready."
+            echo "Draft PRs cannot be merged until marked as ready."
+          else
+            echo "✅ PR is ready for review"
+          fi
 
   validate_pr:
     name: Validate PR
@@ -114,4 +138,58 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - uses: wagoid/commitlint-github-action@v6
+
+      - name: Validate conventional commits
+        uses: wagoid/commitlint-github-action@v6
+        with:
+          configFile: commitlint.config.js
+
+      - name: Check commit message format
+        run: |
+          # Get commits in this PR
+          if [ "${{ github.event.pull_request.draft }}" = "false" ]; then
+            echo "Checking conventional commit format..."
+            git log --oneline ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }} | while read line; do
+              commit_hash=$(echo $line | cut -d' ' -f1)
+              commit_msg=$(echo $line | cut -d' ' -f2-)
+              if ! echo "$commit_msg" | grep -qE "^(feat|fix|docs|style|refactor|test|chore)(\([a-z-]+\))?(!)?: .+"; then
+                echo "❌ Invalid commit message format: $commit_msg"
+                echo "   Expected format: type(scope): description"
+                echo "   Types: feat, fix, docs, style, refactor, test, chore"
+                exit 1
+              fi
+            done
+          fi
+
+      - name: Check for breaking changes
+        run: |
+          if [ "${{ github.event.pull_request.draft }}" = "false" ]; then
+            echo "Checking for breaking changes..."
+            git log --oneline ${{ github.event.pull_request.base.sha }}..${{ github.event.pull_request.head.sha }} | grep -q "!" && {
+              echo "⚠️ Breaking changes detected. Please ensure:"
+              echo "  1. Breaking changes are properly documented in PR description"
+              echo "  2. Version bump is planned"
+              echo "  3. Migration guide is provided if needed"
+            } || echo "✅ No breaking changes detected"
+          fi
+
+  quality_gate:
+    name: Quality Gate
+    if: github.event_name == 'pull_request' && github.event.pull_request.draft == false
+    runs-on: ubuntu-latest
+    needs: [build, validate_pr]
+    steps:
+      - name: Quality Gate Check
+        run: |
+          echo "🔍 Quality Gate Summary:"
+          echo "✅ All CI checks passed"
+          echo "✅ Conventional commits validated"
+          echo "✅ Code quality standards met"
+          echo "✅ Security audit passed"
+          echo "✅ Test coverage ≥95%"
+          echo ""
+          echo "🚀 PR is ready for review and merge!"
+          echo "📋 Next steps:"
+          echo "   1. Ensure 2 maintainer approvals"
+          echo "   2. Resolve any review comments"
+          echo "   3. Merge when all requirements are met"
